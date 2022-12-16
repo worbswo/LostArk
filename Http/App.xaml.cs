@@ -1,5 +1,5 @@
-﻿using Http.View;
-using Http.viewModel;
+﻿using LostArkAction.View;
+using LostArkAction.viewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Http
+namespace LostArkAction
 {
     /// <summary>
     /// App.xaml에 대한 상호 작용 논리

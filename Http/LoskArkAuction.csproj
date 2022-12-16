@@ -62,7 +62,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Code\CommandBehavior.cs" />
     <Compile Include="Code\HttpClient.cs" />
+    <Compile Include="Code\RelayCommand.cs" />
     <Compile Include="viewModel\MainWinodwVM.cs" />
     <Compile Include="viewModel\ViewModelBase.cs" />
     <Compile Include="View\MainWindow.xaml.cs">

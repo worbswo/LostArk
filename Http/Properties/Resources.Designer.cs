@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Http.Properties
+namespace LostArkAction.Properties
 {
 
 
