@@ -65,8 +65,21 @@
     <Compile Include="Code\CommandBehavior.cs" />
     <Compile Include="Code\HttpClient.cs" />
     <Compile Include="Code\RelayCommand.cs" />
+    <Compile Include="Model\Ablity.cs" />
+    <Compile Include="viewModel\AccessoriesVM.cs" />
+    <Compile Include="viewModel\EquipAblityVM.cs" />
     <Compile Include="viewModel\MainWinodwVM.cs" />
+    <Compile Include="viewModel\TargetAblityVM.cs" />
     <Compile Include="viewModel\ViewModelBase.cs" />
+    <Compile Include="View\Accessories.xaml.cs">
+      <DependentUpon>Accessories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EquipAblity.xaml.cs">
+      <DependentUpon>EquipAblity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TargetAblity.xaml.cs">
+      <DependentUpon>TargetAblity.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -94,14 +107,33 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Fonts\MaruBuri-Bold.ttf" />
+    <Resource Include="Fonts\MaruBuri-ExtraLight.ttf" />
+    <Resource Include="Fonts\MaruBuri-Light.ttf" />
+    <Resource Include="Fonts\MaruBuri-Regular.ttf" />
+    <Resource Include="Fonts\MaruBuri-SemiBold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Page Include="Resources\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Accessories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EquipAblity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TargetAblity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
