@@ -82,8 +82,8 @@ namespace LostArkAction.Code
             {
 
                 response.EnsureSuccessStatusCode();
-                    var jsonResponse = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(jsonResponse);
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(jsonResponse);
                 Item tmp = JsonConvert.DeserializeObject<Item>(jsonResponse);
             }
         }

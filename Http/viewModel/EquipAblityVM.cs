@@ -12,13 +12,37 @@ namespace Http.viewModel
     {
         #region Field
         private List<string> _selectOption;
-
+        private List<string> _selectItems=new List<string> { "", "", "", "", ""};
+        private List<int> _figureItems  = new List<int> {0,0,0,0,0 };
         #endregion
         #region Property
 
+        public List<string> SelectItems
+        {
+            get
+            {
+                return _selectItems;
+            }
+            set
+            {
+                _selectItems = value;
+                NotifyPropertyChanged("SelectItems");
+            }
+        }
+        public List<int> FigureItems
+        {
+            get
+            {
+                return _figureItems;
+            }
+            set
+            {
+                _figureItems = value;
+                NotifyPropertyChanged("FigureItems");
+            }
+        }
 
 
-       
 
         public List<string> SelectOptions
         {
