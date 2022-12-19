@@ -11,7 +11,7 @@ namespace Http.Model
         #region Property
         public string Name { get; set; }
         public List<string> Characteristic { get; set; } = new List<string>();
-        public int qulity { get; set; } 
+        public int Qulity { get; set; } 
         #endregion
     }
 }

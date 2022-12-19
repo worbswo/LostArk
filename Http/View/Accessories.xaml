@@ -116,31 +116,32 @@
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
+                Text="{Binding DataContext.AccessoriesVM.Qulity[0],Mode=TwoWay}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
-            <TextBox
-                Grid.Row="1"
-                Grid.Column="1"
-                VerticalAlignment="Center"
-                FontSize="20"></TextBox>
+  
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
+                Text="{Binding DataContext.AccessoriesVM.Qulity[1],Mode=TwoWay}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
             <TextBox
                 Grid.Row="3"
                 Grid.Column="1"
+                Text="{Binding DataContext.AccessoriesVM.Qulity[2],Mode=TwoWay}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
             <TextBox
                 Grid.Row="4"
                 Grid.Column="1"
+                Text="{Binding DataContext.AccessoriesVM.Qulity[3],Mode=TwoWay}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
             <TextBox
                 Grid.Row="5"
                 Grid.Column="1"
+                Text="{Binding DataContext.AccessoriesVM.Qulity[4],Mode=TwoWay}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
             <ComboBox
@@ -149,6 +150,7 @@
                 FontSize="18"
                 Margin="5"
                 Width="70"
+                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[0],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
                 VerticalAlignment="Center"></ComboBox>
             <ComboBox
@@ -157,6 +159,7 @@
                 FontSize="18"
                 Margin="5"
                 Width="70"
+                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[2],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
                 VerticalAlignment="Center"></ComboBox>
             <ComboBox
@@ -165,6 +168,7 @@
                 FontSize="18"
                 Margin="5"
                 Width="70"
+                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[3],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
                 VerticalAlignment="Center"></ComboBox>
             <ComboBox
@@ -173,6 +177,7 @@
                 FontSize="18"
                 Margin="5"
                 Width="70"
+                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[4],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
                 VerticalAlignment="Center"></ComboBox>
             <ComboBox
@@ -181,6 +186,7 @@
                 FontSize="18"
                 Margin="5"
                 Width="70"
+                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[5],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
                 VerticalAlignment="Center"></ComboBox>
             <ComboBox
@@ -190,7 +196,9 @@
                 Margin="5"
                 Width="70"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
-                VerticalAlignment="Center"></ComboBox>
+                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[1],Mode=TwoWay}"
+                VerticalAlignment="Center"
+                ></ComboBox>
         </Grid>
     </Border>
 </UserControl>

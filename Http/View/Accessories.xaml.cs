@@ -24,5 +24,7 @@ namespace Http.View
         {
             InitializeComponent();
         }
+
+     
     }
 }
