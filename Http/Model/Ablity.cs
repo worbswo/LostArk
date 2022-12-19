@@ -12,7 +12,10 @@ namespace Http.Model
         #endregion
 
         #region Property
-        public Dictionary<string, List<int>> Items { get; set; } = new Dictionary<string, List<int>>();
+        public Dictionary<string, int> TargetItems { get; set; } = new Dictionary<string, int>();
+        public Dictionary<string, List<int>> EquipItems { get; set; } = new Dictionary<string, List<int>>();
+        public Dictionary<string, int> PanaltyItems { get; set; } = new Dictionary<string, int>();
+
         #endregion
     }
 }

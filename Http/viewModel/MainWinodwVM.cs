@@ -19,35 +19,19 @@ namespace LostArkAction.viewModel
     {
 
         #region Field
-        private List<string> _characteristics;
         private ICommand _searchCommand;
         #endregion
         #region Property
         public TargetAblityVM TargetAblityVM { get; set; } = new TargetAblityVM();
         public EquipAblityVM EquipAblityVM { get; set; } = new EquipAblityVM();
         public AccessoriesVM AccessoriesVM { get; set; } = new AccessoriesVM();
-        public Ablity TargetAblity { get; set; } = new Ablity();
-        public Ablity EquipAblity { get; set; }=new Ablity();
-        public Ablity PanaltyAblity { get; set; } = new Ablity();
+        public Ablity Ablity { get; set; } = new Ablity();
+        public Accesories Accesories { get; set; } = new Accesories();
 
         HttpClient2 HttpClient { get; set; }
         
         
-        public List<string> Characteristics
-        {
-            get
-            {
-                if (_characteristics == null)
-                {
-                    _characteristics = new List<string>
-                    {
-                        "치명","특화","제압","신속","인내","숙련"
-                    };
-
-                }
-                return _characteristics;
-            }
-        }
+        
 
 
 
@@ -79,8 +63,9 @@ namespace LostArkAction.viewModel
         #region Method
         public void SearchMethod(object sender)
         {
-            TargetAblity.Items = new Dictionary<string, List<int>>();
-            EquipAblity.Items = new Dictionary<string, List<int>>();
+            Ablity.TargetItems = new Dictionary<string, int>();
+            Ablity.EquipItems = new Dictionary<string, List<int>>();
+            Ablity.PanaltyItems = new Dictionary<string, int>();
             for (int i = 0; i < TargetAblityVM.SelectItems.Count; i++)
             {
                 int value = 0;
@@ -104,12 +89,12 @@ namespace LostArkAction.viewModel
                 {
                     continue;
                 }
-                if (TargetAblity.Items.ContainsKey(TargetAblityVM.SelectItems[i]))
+                if (Ablity.TargetItems.ContainsKey(TargetAblityVM.SelectItems[i]))
                 {
                     MessageBox.Show("같은 각인이 있습니다.");
                     break;
                 }
-                TargetAblity.Items.Add(TargetAblityVM.SelectItems[i], new List<int> { value });
+                Ablity.TargetItems.Add(TargetAblityVM.SelectItems[i], value );
             }
             for(int i = 0; i < EquipAblityVM.SelectItems.Count-1; i++)
             {
@@ -117,15 +102,15 @@ namespace LostArkAction.viewModel
                 {
                     break;
                 }
-                if (EquipAblity.Items.ContainsKey(EquipAblityVM.SelectItems[i])){
-                    EquipAblity.Items[EquipAblityVM.SelectItems[i]].Add (EquipAblityVM.FigureItems[i]);
+                if (Ablity.EquipItems.ContainsKey(EquipAblityVM.SelectItems[i])){
+                    Ablity.EquipItems[EquipAblityVM.SelectItems[i]].Add (EquipAblityVM.FigureItems[i]);
                 }
                 else
                 {
-                    EquipAblity.Items.Add(EquipAblityVM.SelectItems[i], new List<int> { EquipAblityVM.FigureItems[i] });
+                    Ablity.EquipItems.Add(EquipAblityVM.SelectItems[i], new List<int> { EquipAblityVM.FigureItems[i] });
                 }
             }
-            PanaltyAblity.Items.Add(EquipAblityVM.SelectItems[4], new List<int> { EquipAblityVM.FigureItems[4] });
+            Ablity.PanaltyItems.Add(EquipAblityVM.SelectItems[4],  EquipAblityVM.FigureItems[4]);
         }
         
         internal void Close(bool isClosing = false)

@@ -66,6 +66,8 @@
     <Compile Include="Code\HttpClient.cs" />
     <Compile Include="Code\RelayCommand.cs" />
     <Compile Include="Model\Ablity.cs" />
+    <Compile Include="Model\Accesories.cs" />
+    <Compile Include="Model\Accesory.cs" />
     <Compile Include="viewModel\AccessoriesVM.cs" />
     <Compile Include="viewModel\EquipAblityVM.cs" />
     <Compile Include="viewModel\MainWinodwVM.cs" />
