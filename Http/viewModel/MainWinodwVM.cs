@@ -124,6 +124,7 @@ namespace LostArkAction.viewModel
             Accesories["귀걸이2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[3]);
             Accesories["반지1"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[4]);
             Accesories["반지2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[5]);
+            Ablity.ComputeAblity();
 
         }
 
