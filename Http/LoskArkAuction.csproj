@@ -65,7 +65,8 @@
     <Compile Include="Code\CommandBehavior.cs" />
     <Compile Include="Code\EtcOption.cs" />
     <Compile Include="Code\HttpClient.cs" />
-    <Compile Include="Code\Item.cs" />
+    <Compile Include="Code\ResultItem.cs" />
+    <Compile Include="Code\SearchItem.cs" />
     <Compile Include="Code\RelayCommand.cs" />
     <Compile Include="Code\SkillOption.cs" />
     <Compile Include="Model\Ablity.cs" />

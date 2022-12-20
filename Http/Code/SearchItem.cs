@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Http.Code
 {
-    public class Item
+    public class SearchItem
     {
         public int ItemLevelMin = 0;
         public int ItemLevelMax = 1700;

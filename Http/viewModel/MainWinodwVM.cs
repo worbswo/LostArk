@@ -26,7 +26,6 @@ namespace LostArkAction.viewModel
         public EquipAblityVM EquipAblityVM { get; set; } = new EquipAblityVM();
         public AccessoriesVM AccessoriesVM { get; set; } = new AccessoriesVM();
         public Ablity Ablity { get; set; } = new Ablity();
-        public Accesories Accesories { get; set; } = new Accesories();
 
         HttpClient2 HttpClient { get; set; }
         
@@ -54,7 +53,6 @@ namespace LostArkAction.viewModel
         #region Constroctor
         public MainWinodwVM()
         {
-            HttpClient = new HttpClient2();
            
 
         }
@@ -112,18 +110,18 @@ namespace LostArkAction.viewModel
             }
             Ablity.PanaltyItems.Add(EquipAblityVM.SelectItems[4],  EquipAblityVM.FigureItems[4]);
 
-            Accesory accesory = new Accesory();
-            Accesories["목걸이"].Qulity = AccessoriesVM.Qulity[0];
-            Accesories["귀걸이1"].Qulity = AccessoriesVM.Qulity[1];
-            Accesories["귀걸이2"].Qulity = AccessoriesVM.Qulity[2];
-            Accesories["반지1"].Qulity = AccessoriesVM.Qulity[3];
-            Accesories["반지2"].Qulity = AccessoriesVM.Qulity[4];
-            Accesories["목걸이"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[0]);
-            Accesories["목걸이"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[1]);
-            Accesories["귀걸이1"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[2]);
-            Accesories["귀걸이2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[3]);
-            Accesories["반지1"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[4]);
-            Accesories["반지2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[5]);
+            Ablity.Accesories = new Accesories();
+            Ablity.Accesories["목걸이"].Qulity = AccessoriesVM.Qulity[0];
+            Ablity.Accesories["귀걸이1"].Qulity = AccessoriesVM.Qulity[1];
+            Ablity.Accesories["귀걸이2"].Qulity = AccessoriesVM.Qulity[2];
+            Ablity.Accesories["반지1"].Qulity = AccessoriesVM.Qulity[3];
+            Ablity.Accesories["반지2"].Qulity = AccessoriesVM.Qulity[4];
+            Ablity.Accesories["목걸이"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[0]);
+            Ablity.Accesories["목걸이"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[1]);
+            Ablity.Accesories["귀걸이1"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[2]);
+            Ablity.Accesories["귀걸이2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[3]);
+            Ablity.Accesories["반지1"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[4]);
+            Ablity.Accesories["반지2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[5]);
             Ablity.ComputeAblity();
 
         }
