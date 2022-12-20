@@ -23,5 +23,7 @@ namespace LostArkAction.View
         {
             InitializeComponent();
         }
+
+ 
     }
 }

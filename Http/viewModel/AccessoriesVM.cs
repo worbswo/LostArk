@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Http.viewModel
+namespace LostArkAction.viewModel
 {
     public class AccessoriesVM : ViewModelBase
     {

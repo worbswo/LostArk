@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Http.Code
+namespace LostArkAction.Code
 {
     public class SearchItem
     {

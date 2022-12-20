@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Http.Model
+namespace LostArkAction.Model
 {
     public class SearchAblity
     {

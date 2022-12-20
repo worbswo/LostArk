@@ -1,4 +1,4 @@
-﻿using Http.Model;
+﻿using LostArkAction.Model;
 using LostArkAction;
 using LostArkAction.Code;
 using LostArkAction.viewModel;
@@ -11,7 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace Http.viewModel
+namespace LostArkAction.viewModel
 {
     public class TargetAblityVM : ViewModelBase
     {

@@ -1,5 +1,5 @@
-﻿using Http.Code;
-using Http.Model;
+﻿using LostArkAction.Code;
+using LostArkAction.Model;
 using LostArkAction.View;
 using LostArkAction.viewModel;
 using Newtonsoft.Json;

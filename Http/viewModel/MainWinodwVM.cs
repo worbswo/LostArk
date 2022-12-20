@@ -1,6 +1,6 @@
-﻿using Http.Model;
-using Http.View;
-using Http.viewModel;
+﻿using LostArkAction.Model;
+using LostArkAction.View;
+using LostArkAction.viewModel;
 using LostArkAction.Code;
 using Newtonsoft.Json.Linq;
 using System;
@@ -22,6 +22,7 @@ namespace LostArkAction.viewModel
         private ICommand _searchCommand;
         #endregion
         #region Property
+        public List<FindAccVM> FindAccVMs { get; set; } = new List<FindAccVM>();
         public TargetAblityVM TargetAblityVM { get; set; } = new TargetAblityVM();
         public EquipAblityVM EquipAblityVM { get; set; } = new EquipAblityVM();
         public AccessoriesVM AccessoriesVM { get; set; } = new AccessoriesVM();

@@ -1,5 +1,6 @@
-﻿using Http.Code;
+﻿using LostArkAction.Code;
 using LostArkAction.Code;
+using LostArkAction.viewModel;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Net.Http;
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace Http.Model
+namespace LostArkAction.Model
 {
     public class Ablity
     {
@@ -281,18 +282,62 @@ namespace Http.Model
                     Permutation(SearchAblities[i], 5, 5);
                 }
                 Console.WriteLine(SearchAblities2.Count);
-                NeckAcc = new List<SearchAblity>();
-                RingAcc2 = new List<SearchAblity>();
-                RingAcc1 = new List<SearchAblity>();
-                EarAcc1 = new List<SearchAblity>();
-                EarAcc2 = new List<SearchAblity>();
+        
                 for (int i = 0; i < SearchAblities2.Count; i++)
                 {
-                    HttpClient2.GetAsync(SearchAblities2[i][0], Accesories, "목걸이");
-                    HttpClient2.GetAsync(SearchAblities2[i][1], Accesories, "귀걸이");
-                    HttpClient2.GetAsync(SearchAblities2[i][2], Accesories, "귀걸이");
-                    HttpClient2.GetAsync(SearchAblities2[i][3], Accesories, "반지");
-                    HttpClient2.GetAsync(SearchAblities2[i][4], Accesories, "반지");
+                    NeckAcc = new List<SearchAblity>();
+                    RingAcc2 = new List<SearchAblity>();
+                    RingAcc1 = new List<SearchAblity>();
+                    EarAcc1 = new List<SearchAblity>();
+                    EarAcc2 = new List<SearchAblity>();
+                    _ = HttpClient2.GetAsync(SearchAblities2[i][0], Accesories, "목걸이");
+                    _ = HttpClient2.GetAsync(SearchAblities2[i][1], Accesories, "귀걸이");
+                    _ = HttpClient2.GetAsync(SearchAblities2[i][2], Accesories, "귀걸이");
+                    _ = HttpClient2.GetAsync(SearchAblities2[i][3], Accesories, "반지");
+                    _ = HttpClient2.GetAsync(SearchAblities2[i][4], Accesories, "반지");
+                    SearchAblity[] searchAblitiyTmp = new SearchAblity[5];
+                    foreach (var tmp1 in NeckAcc)
+                    {
+                        searchAblitiyTmp[0] = tmp1;
+                        foreach (var tmp2 in RingAcc1)
+                        {
+                            searchAblitiyTmp[1] = tmp2;
+
+                            foreach (var tmp3 in RingAcc2)
+                            {
+                                searchAblitiyTmp[2]= tmp3;
+
+                                foreach (var tmp4 in EarAcc1)
+                                {
+                                    searchAblitiyTmp[3] = tmp4;
+
+                                    foreach (var tmp5 in EarAcc2)
+                                    {
+                                        searchAblitiyTmp[4] = tmp5;
+
+                                        Dictionary<string, int> tmpAcc = new Dictionary<string, int>() { { "공격력 감소", 0 }, { "방어력 감소", 0 }, { "공격속도 감소", 0 }, { "이동속도 감소", 0 } };
+                                        for (int j = 0; j < 5; j++)
+                                        {
+                                            tmpAcc[tmp1.PanaltyAblity.Keys.ToList()[0]] += searchAblitiyTmp[j].PanaltyAblity[searchAblitiyTmp[j].PanaltyAblity.Keys.ToList()[0]];
+                                        }
+                                        bool check = true;
+                                        for (int j = 0; j < 5; j++)
+                                        {
+                                            if (searchAblitiyTmp[j].PanaltyAblity[searchAblitiyTmp[j].PanaltyAblity.Keys.ToList()[0]] >= 5)
+                                            {
+                                                check = false;
+                                                break;
+                                            }
+                                        }
+                                        if (check)
+                                        {
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                 }
             }

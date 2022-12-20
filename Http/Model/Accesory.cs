@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Http.Model
+namespace LostArkAction.Model
 {
     public class Accesory
     {
         #region Property
         public string Name { get; set; }
         public List<string> Characteristic { get; set; } = new List<string>();
-        public int Qulity { get; set; } 
+        public int Qulity { get; set; }
         #endregion
     }
 }
