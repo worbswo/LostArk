@@ -12,6 +12,8 @@ namespace LostArkAction.viewModel
     {
         #region Field
         private List<string> _selectOption;
+        private List<string> _selectOption2;
+
         private List<string> _selectItems=new List<string> { "", "", "", "", ""};
         private List<int> _figureItems  = new List<int> {0,0,0,0,0 };
         #endregion
@@ -61,7 +63,29 @@ namespace LostArkAction.viewModel
                 OnPropertyChanged("SelectOptions");
             }
         }
+        public List<string> SelectOptions2
+        {
+            get
+            {
+                if (_selectOption2 == null)
+                {
+                    _selectOption2 = new List<string>()
+                    {
+                        "공격력 감소",
+                        "방어력 감소",
+                        "이동속도 감소",
+                        "공격속도 감소"
+                    };
 
+                }
+                return _selectOption2;
+            }
+            set
+            {
+                _selectOption2 = value;
+                OnPropertyChanged("SelectOptions2");
+            }
+        }
         #endregion
 
         #region Constroctor

@@ -73,8 +73,11 @@
     <Compile Include="Model\Accesories.cs" />
     <Compile Include="Model\Accesory.cs" />
     <Compile Include="Model\SearchAblity.cs" />
+    <Compile Include="viewModel\AccVM.cs" />
     <Compile Include="viewModel\AccessoriesVM.cs" />
     <Compile Include="viewModel\EquipAblityVM.cs" />
+    <Compile Include="viewModel\FindAccVM.cs" />
+    <Compile Include="viewModel\FIndAccWindowVM.cs" />
     <Compile Include="viewModel\MainWinodwVM.cs" />
     <Compile Include="viewModel\TargetAblityVM.cs" />
     <Compile Include="viewModel\ViewModelBase.cs" />
@@ -83,6 +86,9 @@
     </Compile>
     <Compile Include="View\EquipAblity.xaml.cs">
       <DependentUpon>EquipAblity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FindAccWindow.xaml.cs">
+      <DependentUpon>FindAccWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TargetAblity.xaml.cs">
       <DependentUpon>TargetAblity.xaml</DependentUpon>
@@ -134,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EquipAblity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FindAccWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

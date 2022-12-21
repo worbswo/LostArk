@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace LostArkAction.Code
 {
@@ -26,89 +27,122 @@ namespace LostArkAction.Code
             SharedClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             SharedClient.DefaultRequestHeaders.Add("ContentType","application/json");
         }
-        public static async Task GetAsync(SearchAblity searchAblitie, Accesories accesory, string AcceccesoryName)
+        public static async void GetAsync(List<List<SearchAblity>> searchAblitie, Accesories accesory)
         {
-            int pageNo = 1;
-            while (true)
+            
+            for (int k = 0; k < searchAblitie.Count; k++)
             {
-
-                SearchItem item = new SearchItem();
-                item.Sort = "GRADE";
-                item.CategoryCode = Ablity.AccessoryCode[AcceccesoryName];
-                item.PageNo = pageNo;
-                item.ItemGradeQuality = accesory[AcceccesoryName].Qulity;
-                item.EtcOptions.Add(new EtcOption()
+                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc = new List<AccVM>();
+                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2 = new List<AccVM>();
+                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1 = new List<AccVM>();
+                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1 = new List<AccVM>();
+                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2 = new List<AccVM>();
+                for (int i = 0; i < searchAblitie[k].Count; i++)
                 {
-                    FirstOption = 3,
-                    SecondOption = Ablity.AblityCode[searchAblitie.FirstAblity.Keys.ToList()[0]],
-                    MinValue = searchAblitie.FirstAblity[searchAblitie.FirstAblity.Keys.ToList()[0]]
-                });
-                item.EtcOptions.Add(new EtcOption()
-                {
-                    FirstOption = 3,
-                    SecondOption = Ablity.AblityCode[searchAblitie.SecondAblity.Keys.ToList()[0]],
-                    MinValue = searchAblitie.SecondAblity[searchAblitie.SecondAblity.Keys.ToList()[0]]
-                });
-                int code = Ablity.CharactericsCode[accesory[AcceccesoryName].Characteristic[0]];
-                item.EtcOptions.Add(new EtcOption()
-                {
-                    FirstOption = 2,
-                    SecondOption = code,
-                    MaxValue = 500
-                });
-                if(AcceccesoryName == "목걸이")
-                {
-                    code = Ablity.CharactericsCode[accesory[AcceccesoryName].Characteristic[1]];
+                    int pageNo = 1;
+                    string AcceccesoryType = Ablity.AccessoryCode.Keys.ToList()[i];
+                    SearchItem item = new SearchItem();
+                    item.Sort = "GRADE";
+                    item.CategoryCode = Ablity.AccessoryCode[AcceccesoryType];
+                    item.ItemGradeQuality = accesory[AcceccesoryType].Qulity;
+                    item.EtcOptions.Add(new EtcOption()
+                    {
+                        FirstOption = 3,
+                        SecondOption = Ablity.AblityCode[searchAblitie[k][i].FirstAblity.Keys.ToList()[0]],
+                        MinValue = searchAblitie[k][i].FirstAblity[searchAblitie[k][i].FirstAblity.Keys.ToList()[0]]
+                    });
+                    item.EtcOptions.Add(new EtcOption()
+                    {
+                        FirstOption = 3,
+                        SecondOption = Ablity.AblityCode[searchAblitie[k][i].SecondAblity.Keys.ToList()[0]],
+                        MinValue = searchAblitie[k][i].SecondAblity[searchAblitie[k][i].SecondAblity.Keys.ToList()[0]]
+                    });
+                    int code = Ablity.CharactericsCode[accesory[AcceccesoryType].Characteristic[0]];
                     item.EtcOptions.Add(new EtcOption()
                     {
                         FirstOption = 2,
                         SecondOption = code,
                         MaxValue = 500
                     });
-                }
-                StringContent a = new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json");
-                string jsonResponse = "";
-                using (HttpResponseMessage response = await SharedClient.PostAsync("https://developer-lostark.game.onstove.com/auctions/items", a))
-                {
-
-                    response.EnsureSuccessStatusCode();
-                    jsonResponse = await response.Content.ReadAsStringAsync();
-
-                }
-
-                ResultItem tmp = JsonConvert.DeserializeObject<ResultItem>(jsonResponse);
-                if (tmp != null)
-                {
-                    if (tmp.Items != null)
+                    if (AcceccesoryType == "목걸이")
                     {
-                        for (int i = 0; i < tmp.Items.Count; i++)
+                        code = Ablity.CharactericsCode[accesory[AcceccesoryType].Characteristic[1]];
+                        item.EtcOptions.Add(new EtcOption()
                         {
-                            Console.WriteLine("Name  : " + tmp.Items[i].Name);
-                            Console.WriteLine("Grade : " + tmp.Items[i].Grade);
-                            Console.WriteLine("Price : " + tmp.Items[i].AuctionInfo.BuyPrice);
+                            FirstOption = 2,
+                            SecondOption = code,
+                            MaxValue = 500
+                        });
+                    }
+                    int pageSize = 0;
+                    while (true)
+                    {
 
-                            for (int j = 0; j < tmp.Items[i].Options.Count; j++)
+                        item.PageNo = pageNo;
+
+                        StringContent a = new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json");
+                        string jsonResponse = "";
+                        using (HttpResponseMessage response = await SharedClient.PostAsync("https://developer-lostark.game.onstove.com/auctions/items", a))
+                        {
+                            jsonResponse = await response.Content.ReadAsStringAsync();
+                            ResultItem tmp = JsonConvert.DeserializeObject<ResultItem>(jsonResponse);
+                            if (tmp != null)
                             {
-                                Console.WriteLine("OptionName : " + tmp.Items[i].Options[j].OptionName);
-                                Console.WriteLine("Value : " + tmp.Items[i].Options[j].Value);
-                                Console.WriteLine("-------------------------------------");
+                                
+                                pageSize = tmp.PageSize;
+                                if (tmp.Items != null)
+                                {
+                                    
+                                    for (int j = 0; j < tmp.Items.Count; j++)
+                                    {
+                                        /*Console.WriteLine("Name  : " + tmp.Items[j].Name);
+                                        Console.WriteLine("Grade : " + tmp.Items[j].Grade);
+                                        Console.WriteLine("Price : " + tmp.Items[j].AuctionInfo.BuyPrice);
 
+                                        for (int o = 0; o < tmp.Items[j].Options.Count; o++)
+                                        {
+                                            Console.WriteLine("OptionName : " + tmp.Items[j].Options[o].OptionName);
+                                            Console.WriteLine("Value : " + tmp.Items[j].Options[o].Value);
+                                            Console.WriteLine("-------------------------------------");
+
+                                        }
+                                        Console.WriteLine("=======================================");*/
+                                        if (tmp.Items[j].AuctionInfo.BuyPrice != 0)
+                                        {
+                                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.SetAcc(tmp.Items[j], AcceccesoryType);
+
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                    
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                                pageNo++;
+                                Console.WriteLine(pageNo + " /" + pageSize);
+                                if (pageNo > pageSize)
+                                {
+                                    break;
+                                }
+                            }else
+                            {
+                                break;
                             }
-                            Console.WriteLine("=======================================");
-                            if(tmp.Items[i].AuctionInfo.BuyPrice!=0)
-                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.SetAcc(tmp.Items[i].Options, (int)tmp.Items[i].AuctionInfo.BuyPrice, AcceccesoryName);
-
                         }
                     }
                 }
-                
-                pageNo++;
-                if(pageNo>tmp.PageSize)
-                {
-                    break;
-                }
+                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.SetAcc();
+
             }
+                    (App.Current.MainWindow.DataContext as MainWinodwVM).OpenFindACC();
+
         }
 
     }
+
 }

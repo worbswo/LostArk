@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LostArkAction.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,138 +10,38 @@ namespace LostArkAction.viewModel
     public class FindAccVM:ViewModelBase
     {
         #region Field
-        private string neckStr;
-        private int nectValue;
-        private string _firstRingStr;
-        private string _secondRingStr;
-        private int _firstRingValue;
-        private int _secondRingValue;
-        private string _firstEarStr;
-        private string _secondEarStr;
-        private int _firstEarValue;
-        private int _secondEarValue;
+        private int _totalPrice;
+
         #endregion
 
         #region Property
-        public string NeckStr
+        public AccVM NeckAblity { get; set; } = new AccVM();
+        public AccVM FirstRingAblity { get; set; } = new AccVM();
+        public AccVM SecondRingAblity { get; set; } = new AccVM();
+        public AccVM FirstEarAblity { get; set; } = new AccVM();
+        public AccVM SecondEarAblity { get; set; } = new AccVM();
+        public int TotalPrice
         {
             get
             {
-                return neckStr;
+                return _totalPrice;
             }
             set
             {
-                neckStr = value;
-                OnPropertyChanged("NeckStr");
+                _totalPrice = value;
+                OnPropertyChanged("TotalPrice");
             }
         }
-        public int NectValue
+        
+        #endregion
+        #region Constructor
+        public FindAccVM()
         {
-            get
-            {
-                return nectValue;
-            }
-            set
-            {
-                nectValue = value;
-                OnPropertyChanged("NectValue");
-            }
+
         }
-        public string FirstRingStr
+        public FindAccVM(List<SearchAblity> searchAblities)
         {
-            get
-            {
-                return _firstRingStr;
-            }
-            set
-            {
-                _firstRingStr = value;
-                OnPropertyChanged("FirstRingStr");
-            }
-        }
-        public int FirstRingValue
-        {
-            get
-            {
-                return _firstRingValue;
-            }
-            set
-            {
-                _firstRingValue = value;
-                OnPropertyChanged("FirstRingValue");
-            }
-        }
-        public string SecondRingStr
-        {
-            get
-            {
-                return _secondRingStr;
-            }
-            set
-            {
-                _secondRingStr = value;
-                OnPropertyChanged("SecondRingStr");
-            }
-        }
-        public int SecondRingValue
-        {
-            get
-            {
-                return _secondRingValue;
-            }
-            set
-            {
-                _secondRingValue = value;
-                OnPropertyChanged("SecondRingValue");
-            }
-        }
-        public string FirstEarStr
-        {
-            get
-            {
-                return _firstEarStr;
-            }
-            set
-            {
-                _firstEarStr = value;
-                OnPropertyChanged("FirstEarStr");
-            }
-        }
-        public int FirstEarValue
-        {
-            get
-            {
-                return _firstEarValue;
-            }
-            set
-            {
-                _firstEarValue = value;
-                OnPropertyChanged("FirstEarValue");
-            }
-        }
-        public string SecondEarStr
-        {
-            get
-            {
-                return _secondEarStr;
-            }
-            set
-            {
-                _secondEarStr = value;
-                OnPropertyChanged("SecondEarStr");
-            }
-        }
-        public int SecondEarValue
-        {
-            get
-            {
-                return _secondEarValue;
-            }
-            set
-            {
-                _secondEarValue = value;
-                OnPropertyChanged("SecondEarValue");
-            }
+
         }
         #endregion
     }

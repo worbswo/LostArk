@@ -12,6 +12,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using Http.View;
+using Http.viewModel;
 
 namespace LostArkAction.viewModel
 {
@@ -97,6 +99,7 @@ namespace LostArkAction.viewModel
             }
             for(int i = 0; i < EquipAblityVM.SelectItems.Count-1; i++)
             {
+
                 if (EquipAblityVM.SelectItems[i] == null|| EquipAblityVM.SelectItems[i] == "")
                 {
                     break;
@@ -108,8 +111,9 @@ namespace LostArkAction.viewModel
                 {
                     Ablity.EquipItems.Add(EquipAblityVM.SelectItems[i], new List<int> { EquipAblityVM.FigureItems[i] });
                 }
+                
             }
-            Ablity.PanaltyItems.Add(EquipAblityVM.SelectItems[4],  EquipAblityVM.FigureItems[4]);
+            Ablity.PanaltyItems.Add(EquipAblityVM.SelectItems[4], EquipAblityVM.FigureItems[4]);
 
             Ablity.Accesories = new Accesories();
             Ablity.Accesories["목걸이"].Qulity = AccessoriesVM.Qulity[0];
@@ -126,7 +130,14 @@ namespace LostArkAction.viewModel
             Ablity.ComputeAblity();
 
         }
+        public void OpenFindACC()
+        {
+            FindAccWindow findAccWindow= new FindAccWindow();
+            findAccWindow.DataContext = new FIndAccWindowVM(FindAccVMs);
+            (findAccWindow.DataContext as FIndAccWindowVM).RequestClose += (o, e) => { findAccWindow.Close(); };
 
+            findAccWindow.Show();
+        }
         internal void Close(bool isClosing = false)
         {
             if (!isClosing)

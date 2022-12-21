@@ -213,11 +213,9 @@
                     Grid.Row="6"
                     FontSize="18"
                     SelectedItem="{Binding DataContext.EquipAblityVM.SelectItems[4]}"
+                    ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions2}"
                     VerticalAlignment="Center">
-                    <ComboBoxItem>공격력 감소</ComboBoxItem>
-                    <ComboBoxItem>공격속도 감소</ComboBoxItem>
-                    <ComboBoxItem>방어력 감소</ComboBoxItem>
-                    <ComboBoxItem>이동속도 감소</ComboBoxItem>
+                    
 
                 </ComboBox>
                 <TextBox
