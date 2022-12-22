@@ -252,139 +252,38 @@ namespace LostArkAction.Model
                         }
                     }
                 }
-              /*  #region Debug
-                for (int i = 0; i < FirstAblityCandidate.Count; i++)
-                {
-                    Console.Write(FirstAblityCandidate.Keys.ToList()[i] + " : ");
-                    for (int j = 0; j < FirstAblityCandidate[FirstAblityCandidate.Keys.ToList()[i]].Count; j++)
-                    {
-                        Console.Write(FirstAblityCandidate[FirstAblityCandidate.Keys.ToList()[i]][j] + " , ");
-                    }
-                    Console.WriteLine("");
+                /*  #region Debug
+                  for (int i = 0; i < FirstAblityCandidate.Count; i++)
+                  {
+                      Console.Write(FirstAblityCandidate.Keys.ToList()[i] + " : ");
+                      for (int j = 0; j < FirstAblityCandidate[FirstAblityCandidate.Keys.ToList()[i]].Count; j++)
+                      {
+                          Console.Write(FirstAblityCandidate[FirstAblityCandidate.Keys.ToList()[i]][j] + " , ");
+                      }
+                      Console.WriteLine("");
 
-                }
-                Console.WriteLine("----------------------------");
-                for (int i = 0; i < SecondAblityCandidate.Count; i++)
-                {
-                    Console.Write(SecondAblityCandidate.Keys.ToList()[i] + " : ");
-                    for (int j = 0; j < SecondAblityCandidate[SecondAblityCandidate.Keys.ToList()[i]].Count; j++)
-                    {
-                        Console.Write(SecondAblityCandidate[SecondAblityCandidate.Keys.ToList()[i]][j] + " , ");
-                    }
-                    Console.WriteLine("");
+                  }
+                  Console.WriteLine("----------------------------");
+                  for (int i = 0; i < SecondAblityCandidate.Count; i++)
+                  {
+                      Console.Write(SecondAblityCandidate.Keys.ToList()[i] + " : ");
+                      for (int j = 0; j < SecondAblityCandidate[SecondAblityCandidate.Keys.ToList()[i]].Count; j++)
+                      {
+                          Console.Write(SecondAblityCandidate[SecondAblityCandidate.Keys.ToList()[i]][j] + " , ");
+                      }
+                      Console.WriteLine("");
 
-                }
-                for (int i = 0; i < searchAblities.Count; i++)
-                {
-                    foreach (var tmp in searchAblities[i].FirstAblity) { Console.Write("{ " + tmp.Key + " : " + tmp.Value + " , "); }
-                    foreach (var tmp in searchAblities[i].SecondAblity) { Console.Write(tmp.Key + " : " + tmp.Value + " }"); }
-                    Console.WriteLine();
-                }
-                #endregion*/
-
-                int n = searchAblities.Count;
-                Boolean[] visited = new Boolean[n];
-
-
-                combination(searchAblities, visited, 0, n, 5);
-                for(int i = 0; i < SearchAblities.Count; i++)
-                {
-                    Permutation(SearchAblities[i], 5, 5);
-                }
-            
-                 HttpClient2.GetAsync(SearchAblities, Accesories);
-                   
+                  }
+                  for (int i = 0; i < searchAblities.Count; i++)
+                  {
+                      foreach (var tmp in searchAblities[i].FirstAblity) { Console.Write("{ " + tmp.Key + " : " + tmp.Value + " , "); }
+                      foreach (var tmp in searchAblities[i].SecondAblity) { Console.Write(tmp.Key + " : " + tmp.Value + " }"); }
+                      Console.WriteLine();
+                  }
+                  #endregion*/
+                HttpClient2.GetAsync(searchAblities, Accesories);            
             }
 
-        }
-        public void SetAcc()
-        {
-            List<AccVM> neckAcc  = new List<AccVM>();
-            List<AccVM> ringAcc2 = new List<AccVM>();
-            List<AccVM> ringAcc1 = new List<AccVM>();
-            List<AccVM> earAcc1  = new List<AccVM>();
-            List<AccVM> earAcc2  = new List<AccVM>();
-            if (NeckAcc.Count == 0 || RingAcc1.Count == 0 || RingAcc2.Count == 0 || EarAcc1.Count == 0 || EarAcc2.Count == 0)
-            {
-                return;
-            }
-            Dictionary<string, int> tmpAcc = new Dictionary<string, int>() { { "공격력 감소", 0 }, { "방어력 감소", 0 }, { "공격속도 감소", 0 }, { "이동속도 감소", 0 } };
-            tmpAcc[PanaltyItems.Keys.ToList()[0]] += PanaltyItems[PanaltyItems.Keys.ToList()[0]];
-
-            foreach (var tmp1 in NeckAcc)
-            {
-                tmpAcc[tmp1.PenaltyName] += tmp1.PenaltyValue;
-                if (tmpAcc[tmp1.PenaltyName] >= 5)
-                {
-                    tmpAcc[tmp1.PenaltyName] -= tmp1.PenaltyValue;
-
-                    continue;
-                }
-                foreach (var tmp2 in RingAcc1)
-                {
-                    tmpAcc[tmp2.PenaltyName] += tmp2.PenaltyValue;
-                    if (tmpAcc[tmp2.PenaltyName] >= 5)
-                    {
-                        tmpAcc[tmp2.PenaltyName] -= tmp2.PenaltyValue;
-
-                        continue;
-                    }
-
-                    foreach (var tmp3 in RingAcc2)
-                    {
-                        tmpAcc[tmp3.PenaltyName] += tmp3.PenaltyValue;
-                        if (tmpAcc[tmp3.PenaltyName] >= 5)
-                        {
-                            tmpAcc[tmp3.PenaltyName] -= tmp3.PenaltyValue;
-
-                            continue;
-                        }
-
-                        foreach (var tmp4 in EarAcc1)
-                        {
-                            tmpAcc[tmp4.PenaltyName] += tmp4.PenaltyValue;
-                            if (tmpAcc[tmp4.PenaltyName] >= 5)
-                            {
-                                tmpAcc[tmp4.PenaltyName] -= tmp4.PenaltyValue;
-
-                                continue;
-                            }
-
-                            foreach (var tmp5 in EarAcc2)
-                            {
-                                tmpAcc[tmp5.PenaltyName] += tmp5.PenaltyValue;
-                                if (tmpAcc[tmp5.PenaltyName] >= 5)
-                                {
-                                    tmpAcc[tmp5.PenaltyName] -= tmp5.PenaltyValue;
-
-                                    continue;
-                                }
-
-
-                                (App.Current.MainWindow.DataContext as MainWinodwVM).FindAccVMs.Add(new FindAccVM()
-                                {
-                                    NeckAblity = tmp1,
-                                    FirstRingAblity = tmp2,
-                                    SecondRingAblity = tmp3,
-                                    FirstEarAblity = tmp4,
-                                    SecondEarAblity = tmp5,
-                                    TotalPrice = tmp1.Price + tmp2.Price + tmp3.Price + tmp4.Price + tmp5.Price
-                                });
-                                tmpAcc[tmp5.PenaltyName] -= tmp5.PenaltyValue;
-
-                            }
-                            tmpAcc[tmp4.PenaltyName] -= tmp4.PenaltyValue;
-
-                        }
-                        tmpAcc[tmp3.PenaltyName] -= tmp3.PenaltyValue;
-
-                    }
-                    tmpAcc[tmp2.PenaltyName] -= tmp2.PenaltyValue;
-
-                }
-                tmpAcc[tmp1.PenaltyName] -= tmp1.PenaltyValue;
-
-            }
         }
         void combination(List<SearchAblity> arr, Boolean[] visitied, int start, int n, int r)
         {
