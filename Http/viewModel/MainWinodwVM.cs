@@ -133,6 +133,7 @@ namespace LostArkAction.viewModel
         public void OpenFindACC()
         {
             FindAccWindow findAccWindow= new FindAccWindow();
+            
             findAccWindow.DataContext = new FIndAccWindowVM(FindAccVMs);
             (findAccWindow.DataContext as FIndAccWindowVM).RequestClose += (o, e) => { findAccWindow.Close(); };
 

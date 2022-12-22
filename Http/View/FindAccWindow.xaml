@@ -32,6 +32,10 @@
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -59,11 +63,59 @@
                                 Grid.Row="2"
                                 Grid.Column="1"
                                 Text="{Binding NeckAblity.Quality}"></TextBlock>
+                            <TextBlock
+                                Margin="3"
+                                Grid.Row="3"
+                                Text="{Binding NeckAblity.FirstCharaterics}"></TextBlock>
+                            <TextBlock
+                                Margin="3"
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Text="{Binding NeckAblity.FirstCharValue}"></TextBlock>
+                            <TextBlock
+                                Margin="3"
+                                Grid.Row="4"
+                                Text="{Binding NeckAblity.Secondcharaterics}"></TextBlock>
+                            <TextBlock
+                                Margin="3"
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Text="{Binding NeckAblity.SecondCharValue}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="5"
+                                Text="{Binding NeckAblity.Name1}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Text="{Binding NeckAblity.Value1}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="6"
+                                Text="{Binding NeckAblity.Name2}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                Text="{Binding NeckAblity.Value2}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="7"
+                                Text="{Binding NeckAblity.PenaltyName}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Text="{Binding NeckAblity.PenaltyValue}"></TextBlock>
                         </Grid>
                         <Grid
                             Margin="2"
                             Grid.Column="2">
                             <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -93,15 +145,49 @@
                                 Grid.Row="2"
                                 Text="품질 : "></TextBlock>
                             <TextBlock
-                                Margin="2"
-                                Grid.Row="2"
+                                Margin="3"
+                                Grid.Row="3"
+                                Text="{Binding FirstRingAblity.FirstCharaterics}"></TextBlock>
+                            <TextBlock
+                                Margin="3"
+                                Grid.Row="3"
                                 Grid.Column="1"
-                                Text="{Binding FirstRingAblity.Quality}"></TextBlock>
+                                Text="{Binding FirstRingAblity.FirstCharValue}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="5"
+                                Text="{Binding FirstRingAblity.Name1}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Text="{Binding FirstRingAblity.Value1}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="6"
+                                Text="{Binding FirstRingAblity.Name2}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                Text="{Binding FirstRingAblity.Value2}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="7"
+                                Text="{Binding FirstRingAblity.PenaltyName}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Text="{Binding FirstRingAblity.PenaltyValue}"></TextBlock>
                         </Grid>
                         <Grid
                             Margin="3"
                             Grid.Column="3">
                             <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -135,11 +221,50 @@
                                 Grid.Row="2"
                                 Grid.Column="1"
                                 Text="{Binding SecondRingAblity.Quality}"></TextBlock>
+                            <TextBlock
+                                Margin="3"
+                                Grid.Row="3"
+                                Text="{Binding SecondRingAblity.FirstCharaterics}"></TextBlock>
+                            <TextBlock
+                                Margin="3"
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Text="{Binding SecondRingAblity.FirstCharValue}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="5"
+                                Text="{Binding SecondRingAblity.Name1}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Text="{Binding SecondRingAblity.Value1}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="6"
+                                Text="{Binding SecondRingAblity.Name2}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                Text="{Binding SecondRingAblity.Value2}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="7"
+                                Text="{Binding SecondRingAblity.PenaltyName}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Text="{Binding SecondRingAblity.PenaltyValue}"></TextBlock>
                         </Grid>
                         <Grid
                             Margin="4"
                             Grid.Column="4">
                             <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -173,11 +298,50 @@
                                 Grid.Row="2"
                                 Grid.Column="1"
                                 Text="{Binding FirstEarAblity.Quality}"></TextBlock>
+                            <TextBlock
+                                Margin="3"
+                                Grid.Row="3"
+                                Text="{Binding FirstEarAblity.FirstCharaterics}"></TextBlock>
+                            <TextBlock
+                                Margin="3"
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Text="{Binding FirstEarAblity.FirstCharValue}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="5"
+                                Text="{Binding FirstEarAblity.Name1}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Text="{Binding FirstEarAblity.Value1}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="6"
+                                Text="{Binding FirstEarAblity.Name2}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                Text="{Binding FirstEarAblity.Value2}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="7"
+                                Text="{Binding FirstEarAblity.PenaltyName}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Text="{Binding FirstEarAblity.PenaltyValue}"></TextBlock>
                         </Grid>
                         <Grid
                             Margin="5"
                             Grid.Column="5">
                             <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -211,6 +375,42 @@
                                 Grid.Row="2"
                                 Grid.Column="1"
                                 Text="{Binding SecondEarAblity.Quality}"></TextBlock>
+                            <TextBlock
+                                Margin="3"
+                                Grid.Row="3"
+                                Text="{Binding SecondEarAblity.FirstCharaterics}"></TextBlock>
+                            <TextBlock
+                                Margin="3"
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Text="{Binding SecondEarAblity.FirstCharValue}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="5"
+                                Text="{Binding SecondEarAblity.Name1}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Text="{Binding SecondEarAblity.Value1}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="6"
+                                Text="{Binding SecondEarAblity.Name2}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                Text="{Binding SecondEarAblity.Value2}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="7"
+                                Text="{Binding SecondEarAblity.PenaltyName}"></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Text="{Binding SecondEarAblity.PenaltyValue}"></TextBlock>
                         </Grid>
                     </Grid>
                 </DataTemplate>

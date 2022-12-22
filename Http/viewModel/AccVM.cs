@@ -184,5 +184,37 @@ namespace LostArkAction.viewModel
             }
         }
         #endregion
+
+        #region Method
+        public bool Contain(AccVM accVM)
+        {
+            bool result = false;
+            if(accVM.Name1==Name1 && accVM.Name2==Name2)
+            {
+                if(accVM.Value1==Value1&& accVM.Value2==Value2)
+                {
+                    if (accVM.PenaltyName == PenaltyName)
+                    {
+                        
+                            result = true;
+                        
+                    }
+                }
+            }
+            if (accVM.Name1 == Name2 && accVM.Name2 == Name1)
+            {
+                if (accVM.Value1 == Value2 && accVM.Value2 == Value1)
+                {
+                    if (accVM.PenaltyName == PenaltyName)
+                    {
+                        
+                            result = true;
+                        
+                    }
+                }
+            }
+            return result;
+        }
+        #endregion
     }
 }
