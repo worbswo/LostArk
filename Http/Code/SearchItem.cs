@@ -18,7 +18,7 @@ namespace LostArkAction.Code
         public int CategoryCode;
         public string CharacterClass;
         public int ItemTier = 3;
-        public string ItemGrade = "고대";
+        public string ItemGrade = "유물";
         public int PageNo = 1;
         public string SortCondition = "ASC";
 
