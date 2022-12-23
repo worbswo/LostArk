@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Http.View"
         mc:Ignorable="d"
-        Title="FindAccWindow" Height="450" Width="800">
+        Title="FindAccWindow" Height="450" Width="1000">
     <Grid>
         <ListBox Margin="10"
             ItemsSource="{Binding AccCollectionView}">
@@ -23,8 +23,36 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Margin="2" Text="{Binding TotalPrice}"></TextBlock>
-                        <Grid Margin="2" Grid.Column="1">
+                        <Grid Margin="15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Grid.ColumnSpan="2"
+                                Text="{Binding TotalPrice}"></TextBlock>
+                            <TextBlock
+                                Grid.Row="1"
+                                Text="{Binding FirstChar}"></TextBlock>
+                            <TextBlock
+                                Grid.Row="2"
+                                Text="{Binding SecondChar}"></TextBlock>
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding TotalFirstChar}"></TextBlock>
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Text="{Binding TotalSecondChar}"></TextBlock>
+                        </Grid>
+
+                        <Grid Margin="10" Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -40,28 +68,36 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <TextBlock
                                 Margin="2"
-                                Grid.ColumnSpan="2"
+                                Grid.ColumnSpan="4"
+                                FontWeight="Bold"
+                                Foreground="DarkOrange"
                                 Text="{Binding NeckAblity.Name}"></TextBlock>
                             <TextBlock
                                 Margin="2"
+                                Grid.ColumnSpan="2"
                                 Grid.Row="1"
                                 Text="가격 : "></TextBlock>
                             <TextBlock
                                 Margin="2"
                                 Grid.Row="1"
-                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                Grid.Column="2"
                                 Text="{Binding NeckAblity.Price}"></TextBlock>
                             <TextBlock
                                 Margin="2"
                                 Grid.Row="2"
+                                Grid.ColumnSpan="2"
                                 Text="품질 : "></TextBlock>
                             <TextBlock
                                 Margin="2"
                                 Grid.Row="2"
-                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                Grid.Column="2"
                                 Text="{Binding NeckAblity.Quality}"></TextBlock>
                             <TextBlock
                                 Margin="3"
@@ -74,46 +110,52 @@
                                 Text="{Binding NeckAblity.FirstCharValue}"></TextBlock>
                             <TextBlock
                                 Margin="3"
-                                Grid.Row="4"
+                                Grid.Row="3"
+                                Grid.Column="2"
                                 Text="{Binding NeckAblity.Secondcharaterics}"></TextBlock>
                             <TextBlock
                                 Margin="3"
-                                Grid.Row="4"
-                                Grid.Column="1"
+                                Grid.Row="3"
+                                Grid.Column="3"
                                 Text="{Binding NeckAblity.SecondCharValue}"></TextBlock>
                             <TextBlock
                                 Margin="2"
-                                Grid.Row="5"
+                                Grid.Row="4"
+                                Grid.ColumnSpan="2"
                                 Text="{Binding NeckAblity.Name1}"></TextBlock>
                             <TextBlock
                                 Margin="2"
-                                Grid.Row="5"
-                                Grid.Column="1"
+                                Grid.Row="4"
+                                Grid.ColumnSpan="2"
+                                Grid.Column="2"
                                 Text="{Binding NeckAblity.Value1}"></TextBlock>
                             <TextBlock
                                 Margin="2"
-                                Grid.Row="6"
+                                Grid.Row="5"
+                                Grid.ColumnSpan="2"
                                 Text="{Binding NeckAblity.Name2}"></TextBlock>
                             <TextBlock
                                 Margin="2"
-                                Grid.Row="6"
-                                Grid.Column="1"
+                                Grid.Row="5"
+                                Grid.ColumnSpan="2"
+                                Grid.Column="2"
                                 Text="{Binding NeckAblity.Value2}"></TextBlock>
                             <TextBlock
                                 Margin="2"
-                                Grid.Row="7"
+                                Grid.Row="6"
+                                Grid.ColumnSpan="2"
                                 Text="{Binding NeckAblity.PenaltyName}"></TextBlock>
                             <TextBlock
                                 Margin="2"
-                                Grid.Row="7"
-                                Grid.Column="1"
+                                Grid.Row="6"
+                                Grid.ColumnSpan="2"
+                                Grid.Column="2"
                                 Text="{Binding NeckAblity.PenaltyValue}"></TextBlock>
                         </Grid>
                         <Grid
-                            Margin="2"
+                            Margin="10"
                             Grid.Column="2">
                             <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -130,6 +172,8 @@
                             <TextBlock
                                 Margin="2"
                                 Grid.ColumnSpan="2"
+                                FontWeight="Bold"
+                                Foreground="DarkOrange"
                                 Text="{Binding FirstRingAblity.Name}"></TextBlock>
                             <TextBlock
                                 Margin="2"
@@ -144,6 +188,11 @@
                                 Margin="2"
                                 Grid.Row="2"
                                 Text="품질 : "></TextBlock>
+                            <TextBlock
+                                Margin="2"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Text="{Binding FirstRingAblity.Quality}"></TextBlock>
                             <TextBlock
                                 Margin="3"
                                 Grid.Row="3"
@@ -182,10 +231,9 @@
                                 Text="{Binding FirstRingAblity.PenaltyValue}"></TextBlock>
                         </Grid>
                         <Grid
-                            Margin="3"
+                            Margin="10"
                             Grid.Column="3">
                             <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -202,6 +250,8 @@
                             <TextBlock
                                 Margin="2"
                                 Grid.ColumnSpan="2"
+                                FontWeight="Bold"
+                                Foreground="DarkOrange"
                                 Text="{Binding SecondRingAblity.Name}"></TextBlock>
                             <TextBlock
                                 Margin="2"
@@ -259,10 +309,9 @@
                                 Text="{Binding SecondRingAblity.PenaltyValue}"></TextBlock>
                         </Grid>
                         <Grid
-                            Margin="4"
+                            Margin="10"
                             Grid.Column="4">
                             <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -279,6 +328,8 @@
                             <TextBlock
                                 Margin="2"
                                 Grid.ColumnSpan="2"
+                                FontWeight="Bold"
+                                Foreground="DarkOrange"
                                 Text="{Binding FirstEarAblity.Name}"></TextBlock>
                             <TextBlock
                                 Margin="2"
@@ -336,10 +387,9 @@
                                 Text="{Binding FirstEarAblity.PenaltyValue}"></TextBlock>
                         </Grid>
                         <Grid
-                            Margin="5"
+                            Margin="10"
                             Grid.Column="5">
                             <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -356,6 +406,8 @@
                             <TextBlock
                                 Margin="2"
                                 Grid.ColumnSpan="2"
+                                FontWeight="Bold"
+                                Foreground="DarkOrange"
                                 Text="{Binding SecondEarAblity.Name}"></TextBlock>
                             <TextBlock
                                 Margin="2"

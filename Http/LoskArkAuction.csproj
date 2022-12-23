@@ -63,6 +63,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Code\CommandBehavior.cs" />
+    <Compile Include="Code\DispatcherService.cs" />
     <Compile Include="Code\EtcOption.cs" />
     <Compile Include="Code\HttpClient.cs" />
     <Compile Include="Code\ResultItem.cs" />

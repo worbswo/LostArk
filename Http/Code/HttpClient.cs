@@ -54,7 +54,7 @@ namespace LostArkAction.Code
                     SearchItem item = new SearchItem();
                     item.Sort = "ITEM_QUALITY ";
                     item.CategoryCode = Ablity.AccessoryCode[AcceccesoryType];
-                    item.ItemGradeQuality = accesory[AcceccesoryType].Qulity;
+                    item.ItemGradeQuality = (int)(accesory[AcceccesoryType].Qulity/10)*10;
                     item.EtcOptions.Add(new EtcOption()
                     {
                         FirstOption = 3,
@@ -85,9 +85,10 @@ namespace LostArkAction.Code
                         });
                     }
                     int pageSize = 0;
-                    int minValue = int.MaxValue;
                     AuctionItem auctionItem = new AuctionItem();
                     auctionItem.Name = "";
+                    int minValue = int.MaxValue;
+
                     while (true)
                     {
                         Thread.Sleep(1);
@@ -121,21 +122,11 @@ namespace LostArkAction.Code
                             if (tmp.Items != null)
                             {
                                 bool isQuality = false;
+
                                 for (int j = 0; j < tmp.Items.Count; j++)
                                 {
-                                    /*Console.WriteLine("Name  : " + tmp.Items[j].Name);
-                                    Console.WriteLine("Grade : " + tmp.Items[j].Grade);
-                                    Console.WriteLine("Price : " + tmp.Items[j].AuctionInfo.BuyPrice);
 
-                                    for (int o = 0; o < tmp.Items[j].Options.Count; o++)
-                                    {
-                                        Console.WriteLine("OptionName : " + tmp.Items[j].Options[o].OptionName);
-                                        Console.WriteLine("Value : " + tmp.Items[j].Options[o].Value);
-                                        Console.WriteLine("-------------------------------------");
-
-                                    }
-                                    Console.WriteLine("=======================================");*/
-                                    if (tmp.Items[j].GradeQuality > (accesory[AcceccesoryType].Qulity))
+                                    if (tmp.Items[j].GradeQuality > (accesory[AcceccesoryType].Qulity+10)|| tmp.Items[j].GradeQuality< (accesory[AcceccesoryType].Qulity))
                                     {
                                         isQuality = true;
                                         break;
@@ -192,11 +183,6 @@ namespace LostArkAction.Code
                                         {
                                             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.SetAcc(tmp.Items[j], AcceccesoryType);
                                         }
-                                        if (minValue > (int)tmp.Items[j].AuctionInfo.BuyPrice)
-                                        {
-                                            minValue = (int)tmp.Items[j].AuctionInfo.BuyPrice;
-                                            auctionItem = tmp.Items[j];
-                                        }
                                     }
                                 }
                                 if (isQuality)
@@ -216,12 +202,7 @@ namespace LostArkAction.Code
             }
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.combination((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1, 0);
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.combination((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1, 1);
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.ResultAcc();
-            (App.Current.MainWindow.DataContext as MainWinodwVM).OpenFindACC();
-            Console.WriteLine("Neck : " + (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc.Count);
-            Console.WriteLine("Ring1 : " + (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1.Count);
-            Console.WriteLine("Ear1 : " + (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1.Count);
-
+            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.Start();
         }
 
     }

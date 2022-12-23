@@ -195,8 +195,10 @@ namespace LostArkAction.viewModel
                 {
                     if (accVM.PenaltyName == PenaltyName)
                     {
-                        
+                        if (accVM.PenaltyValue == PenaltyValue)
+                        {
                             result = true;
+                        }
                         
                     }
                 }
@@ -207,9 +209,11 @@ namespace LostArkAction.viewModel
                 {
                     if (accVM.PenaltyName == PenaltyName)
                     {
-                        
+
+                        if (accVM.PenaltyValue == PenaltyValue)
+                        {
                             result = true;
-                        
+                        }
                     }
                 }
             }
