@@ -53,6 +53,17 @@ namespace LostArkAction.Code
                     int pageNo = 1;
                     SearchItem item = new SearchItem();
                     item.Sort = "ITEM_QUALITY ";
+                    if (Ablity.selectClass == 0)
+                    {
+                        item.ItemGrade = "유물";
+                    }else if (Ablity.selectClass == 1)
+                    {
+                        item.ItemGrade = "고대";
+                    }
+                    else
+                    {
+                        item.ItemGrade = "";
+                    }
                     item.CategoryCode = Ablity.AccessoryCode[AcceccesoryType];
                     item.ItemGradeQuality = (int)(accesory[AcceccesoryType].Qulity/10)*10;
                     item.EtcOptions.Add(new EtcOption()
@@ -131,7 +142,7 @@ namespace LostArkAction.Code
                                         isQuality = true;
                                         break;
                                     }
-                                    if (tmp.Items[j].AuctionInfo.BuyPrice != 0)
+                                    if (tmp.Items[j].AuctionInfo.BuyPrice != 0&& tmp.Items[j].AuctionInfo.BuyPrice != null)
                                     {
                                         bool isSame = false;
                                         AccVM tmp2 = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.ConvertAuctionItemToAcc(tmp.Items[j], AcceccesoryType);
@@ -191,7 +202,6 @@ namespace LostArkAction.Code
                                 }
                             }
                             pageNo++;
-                            Console.WriteLine(pageNo + " /" + pageSize);  
                         }
                     }
                     if (auctionItem.Name!="")
@@ -200,6 +210,8 @@ namespace LostArkAction.Code
                 }
                            // (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.SetAcc();
             }
+            Console.WriteLine("검색완료");
+           
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.combination((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1, 0);
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.combination((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1, 1);
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.Start();

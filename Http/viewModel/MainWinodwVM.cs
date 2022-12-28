@@ -24,6 +24,9 @@ namespace LostArkAction.viewModel
         #region Field
         private ICommand _searchCommand;
         private float _progressValue;
+        private bool isRelic  = true;
+        private bool isAncient;
+        private bool isAll;
         #endregion
         #region Property
         public List<FindAccVM> FindAccVMs { get; set; } = new List<FindAccVM>();
@@ -42,9 +45,51 @@ namespace LostArkAction.viewModel
                 OnPropertyChanged("ProgressValue");
             }
         }
-        
-        
-
+        public bool IsRelic
+        {
+            get
+            {
+                return isRelic;
+            }
+            set
+            {
+                isRelic = value;
+                if (isRelic)
+                {
+                    Ablity.selectClass = 0;
+                }
+            }
+        }
+        public bool IsAncient
+        {
+            get
+            {
+                return isAncient;
+            }
+            set
+            {
+                isAncient = value;
+                if (isAncient)
+                {
+                    Ablity.selectClass = 1;
+                }
+            }
+        }
+        public bool IsAll
+        {
+            get
+            {
+                return isAll;
+            }
+            set
+            {
+                isAll = value;
+                if (isAll)
+                {
+                    Ablity.selectClass = 2;
+                }
+            }
+        }
 
 
         #endregion
@@ -74,7 +119,7 @@ namespace LostArkAction.viewModel
         public void SearchMethod(object sender)
         {
             Ablity = new Ablity(this);
-
+            FindAccVMs = new List<FindAccVM>();
             Ablity.TargetItems = new Dictionary<string, int>();
             Ablity.EquipItems = new Dictionary<string, List<int>>();
             Ablity.PanaltyItems = new Dictionary<string, int>();
@@ -115,7 +160,7 @@ namespace LostArkAction.viewModel
                 ischeck = true;
                 for (int i = 0; i < TargetAblityVM.SelectItems.Count; i++)
                 {
-                    if (TargetAblityVM.SelectItems[i] != "")
+                    if (TargetAblityVM.SelectItems[i] != ""&& TargetAblityVM.SelectItems[i]!=null)
                     {
                         if (TargetAblityVM.SelectFigureItems[i] == 0)
                         {

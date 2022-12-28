@@ -28,7 +28,7 @@ namespace LostArkAction.Code
     public class AuctionInfo
     {
         public Int64 StartPrice;
-        public Int64 BuyPrice;
+        public Int64? BuyPrice;
         public Int64 BidPrice;
         public string EndDate;
         public Int32 BidCount;

@@ -73,7 +73,7 @@
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Center"
                 FontSize="20"
-                IsChecked="True"
+                IsChecked="{Binding IsRelic}"
                 Foreground="GhostWhite"
                 Content="유물"></RadioButton>
             <RadioButton
@@ -82,6 +82,7 @@
                 VerticalContentAlignment="Center"
                 FontSize="20"
                 Foreground="GhostWhite"
+                IsChecked="{Binding IsAncient}"
                 Content="고대"></RadioButton>
             <RadioButton
                 Grid.Column="2"
@@ -89,6 +90,7 @@
                 VerticalContentAlignment="Center"
                 FontSize="20"
                 Foreground="GhostWhite"
+                IsChecked="{Binding IsAll}"
                 Content="전체"></RadioButton>
             <Button Content="  검 색  "
                 Command="{Binding SearchCommand}"
