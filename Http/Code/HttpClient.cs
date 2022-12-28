@@ -70,13 +70,14 @@ namespace LostArkAction.Code
                     {
                         FirstOption = 3,
                         SecondOption = Ablity.AblityCode[searchAblitie[i].FirstAblity.Keys.ToList()[0]],
-                        MinValue = searchAblitie[i].FirstAblity[searchAblitie[i].FirstAblity.Keys.ToList()[0]]
+                        MinValue = searchAblitie[i].FirstAblity[searchAblitie[i].FirstAblity.Keys.ToList()[0]],
                     });
                     item.EtcOptions.Add(new EtcOption()
                     {
                         FirstOption = 3,
                         SecondOption = Ablity.AblityCode[searchAblitie[i].SecondAblity.Keys.ToList()[0]],
-                        MinValue = searchAblitie[i].SecondAblity[searchAblitie[i].SecondAblity.Keys.ToList()[0]]
+                        MinValue = searchAblitie[i].SecondAblity[searchAblitie[i].SecondAblity.Keys.ToList()[0]],
+
                     });
                     int code = Ablity.CharactericsCode[accesory[AcceccesoryType].Characteristic[0]];
                     item.EtcOptions.Add(new EtcOption()
@@ -137,7 +138,7 @@ namespace LostArkAction.Code
                                 for (int j = 0; j < tmp.Items.Count; j++)
                                 {
 
-                                    if (tmp.Items[j].GradeQuality > (accesory[AcceccesoryType].Qulity+10)|| tmp.Items[j].GradeQuality< (accesory[AcceccesoryType].Qulity))
+                                    if (tmp.Items[j].GradeQuality< (accesory[AcceccesoryType].Qulity))
                                     {
                                         isQuality = true;
                                         break;
