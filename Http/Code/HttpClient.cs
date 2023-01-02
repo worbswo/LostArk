@@ -72,13 +72,16 @@ namespace LostArkAction.Code
                         SecondOption = Ablity.AblityCode[searchAblitie[i].FirstAblity.Keys.ToList()[0]],
                         MinValue = searchAblitie[i].FirstAblity[searchAblitie[i].FirstAblity.Keys.ToList()[0]],
                     });
-                    item.EtcOptions.Add(new EtcOption()
+                    if (searchAblitie[i].SecondAblity.Keys.ToList()[0] != "random")
                     {
-                        FirstOption = 3,
-                        SecondOption = Ablity.AblityCode[searchAblitie[i].SecondAblity.Keys.ToList()[0]],
-                        MinValue = searchAblitie[i].SecondAblity[searchAblitie[i].SecondAblity.Keys.ToList()[0]],
+                        item.EtcOptions.Add(new EtcOption()
+                        {
+                            FirstOption = 3,
+                            SecondOption = Ablity.AblityCode[searchAblitie[i].SecondAblity.Keys.ToList()[0]],
+                            MinValue = searchAblitie[i].SecondAblity[searchAblitie[i].SecondAblity.Keys.ToList()[0]],
 
-                    });
+                        });
+                    }
                     int code = Ablity.CharactericsCode[accesory[AcceccesoryType].Characteristic[0]];
                     item.EtcOptions.Add(new EtcOption()
                     {
@@ -212,7 +215,7 @@ namespace LostArkAction.Code
                            // (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.SetAcc();
             }
             Console.WriteLine("검색완료");
-           
+            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.SetNeck();
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.combination((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1, 0);
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.combination((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1, 1);
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.Start();

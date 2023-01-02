@@ -256,6 +256,7 @@ namespace LostArkAction.viewModel
         {
             if (!isClosing)
             {
+                if(Ablity!=null)
                     Ablity.Thread.Abort();
                 
             }
