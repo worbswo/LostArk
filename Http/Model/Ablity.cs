@@ -4,6 +4,7 @@ using LostArkAction.viewModel;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
@@ -50,12 +51,13 @@ namespace LostArkAction.Model
         public List<AccVM> NeckAcc { get; set; } = new List<AccVM>();
         public List<AccVM> RingAcc1 { get; set; } = new List<AccVM>();
         public List<List<AccVM>> RingAcc2 { get; set; } = new List<List<AccVM>>();
-        List<List<int>> RingAccToNeck { get; set; } = new List<List<int>>();
         public List<List<AccVM>> EarAcc2 { get; set; } = new List<List<AccVM>>();
-        List<List<int>> EarAccToNeck { get; set; } = new List<List<int>>();
+        public List<List<AccVM>> Accs { get; set; } = new List<List<AccVM>>();
+        
 
         public List<AccVM> EarAcc1 { get; set; } = new List<AccVM>();
         public Thread Thread { get; set; }
+        public Thread Thread2 { get; set; }
         MainWinodwVM MainWinodwVM { get; set; }
         #endregion
 
@@ -65,8 +67,9 @@ namespace LostArkAction.Model
 
         Dictionary<string, int> EquipCheck { get; set; }
         Dictionary<string, int> PanaltyCheck { get; set; }
-        float TotalValue {get; set; }
-        float Cnt { get; set; }
+
+        uint TotalValue {get; set; }
+        uint Cnt { get; set; }
         #endregion
         public Ablity(MainWinodwVM mainWinodw)
         {
@@ -77,7 +80,7 @@ namespace LostArkAction.Model
         #region Method
         public void Start()
         {
-            Thread = new Thread(ResultAcc);
+            Thread = new Thread(SetAcc);
             Thread.Start();
         }
         public void ComputeAblity()
@@ -86,17 +89,23 @@ namespace LostArkAction.Model
             SecondAblityCandidate = new Dictionary<string, List<int>>();
             SearchAblities = new List<List<SearchAblity>>();
             SearchAblities2 = new List<List<SearchAblity>>();
+            int TargetSum = 0;
+            int EquipSum = 0;
             for (int i = 0; i < EquipItems.Count; i++)
             {
                 for (int j = 0; j < EquipItems[EquipItems.Keys.ToList()[i]].Count; j++)
                 {
+                    EquipSum += EquipItems[EquipItems.Keys.ToList()[i]][j];
+
                     TargetItems[EquipItems.Keys.ToList()[i]] -= EquipItems[EquipItems.Keys.ToList()[i]][j];
                 }
             }
             for(int i = 0; i < TargetItems.Count; i++)
             {
+                TargetSum += TargetItems[TargetItems.Keys.ToList()[i]];
                 CountEquipAvlity.Add(TargetItems.Keys.ToList()[i], new List<int>{ 0,0});
             }
+            int Minus = TargetSum - EquipSum;
             int cnt = 0;
             Dictionary<string, int> tmpItem = new Dictionary<string, int>();
             foreach (var tmp in TargetItems)
@@ -107,7 +116,7 @@ namespace LostArkAction.Model
             #region Seperate Ablity
             if (selectClass == 0)
             {
-
+                Minus = 40 - Minus;
                 for (int i = 0; i < tmpItem.Count; i++)
                 {
                     while (true)
@@ -163,9 +172,17 @@ namespace LostArkAction.Model
                         }
                     }
                 }
+                if (Minus > 0)
+                {
+                    for(int i =0;i< FirstAblityCandidate.Count; i++)
+                    {
+                        FirstAblityCandidate[FirstAblityCandidate.Keys.ToList()[i]].Add(4);
+                    }
+                }
             }
             else
             {
+                Minus = 45 - Minus;
                 for (int i = 0; i < tmpItem.Count; i++)
                 {
                     while (true)
@@ -237,10 +254,17 @@ namespace LostArkAction.Model
                         }
                     }
                 }
+                if (Minus > 0)
+                {
+                    for (int i = 0; i < FirstAblityCandidate.Count; i++)
+                    {
+                        FirstAblityCandidate[FirstAblityCandidate.Keys.ToList()[i]].Add(5);
+                    }
+                }
             }
             #endregion
 
-            if (cnt > 5)
+            if (Minus < 0)
             {
                 MessageBox.Show("구성할 수 없는 각인 입니다.");
                 return;
@@ -549,81 +573,7 @@ namespace LostArkAction.Model
                 }
             }
         }
-        public void CheckEar(int idx, AccVM neckAcc, List<AccVM> earAcc, List<AccVM> ringAcc)
-        {
-           
-            PanaltyCheck[earAcc[0].PenaltyName] += earAcc[0].PenaltyValue;
-            PanaltyCheck[earAcc[1].PenaltyName] += earAcc[1].PenaltyValue;
-            EquipCheck[earAcc[1].Name1] -= earAcc[1].Value1;
-            if (EquipCheck.ContainsKey(earAcc[1].Name2))
-                EquipCheck[earAcc[1].Name2] -= earAcc[1].Value2;
-            EquipCheck[earAcc[0].Name1] -= earAcc[0].Value1;
-            if (EquipCheck.ContainsKey(earAcc[0].Name2))
-                EquipCheck[earAcc[0].Name2] -= earAcc[0].Value2;
-            if (PanaltyCheck[earAcc[0].PenaltyName] >= 5 || PanaltyCheck[earAcc[1].PenaltyName] >= 5)
-            {
-                EquipCheck[earAcc[1].Name1] += earAcc[1].Value1;
-                if (EquipCheck.ContainsKey(earAcc[1].Name2))
-                    EquipCheck[earAcc[1].Name2] += earAcc[1].Value2;
-                EquipCheck[earAcc[0].Name1] += earAcc[0].Value1;
-                if (EquipCheck.ContainsKey(earAcc[0].Name2))
-                    EquipCheck[earAcc[0].Name2] += earAcc[0].Value2;
-                PanaltyCheck[earAcc[0].PenaltyName] -= earAcc[0].PenaltyValue;
-                PanaltyCheck[earAcc[1].PenaltyName] -= earAcc[1].PenaltyValue;
-            }
-            else
-            {
-                PanaltyCheck[earAcc[0].PenaltyName] -= earAcc[0].PenaltyValue;
-                PanaltyCheck[earAcc[1].PenaltyName] -= earAcc[1].PenaltyValue;
-
-                var check = EquipCheck.Where(x => x.Value > 0).ToList();
-                if (check.Count == 0)
-                {
-                    int value1 = neckAcc.FirstCharValue;
-                    int value2 = neckAcc.SecondCharValue;
-
-                    if (neckAcc.FirstCharaterics == ringAcc[0].FirstCharaterics) value1 += ringAcc[0].FirstCharValue;
-                    if (neckAcc.FirstCharaterics == ringAcc[1].FirstCharaterics) value1 += ringAcc[1].FirstCharValue;
-                    if (neckAcc.FirstCharaterics == earAcc[0].FirstCharaterics) value1 += earAcc[0].FirstCharValue;
-                    if (neckAcc.FirstCharaterics == earAcc[1].FirstCharaterics) value1 += earAcc[1].FirstCharValue;
-                    if (neckAcc.Secondcharaterics == ringAcc[0].FirstCharaterics) value2 += ringAcc[0].FirstCharValue;
-                    if (neckAcc.Secondcharaterics == ringAcc[1].FirstCharaterics) value2 += ringAcc[1].FirstCharValue;
-                    if (neckAcc.Secondcharaterics == earAcc[0].FirstCharaterics) value2 += earAcc[0].FirstCharValue;
-                    if (neckAcc.Secondcharaterics == earAcc[1].FirstCharaterics) value2 += earAcc[1].FirstCharValue;
-                    FindAccVM findAccVM = new FindAccVM
-                    {
-                        NeckAblity = neckAcc,
-                        FirstRingAblity = ringAcc[0],
-                        SecondRingAblity = ringAcc[1],
-                        FirstEarAblity = earAcc[0],
-                        SecondEarAblity = earAcc[1],
-                        TotalPrice = neckAcc.Price + ringAcc[0].Price + ringAcc[1].Price + earAcc[0].Price + earAcc[1].Price
-                    };
-                    if (value1 > value2)
-                    {
-                        findAccVM.TotalFirstChar = value1;
-                        findAccVM.TotalSecondChar = value2;
-                        findAccVM.FirstChar = neckAcc.FirstCharaterics;
-                        findAccVM.SecondChar = neckAcc.Secondcharaterics;
-                    }
-                    else
-                    {
-                        findAccVM.TotalFirstChar = value2;
-                        findAccVM.TotalSecondChar = value1;
-                        findAccVM.FirstChar = neckAcc.Secondcharaterics;
-                        findAccVM.SecondChar = neckAcc.FirstCharaterics;
-                    }
-                    MainWinodwVM.FindAccVMs.Add(findAccVM);
-                }
-                EquipCheck[earAcc[1].Name1] += earAcc[1].Value1;
-                if (EquipCheck.ContainsKey(earAcc[1].Name2))
-                    EquipCheck[earAcc[1].Name2] += earAcc[1].Value2;
-                EquipCheck[earAcc[0].Name1] += earAcc[0].Value1;
-                if (EquipCheck.ContainsKey(earAcc[0].Name2))
-                    EquipCheck[earAcc[0].Name2] += earAcc[0].Value2;
-            }
-           
-        }
+        
         public void SetNeck()
         {
             List<AccVM> tmp = new List<AccVM>();
@@ -646,17 +596,14 @@ namespace LostArkAction.Model
 
             NeckAcc = tmp;
         }
-        public void ResultAcc()
+        public void SetAcc()
         {
             PanaltyCheck = new Dictionary<string, int> { { "공격력 감소", 0 }, { "공격속도 감소", 0 }, { "방어력 감소", 0 }, { "이동속도 감소", 0 } };
             PanaltyCheck[PanaltyItems.Keys.ToList()[0]] += PanaltyItems[PanaltyItems.Keys.ToList()[0]];
-            Cnt = 0;
-            int checkValue = selectClass == 0 ? 16 : 18;
-            int sizeRing = RingAcc2.Count;
-            int sizeEar = EarAcc2.Count;
-            TotalValue = NeckAcc.Count * RingAcc2.Count;
-
-            for (int i=0;i< NeckAcc.Count; i++)
+            int checkValue = selectClass == 0 ? 8 : 9;
+            uint total = (uint)(RingAcc2.Count * EarAcc2.Count);
+            uint cnt = 0;
+            for (int i = 0; i < RingAcc2.Count; i++)
             {
                 EquipCheck = new Dictionary<string, int>();
 
@@ -664,70 +611,222 @@ namespace LostArkAction.Model
                 {
                     EquipCheck.Add(tmp.Key, tmp.Value);
                 }
-                PanaltyCheck[NeckAcc[i].PenaltyName] += NeckAcc[i].PenaltyValue;
-
-                EquipCheck[NeckAcc[i].Name1] -= NeckAcc[i].Value1;
-                if(EquipCheck.ContainsKey(NeckAcc[i].Name2))
-                EquipCheck[NeckAcc[i].Name2] -= NeckAcc[i].Value2;
-
-                for (int j = 0; j < sizeRing; j++)
+                PanaltyCheck[RingAcc2[i][0].PenaltyName] += RingAcc2[i][0].PenaltyValue;
+                PanaltyCheck[RingAcc2[i][1].PenaltyName] += RingAcc2[i][1].PenaltyValue;
+                EquipCheck[RingAcc2[i][1].Name1] -= RingAcc2[i][1].Value1;
+                if (EquipCheck.ContainsKey(RingAcc2[i][1].Name2))
+                    EquipCheck[RingAcc2[i][1].Name2] -= RingAcc2[i][1].Value2;
+                EquipCheck[RingAcc2[i][0].Name1] -= RingAcc2[i][0].Value1;
+                if (EquipCheck.ContainsKey(RingAcc2[i][0].Name2))
+                    EquipCheck[RingAcc2[i][0].Name2] -= RingAcc2[i][0].Value2;
+                if (PanaltyCheck[RingAcc2[i][0].PenaltyName] >= 5 || PanaltyCheck[RingAcc2[i][1].PenaltyName] >= 5)
                 {
-
-                    PanaltyCheck[RingAcc2[j][0].PenaltyName] += RingAcc2[j][0].PenaltyValue;
-                    PanaltyCheck[RingAcc2[j][1].PenaltyName] += RingAcc2[j][1].PenaltyValue;
-                    EquipCheck[RingAcc2[j][1].Name1] -= RingAcc2[j][1].Value1;
-                    if (EquipCheck.ContainsKey(RingAcc2[j][1].Name2))
-                        EquipCheck[RingAcc2[j][1].Name2] -= RingAcc2[j][1].Value2;
-                    EquipCheck[RingAcc2[j][0].Name1] -= RingAcc2[j][0].Value1;
-                    if (EquipCheck.ContainsKey(RingAcc2[j][0].Name2))
-                        EquipCheck[RingAcc2[j][0].Name2] -= RingAcc2[j][0].Value2;
-                    
-                    int sumValue = 0;
-                    foreach(var equip in EquipCheck)
+                    EquipCheck[RingAcc2[i][1].Name1] += RingAcc2[i][1].Value1;
+                    if (EquipCheck.ContainsKey(RingAcc2[i][1].Name2))
+                        EquipCheck[RingAcc2[i][1].Name2] += RingAcc2[i][1].Value2;
+                    EquipCheck[RingAcc2[i][0].Name1] += RingAcc2[i][0].Value1;
+                    if (EquipCheck.ContainsKey(RingAcc2[i][0].Name2))
+                        EquipCheck[RingAcc2[i][0].Name2] += RingAcc2[i][0].Value2;
+                    PanaltyCheck[RingAcc2[i][0].PenaltyName] -= RingAcc2[i][0].PenaltyValue;
+                    PanaltyCheck[RingAcc2[i][1].PenaltyName] -= RingAcc2[i][1].PenaltyValue;
+                    cnt += (uint)EarAcc2.Count;
+                    MainWinodwVM.AccProgressValue = (float)(((double)cnt / total) * 100.0);
+                    continue;
+                }
+                for(int j = 0; j < EarAcc2.Count; j++)
+                {
+                    PanaltyCheck[EarAcc2[j][0].PenaltyName] += EarAcc2[j][0].PenaltyValue;
+                    PanaltyCheck[EarAcc2[j][1].PenaltyName] += EarAcc2[j][1].PenaltyValue;
+                    EquipCheck[EarAcc2[j][1].Name1] -= EarAcc2[j][1].Value1;
+                    if (EquipCheck.ContainsKey(EarAcc2[j][1].Name2))
+                        EquipCheck[EarAcc2[j][1].Name2] -= EarAcc2[j][1].Value2;
+                    EquipCheck[EarAcc2[j][0].Name1] -= EarAcc2[j][0].Value1;
+                    if (EquipCheck.ContainsKey(EarAcc2[j][0].Name2))
+                        EquipCheck[EarAcc2[j][0].Name2] -= EarAcc2[j][0].Value2;
+                    if (PanaltyCheck[EarAcc2[j][0].PenaltyName] >= 5 || PanaltyCheck[EarAcc2[j][1].PenaltyName] >= 5)
                     {
-                        if(equip.Value>0)
-                        sumValue += equip.Value;
-                    }
-                    if (sumValue>checkValue)
-                    {
-                        EquipCheck[RingAcc2[j][1].Name1] += RingAcc2[j][1].Value1;
-                        if (EquipCheck.ContainsKey(RingAcc2[j][1].Name2))
-                            EquipCheck[RingAcc2[j][1].Name2] += RingAcc2[j][1].Value2;
-                        EquipCheck[RingAcc2[j][0].Name1] += RingAcc2[j][0].Value1;
-                        if (EquipCheck.ContainsKey(RingAcc2[j][0].Name2))
-                            EquipCheck[RingAcc2[j][0].Name2] += RingAcc2[j][0].Value2;
-                        PanaltyCheck[RingAcc2[j][0].PenaltyName] -= RingAcc2[j][0].PenaltyValue;
-                        PanaltyCheck[RingAcc2[j][1].PenaltyName] -= RingAcc2[j][1].PenaltyValue;
-                        Cnt++;
-                        MainWinodwVM.ProgressValue = (float)(Cnt / TotalValue * 100);
+                        EquipCheck[EarAcc2[j][1].Name1] += EarAcc2[j][1].Value1;
+                        if (EquipCheck.ContainsKey(EarAcc2[j][1].Name2))
+                            EquipCheck[EarAcc2[j][1].Name2] += EarAcc2[j][1].Value2;
+                        EquipCheck[EarAcc2[j][0].Name1] += EarAcc2[j][0].Value1;
+                        if (EquipCheck.ContainsKey(EarAcc2[j][0].Name2))
+                            EquipCheck[EarAcc2[j][0].Name2] += EarAcc2[j][0].Value2;
+                        PanaltyCheck[EarAcc2[j][0].PenaltyName] -= EarAcc2[j][0].PenaltyValue;
+                        PanaltyCheck[EarAcc2[j][1].PenaltyName] -= EarAcc2[j][1].PenaltyValue;
+                        cnt ++;
+                        MainWinodwVM.AccProgressValue = (float)(((double)cnt / total) * 100.0);
                         continue;
                     }
-
-                    for (int k = 0; k < sizeEar; k++)
+                    int sumValue = 0;
+                    foreach (var equip in EquipCheck)
                     {
-                        CheckEar(k, NeckAcc[i], EarAcc2[k], RingAcc2[j]);
+                        if (equip.Value > 0)
+                            sumValue += equip.Value;
+                    }
+                    if (sumValue > checkValue)
+                    {
+                        EquipCheck[EarAcc2[j][1].Name1] += EarAcc2[j][1].Value1;
+                        if (EquipCheck.ContainsKey(EarAcc2[j][1].Name2))
+                            EquipCheck[EarAcc2[j][1].Name2] += EarAcc2[j][1].Value2;
+                        EquipCheck[EarAcc2[j][0].Name1] += EarAcc2[j][0].Value1;
+                        if (EquipCheck.ContainsKey(EarAcc2[j][0].Name2))
+                            EquipCheck[EarAcc2[j][0].Name2] += EarAcc2[j][0].Value2;
+                        PanaltyCheck[EarAcc2[j][0].PenaltyName] -= EarAcc2[j][0].PenaltyValue;
+                        PanaltyCheck[EarAcc2[j][1].PenaltyName] -= EarAcc2[j][1].PenaltyValue;
+                        cnt ++;
+                        MainWinodwVM.AccProgressValue = (float)(((double)cnt / total) * 100.0);
+                        continue;
+                    }
+                    List<AccVM> tmp = new List<AccVM>();
+                    tmp.Add(RingAcc2[i][0]);
+                    tmp.Add(RingAcc2[i][1]);
+                    tmp.Add(EarAcc2[j][0]);
+                    tmp.Add(EarAcc2[j][1]);
+                    Accs.Add(tmp);
+                   
+
+                    EquipCheck[EarAcc2[j][1].Name1] += EarAcc2[j][1].Value1;
+                    if (EquipCheck.ContainsKey(EarAcc2[j][1].Name2))
+                        EquipCheck[EarAcc2[j][1].Name2] += EarAcc2[j][1].Value2;
+                    EquipCheck[EarAcc2[j][0].Name1] += EarAcc2[j][0].Value1;
+                    if (EquipCheck.ContainsKey(EarAcc2[j][0].Name2))
+                        EquipCheck[EarAcc2[j][0].Name2] += EarAcc2[j][0].Value2;
+                    PanaltyCheck[EarAcc2[j][0].PenaltyName] -= EarAcc2[j][0].PenaltyValue;
+                    PanaltyCheck[EarAcc2[j][1].PenaltyName] -= EarAcc2[j][1].PenaltyValue;
+                    cnt ++;
+                    MainWinodwVM.AccProgressValue = (float)(((double)cnt / total) * 100.0);
+                }
+
+
+                EquipCheck[RingAcc2[i][1].Name1] += RingAcc2[i][1].Value1;
+                if (EquipCheck.ContainsKey(RingAcc2[i][1].Name2))
+                    EquipCheck[RingAcc2[i][1].Name2] += RingAcc2[i][1].Value2;
+                EquipCheck[RingAcc2[i][0].Name1] += RingAcc2[i][0].Value1;
+                if (EquipCheck.ContainsKey(RingAcc2[i][0].Name2))
+                    EquipCheck[RingAcc2[i][0].Name2] += RingAcc2[i][0].Value2;
+                PanaltyCheck[RingAcc2[i][0].PenaltyName] -= RingAcc2[i][0].PenaltyValue;
+                PanaltyCheck[RingAcc2[i][1].PenaltyName] -= RingAcc2[i][1].PenaltyValue;
+            }
+            Accs= Accs.OrderBy(x => (x[0].Price+ x[1].Price+ x[2].Price+ x[3].Price)).ToList();
+            Thread2 = new Thread(ResultAcc2);
+            Thread2.Start();
+        }
+        public void ResultAcc2()
+        {
+            Cnt = 0;
+            PanaltyCheck = new Dictionary<string, int> { { "공격력 감소", 0 }, { "공격속도 감소", 0 }, { "방어력 감소", 0 }, { "이동속도 감소", 0 } };
+            PanaltyCheck[PanaltyItems.Keys.ToList()[0]] += PanaltyItems[PanaltyItems.Keys.ToList()[0]];
+            int size = 50000;
+            size = size > Accs.Count ? Accs.Count : size;
+            TotalValue = (uint)(NeckAcc.Count * size);
+
+            for (int i=0;i<NeckAcc.Count;i++)
+            {
+                EquipCheck.Clear();
+
+                foreach (var tmp in TargetItems)
+                {
+                    EquipCheck.Add(tmp.Key, tmp.Value);
+                }
+                PanaltyCheck[NeckAcc[i].PenaltyName] += NeckAcc[i].PenaltyValue;
+                EquipCheck[NeckAcc[i].Name1] -= NeckAcc[i].Value1;
+                if (EquipCheck.ContainsKey(NeckAcc[i].Name2))
+                    EquipCheck[NeckAcc[i].Name2] -= NeckAcc[i].Value2;
+                if (PanaltyCheck[NeckAcc[i].PenaltyName] >= 5 )
+                {
+                    PanaltyCheck[NeckAcc[i].PenaltyName] -= NeckAcc[i].PenaltyValue;
+                    Cnt+=(uint)Accs.Count;
+                    MainWinodwVM.ProgressValue = (float)(((double)Cnt / TotalValue) * 100.0);
+                    continue;
+                }
+                for (int j = 0; j < size; j++)
+                {
+
+                    
+                    bool check2 = false;
+                    for(int k = 0; k < Accs[j].Count; k++)
+                    {
+                        PanaltyCheck[Accs[j][k].PenaltyName] += Accs[j][k].PenaltyValue;
+
+                        EquipCheck[Accs[j][k].Name1] -= Accs[j][k].Value1;
+                        if (EquipCheck.ContainsKey(Accs[j][k].Name2))
+                            EquipCheck[Accs[j][k].Name2] -= Accs[j][k].Value2;
+
+                        if(PanaltyCheck[Accs[j][k].PenaltyName] >= 5)
+                        {
+                            check2= true;
+                        }
+                    }
+                    if (check2)
+                    {
+                        for (int k = 0; k < Accs[j].Count; k++)
+                        {
+                            PanaltyCheck[Accs[j][k].PenaltyName] -= Accs[j][k].PenaltyValue;
+
+                            EquipCheck[Accs[j][k].Name1] += Accs[j][k].Value1;
+                            if (EquipCheck.ContainsKey(Accs[j][k].Name2))
+                                EquipCheck[Accs[j][k].Name2] += Accs[j][k].Value2;
+                        }
+                        Cnt ++;
+                        MainWinodwVM.ProgressValue = (float)(((double)Cnt / TotalValue) * 100.0);
+                        continue;
+                    }
+                    var check = EquipCheck.Where(x => x.Value > 0).ToList();
+                    if (check.Count == 0)
+                    {
+                        int value1 = NeckAcc[i].FirstCharValue;
+                        int value2 = NeckAcc[i].SecondCharValue;
+
+                        if (NeckAcc[i].FirstCharaterics == Accs[j][0].FirstCharaterics) value1 += Accs[j][0].FirstCharValue;
+                        if (NeckAcc[i].FirstCharaterics == Accs[j][1].FirstCharaterics) value1 += Accs[j][1].FirstCharValue;
+                        if (NeckAcc[i].FirstCharaterics == Accs[j][2].FirstCharaterics) value1 += Accs[j][2].FirstCharValue;
+                        if (NeckAcc[i].FirstCharaterics == Accs[j][3].FirstCharaterics) value1 += Accs[j][3].FirstCharValue;
+                        if (NeckAcc[i].Secondcharaterics == Accs[j][0].FirstCharaterics) value2 += Accs[j][0].FirstCharValue;
+                        if (NeckAcc[i].Secondcharaterics == Accs[j][1].FirstCharaterics) value2 += Accs[j][1].FirstCharValue;
+                        if (NeckAcc[i].Secondcharaterics == Accs[j][2].FirstCharaterics) value2 += Accs[j][2].FirstCharValue;
+                        if (NeckAcc[i].Secondcharaterics == Accs[j][3].FirstCharaterics) value2 += Accs[j][3].FirstCharValue;
+                        FindAccVM findAccVM = new FindAccVM
+                        {
+                            NeckAblity = NeckAcc[i],
+                            FirstRingAblity = Accs[j][0],
+                            SecondRingAblity = Accs[j][1],
+                            FirstEarAblity = Accs[j][2],
+                            SecondEarAblity = Accs[j][3],
+                            TotalPrice = NeckAcc[i].Price + Accs[j][0].Price + Accs[j][1].Price + Accs[j][2].Price + Accs[j][3].Price
+                        };
+                        if (value1 > value2)
+                        {
+                            findAccVM.TotalFirstChar = value1;
+                            findAccVM.TotalSecondChar = value2;
+                            findAccVM.FirstChar = NeckAcc[i].FirstCharaterics;
+                            findAccVM.SecondChar = NeckAcc[i].Secondcharaterics;
+                        }
+                        else
+                        {
+                            findAccVM.TotalFirstChar = value2;
+                            findAccVM.TotalSecondChar = value1;
+                            findAccVM.FirstChar = NeckAcc[i].Secondcharaterics;
+                            findAccVM.SecondChar = NeckAcc[i].FirstCharaterics;
+                        }
+                        MainWinodwVM.FindAccVMs.Add(findAccVM);
+                    }
+                    for (int k = 0; k < Accs[j].Count; k++)
+                    {
+                        PanaltyCheck[Accs[j][k].PenaltyName] -= Accs[j][k].PenaltyValue;
+
+                        EquipCheck[Accs[j][k].Name1] += Accs[j][k].Value1;
+                        if (EquipCheck.ContainsKey(Accs[j][k].Name2))
+                            EquipCheck[Accs[j][k].Name2] += Accs[j][k].Value2;
                     }
                     Cnt++;
-                    MainWinodwVM.ProgressValue = (float)(Cnt / TotalValue * 100);
-                    EquipCheck[RingAcc2[j][1].Name1] += RingAcc2[j][1].Value1;
-                    if (EquipCheck.ContainsKey(RingAcc2[j][1].Name2))
-                        EquipCheck[RingAcc2[j][1].Name2] += RingAcc2[j][1].Value2;
-                    EquipCheck[RingAcc2[j][0].Name1] += RingAcc2[j][0].Value1;
-                    if (EquipCheck.ContainsKey(RingAcc2[j][0].Name2))
-                        EquipCheck[RingAcc2[j][0].Name2] += RingAcc2[j][0].Value2;
-                    PanaltyCheck[RingAcc2[j][0].PenaltyName] -= RingAcc2[j][0].PenaltyValue;
-                    PanaltyCheck[RingAcc2[j][1].PenaltyName] -= RingAcc2[j][1].PenaltyValue;
+                    MainWinodwVM.ProgressValue = (float)(((double)Cnt / TotalValue) * 100.0);
                 }
-                EquipCheck[NeckAcc[i].Name1] += NeckAcc[i].Value1;
-                if (EquipCheck.ContainsKey(NeckAcc[i].Name2))
-                    EquipCheck[NeckAcc[i].Name2] += NeckAcc[i].Value2;
                 PanaltyCheck[NeckAcc[i].PenaltyName] -= NeckAcc[i].PenaltyValue;
             }
-
             DispatcherService.Invoke(() => { MainWinodwVM.OpenFindACC(); });
-               
 
         }
+        
         public AccVM ConvertAuctionItemToAcc(AuctionItem auctionItem, string accName)
         {
             bool isCheck = false;
@@ -992,7 +1091,6 @@ namespace LostArkAction.Model
                     if (auctionItem.Options[i].Type == "STAT")
                     {
                         searchAblity.FirstCharaterics = auctionItem.Options[i].OptionName;
-
                         searchAblity.FirstCharValue = auctionItem.Options[i].Value;
                     }
                     else if (auctionItem.Options[i].Type == "ABILITY_ENGRAVE")

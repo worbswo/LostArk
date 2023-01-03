@@ -8,516 +8,666 @@
     mc:Ignorable="d"
     Title="FindAccWindow"
     Height="600"
-    Width="1100"
-    MaxWidth="1100"
-    MinWidth="1100">
+    Width="1200"
+    MaxWidth="1200"
+    MinWidth="1200">
     <Grid>
-        <ListBox
+        <ListView
             Margin="10"
             ItemsSource="{Binding AccCollectionView}"
-            Width="1000">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid
-                        Margin="5">
-                        <Grid.RowDefinitions>
+            Width="1150"
+            AlternationCount="2">
+            <ListView.ItemContainerStyle>
+                <Style
+                    TargetType="ListViewItem">
+                    <Style.Resources>
+                        <LinearGradientBrush
+                            x:Key="ListItemHoverFill"
+                            EndPoint="0,1"
+                            StartPoint="0,0">
+                            <GradientStop
+                                Color="#ddD5F1FE"
+                                Offset="1.0" />
+                            <GradientStop
+                                Color="#ddF1FBFF"
+                                Offset="0.5" />
+                            <GradientStop
+                                Color="#ddD5F1FE"
+                                Offset="0.0" />
+                        </LinearGradientBrush>
+                        <LinearGradientBrush
+                            x:Key="ListItemSelectFill"
+                            EndPoint="0,1"
+                            StartPoint="0,0">
+                            <GradientStop
+                                Color="#aa72D2FF"
+                                Offset="1.0" />
+                            <GradientStop
+                                Color="#aaF1FBFF"
+                                Offset="0.5" />
+                            <GradientStop
+                                Color="#aa72D2FF"
+                                Offset="0.0" />
+                        </LinearGradientBrush>
+                    </Style.Resources>
+                    <Setter
+                        Property="HorizontalContentAlignment"
+                        Value="Stretch" />
+                    <Setter
+                        Property="Template">
 
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition
-                                Width="100"></ColumnDefinition>
-                            <ColumnDefinition
-                                Width="170"></ColumnDefinition>
-                            <ColumnDefinition
-                                Width="170"></ColumnDefinition>
-                            <ColumnDefinition
-                                Width="170"></ColumnDefinition>
-                            <ColumnDefinition
-                                Width="170"></ColumnDefinition>
-                            <ColumnDefinition
-                                Width="170"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Border
-                            BorderBrush="DodgerBlue"
-                            BorderThickness="2"
-                            CornerRadius="2">
-                            <Grid
-                                Margin="15">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBlock
-                                    Grid.ColumnSpan="2"
-                                    Text="{Binding TotalPrice,StringFormat='\{0:N0\}골드'}"></TextBlock>
-                                <TextBlock
-                                    Grid.Row="1"
-                                    Text="{Binding FirstChar}"></TextBlock>
-                                <TextBlock
-                                    Grid.Row="2"
-                                    Text="{Binding SecondChar}"></TextBlock>
-                                <TextBlock
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Text="{Binding TotalFirstChar}"></TextBlock>
-                                <TextBlock
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Text="{Binding TotalSecondChar}"></TextBlock>
-                            </Grid>
-                        </Border>
-                        <Border
-                            BorderBrush="DarkGreen"
-                            BorderThickness="2"
-                            CornerRadius="2"
-                            Grid.Column="1"
-                            Margin="2">
-                            <Grid
-                                Margin="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
+                        <Setter.Value>
+                            <ControlTemplate
+                                TargetType="{x:Type ListViewItem}">
+                                <Border 
+                                    Height="230"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    Background="{TemplateBinding Background}">
+                                    <Grid>
+                                        <Rectangle
+                                            Name="UpperHighlight"
+                                            Visibility="Collapsed"
+                                            Fill="{StaticResource ListItemHoverFill}" />
+                                        <Rectangle
+                                            Name="SelectedRect"
+                                            Visibility="Collapsed"
+                                            Fill="{StaticResource ListItemSelectFill}" />
+                                        <GridViewRowPresenter />
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger
+                                        Property="IsMouseOver"
+                                        Value="True">
+                                        <Setter
+                                            TargetName="UpperHighlight"
+                                            Property="Visibility"
+                                            Value="Visible" />
+                                    </Trigger>
+                                    <Trigger
+                                        Property="IsSelected"
+                                        Value="True">
+                                        <Setter
+                                            TargetName="SelectedRect"
+                                            Property="Visibility"
+                                            Value="Visible" />
+                                    </Trigger>
+                                    <Trigger
+                                        Property="ListBox.AlternationIndex"
+                                        Value="1">
+                                        <Setter
+                                            Property="Background"
+                                            Value="#f4f4f4" />
+                                    </Trigger>
+                                    <Trigger
+                                        Property="ListBox.AlternationIndex"
+                                        Value="2">
+                                        <Setter
+                                            Property="Background"
+                                            Value="White" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn
+                            Width="120">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader
+                                    Tag="ReceivingDate"
+                                    Content="합계"></GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        BorderBrush="DodgerBlue"
+                                        BorderThickness="2"
+                                        CornerRadius="2">
+                                        <Grid
+                                            Margin="15">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock
+                                                Grid.ColumnSpan="2"
+                                                Text="{Binding TotalPrice,StringFormat='\{0:N0\}골드'}"></TextBlock>
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Text="{Binding FirstChar}"></TextBlock>
+                                            <TextBlock
+                                                Grid.Row="2"
+                                                Text="{Binding SecondChar}"></TextBlock>
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Text="{Binding TotalFirstChar}"></TextBlock>
+                                            <TextBlock
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Text="{Binding TotalSecondChar}"></TextBlock>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn
+                            Width="200">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader
+                                    Tag="ReceivingDate"
+                                    Content="목걸이"></GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        BorderBrush="DarkGreen"
+                                        BorderThickness="2"
+                                        CornerRadius="2"
+                                        Grid.Column="1"
+                                        Margin="2">
+                                        <Grid
+                                            Margin="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
 
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.ColumnSpan="4"
-                                    FontWeight="Bold"
-                                    Foreground="DarkOrange"
-                                    Text="{Binding NeckAblity.Name}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.ColumnSpan="2"
-                                    Grid.Row="1"
-                                    Text="가격 : "></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="2"
-                                    Grid.Column="2"
-                                    Text="{Binding NeckAblity.Price, StringFormat='\{0:N0\}골드'}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="2"
-                                    Grid.ColumnSpan="2"
-                                    Text="품질 : "></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="2"
-                                    Grid.ColumnSpan="2"
-                                    Grid.Column="2"
-                                    Text="{Binding NeckAblity.Quality}"></TextBlock>
-                                <TextBlock
-                                    Margin="3"
-                                    Grid.Row="3"
-                                    Text="{Binding NeckAblity.FirstCharaterics}"></TextBlock>
-                                <TextBlock
-                                    Margin="3"
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    Text="{Binding NeckAblity.FirstCharValue}"></TextBlock>
-                                <TextBlock
-                                    Margin="3"
-                                    Grid.Row="3"
-                                    Grid.Column="2"
-                                    Text="{Binding NeckAblity.Secondcharaterics}"></TextBlock>
-                                <TextBlock
-                                    Margin="3"
-                                    Grid.Row="3"
-                                    Grid.Column="3"
-                                    Text="{Binding NeckAblity.SecondCharValue}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="4"
-                                    Grid.ColumnSpan="2"
-                                    Text="{Binding NeckAblity.Name1}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="4"
-                                    Grid.ColumnSpan="2"
-                                    Grid.Column="2"
-                                    Text="{Binding NeckAblity.Value1}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="5"
-                                    Grid.ColumnSpan="2"
-                                    Text="{Binding NeckAblity.Name2}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="5"
-                                    Grid.ColumnSpan="2"
-                                    Grid.Column="2"
-                                    Text="{Binding NeckAblity.Value2}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="6"
-                                    Grid.ColumnSpan="2"
-                                    Text="{Binding NeckAblity.PenaltyName}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="6"
-                                    Grid.ColumnSpan="2"
-                                    Grid.Column="2"
-                                    Text="{Binding NeckAblity.PenaltyValue}"></TextBlock>
-                            </Grid>
-                        </Border>
-                        <Border
-                            BorderBrush="Tomato"
-                            BorderThickness="2"
-                            CornerRadius="2"
-                            Grid.Column="2"
-                            Margin="2">
-                            <Grid
-                                Margin="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.ColumnSpan="2"
-                                    FontWeight="Bold"
-                                    Foreground="DarkOrange"
-                                    Text="{Binding FirstRingAblity.Name}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="1"
-                                    Text="가격 : "></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Text="{Binding FirstRingAblity.Price, StringFormat='\{0:N0\}골드'}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="2"
-                                    Text="품질 : "></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Text="{Binding FirstRingAblity.Quality}"></TextBlock>
-                                <TextBlock
-                                    Margin="3"
-                                    Grid.Row="3"
-                                    Text="{Binding FirstRingAblity.FirstCharaterics}"></TextBlock>
-                                <TextBlock
-                                    Margin="3"
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    Text="{Binding FirstRingAblity.FirstCharValue}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="5"
-                                    Text="{Binding FirstRingAblity.Name1}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="5"
-                                    Grid.Column="1"
-                                    Text="{Binding FirstRingAblity.Value1}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="6"
-                                    Text="{Binding FirstRingAblity.Name2}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="6"
-                                    Grid.Column="1"
-                                    Text="{Binding FirstRingAblity.Value2}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="7"
-                                    Text="{Binding FirstRingAblity.PenaltyName}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="7"
-                                    Grid.Column="1"
-                                    Text="{Binding FirstRingAblity.PenaltyValue}"></TextBlock>
-                            </Grid>
-                        </Border>
-                        <Border
-                            BorderBrush="Tomato"
-                            BorderThickness="2"
-                            CornerRadius="2"
-                            Grid.Column="3"
-                            Margin="2">
-                            <Grid
-                                Margin="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.ColumnSpan="2"
-                                    FontWeight="Bold"
-                                    Foreground="DarkOrange"
-                                    Text="{Binding SecondRingAblity.Name}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="1"
-                                    Text="가격 : "></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Text="{Binding SecondRingAblity.Price, StringFormat='\{0:N0\}골드'}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="2"
-                                    Text="품질 : "></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Text="{Binding SecondRingAblity.Quality}"></TextBlock>
-                                <TextBlock
-                                    Margin="3"
-                                    Grid.Row="3"
-                                    Text="{Binding SecondRingAblity.FirstCharaterics}"></TextBlock>
-                                <TextBlock
-                                    Margin="3"
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    Text="{Binding SecondRingAblity.FirstCharValue}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="5"
-                                    Text="{Binding SecondRingAblity.Name1}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="5"
-                                    Grid.Column="1"
-                                    Text="{Binding SecondRingAblity.Value1}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="6"
-                                    Text="{Binding SecondRingAblity.Name2}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="6"
-                                    Grid.Column="1"
-                                    Text="{Binding SecondRingAblity.Value2}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="7"
-                                    Text="{Binding SecondRingAblity.PenaltyName}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="7"
-                                    Grid.Column="1"
-                                    Text="{Binding SecondRingAblity.PenaltyValue}"></TextBlock>
-                            </Grid>
-                        </Border>
-                        <Border
-                            BorderBrush="BurlyWood"
-                            BorderThickness="2"
-                            CornerRadius="2"
-                            Grid.Column="4"
-                            Margin="2">
-                            <Grid
-                                Margin="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.ColumnSpan="2"
-                                    FontWeight="Bold"
-                                    Foreground="DarkOrange"
-                                    Text="{Binding FirstEarAblity.Name}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="1"
-                                    Text="가격 : "></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Text="{Binding FirstEarAblity.Price, StringFormat='\{0:N0\}골드'}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="2"
-                                    Text="품질 : "></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Text="{Binding FirstEarAblity.Quality}"></TextBlock>
-                                <TextBlock
-                                    Margin="3"
-                                    Grid.Row="3"
-                                    Text="{Binding FirstEarAblity.FirstCharaterics}"></TextBlock>
-                                <TextBlock
-                                    Margin="3"
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    Text="{Binding FirstEarAblity.FirstCharValue}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="5"
-                                    Text="{Binding FirstEarAblity.Name1}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="5"
-                                    Grid.Column="1"
-                                    Text="{Binding FirstEarAblity.Value1}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="6"
-                                    Text="{Binding FirstEarAblity.Name2}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="6"
-                                    Grid.Column="1"
-                                    Text="{Binding FirstEarAblity.Value2}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="7"
-                                    Text="{Binding FirstEarAblity.PenaltyName}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="7"
-                                    Grid.Column="1"
-                                    Text="{Binding FirstEarAblity.PenaltyValue}"></TextBlock>
-                            </Grid>
-                        </Border>
-                        <Border
-                            BorderBrush="BurlyWood"
-                            BorderThickness="2"
-                            CornerRadius="2"
-                            Grid.Column="5"
-                            Margin="2">
-                            <Grid
-                                Margin="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.ColumnSpan="2"
-                                    FontWeight="Bold"
-                                    Foreground="DarkOrange"
-                                    Text="{Binding SecondEarAblity.Name}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="1"
-                                    Text="가격 : "></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Text="{Binding SecondEarAblity.Price, StringFormat='\{0:N0\}골드'}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="2"
-                                    Text="품질 : "></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Text="{Binding SecondEarAblity.Quality}"></TextBlock>
-                                <TextBlock
-                                    Margin="3"
-                                    Grid.Row="3"
-                                    Text="{Binding SecondEarAblity.FirstCharaterics}"></TextBlock>
-                                <TextBlock
-                                    Margin="3"
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    Text="{Binding SecondEarAblity.FirstCharValue}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="5"
-                                    Text="{Binding SecondEarAblity.Name1}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="5"
-                                    Grid.Column="1"
-                                    Text="{Binding SecondEarAblity.Value1}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="6"
-                                    Text="{Binding SecondEarAblity.Name2}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="6"
-                                    Grid.Column="1"
-                                    Text="{Binding SecondEarAblity.Value2}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="7"
-                                    Text="{Binding SecondEarAblity.PenaltyName}"></TextBlock>
-                                <TextBlock
-                                    Margin="2"
-                                    Grid.Row="7"
-                                    Grid.Column="1"
-                                    Text="{Binding SecondEarAblity.PenaltyValue}"></TextBlock>
-                            </Grid>
-                        </Border>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.ColumnSpan="4"
+                                                FontWeight="Bold"
+                                                Foreground="DarkOrange"
+                                                Text="{Binding NeckAblity.Name}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.ColumnSpan="2"
+                                                Grid.Row="1"
+                                                Text="가격 : "></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="1"
+                                                Grid.ColumnSpan="2"
+                                                Grid.Column="2"
+                                                Text="{Binding NeckAblity.Price, StringFormat='\{0:N0\}골드'}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="2"
+                                                Grid.ColumnSpan="2"
+                                                Text="품질 : "></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="2"
+                                                Grid.ColumnSpan="2"
+                                                Grid.Column="2"
+                                                Text="{Binding NeckAblity.Quality}"></TextBlock>
+                                            <TextBlock
+                                                Margin="3"
+                                                Grid.Row="3"
+                                                Text="{Binding NeckAblity.FirstCharaterics}"></TextBlock>
+                                            <TextBlock
+                                                Margin="3"
+                                                Grid.Row="3"
+                                                Grid.Column="1"
+                                                Text="{Binding NeckAblity.FirstCharValue}"></TextBlock>
+                                            <TextBlock
+                                                Margin="3"
+                                                Grid.Row="3"
+                                                Grid.Column="2"
+                                                Text="{Binding NeckAblity.Secondcharaterics}"></TextBlock>
+                                            <TextBlock
+                                                Margin="3"
+                                                Grid.Row="3"
+                                                Grid.Column="3"
+                                                Text="{Binding NeckAblity.SecondCharValue}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="4"
+                                                Grid.ColumnSpan="2"
+                                                Text="{Binding NeckAblity.Name1}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="4"
+                                                Grid.ColumnSpan="2"
+                                                Grid.Column="2"
+                                                Text="{Binding NeckAblity.Value1}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="5"
+                                                Grid.ColumnSpan="2"
+                                                Text="{Binding NeckAblity.Name2}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="5"
+                                                Grid.ColumnSpan="2"
+                                                Grid.Column="2"
+                                                Text="{Binding NeckAblity.Value2}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="6"
+                                                Grid.ColumnSpan="2"
+                                                Text="{Binding NeckAblity.PenaltyName}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="6"
+                                                Grid.ColumnSpan="2"
+                                                Grid.Column="2"
+                                                Text="{Binding NeckAblity.PenaltyValue}"></TextBlock>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn
+                            Width="200">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader
+                                    Tag="ReceivingDate"
+                                    Content="귀걸이1"></GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        BorderBrush="BurlyWood"
+                                        BorderThickness="2"
+                                        CornerRadius="2"
+                                        Grid.Column="4"
+                                        Margin="2">
+                                        <Grid
+                                            Margin="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.ColumnSpan="2"
+                                                FontWeight="Bold"
+                                                Foreground="DarkOrange"
+                                                Text="{Binding FirstEarAblity.Name}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="1"
+                                                Text="가격 : "></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Text="{Binding FirstEarAblity.Price, StringFormat='\{0:N0\}골드'}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="2"
+                                                Text="품질 : "></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Text="{Binding FirstEarAblity.Quality}"></TextBlock>
+                                            <TextBlock
+                                                Margin="3"
+                                                Grid.Row="3"
+                                                Text="{Binding FirstEarAblity.FirstCharaterics}"></TextBlock>
+                                            <TextBlock
+                                                Margin="3"
+                                                Grid.Row="3"
+                                                Grid.Column="1"
+                                                Text="{Binding FirstEarAblity.FirstCharValue}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="5"
+                                                Text="{Binding FirstEarAblity.Name1}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="5"
+                                                Grid.Column="1"
+                                                Text="{Binding FirstEarAblity.Value1}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="6"
+                                                Text="{Binding FirstEarAblity.Name2}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="6"
+                                                Grid.Column="1"
+                                                Text="{Binding FirstEarAblity.Value2}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="7"
+                                                Text="{Binding FirstEarAblity.PenaltyName}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="7"
+                                                Grid.Column="1"
+                                                Text="{Binding FirstEarAblity.PenaltyValue}"></TextBlock>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn
+                            Width="200">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader
+                                    Tag="ReceivingDate"
+                                    Content="귀걸이2"></GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        BorderBrush="BurlyWood"
+                                        BorderThickness="2"
+                                        CornerRadius="2"
+                                        Grid.Column="5"
+                                        Margin="2">
+                                        <Grid
+                                            Margin="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.ColumnSpan="2"
+                                                FontWeight="Bold"
+                                                Foreground="DarkOrange"
+                                                Text="{Binding SecondEarAblity.Name}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="1"
+                                                Text="가격 : "></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Text="{Binding SecondEarAblity.Price, StringFormat='\{0:N0\}골드'}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="2"
+                                                Text="품질 : "></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Text="{Binding SecondEarAblity.Quality}"></TextBlock>
+                                            <TextBlock
+                                                Margin="3"
+                                                Grid.Row="3"
+                                                Text="{Binding SecondEarAblity.FirstCharaterics}"></TextBlock>
+                                            <TextBlock
+                                                Margin="3"
+                                                Grid.Row="3"
+                                                Grid.Column="1"
+                                                Text="{Binding SecondEarAblity.FirstCharValue}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="5"
+                                                Text="{Binding SecondEarAblity.Name1}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="5"
+                                                Grid.Column="1"
+                                                Text="{Binding SecondEarAblity.Value1}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="6"
+                                                Text="{Binding SecondEarAblity.Name2}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="6"
+                                                Grid.Column="1"
+                                                Text="{Binding SecondEarAblity.Value2}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="7"
+                                                Text="{Binding SecondEarAblity.PenaltyName}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="7"
+                                                Grid.Column="1"
+                                                Text="{Binding SecondEarAblity.PenaltyValue}"></TextBlock>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn
+                            Width="200">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader
+                                    Tag="ReceivingDate"
+                                    Content="반지1"></GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        BorderBrush="Tomato"
+                                        BorderThickness="2"
+                                        CornerRadius="2"
+                                        Grid.Column="2"
+                                        Margin="2">
+                                        <Grid
+                                            Margin="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.ColumnSpan="2"
+                                                FontWeight="Bold"
+                                                Foreground="DarkOrange"
+                                                Text="{Binding FirstRingAblity.Name}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="1"
+                                                Text="가격 : "></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Text="{Binding FirstRingAblity.Price, StringFormat='\{0:N0\}골드'}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="2"
+                                                Text="품질 : "></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Text="{Binding FirstRingAblity.Quality}"></TextBlock>
+                                            <TextBlock
+                                                Margin="3"
+                                                Grid.Row="3"
+                                                Text="{Binding FirstRingAblity.FirstCharaterics}"></TextBlock>
+                                            <TextBlock
+                                                Margin="3"
+                                                Grid.Row="3"
+                                                Grid.Column="1"
+                                                Text="{Binding FirstRingAblity.FirstCharValue}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="5"
+                                                Text="{Binding FirstRingAblity.Name1}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="5"
+                                                Grid.Column="1"
+                                                Text="{Binding FirstRingAblity.Value1}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="6"
+                                                Text="{Binding FirstRingAblity.Name2}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="6"
+                                                Grid.Column="1"
+                                                Text="{Binding FirstRingAblity.Value2}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="7"
+                                                Text="{Binding FirstRingAblity.PenaltyName}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="7"
+                                                Grid.Column="1"
+                                                Text="{Binding FirstRingAblity.PenaltyValue}"></TextBlock>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn
+                            Width="200">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader
+                                    Tag="ReceivingDate"
+                                    Content="반지2"></GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        BorderBrush="Tomato"
+                                        BorderThickness="2"
+                                        CornerRadius="2"
+                                        Grid.Column="3"
+                                        Margin="2">
+                                        <Grid
+                                            Margin="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.ColumnSpan="2"
+                                                FontWeight="Bold"
+                                                Foreground="DarkOrange"
+                                                Text="{Binding SecondRingAblity.Name}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="1"
+                                                Text="가격 : "></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Text="{Binding SecondRingAblity.Price, StringFormat='\{0:N0\}골드'}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="2"
+                                                Text="품질 : "></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Text="{Binding SecondRingAblity.Quality}"></TextBlock>
+                                            <TextBlock
+                                                Margin="3"
+                                                Grid.Row="3"
+                                                Text="{Binding SecondRingAblity.FirstCharaterics}"></TextBlock>
+                                            <TextBlock
+                                                Margin="3"
+                                                Grid.Row="3"
+                                                Grid.Column="1"
+                                                Text="{Binding SecondRingAblity.FirstCharValue}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="5"
+                                                Text="{Binding SecondRingAblity.Name1}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="5"
+                                                Grid.Column="1"
+                                                Text="{Binding SecondRingAblity.Value1}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="6"
+                                                Text="{Binding SecondRingAblity.Name2}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="6"
+                                                Grid.Column="1"
+                                                Text="{Binding SecondRingAblity.Value2}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="7"
+                                                Text="{Binding SecondRingAblity.PenaltyName}"></TextBlock>
+                                            <TextBlock
+                                                Margin="2"
+                                                Grid.Row="7"
+                                                Grid.Column="1"
+                                                Text="{Binding SecondRingAblity.PenaltyValue}"></TextBlock>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

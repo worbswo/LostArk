@@ -21,7 +21,9 @@
             <RowDefinition
                 Height="*"></RowDefinition>
             <RowDefinition
-                Height="50"></RowDefinition>
+                Height="25"></RowDefinition>
+            <RowDefinition
+                Height="25"></RowDefinition>
             <RowDefinition
                 Height="50"></RowDefinition>
             <RowDefinition
@@ -45,13 +47,12 @@
             Grid.ColumnSpan="2"
             Grid.Row="2"></view:Accessories>
         <ProgressBar
-            Name="searchProgress"
+            Name="accProgress"
             Grid.Row="3"
             Minimum="0"
             Maximum="100"
             Grid.ColumnSpan="2"
-            Margin="10"
-            
+            Margin="10,2,10,2"
             Value="{Binding SearchProgressValue}"
             Foreground="#FF4589E4">
         </ProgressBar>
@@ -60,10 +61,27 @@
             Grid.ColumnSpan="2"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
+            Text="{Binding ElementName=accProgress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>
+        <ProgressBar
+            Name="searchProgress"
+            Grid.Row="4"
+            Minimum="0"
+            Maximum="100"
+            Grid.ColumnSpan="2"
+            Margin="10,2,10,2"
+            
+            Value="{Binding AccProgressValue}"
+            Foreground="#FFF57E2A">
+        </ProgressBar>
+        <TextBlock
+            Grid.Row="4"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
             Text="{Binding ElementName=searchProgress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>
         <ProgressBar 
             Name="progress"
-            Grid.Row="4"
+            Grid.Row="5"
             Minimum="0"
             Maximum="100"
                      Grid.ColumnSpan="2"
@@ -71,13 +89,13 @@
             Value="{Binding ProgressValue}">
         </ProgressBar>
         <TextBlock
-            Grid.Row="4"
+            Grid.Row="5"
             Grid.ColumnSpan="2"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Text="{Binding ElementName=progress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>
         <Grid
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.ColumnSpan="2"
             Margin="10">
             <Grid.ColumnDefinitions>

@@ -15,6 +15,7 @@ using System.Windows.Input;
 using Http.View;
 using Http.viewModel;
 using System.Threading;
+using System.IO;
 
 namespace LostArkAction.viewModel
 {
@@ -25,6 +26,7 @@ namespace LostArkAction.viewModel
         private ICommand _searchCommand;
         private float _progressValue;
         private float _searchProgressValue;
+        private float _accProgressValue;
 
         private bool isRelic  = true;
         private bool isAncient;
@@ -45,6 +47,15 @@ namespace LostArkAction.viewModel
             {
                 _progressValue = value;
                 OnPropertyChanged("ProgressValue");
+            }
+        }
+        public float AccProgressValue
+        {
+            get { return _accProgressValue; }
+            set
+            {
+                _accProgressValue = value;
+                OnPropertyChanged("AccProgressValue");
             }
         }
         public float SearchProgressValue
@@ -122,7 +133,13 @@ namespace LostArkAction.viewModel
         #region Constroctor
         public MainWinodwVM()
         {
-
+            StreamReader SR = new StreamReader("API.txt");
+            string line;
+            while ((line = SR.ReadLine()) != null)
+            {
+                HttpClient2.APIkeys.Add(line);
+            }
+            SR.Close();
         }
         #endregion
 
