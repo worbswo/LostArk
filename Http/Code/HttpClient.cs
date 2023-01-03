@@ -44,6 +44,9 @@ namespace LostArkAction.Code
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1 = new List<AccVM>();
             int cnt = 0;
             int apiKeyidx = 1;
+            int searchTotal = 3 * searchAblitie.Count;
+            int searchCnt = 0;
+   
             for (int k = 0; k < 5; k+=2)
             {
                 string AcceccesoryType = Ablity.AccessoryCode.Keys.ToList()[k];
@@ -211,6 +214,8 @@ namespace LostArkAction.Code
                     if (auctionItem.Name!="")
                     {
                     }
+                    searchCnt++;
+                    (App.Current.MainWindow.DataContext as MainWinodwVM).SearchProgressValue = (float)searchCnt / searchTotal * 100;
                 }
                            // (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.SetAcc();
             }

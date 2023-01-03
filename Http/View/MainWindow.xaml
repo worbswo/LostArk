@@ -9,7 +9,7 @@
     xmlns:view="clr-namespace:LostArkAction.View"
     mc:Ignorable="d"
     Title="LostArkAblity"
-    Height="900"
+    Height="950"
     Width="800"
     ResizeMode="NoResize">
     <Grid
@@ -20,6 +20,8 @@
                 Height="*"></RowDefinition>
             <RowDefinition
                 Height="*"></RowDefinition>
+            <RowDefinition
+                Height="50"></RowDefinition>
             <RowDefinition
                 Height="50"></RowDefinition>
             <RowDefinition
@@ -42,9 +44,26 @@
             DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"
             Grid.ColumnSpan="2"
             Grid.Row="2"></view:Accessories>
+        <ProgressBar
+            Name="searchProgress"
+            Grid.Row="3"
+            Minimum="0"
+            Maximum="100"
+            Grid.ColumnSpan="2"
+            Margin="10"
+            
+            Value="{Binding SearchProgressValue}"
+            Foreground="#FF4589E4">
+        </ProgressBar>
+        <TextBlock
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Text="{Binding ElementName=searchProgress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>
         <ProgressBar 
             Name="progress"
-            Grid.Row="3"
+            Grid.Row="4"
             Minimum="0"
             Maximum="100"
                      Grid.ColumnSpan="2"
@@ -52,13 +71,13 @@
             Value="{Binding ProgressValue}">
         </ProgressBar>
         <TextBlock
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.ColumnSpan="2"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Text="{Binding ElementName=progress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>
         <Grid
-            Grid.Row="4"
+            Grid.Row="5"
             Grid.ColumnSpan="2"
             Margin="10">
             <Grid.ColumnDefinitions>

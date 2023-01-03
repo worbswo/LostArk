@@ -24,6 +24,8 @@ namespace LostArkAction.viewModel
         #region Field
         private ICommand _searchCommand;
         private float _progressValue;
+        private float _searchProgressValue;
+
         private bool isRelic  = true;
         private bool isAncient;
         private bool isAll;
@@ -35,7 +37,7 @@ namespace LostArkAction.viewModel
         public AccessoriesVM AccessoriesVM { get; set; } = new AccessoriesVM();
         public Ablity Ablity { get; set; }
         public Thread ThreadSearch { get; set; }
-        HttpClient2 HttpClient { get; set; }
+
         public float ProgressValue
         {
             get { return _progressValue; }
@@ -43,6 +45,15 @@ namespace LostArkAction.viewModel
             {
                 _progressValue = value;
                 OnPropertyChanged("ProgressValue");
+            }
+        }
+        public float SearchProgressValue
+        {
+            get { return _searchProgressValue; }
+            set
+            {
+                _searchProgressValue = value;
+                OnPropertyChanged("SearchProgressValue");
             }
         }
         public bool IsRelic
