@@ -249,7 +249,11 @@ namespace LostArkAction.viewModel
                             {
                                 Ablity.EquipItems.Add(EquipAblityVM.SelectItems[i], new List<int> { EquipAblityVM.FigureItems[i] });
                             }
-
+                        }
+                        if(EquipAblityVM.SelectItems[4]==null|| EquipAblityVM.SelectItems[4] == "")
+                        {
+                            MessageBox.Show("페널티 감소 각인을 입력 하세요.");
+                            return;
                         }
                         Ablity.PanaltyItems.Add(EquipAblityVM.SelectItems[4], EquipAblityVM.FigureItems[4]);
 

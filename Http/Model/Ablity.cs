@@ -45,7 +45,6 @@ namespace LostArkAction.Model
         public Dictionary<string, List<int>> SecondAblityCandidate { get; set; } = new Dictionary<string, List<int>>();
         public List<List<SearchAblity>> SearchAblities { get; set; } = new List<List<SearchAblity>>();
         public List<List<SearchAblity>> SearchAblities2 { get; set; } = new List<List<SearchAblity>>();
-        private Dictionary<string, List<int>> CountEquipAvlity { get; set; } = new Dictionary<string, List<int>>();
         #region Accesory
         public Accesories Accesories { get; set; } = new Accesories();
         public List<AccVM> NeckAcc { get; set; } = new List<AccVM>();
@@ -103,7 +102,6 @@ namespace LostArkAction.Model
             for(int i = 0; i < TargetItems.Count; i++)
             {
                 TargetSum += TargetItems[TargetItems.Keys.ToList()[i]];
-                CountEquipAvlity.Add(TargetItems.Keys.ToList()[i], new List<int>{ 0,0});
             }
             int Minus = TargetSum - EquipSum;
             int cnt = 0;
@@ -114,6 +112,9 @@ namespace LostArkAction.Model
             }
 
             #region Seperate Ablity
+            int firstCnt = 0;
+            int secondCnt = 0;
+
             if (selectClass == 0)
             {
                 Minus = 40 - Minus;
@@ -123,7 +124,7 @@ namespace LostArkAction.Model
                     {
                         if (tmpItem[tmpItem.Keys.ToList()[i]] / 5 > 0 && (tmpItem[tmpItem.Keys.ToList()[i]] % 5 >= 3 || tmpItem[tmpItem.Keys.ToList()[i]] % 5 == 0))
                         {
-                            cnt++;
+                            firstCnt++;
                             if (FirstAblityCandidate.ContainsKey(tmpItem.Keys.ToList()[i]))
                             {
                                 FirstAblityCandidate[tmpItem.Keys.ToList()[i]].Add(5);
@@ -133,11 +134,10 @@ namespace LostArkAction.Model
                                 FirstAblityCandidate.Add(tmpItem.Keys.ToList()[i], new List<int> { 5 });
                             }
                             tmpItem[tmpItem.Keys.ToList()[i]] -= 5;
-                            CountEquipAvlity[tmpItem.Keys.ToList()[i]][0]++;
                         }
                         else if (tmpItem[tmpItem.Keys.ToList()[i]] / 4 > 0 && (tmpItem[tmpItem.Keys.ToList()[i]] % 4 >= 3 || tmpItem[tmpItem.Keys.ToList()[i]] % 4 == 0))
                         {
-                            cnt++;
+                            firstCnt++;
                             if (FirstAblityCandidate.ContainsKey(tmpItem.Keys.ToList()[i]))
                             {
                                 FirstAblityCandidate[tmpItem.Keys.ToList()[i]].Add(4);
@@ -147,13 +147,12 @@ namespace LostArkAction.Model
                                 FirstAblityCandidate.Add(tmpItem.Keys.ToList()[i], new List<int> { 4 });
                             }
                             tmpItem[tmpItem.Keys.ToList()[i]] -= 4;
-                            CountEquipAvlity[tmpItem.Keys.ToList()[i]][0]++;
 
 
                         }
                         else if (tmpItem[tmpItem.Keys.ToList()[i]] > 0)
                         {
-
+                            secondCnt++;
                             if (SecondAblityCandidate.ContainsKey(tmpItem.Keys.ToList()[i]))
                             {
                                 SecondAblityCandidate[tmpItem.Keys.ToList()[i]].Add(3);
@@ -163,8 +162,6 @@ namespace LostArkAction.Model
                                 SecondAblityCandidate.Add(tmpItem.Keys.ToList()[i], new List<int> { 3 });
                             }
                             tmpItem[tmpItem.Keys.ToList()[i]] -= 3;
-                            CountEquipAvlity[tmpItem.Keys.ToList()[i]][1]++;
-
                         }
                         else
                         {
@@ -172,13 +169,7 @@ namespace LostArkAction.Model
                         }
                     }
                 }
-                if (Minus > 0)
-                {
-                    for(int i =0;i< FirstAblityCandidate.Count; i++)
-                    {
-                        FirstAblityCandidate[FirstAblityCandidate.Keys.ToList()[i]].Add(4);
-                    }
-                }
+               
             }
             else
             {
@@ -189,7 +180,7 @@ namespace LostArkAction.Model
                     {
                         if (tmpItem[tmpItem.Keys.ToList()[i]] / 6 > 0 && (tmpItem[tmpItem.Keys.ToList()[i]] % 6 >= 3 || tmpItem[tmpItem.Keys.ToList()[i]] % 6 == 0))
                         {
-                            cnt++;
+                            firstCnt++;
                             if (FirstAblityCandidate.ContainsKey(tmpItem.Keys.ToList()[i]))
                             {
                                 FirstAblityCandidate[tmpItem.Keys.ToList()[i]].Add(6);
@@ -199,12 +190,11 @@ namespace LostArkAction.Model
                                 FirstAblityCandidate.Add(tmpItem.Keys.ToList()[i], new List<int> { 6 });
                             }
                             tmpItem[tmpItem.Keys.ToList()[i]] -= 6;
-                            CountEquipAvlity[tmpItem.Keys.ToList()[i]][0]++;
 
                         }
                         else if (tmpItem[tmpItem.Keys.ToList()[i]] / 5 > 0 && (tmpItem[tmpItem.Keys.ToList()[i]] % 5 >= 3 || tmpItem[tmpItem.Keys.ToList()[i]] % 5 == 0))
                         {
-                            cnt++;
+                            firstCnt++;
                             if (FirstAblityCandidate.ContainsKey(tmpItem.Keys.ToList()[i]))
                             {
                                 FirstAblityCandidate[tmpItem.Keys.ToList()[i]].Add(5);
@@ -214,12 +204,10 @@ namespace LostArkAction.Model
                                 FirstAblityCandidate.Add(tmpItem.Keys.ToList()[i], new List<int> { 5 });
                             }
                             tmpItem[tmpItem.Keys.ToList()[i]] -= 5;
-                            CountEquipAvlity[tmpItem.Keys.ToList()[i]][0]++;
-
                         }
                         else if (tmpItem[tmpItem.Keys.ToList()[i]] / 4 > 0 && (tmpItem[tmpItem.Keys.ToList()[i]] % 4 >= 3 || tmpItem[tmpItem.Keys.ToList()[i]] % 4 == 0))
                         {
-                            cnt++;
+                            firstCnt++;
                             if (FirstAblityCandidate.ContainsKey(tmpItem.Keys.ToList()[i]))
                             {
                                 FirstAblityCandidate[tmpItem.Keys.ToList()[i]].Add(4);
@@ -229,12 +217,11 @@ namespace LostArkAction.Model
                                 FirstAblityCandidate.Add(tmpItem.Keys.ToList()[i], new List<int> { 4 });
                             }
                             tmpItem[tmpItem.Keys.ToList()[i]] -= 4;
-                            CountEquipAvlity[tmpItem.Keys.ToList()[i]][0]++;
 
                         }
                         else if (tmpItem[tmpItem.Keys.ToList()[i]] > 0)
                         {
-
+                            secondCnt++;
                             if (SecondAblityCandidate.ContainsKey(tmpItem.Keys.ToList()[i]))
                             {
                                 SecondAblityCandidate[tmpItem.Keys.ToList()[i]].Add(3);
@@ -244,9 +231,6 @@ namespace LostArkAction.Model
                                 SecondAblityCandidate.Add(tmpItem.Keys.ToList()[i], new List<int> { 3 });
                             }
                             tmpItem[tmpItem.Keys.ToList()[i]] -= 3;
-
-                            CountEquipAvlity[tmpItem.Keys.ToList()[i]][1]++;
-
                         }
                         else
                         {
@@ -254,13 +238,7 @@ namespace LostArkAction.Model
                         }
                     }
                 }
-                if (Minus > 0)
-                {
-                    for (int i = 0; i < FirstAblityCandidate.Count; i++)
-                    {
-                        FirstAblityCandidate[FirstAblityCandidate.Keys.ToList()[i]].Add(5);
-                    }
-                }
+               
             }
             #endregion
 
@@ -273,34 +251,18 @@ namespace LostArkAction.Model
                 List<SearchAblity> searchAblities = new List<SearchAblity>();
                 Dictionary<string, int> firstAblityCandidate = new Dictionary<string, int>();
                 Dictionary<string, int> secondAblityCandidate = new Dictionary<string, int>();
-                int firstCnt = 0;
-                foreach (var tmp in FirstAblityCandidate)
-                {
-                    for (int i = 0; i < tmp.Value.Count; i++)
-                    {
-                        firstCnt++;
-                    }
-                }
-                int secondCnt = 0;
-                foreach (var tmp in SecondAblityCandidate)
-                {
-                    for (int i = 0; i < tmp.Value.Count; i++)
-                    {
-                        secondCnt++;
-                    }
-                }
+        
+               
                 foreach (var tmp in FirstAblityCandidate)
                 {
                     for (int i = 0; i < tmp.Value.Count; i++)
                     {
                         if (firstAblityCandidate.ContainsKey(tmp.Key))
-                        {
-                          
+                        { 
                             if (firstAblityCandidate[tmp.Key] > tmp.Value[i])
                             {
                                 firstAblityCandidate[tmp.Key]=(tmp.Value[i]);
                             }
-                            
                         }
                         else
                         {
@@ -314,12 +276,10 @@ namespace LostArkAction.Model
                     {
                         if (secondAblityCandidate.ContainsKey(tmp.Key))
                         {
-
                             if (secondAblityCandidate[tmp.Key] > tmp.Value[i])
                             {
                                 secondAblityCandidate[tmp.Key] = (tmp.Value[i]);
                             }
-
                         }
                         else
                         {
@@ -406,13 +366,10 @@ namespace LostArkAction.Model
                       Console.WriteLine();
                   }
                   #endregion
+
                 RingAcc2  = new List<List<AccVM>>();
                 EarAcc2 = new List<List<AccVM>>();
                 HttpClient2.GetAsync(searchAblities, Accesories);
-                Console.WriteLine("----------------------------");
-
-
-
             }
 
         }
@@ -677,11 +634,13 @@ namespace LostArkAction.Model
                         MainWinodwVM.AccProgressValue = (float)(((double)cnt / total) * 100.0);
                         continue;
                     }
-                    List<AccVM> tmp = new List<AccVM>();
-                    tmp.Add(RingAcc2[i][0]);
-                    tmp.Add(RingAcc2[i][1]);
-                    tmp.Add(EarAcc2[j][0]);
-                    tmp.Add(EarAcc2[j][1]);
+                    List<AccVM> tmp = new List<AccVM>
+                    {
+                        RingAcc2[i][0],
+                        RingAcc2[i][1],
+                        EarAcc2[j][0],
+                        EarAcc2[j][1]
+                    };
                     Accs.Add(tmp);
                    
 
@@ -716,7 +675,7 @@ namespace LostArkAction.Model
             Cnt = 0;
             PanaltyCheck = new Dictionary<string, int> { { "공격력 감소", 0 }, { "공격속도 감소", 0 }, { "방어력 감소", 0 }, { "이동속도 감소", 0 } };
             PanaltyCheck[PanaltyItems.Keys.ToList()[0]] += PanaltyItems[PanaltyItems.Keys.ToList()[0]];
-            int size = 50000;
+            int size = int.MaxValue;
             size = size > Accs.Count ? Accs.Count : size;
             TotalValue = (uint)(NeckAcc.Count * size);
 
@@ -740,9 +699,7 @@ namespace LostArkAction.Model
                     continue;
                 }
                 for (int j = 0; j < size; j++)
-                {
-
-                    
+                { 
                     bool check2 = false;
                     for(int k = 0; k < Accs[j].Count; k++)
                     {

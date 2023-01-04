@@ -37,7 +37,7 @@ namespace LostArkAction.Code
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1 = new List<AccVM>();
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1 = new List<AccVM>();
             int cnt = 0;
-            int apiKeyidx = 1;
+            int apiKeyidx = 0;
             int searchTotal = 3 * searchAblitie.Count;
             int searchCnt = 0;
    
@@ -68,6 +68,8 @@ namespace LostArkAction.Code
                         FirstOption = 3,
                         SecondOption = Ablity.AblityCode[searchAblitie[i].FirstAblity.Keys.ToList()[0]],
                         MinValue = searchAblitie[i].FirstAblity[searchAblitie[i].FirstAblity.Keys.ToList()[0]],
+                        MaxValue = searchAblitie[i].FirstAblity[searchAblitie[i].FirstAblity.Keys.ToList()[0]],
+
                     });
                     if (searchAblitie[i].SecondAblity.Keys.ToList()[0] != "random")
                     {
@@ -107,7 +109,7 @@ namespace LostArkAction.Code
                         {
                             SharedClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", APIkeys[apiKeyidx]);
                             apiKeyidx++;
-                            if (apiKeyidx > 4)
+                            if (apiKeyidx > APIkeys.Count-1)
                             {
                                 apiKeyidx = 0;
                             }
