@@ -269,7 +269,7 @@ namespace LostArkAction.viewModel
                         Ablity.Accesories["귀걸이2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[3]);
                         Ablity.Accesories["반지1"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[4]);
                         Ablity.Accesories["반지2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[5]);
-                        Ablity.ComputeAblity();
+                        Ablity.SelectedAblity();
                     }
                 }
             }
@@ -288,8 +288,11 @@ namespace LostArkAction.viewModel
         {
             if (!isClosing)
             {
-                if(Ablity!=null)
+                if (Ablity != null)
+                {
                     Ablity.Thread.Abort();
+                    Ablity.Thread2.Abort();
+                }
                 
             }
         }
