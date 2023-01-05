@@ -176,6 +176,11 @@ namespace LostArkAction.viewModel
                 {
                     continue;
                 }
+                if (!Ablity.AblityCode.ContainsKey(TargetAblityVM.SelectItems[i]))
+                {
+                    MessageBox.Show("해당 각인이 없습니다.");
+                    return;
+                }
                 if (Ablity.TargetItems.ContainsKey(TargetAblityVM.SelectItems[i]))
                 {
                     MessageBox.Show("같은 각인이 있습니다.");

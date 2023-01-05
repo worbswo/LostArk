@@ -271,7 +271,12 @@ namespace LostArkAction.Model
                     break;
                 }
             }
-            for(int i = 0; i < AblitiesCombi.Count; i++)
+            if (AblitiesCombi.Count==0)
+            {
+                MessageBox.Show("구성할 수 없는 각인 입니다.");
+                return;
+            }
+            for (int i = 0; i < AblitiesCombi.Count; i++)
             {
                 for (int j = 0; j < AblitiesCombi[i].Count; j++)
                 {
@@ -943,6 +948,11 @@ namespace LostArkAction.Model
                     Cnt++;
                     MainWinodwVM.ProgressValue = (float)(((double)Cnt / TotalValue) * 100.0);
                 }
+            }
+            if (findAccVMsTmp.Count == 0)
+            {
+                MessageBox.Show("각인을 구성할 수 있는 매물이 없습니다.");
+                return;
             }
             for (int i = 0; i < findAccVMsTmp.Count; i++)
             {
