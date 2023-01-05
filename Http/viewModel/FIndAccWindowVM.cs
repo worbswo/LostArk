@@ -30,10 +30,12 @@ namespace Http.viewModel
         #region Constructor
         public FIndAccWindowVM(List<FindAccVM> findAccVMs)
         {
-            FindAccVMs = new ObservableCollection<FindAccVM>(findAccVMs);
+            findAccVMs = findAccVMs.OrderBy(x => x.TotalPrice).ToList();
+
+            FindAccVMs = new ObservableCollection<FindAccVM>(findAccVMs.GetRange(0,1000));
             AccCollectionViewSource = new CollectionViewSource();
             AccCollectionViewSource.Source = this.FindAccVMs;
-            AccCollectionViewSource.View.SortDescriptions.Add(new SortDescription("TotalPrice", ListSortDirection.Ascending));
+            //AccCollectionViewSource.View.SortDescriptions.Add(new SortDescription("TotalPrice", ListSortDirection.Ascending));
         }
         #endregion
 

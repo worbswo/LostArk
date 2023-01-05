@@ -15,6 +15,8 @@ namespace LostArkAction.viewModel
         private int _totalSecondChar;
         private string _firstChar;
         private string _secondChar;
+        private string _TotalChar;
+
         #endregion
 
         #region Property
@@ -70,6 +72,19 @@ namespace LostArkAction.viewModel
                 _firstChar = value;
                 OnPropertyChanged("FirstChar");
             }
+        }
+        public string TotalChar
+        {
+            get
+            {
+                return _TotalChar;
+            } 
+            set
+            {
+                _TotalChar = value;
+                OnPropertyChanged("TotalChar");
+            }
+
         }
         public string SecondChar
         {

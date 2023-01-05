@@ -33,8 +33,7 @@ namespace LostArkAction.viewModel
         private bool isAll;
         #endregion
         #region Property
-        public List<FindAccVM> FindAccVMs { get; set; } = new List<FindAccVM>();
-        public List<List<FindAccVM>> FindAccVMsTmp { get; set; } = new List<List<FindAccVM>>();
+        public List<FindAccVM> FindAccVMs  = new List<FindAccVM>();
 
         public TargetAblityVM TargetAblityVM { get; set; } = new TargetAblityVM();
         public EquipAblityVM EquipAblityVM { get; set; } = new EquipAblityVM();

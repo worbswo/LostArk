@@ -132,10 +132,8 @@
                                             Margin="15">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition></ColumnDefinition>
-                                                <ColumnDefinition></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
-                                                <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                             </Grid.RowDefinitions>
@@ -144,18 +142,8 @@
                                                 Text="{Binding TotalPrice,StringFormat='\{0:N0\}골드'}"></TextBlock>
                                             <TextBlock
                                                 Grid.Row="1"
-                                                Text="{Binding FirstChar}"></TextBlock>
-                                            <TextBlock
-                                                Grid.Row="2"
-                                                Text="{Binding SecondChar}"></TextBlock>
-                                            <TextBlock
-                                                Grid.Row="1"
-                                                Grid.Column="1"
-                                                Text="{Binding TotalFirstChar}"></TextBlock>
-                                            <TextBlock
-                                                Grid.Row="2"
-                                                Grid.Column="1"
-                                                Text="{Binding TotalSecondChar}"></TextBlock>
+                                                Text="{Binding TotalChar}"></TextBlock>
+  
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
