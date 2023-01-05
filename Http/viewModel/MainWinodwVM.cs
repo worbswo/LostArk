@@ -134,13 +134,27 @@ namespace LostArkAction.viewModel
         #region Constroctor
         public MainWinodwVM()
         {
-            StreamReader SR = new StreamReader("API.txt");
-            string line;
-            while ((line = SR.ReadLine()) != null)
+            if (!File.Exists("API.txt"))
             {
-                HttpClient2.APIkeys.Add(line);
+                MessageBox.Show("API 파일이 존재하지 않습니다.");
+                App.Current.Shutdown();
             }
-            SR.Close();
+            else
+            {
+                StreamReader SR = new StreamReader("API.txt");
+                string line;
+                while ((line = SR.ReadLine()) != null)
+                {
+                    HttpClient2.APIkeys.Add(line);
+                }
+                SR.Close();
+                if (HttpClient2.APIkeys.Count == 0)
+                {
+                    MessageBox.Show("API 키가 존재하지 않습니다.");
+                    App.Current.Shutdown();
+
+                }
+            }
         }
         #endregion
 
