@@ -40,7 +40,7 @@ namespace LostArkAction.Model
      #endregion
         List<List<SearchAblity>> AblitiesCombi = new List<List<SearchAblity>>();
         List<SearchAblity> SearchAblities = new List<SearchAblity>();
-        List<Dictionary<string, List<int>>> SearchFirstAblityCandidate = new List<Dictionary<string, List<int>>>();
+        List<Dictionary<string, List<int>>> SearchAblityCandidate = new List<Dictionary<string, List<int>>>();
         List<Dictionary<string, List<int>>> SearchSecondAblityCandidate = new List<Dictionary<string, List<int>>>();
         public Dictionary<int, List<List<int>>> AccRelicCases  = new Dictionary<int, List<List<int>>>();
         public Dictionary<int, List<List<int>>> AccAncientCases  = new Dictionary<int, List<List<int>>>();
@@ -384,7 +384,7 @@ namespace LostArkAction.Model
         {
             Dictionary<string, List<int>> firstAblityCandidate = new Dictionary<string, List<int>>();
             Dictionary<string, List<int>> secondAblityCandidate = new Dictionary<string, List<int>>();
-            Dictionary<string, List<int>> firstAblityCandidate2 = new Dictionary<string, List<int>>();
+            Dictionary<string, List<int>> candidate = new Dictionary<string, List<int>>();
             Dictionary<string, List<int>> secondAblityCandidate2 = new Dictionary<string, List<int>>();
             List<SearchAblity> tmpSearchAblities = new List<SearchAblity>();
             int firstCnt = 0;
@@ -407,23 +407,7 @@ namespace LostArkAction.Model
                         {
                             firstAblityCandidate.Add(abliName[i], new List<int> { tmp[j] });
                         }
-                        if (firstAblityCandidate2.ContainsKey(abliName[i]))
-                        {
-                            if (firstAblityCandidate2[abliName[i]][tmp[j] - 1] == 1000)
-                            {
-                                firstAblityCandidate2[abliName[i]][tmp[j] - 1]=1;
-                            }
-                            else
-                            {
-                                firstAblityCandidate2[abliName[i]][tmp[j] - 1]++;
-                            }
-                            
-                        }
-                        else
-                        {
-                            firstAblityCandidate2.Add(abliName[i], new List<int> { 1000, 1000, 1000, 1000, 1000, 1000 });
-                            firstAblityCandidate2[abliName[i]][tmp[j] - 1] = 1;
-                        }
+                       
                     }
                     else
                     {
@@ -438,23 +422,24 @@ namespace LostArkAction.Model
                         {
                             secondAblityCandidate.Add(abliName[i], new List<int> { tmp[j] });
                         }
-                        if (secondAblityCandidate2.ContainsKey(abliName[i]))
+                       
+                    }
+                    if (candidate.ContainsKey(abliName[i]))
+                    {
+                        if (candidate[abliName[i]][tmp[j] - 1] == 1000)
                         {
-                            if (secondAblityCandidate2[abliName[i]][2] == 1000)
-                            {
-                                secondAblityCandidate2[abliName[i]][2] = 1;
-                            }
-                            else
-                            {
-                                secondAblityCandidate2[abliName[i]][2]++;
-                            }
+                            candidate[abliName[i]][tmp[j] - 1] = 1;
                         }
                         else
                         {
-                            secondAblityCandidate2.Add(abliName[i], new List<int> { 1000, 1000, 1000, 1000, 1000, 1000 });
-                            secondAblityCandidate2[abliName[i]][2] = 1;
-
+                            candidate[abliName[i]][tmp[j] - 1]++;
                         }
+
+                    }
+                    else
+                    {
+                        candidate.Add(abliName[i], new List<int> { 1000, 1000, 1000, 1000, 1000, 1000 });
+                        candidate[abliName[i]][tmp[j] - 1] = 1;
                     }
                 }
             }
@@ -472,6 +457,8 @@ namespace LostArkAction.Model
                 if (secondCnt < 6)
                 {
                     secondAblityCandidate.Add("random", new List<int> { 3 });
+                    candidate.Add("random", new List<int> { 1000, 1000, 1, 1000, 1000, 1000 });
+
                 }
             }
             else
@@ -479,7 +466,7 @@ namespace LostArkAction.Model
                 if (secondCnt < 5)
                 {
                     secondAblityCandidate.Add("random", new List<int> { 3 });
-
+                    candidate.Add("random", new List<int> { 1000, 1000, 1, 1000, 1000, 1000 });
                 }
             }
             foreach (var tmp in firstAblityCandidate)
@@ -526,23 +513,7 @@ namespace LostArkAction.Model
                                     searchAblity.SecondAblity.Add(tmp2.Key, tmp2.Value[j]);
                                     tmpSearchAblities.Add(searchAblity);
                                 }
-                                if (firstAblityCandidate2.ContainsKey(tmp.Key))
-                                {
-                                    if (firstAblityCandidate2[tmp.Key][tmp.Value[i] - 1] == 1000)
-                                    {
-                                        firstAblityCandidate2[tmp.Key][tmp.Value[i] - 1] = 1;
-                                    }
-                                    else
-                                    {
-                                        firstAblityCandidate2[tmp.Key][tmp.Value[i] - 1]++;
-                                    }
-
-                                }
-                                else
-                                {
-                                    firstAblityCandidate2.Add(tmp.Key, new List<int> { 1000, 1000, 1000, 1000, 1000, 1000 });
-                                    firstAblityCandidate2[tmp.Key][tmp.Value[i] - 1] = 1;
-                                }
+                                
                             }
                         }
                     }
@@ -581,7 +552,7 @@ namespace LostArkAction.Model
             Console.WriteLine("----------------------------");
 
             #endregion
-            SearchFirstAblityCandidate.Add(firstAblityCandidate2);
+            SearchAblityCandidate.Add(candidate);
             SearchSecondAblityCandidate.Add(secondAblityCandidate2);
             searchAblities.Add(tmpSearchAblities);
         }
@@ -648,28 +619,21 @@ namespace LostArkAction.Model
                 List < Dictionary < string ,int>> equipCheck = new List<Dictionary<string, int>>();
                 List < Dictionary < string, int>> panaltyCheck = new List<Dictionary<string, int>>();
                 List<List<List<AccVM>>> tmp = new List<List<List<AccVM>>>();
-                List<Dictionary<string, List<int>>> firstAblityCandidate = new List<Dictionary<string, List<int>>>();
-                List<Dictionary<string, List<int>>> secondAblityCandidate = new List<Dictionary<string, List<int>>>();
+                List<Dictionary<string, List<int>>> candidate = new List<Dictionary<string, List<int>>>();
                 for (int i = 0; i < list[0].Count; i++)
                 {
                     panaltyCheck.Add(new Dictionary<string, int> { { "공격력 감소", 0 }, { "공격속도 감소", 0 }, { "방어력 감소", 0 }, { "이동속도 감소", 0 } });
                     panaltyCheck[i][PanaltyItems.Keys.ToList()[0]] += PanaltyItems[PanaltyItems.Keys.ToList()[0]];
                     equipCheck.Add(new Dictionary<string, int>());
                     tmp.Add(new List<List<AccVM>>());
-                    firstAblityCandidate.Add(new Dictionary<string, List<int>>());
-                    secondAblityCandidate.Add(new Dictionary<string, List<int>>());
+                    candidate.Add(new Dictionary<string, List<int>>());
                 }
                 for (int i = 0; i < list[0].Count; i++)
                 {
-                    foreach (var canTmp in SearchFirstAblityCandidate[o])
+                    foreach (var canTmp in SearchAblityCandidate[o])
                     {
-                        firstAblityCandidate[i].Add(canTmp.Key, new List<int> { canTmp.Value[0], canTmp.Value[1], canTmp.Value[2], canTmp.Value[3], canTmp.Value[5], canTmp.Value[5] });
+                        candidate[i].Add(canTmp.Key, new List<int> { canTmp.Value[0], canTmp.Value[1], canTmp.Value[2], canTmp.Value[3], canTmp.Value[5], canTmp.Value[5] });
                     }
-                    foreach (var canTmp in SearchSecondAblityCandidate[o])
-                    {
-                        secondAblityCandidate[i].Add(canTmp.Key, new List<int> { canTmp.Value[0], canTmp.Value[1], canTmp.Value[2], canTmp.Value[3], canTmp.Value[5], canTmp.Value[5] });
-                    }
-
                 }
                 int minus = 0;
                 if (SameChar)
@@ -693,37 +657,37 @@ namespace LostArkAction.Model
                     {
                         startIdx = i + 1;
                     }
-                    firstAblityCandidate[i][list[0][i].Name1][list[0][i].Value1-1]--;
-                    secondAblityCandidate[i][list[0][i].Name2][2]--;
+                    candidate[i][list[0][i].Name1][list[0][i].Value1-1]--;
+                    candidate[i][list[0][i].Name2][2]--;
                     for (int j = startIdx; j < list[1].Count; j++)
                     {
                         check = true;
-                        firstAblityCandidate[i][list[1][j].Name1][list[1][j].Value1-1]--;
-                        secondAblityCandidate[i][list[1][j].Name2][2]--;
-                        if (firstAblityCandidate[i][list[1][j].Name1][list[1][j].Value1 - 1] <0 || secondAblityCandidate[i][list[1][j].Name2][2] < 0)
+                        candidate[i][list[1][j].Name1][list[1][j].Value1-1]--;
+                        candidate[i][list[1][j].Name2][2]--;
+                        if (candidate[i][list[1][j].Name1][list[1][j].Value1 - 1] <0 || candidate[i][list[1][j].Name2][2] < 0)
                         {
-                            firstAblityCandidate[i][list[1][j].Name1][list[1][j].Value1 - 1]++;
-                            secondAblityCandidate[i][list[1][j].Name2][2]++;
+                            candidate[i][list[1][j].Name1][list[1][j].Value1 - 1]++;
+                            candidate[i][list[1][j].Name2][2]++;
                             continue;
                         }
                         panaltyCheck[i][list[1][j].PenaltyName] += list[1][j].PenaltyValue;
                         if (panaltyCheck[i][list[1][j].PenaltyName] >= 5)
                         {
                             panaltyCheck[i][list[1][j].PenaltyName] -= list[1][j].PenaltyValue;
-                            firstAblityCandidate[i][list[1][j].Name1][list[1][j].Value1 - 1]++;
-                            secondAblityCandidate[i][list[1][j].Name2][2]++;
+                            candidate[i][list[1][j].Name1][list[1][j].Value1 - 1]++;
+                            candidate[i][list[1][j].Name2][2]++;
                             continue;
                         }
                         
                         
                         for (int k = 0; k < FinalNeckAcc[o].Count; k++)
                         {
-                            firstAblityCandidate[i][FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1]--;
-                            secondAblityCandidate[i][FinalNeckAcc[o][k].Name2][2]--;
-                            if (firstAblityCandidate[i][FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1] < 0 || secondAblityCandidate[i][FinalNeckAcc[o][k].Name2][2] < 0)
+                            candidate[i][FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1]--;
+                            candidate[i][FinalNeckAcc[o][k].Name2][2]--;
+                            if (candidate[i][FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1] < 0 || candidate[i][FinalNeckAcc[o][k].Name2][2] < 0)
                             {
-                                firstAblityCandidate[i][FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1]++;
-                                secondAblityCandidate[i][FinalNeckAcc[o][k].Name2][2]++;
+                                candidate[i][FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1]++;
+                                candidate[i][FinalNeckAcc[o][k].Name2][2]++;
                                 check = false;
 
                                 continue;
@@ -732,8 +696,8 @@ namespace LostArkAction.Model
                             if (panaltyCheck[i][FinalNeckAcc[o][k].PenaltyName] >= 5)
                             {
                                 panaltyCheck[i][FinalNeckAcc[o][k].PenaltyName] -= FinalNeckAcc[o][k].PenaltyValue;
-                                firstAblityCandidate[i][FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1]++;
-                                secondAblityCandidate[i][FinalNeckAcc[o][k].Name2][2]++;
+                                candidate[i][FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1]++;
+                                candidate[i][FinalNeckAcc[o][k].Name2][2]++;
                                 check = false;
 
                                 continue;
@@ -742,8 +706,8 @@ namespace LostArkAction.Model
                             check = true;
                             panaltyCheck[i][FinalNeckAcc[o][k].PenaltyName] -= FinalNeckAcc[o][k].PenaltyValue;
                             
-                            firstAblityCandidate[i][FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1]++;
-                            secondAblityCandidate[i][FinalNeckAcc[o][k].Name2][2]++;
+                            candidate[i][FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1]++;
+                            candidate[i][FinalNeckAcc[o][k].Name2][2]++;
                             break;
                         }
                         if (check)
@@ -754,8 +718,8 @@ namespace LostArkAction.Model
                         }
                         panaltyCheck[i][list[1][j].PenaltyName] -= list[1][j].PenaltyValue;
                         
-                        firstAblityCandidate[i][list[1][j].Name1][list[1][j].Value1 - 1]++;
-                        secondAblityCandidate[i][list[1][j].Name2][2]++;
+                        candidate[i][list[1][j].Name1][list[1][j].Value1 - 1]++;
+                        candidate[i][list[1][j].Name2][2]++;
 
                     }
 
@@ -838,26 +802,19 @@ namespace LostArkAction.Model
             for (int o = 0; o < FinalNeckAcc.Count; o++)
             {
                 List<List<List<AccVM>>> tmpAccVMs = new List<List<List<AccVM>>>();
-                List<Dictionary<string, List<int>>> firstAblityCandidate = new List<Dictionary<string, List<int>>>();
-                List<Dictionary<string, List<int>>> secondAblityCandidate = new List<Dictionary<string, List<int>>>();
+                List<Dictionary<string, List<int>>> candidate = new List<Dictionary<string, List<int>>>();
                 for (int i = 0; i < RingCombi[o].Count; i++)
                 {
                     tmpAccVMs.Add(new List<List<AccVM>>());
 
-                    firstAblityCandidate.Add(new Dictionary<string, List<int>>());
-                    secondAblityCandidate.Add(new Dictionary<string, List<int>>());
+                    candidate.Add(new Dictionary<string, List<int>>());
                 }
                 for (int i = 0; i < RingCombi[o].Count; i++)
                 {
-                    foreach (var canTmp in SearchFirstAblityCandidate[o])
+                    foreach (var canTmp in SearchAblityCandidate[o])
                     {
-                        firstAblityCandidate[i].Add(canTmp.Key, new List<int> { canTmp.Value[0], canTmp.Value[1], canTmp.Value[2], canTmp.Value[3], canTmp.Value[5], canTmp.Value[5] });
+                        candidate[i].Add(canTmp.Key, new List<int> { canTmp.Value[0], canTmp.Value[1], canTmp.Value[2], canTmp.Value[3], canTmp.Value[5], canTmp.Value[5] });
                     }
-                    foreach (var canTmp in SearchSecondAblityCandidate[o])
-                    {
-                        secondAblityCandidate[i].Add(canTmp.Key, new List<int> { canTmp.Value[0], canTmp.Value[1], canTmp.Value[2], canTmp.Value[3], canTmp.Value[5], canTmp.Value[5] });
-                    }
-
                 }
                 Parallel.For(0, RingCombi[o].Count, i =>
                 {
@@ -865,10 +822,10 @@ namespace LostArkAction.Model
                     panaltyCheck[PanaltyItems.Keys.ToList()[0]] += PanaltyItems[PanaltyItems.Keys.ToList()[0]];
                     panaltyCheck[RingCombi[o][i][0].PenaltyName] += RingCombi[o][i][0].PenaltyValue;
                     panaltyCheck[RingCombi[o][i][1].PenaltyName] += RingCombi[o][i][1].PenaltyValue;
-                    firstAblityCandidate[i][RingCombi[o][i][0].Name1][RingCombi[o][i][0].Value1 - 1]--;
-                    firstAblityCandidate[i][RingCombi[o][i][1].Name1][RingCombi[o][i][1].Value1 - 1]--;
-                    secondAblityCandidate[i][RingCombi[o][i][1].Name2][2]--;
-                    secondAblityCandidate[i][RingCombi[o][i][0].Name2][2]--;
+                    candidate[i][RingCombi[o][i][0].Name1][RingCombi[o][i][0].Value1 - 1]--;
+                    candidate[i][RingCombi[o][i][1].Name1][RingCombi[o][i][1].Value1 - 1]--;
+                    candidate[i][RingCombi[o][i][1].Name2][2]--;
+                    candidate[i][RingCombi[o][i][0].Name2][2]--;
 
                     if (panaltyCheck[RingCombi[o][i][0].PenaltyName] >= 5 || panaltyCheck[RingCombi[o][i][1].PenaltyName] >= 5)
                     {
@@ -880,14 +837,14 @@ namespace LostArkAction.Model
                     {
                         panaltyCheck[EarCombi[o][j][0].PenaltyName] += EarCombi[o][j][0].PenaltyValue;
                         panaltyCheck[EarCombi[o][j][1].PenaltyName] += EarCombi[o][j][1].PenaltyValue;
-                        firstAblityCandidate[i][EarCombi[o][j][0].Name1][EarCombi[o][j][0].Value1 - 1]--;
-                        firstAblityCandidate[i][EarCombi[o][j][1].Name1][EarCombi[o][j][1].Value1 - 1]--;
-                        secondAblityCandidate[i][EarCombi[o][j][1].Name2][2]--;
-                        secondAblityCandidate[i][EarCombi[o][j][0].Name2][2]--;
+                        candidate[i][EarCombi[o][j][0].Name1][EarCombi[o][j][0].Value1 - 1]--;
+                        candidate[i][EarCombi[o][j][1].Name1][EarCombi[o][j][1].Value1 - 1]--;
+                        candidate[i][EarCombi[o][j][1].Name2][2]--;
+                        candidate[i][EarCombi[o][j][0].Name2][2]--;
                         
                         if (panaltyCheck[EarCombi[o][j][0].PenaltyName] >= 5 || panaltyCheck[EarCombi[o][j][1].PenaltyName] >= 5
-                        || firstAblityCandidate[i][EarCombi[o][j][0].Name1][EarCombi[o][j][0].Value1 - 1]<0|| firstAblityCandidate[i][EarCombi[o][j][1].Name1][EarCombi[o][j][1].Value1 - 1]<0||
-                        secondAblityCandidate[i][EarCombi[o][j][1].Name2][2]<0|| secondAblityCandidate[i][EarCombi[o][j][0].Name2][2]<0)
+                        || candidate[i][EarCombi[o][j][0].Name1][EarCombi[o][j][0].Value1 - 1]<0|| candidate[i][EarCombi[o][j][1].Name1][EarCombi[o][j][1].Value1 - 1]<0||
+                        candidate[i][EarCombi[o][j][1].Name2][2]<0|| candidate[i][EarCombi[o][j][0].Name2][2]<0)
                         {
                         }
                         else
@@ -903,10 +860,10 @@ namespace LostArkAction.Model
                         }
                         panaltyCheck[EarCombi[o][j][0].PenaltyName] -= EarCombi[o][j][0].PenaltyValue;
                         panaltyCheck[EarCombi[o][j][1].PenaltyName] -= EarCombi[o][j][1].PenaltyValue;
-                        firstAblityCandidate[i][EarCombi[o][j][0].Name1][EarCombi[o][j][0].Value1 - 1]++;
-                        firstAblityCandidate[i][EarCombi[o][j][1].Name1][EarCombi[o][j][1].Value1 - 1]++;
-                        secondAblityCandidate[i][EarCombi[o][j][1].Name2][2]++;
-                        secondAblityCandidate[i][EarCombi[o][j][0].Name2][2]++;
+                        candidate[i][EarCombi[o][j][0].Name1][EarCombi[o][j][0].Value1 - 1]++;
+                        candidate[i][EarCombi[o][j][1].Name1][EarCombi[o][j][1].Value1 - 1]++;
+                        candidate[i][EarCombi[o][j][1].Name2][2]++;
+                        candidate[i][EarCombi[o][j][0].Name2][2]++;
                         cnt++;
                         MainWinodwVM.AccProgressValue = (float)(((double)cnt / total) * 100.0);
                     }
