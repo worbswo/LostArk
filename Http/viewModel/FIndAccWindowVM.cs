@@ -31,8 +31,8 @@ namespace Http.viewModel
         public FIndAccWindowVM(List<FindAccVM> findAccVMs)
         {
             findAccVMs = findAccVMs.OrderBy(x => x.TotalPrice).ToList();
-
-            FindAccVMs = new ObservableCollection<FindAccVM>(findAccVMs.GetRange(0,1000));
+            int size = 1000 > findAccVMs.Count ? findAccVMs.Count : 1000;
+            FindAccVMs = new ObservableCollection<FindAccVM>(findAccVMs.GetRange(0, size));
             AccCollectionViewSource = new CollectionViewSource();
             AccCollectionViewSource.Source = this.FindAccVMs;
             //AccCollectionViewSource.View.SortDescriptions.Add(new SortDescription("TotalPrice", ListSortDirection.Ascending));
