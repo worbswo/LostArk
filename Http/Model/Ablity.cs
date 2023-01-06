@@ -642,7 +642,6 @@ namespace LostArkAction.Model
                 }
                 Parallel.For(0, list[0].Count-minus, i =>
                 {
-                    
                     bool check = true;
                     
                     panaltyCheck[i][list[0][i].PenaltyName] += list[0][i].PenaltyValue;
@@ -727,7 +726,12 @@ namespace LostArkAction.Model
 
                 });
                 for (int i = 0; i < tmp.Count; i++) {
+                    if (tmp[i] == null)
+                    {
+                        continue;
+                    }
                     tmp[i] = tmp[i].OrderBy(x => (x[0].Price + x[1].Price)).ToList();
+            
                     for (int j = 0; j < tmp[i].Count; j++)
                     {
                         if (type == 0)
@@ -740,6 +744,20 @@ namespace LostArkAction.Model
                             EarCombi[o].Add(new List<AccVM>(tmp[i][j]));
                         }
                     }
+                }
+                
+                if (type == 0)
+                {
+                    int size = 1000;
+                    size = size > RingCombi[o].Count ? RingCombi[o].Count : size;
+                    RingCombi[o] = RingCombi[o].GetRange(0, size);
+
+                }
+                else
+                {
+                    int size = 1000;
+                    size = size > EarCombi[o].Count ? EarCombi[o].Count : size;
+                    EarCombi[o] = EarCombi[o].GetRange(0, size);
                 }
             }
         }
