@@ -69,7 +69,7 @@ namespace LostArkAction.Code
                 {
                     int pageNo = 1;
                     SearchItem item = new SearchItem();
-                    item.Sort = "ITEM_QUALITY ";
+                    item.Sort = "ITEM_QUALITY";
                     if (Ablity.selectClass == 0)
                     {
                         item.ItemGrade = "유물";
@@ -126,7 +126,7 @@ namespace LostArkAction.Code
                     {
                         
                         Cnt++;
-                        if (Cnt >= 100)
+                        if (Cnt >= 90)
                         {
                             apiKeyidx++;
                             if (apiKeyidx > APIkeys.Count - 1)
@@ -144,6 +144,18 @@ namespace LostArkAction.Code
                         using (HttpResponseMessage response = await SharedClient.PostAsync("https://developer-lostark.game.onstove.com/auctions/items", a))
                         {
                             string jsonResponse = await response.Content.ReadAsStringAsync();
+                            if (jsonResponse.Contains("Rate Limit Exceeded") || jsonResponse.Contains("Unauthorized"))
+                            {
+                                apiKeyidx++;
+                                if (apiKeyidx > APIkeys.Count - 1)
+                                {
+                                    apiKeyidx = 0;
+                                }
+                                SharedClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", APIkeys[apiKeyidx]);
+
+                                Cnt = 0;
+                                continue;
+                            }
                             tmp = JsonConvert.DeserializeObject<ResultItem>(jsonResponse);
                         }
 
@@ -255,8 +267,12 @@ namespace LostArkAction.Code
                                 {
                                     break;
                                 }
+                                pageNo++;
                             }
-                            pageNo++;
+                            else
+                            {
+                                break;
+                            }
                         }
                         else
                         {

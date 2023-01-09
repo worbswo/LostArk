@@ -199,7 +199,6 @@ namespace LostArkAction.viewModel
                         {
                             result = true;
                         }
-                        
                     }
                 }
             }

@@ -1,4 +1,5 @@
-﻿using LostArkAction.viewModel;
+﻿using LostArkAction;
+using LostArkAction.viewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,12 +31,12 @@ namespace Http.viewModel
         #region Constructor
         public FIndAccWindowVM(List<FindAccVM> findAccVMs)
         {
-            findAccVMs = findAccVMs.OrderBy(x => x.TotalPrice).ToList();
             int size = 1000 > findAccVMs.Count ? findAccVMs.Count : 1000;
-            FindAccVMs = new ObservableCollection<FindAccVM>(findAccVMs.GetRange(0, size));
+            FindAccVMs = new ObservableCollection<FindAccVM>(findAccVMs);
             AccCollectionViewSource = new CollectionViewSource();
             AccCollectionViewSource.Source = this.FindAccVMs;
-            //AccCollectionViewSource.View.SortDescriptions.Add(new SortDescription("TotalPrice", ListSortDirection.Ascending));
+            (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn= true;
+            AccCollectionViewSource.View.SortDescriptions.Add(new SortDescription("TotalPrice", ListSortDirection.Ascending));
         }
         #endregion
 

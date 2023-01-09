@@ -132,6 +132,7 @@
             <Button Content="  검 색  "
                 Command="{Binding SearchCommand}"
                     HorizontalAlignment="Center"
+                IsEnabled="{Binding IsEnableSearchBtn}"
                     Grid.Column="5"></Button>
         </Grid>
     </Grid>

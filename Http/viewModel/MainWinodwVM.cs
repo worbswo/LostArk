@@ -27,7 +27,7 @@ namespace LostArkAction.viewModel
         private float _progressValue;
         private float _searchProgressValue;
         private float _accProgressValue;
-
+        private bool _isEnableSearchBtn = true;
         private bool isRelic  = true;
         private bool isAncient;
         private bool isAll;
@@ -41,6 +41,19 @@ namespace LostArkAction.viewModel
         public Ablity Ablity { get; set; }
         public Thread ThreadSearch { get; set; }
 
+        public bool IsEnableSearchBtn
+        {
+            get
+            {
+                return _isEnableSearchBtn;
+            }
+            set
+            {
+                _isEnableSearchBtn = value;
+                OnPropertyChanged("IsEnableSearchBtn");
+
+            }
+        }
         public float ProgressValue
         {
             get { return _progressValue; }
@@ -161,6 +174,7 @@ namespace LostArkAction.viewModel
         #region Method
         public void SearchMethod(object sender)
         {
+            IsEnableSearchBtn = false;
             Ablity = new Ablity(this);
             FindAccVMs = new List<FindAccVM>();
             Ablity.TargetItems = new Dictionary<string, int>();
@@ -193,11 +207,13 @@ namespace LostArkAction.viewModel
                 if (!Ablity.AblityCode.ContainsKey(TargetAblityVM.SelectItems[i]))
                 {
                     MessageBox.Show("해당 각인이 없습니다.");
+                    IsEnableSearchBtn = true;
                     return;
                 }
                 if (Ablity.TargetItems.ContainsKey(TargetAblityVM.SelectItems[i]))
                 {
                     MessageBox.Show("같은 각인이 있습니다.");
+                    IsEnableSearchBtn = true;
                     ischeck = false;
                     return;
                 }
@@ -213,6 +229,7 @@ namespace LostArkAction.viewModel
                         if (TargetAblityVM.SelectFigureItems[i] == 0)
                         {
                             MessageBox.Show(TargetAblityVM.SelectItems[i] + "의 레벨을 선택하세요.");
+                            IsEnableSearchBtn = true;
                             ischeck = false;
                             return;
                         }
@@ -223,32 +240,38 @@ namespace LostArkAction.viewModel
                     if (AccessoriesVM.SelectCharacteriastics[0] == "")
                     {
                         MessageBox.Show("목걸이의 첫번째 특성을 선택하세요.");
+                        IsEnableSearchBtn = true;
                         return;
                     }
                     else if (AccessoriesVM.SelectCharacteriastics[1] == "")
                     {
                         MessageBox.Show("목걸이의 두번째 특성을 선택하세요.");
+                        IsEnableSearchBtn = true;
                         return;
 
                     }
                     else if (AccessoriesVM.SelectCharacteriastics[2] == "")
                     {
                         MessageBox.Show("첫번째 귀걸이의 특성을 선택하세요.");
+                        IsEnableSearchBtn = true;
                         return;
                     }
                     else if (AccessoriesVM.SelectCharacteriastics[3] == "")
                     {
                         MessageBox.Show("두번재 귀걸이의 특성을 선택하세요.");
+                        IsEnableSearchBtn = true;
                         return;
                     }
                     else if (AccessoriesVM.SelectCharacteriastics[4] == "")
                     {
                         MessageBox.Show("첫번째 반지의 특성을 선택하세요.");
+                        IsEnableSearchBtn = true;
                         return;
                     }
                     else if (AccessoriesVM.SelectCharacteriastics[5] == "")
                     {
                         MessageBox.Show("두번째 반지의 특성을 선택하세요.");
+                        IsEnableSearchBtn = true;
                         return;
                     }
                     else
@@ -273,6 +296,7 @@ namespace LostArkAction.viewModel
                         if(EquipAblityVM.SelectItems[4]==null|| EquipAblityVM.SelectItems[4] == "")
                         {
                             MessageBox.Show("페널티 감소 각인을 입력 하세요.");
+                            IsEnableSearchBtn = true;
                             return;
                         }
                         Ablity.PanaltyItems.Add(EquipAblityVM.SelectItems[4], EquipAblityVM.FigureItems[4]);
