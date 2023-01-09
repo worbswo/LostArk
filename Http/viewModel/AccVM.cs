@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LostArkAction.viewModel
 {
-    public class AccVM :ViewModelBase
+    public class AccVM : ViewModelBase
     {
         #region Field
         private string _name;
@@ -128,7 +128,7 @@ namespace LostArkAction.viewModel
             get { return _price; }
             set
             {
-                if(_price != value)
+                if (_price != value)
                 {
                     _price = value;
                 }
@@ -167,7 +167,7 @@ namespace LostArkAction.viewModel
             }
             set
             {
-                _firstCharValue= value;
+                _firstCharValue = value;
                 OnPropertyChanged("FirstCharValue");
             }
         }
@@ -186,32 +186,52 @@ namespace LostArkAction.viewModel
         #endregion
 
         #region Method
-        public bool Contain(AccVM accVM)
+        public bool Contain(AccVM accVM, bool ran = false)
         {
             bool result = false;
-            if(accVM.Name1==Name1 && accVM.Name2==Name2)
+            if (!ran)
             {
-                if(accVM.Value1==Value1&& accVM.Value2==Value2)
+                if (accVM.Name1 == Name1 && accVM.Name2 == Name2)
                 {
-                    if (accVM.PenaltyName == PenaltyName)
+                    if (accVM.Value1 == Value1 && accVM.Value2 == Value2)
                     {
-                        if (accVM.PenaltyValue == PenaltyValue)
+                        if (accVM.PenaltyName == PenaltyName)
                         {
-                            result = true;
+                            if (accVM.PenaltyValue == PenaltyValue)
+                            {
+                                result = true;
+                            }
+
+                        }
+                    }
+                }
+                if (accVM.Name1 == Name2 && accVM.Name2 == Name1)
+                {
+                    if (accVM.Value1 == Value2 && accVM.Value2 == Value1)
+                    {
+                        if (accVM.PenaltyName == PenaltyName)
+                        {
+
+                            if (accVM.PenaltyValue == PenaltyValue)
+                            {
+                                result = true;
+                            }
                         }
                     }
                 }
             }
-            if (accVM.Name1 == Name2 && accVM.Name2 == Name1)
+            else
             {
-                if (accVM.Value1 == Value2 && accVM.Value2 == Value1)
+                if (accVM.Name1 == Name1)
                 {
-                    if (accVM.PenaltyName == PenaltyName)
+                    if (accVM.Value1 == Value1)
                     {
-
-                        if (accVM.PenaltyValue == PenaltyValue)
+                        if (accVM.PenaltyName == PenaltyName)
                         {
-                            result = true;
+                            if (accVM.PenaltyValue == PenaltyValue)
+                            {
+                                result = true;
+                            }
                         }
                     }
                 }
