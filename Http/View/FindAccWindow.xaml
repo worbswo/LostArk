@@ -5,17 +5,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Http.View"
+    xmlns:code="clr-namespace:Http.Code"
     mc:Ignorable="d"
     Title="FindAccWindow"
     Height="600"
     Width="1200"
     MaxWidth="1200"
     MinWidth="1200">
+    <Window.Resources>
+        <code:StringToImageSourceConverter
+            x:Key="MyImageConverter"></code:StringToImageSourceConverter>
+    </Window.Resources>
     <Grid>
         <ListView
             Margin="10"
             ItemsSource="{Binding AccCollectionView}"
             Width="1150"
+
             AlternationCount="2">
             <ListView.ItemContainerStyle>
                 <Style
@@ -176,7 +182,6 @@
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
-
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition></ColumnDefinition>
@@ -239,7 +244,6 @@
                                             <TextBlock
                                                 Margin="2"
                                                 Grid.Row="4"
-                                                Grid.ColumnSpan="2"
                                                 Grid.Column="2"
                                                 Text="{Binding NeckAblity.Value1}"></TextBlock>
                                             <TextBlock
@@ -250,7 +254,6 @@
                                             <TextBlock
                                                 Margin="2"
                                                 Grid.Row="5"
-                                                Grid.ColumnSpan="2"
                                                 Grid.Column="2"
                                                 Text="{Binding NeckAblity.Value2}"></TextBlock>
                                             <TextBlock
@@ -261,9 +264,16 @@
                                             <TextBlock
                                                 Margin="2"
                                                 Grid.Row="6"
-                                                Grid.ColumnSpan="2"
                                                 Grid.Column="2"
                                                 Text="{Binding NeckAblity.PenaltyValue}"></TextBlock>
+                                            <Image
+                                                Grid.Row="4"
+                                                Grid.Column="2"
+                                                Grid.ColumnSpan="2"
+                                                Grid.RowSpan="3"
+                                                Margin="20,0,0,0"
+                                                Source="{Binding Path=NeckAblity.ImagePath,Converter={StaticResource MyImageConverter}}"
+                                                Stretch="Uniform"></Image>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -360,6 +370,14 @@
                                                 Grid.Row="7"
                                                 Grid.Column="1"
                                                 Text="{Binding FirstEarAblity.PenaltyValue}"></TextBlock>
+                                            <Image
+                                                Grid.Row="5"
+                                                Grid.Column="2"
+                                                Grid.ColumnSpan="2"
+                                                Grid.RowSpan="3"
+                                                Margin="20,0,0,0"
+                                                Source="{Binding Path=FirstEarAblity.ImagePath,Converter={StaticResource MyImageConverter}}"
+                                                Stretch="Uniform"></Image>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -456,6 +474,14 @@
                                                 Grid.Row="7"
                                                 Grid.Column="1"
                                                 Text="{Binding SecondEarAblity.PenaltyValue}"></TextBlock>
+                                            <Image
+                                                Grid.Row="5"
+                                                Grid.Column="2"
+                                                Grid.ColumnSpan="2"
+                                                Grid.RowSpan="3"
+                                                Margin="20,0,0,0"
+                                                Source="{Binding Path=SecondEarAblity.ImagePath,Converter={StaticResource MyImageConverter}}"
+                                                Stretch="Uniform"></Image>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -552,6 +578,14 @@
                                                 Grid.Row="7"
                                                 Grid.Column="1"
                                                 Text="{Binding FirstRingAblity.PenaltyValue}"></TextBlock>
+                                            <Image
+                                                Grid.Row="5"
+                                                Grid.Column="2"
+                                                Grid.ColumnSpan="2"
+                                                Grid.RowSpan="3"
+                                                Margin="20,0,0,0"
+                                                Source="{Binding Path=FirstRingAblity.ImagePath,Converter={StaticResource MyImageConverter}}"
+                                                Stretch="Uniform"></Image>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -648,6 +682,14 @@
                                                 Grid.Row="7"
                                                 Grid.Column="1"
                                                 Text="{Binding SecondRingAblity.PenaltyValue}"></TextBlock>
+                                            <Image
+                                                Grid.Row="5"
+                                                Grid.Column="2"
+                                                Grid.ColumnSpan="2"
+                                                Grid.RowSpan="3"
+                                                Margin="20,0,0,0"
+                                                Source="{Binding Path=SecondRingAblity.ImagePath,Converter={StaticResource MyImageConverter}}"
+                                                Stretch="Uniform"></Image>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>

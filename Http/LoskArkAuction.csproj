@@ -70,6 +70,7 @@
     <Compile Include="Code\SearchItem.cs" />
     <Compile Include="Code\RelayCommand.cs" />
     <Compile Include="Code\SkillOption.cs" />
+    <Compile Include="Code\StringToImageSourceConverter.cs" />
     <Compile Include="Model\Ablity.cs" />
     <Compile Include="Model\Accesories.cs" />
     <Compile Include="Model\Accesory.cs" />

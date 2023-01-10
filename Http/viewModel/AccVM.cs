@@ -23,10 +23,23 @@ namespace LostArkAction.viewModel
         private int _firstCharValue;
         private string _secondcharaterics;
         private int _secondCharValue;
-
+        private string _imagePath;
         #endregion
 
         #region Property
+
+        public string ImagePath
+        {
+            get { return _imagePath; }
+            set
+            {
+                if (_imagePath != value)
+                {
+                    _imagePath = value;
+                }
+                OnPropertyChanged("ImagePath");
+            }
+        }
         public string Name
         {
             get { return _name; }

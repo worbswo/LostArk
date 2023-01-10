@@ -177,7 +177,7 @@ namespace LostArkAction.Code
                                     if (tmp.Items[j].GradeQuality < (accesory[AcceccesoryType].Qulity))
                                     {
                                         isQuality = true;
-                                        break;
+                                        continue;
                                     }
                                     if (tmp.Items[j].AuctionInfo.BuyPrice != 0 && tmp.Items[j].AuctionInfo.BuyPrice != null)
                                     {
@@ -207,6 +207,11 @@ namespace LostArkAction.Code
                                                             {
                                                                 (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc[p] = tmp2;
                                                             }
+
+                                                        }
+                                                        else
+                                                        {
+                                                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc[p] = tmp2;
                                                         }
                                                     }
                                                     isSame = true;
@@ -238,6 +243,10 @@ namespace LostArkAction.Code
                                                                 (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[p] = tmp2;
                                                             }
                                                         }
+                                                        else
+                                                        {
+                                                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[p] = tmp2;
+                                                        }
                                                     }
                                                     isSame = true;
                                                     break;
@@ -267,6 +276,10 @@ namespace LostArkAction.Code
                                                             {
                                                                 (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2[p] = tmp2;
                                                             }
+                                                        }
+                                                        else
+                                                        {
+                                                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2[p] = tmp2;
                                                         }
                                                     }
                                                     isSame = true;
@@ -298,6 +311,10 @@ namespace LostArkAction.Code
                                                                 (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[p] = tmp2;
                                                             }
                                                         }
+                                                        else
+                                                        {
+                                                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[p] = tmp2;
+                                                        }
                                                     }
                                                     isSame = true;
                                                     break;
@@ -328,6 +345,10 @@ namespace LostArkAction.Code
                                                                 (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2[p] = tmp2;
                                                             }
                                                         }
+                                                        else
+                                                        {
+                                                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2[p] = tmp2;
+                                                        }
                                                     }
                                                     isSame = true;
                                                     break;
@@ -342,7 +363,7 @@ namespace LostArkAction.Code
                                 }
                                 if (isQuality)
                                 {
-                                    break;
+                                  //  break;
                                 }
                                 pageNo++;
                             }

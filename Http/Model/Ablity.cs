@@ -74,11 +74,11 @@ namespace LostArkAction.Model
         {
             MainWinodwVM = mainWinodw;
             HttpClient = new HttpClient2();
-            List<List<int>> tmp = new List<List<int>>() { new List<int> { 5, 5, 5 }, new List<int> { 5, 5, 4, 3 }, new List<int> { 5, 4, 4, 3 }, new List<int> { 5, 4, 3, 3 } };
+            List<List<int>> tmp = new List<List<int>>() { new List<int> { 5, 5, 5 }, new List<int> { 5, 5, 4, 3 }, new List<int> { 5, 4, 4, 3 }, new List<int> { 5, 4, 3, 3 }, new List<int> { 4, 4, 4, 3 } };
             AccRelicCases.Add(15, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 5, 5, 4 }, new List<int> { 5, 5, 3, 3 }, new List<int> { 5, 4, 4, 3 }, new List<int> { 5, 4, 3, 3 } };
+            tmp = new List<List<int>>() { new List<int> { 5, 5, 4 }, new List<int> { 5, 5, 3, 3 }, new List<int> { 5, 4, 4, 3 }, new List<int> { 5, 4, 3, 3 }, new List<int> { 4, 4, 4, 3 } };
             AccRelicCases.Add(14, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 5, 5, 3 }, new List<int> { 5, 4, 3, 3 }, new List<int> { 5, 4, 4 }, new List<int> { 5, 3, 3, 3 } };
+            tmp = new List<List<int>>() { new List<int> { 5, 5, 3 }, new List<int> { 5, 4, 3, 3 }, new List<int> { 5, 4, 4 }, new List<int> { 5, 3, 3, 3 }, new List<int> { 4, 4, 4, 3 } };
             AccRelicCases.Add(13, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 5, 4, 3 }, new List<int> { 5, 3, 3, 3 }, new List<int> { 4, 4, 4 }, new List<int> { 4, 4, 3, 3 } };
             AccRelicCases.Add(12, new List<List<int>>(tmp));
@@ -88,11 +88,11 @@ namespace LostArkAction.Model
             AccRelicCases.Add(10, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 5, 4 }, new List<int> { 5, 3, 3 }, new List<int> { 4, 4, 3 }, new List<int> { 4, 3, 3 }, new List<int> { 3, 3, 3 } };
             AccRelicCases.Add(9, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 5, 3 }, new List<int> { 4, 4 } };
+            tmp = new List<List<int>>() { new List<int> { 5, 3 }, new List<int> { 4, 4 }, new List<int> { 3, 3, 3 } };
             AccRelicCases.Add(8, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 5, 3 }, new List<int> { 4, 3 } };
+            tmp = new List<List<int>>() { new List<int> { 5, 3 }, new List<int> { 4, 3 }, new List<int> { 3, 3, 3 } };
             AccRelicCases.Add(7, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3, 3 } };
+            tmp = new List<List<int>>() { new List<int> { 3, 3 }, new List<int> { 4, 3 }, new List<int> { 5, 3 } };
             AccRelicCases.Add(6, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 5 } };
             AccRelicCases.Add(5, new List<List<int>>(tmp));
@@ -106,11 +106,11 @@ namespace LostArkAction.Model
             AccRelicCases.Add(3, new List<List<int>>(tmp));
             AccRelicCases.Add(0, new List<List<int>>());
 
-            tmp = new List<List<int>>() { new List<int> { 5, 5, 5 }, new List<int> { 5, 5, 4, 3 }, new List<int> { 5, 4, 4, 3 }, new List<int> { 5, 4, 3, 3 } };
+            tmp = new List<List<int>>() { new List<int> { 5, 5, 5 }, new List<int> { 5, 5, 4, 3 }, new List<int> { 5, 4, 4, 3 }, new List<int> { 5, 4, 3, 3 }, new List<int> { 4, 4, 4, 3 } };
             AccAncientCases.Add(15, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 5, 5, 4 }, new List<int> { 5, 5, 3, 3 }, new List<int> { 5, 4, 4, 3 }, new List<int> { 5, 4, 3, 3 } };
+            tmp = new List<List<int>>() { new List<int> { 5, 5, 4 }, new List<int> { 5, 5, 3, 3 }, new List<int> { 5, 4, 4, 3 }, new List<int> { 5, 4, 3, 3 }, new List<int> { 4, 4, 4, 3 } };
             AccAncientCases.Add(14, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 5, 5, 3 }, new List<int> { 5, 4, 3, 3 }, new List<int> { 5, 4, 4 }, new List<int> { 5, 3, 3, 3 } };
+            tmp = new List<List<int>>() { new List<int> { 5, 5, 3 }, new List<int> { 5, 4, 3, 3 }, new List<int> { 5, 4, 4 }, new List<int> { 5, 3, 3, 3 }, new List<int> { 4, 4, 4, 3 } };
             AccAncientCases.Add(13, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 5, 4, 3 }, new List<int> { 5, 3, 3, 3 }, new List<int> { 4, 4, 4 }, new List<int> { 4, 4, 3, 3 } };
             AccAncientCases.Add(12, new List<List<int>>(tmp));
@@ -120,11 +120,11 @@ namespace LostArkAction.Model
             AccAncientCases.Add(10, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 5, 4 }, new List<int> { 5, 3, 3 }, new List<int> { 4, 4, 3 }, new List<int> { 4, 3, 3 }, new List<int> { 3, 3, 3 } };
             AccAncientCases.Add(9, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 5, 3 }, new List<int> { 4, 4 } };
+            tmp = new List<List<int>>() { new List<int> { 5, 3 }, new List<int> { 4, 4 }, new List<int> { 3, 3, 3 } };
             AccAncientCases.Add(8, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 5, 3 }, new List<int> { 4, 3 } };
+            tmp = new List<List<int>>() { new List<int> { 5, 3 }, new List<int> { 4, 3 }, new List<int> { 3, 3, 3 } };
             AccAncientCases.Add(7, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3, 3 } };
+            tmp = new List<List<int>>() { new List<int> { 3, 3 }, new List<int> { 4, 3 }, new List<int> { 5, 3 } };
             AccAncientCases.Add(6, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 5 } };
             AccAncientCases.Add(5, new List<List<int>>(tmp));
@@ -159,6 +159,8 @@ namespace LostArkAction.Model
             AccAncientCases[10].Add(new List<int> { 6, 4 });
             AccAncientCases[10].Add(new List<int> { 6, 3, 3 });
             AccAncientCases[9].Add(new List<int> { 6, 3 });
+            AccAncientCases[8].Add(new List<int> { 6, 3 });
+            AccAncientCases[7].Add(new List<int> { 6, 3 });
             AccAncientCases[6].Add(new List<int> { 6 });
         }
         #region Method
@@ -242,7 +244,6 @@ namespace LostArkAction.Model
             }
 
             bool check = false;
-            List<List<SearchAblity>> tmpSearch = new List<List<SearchAblity>>();
             while (true)
             {
                 int ablitySum = 0;
@@ -252,7 +253,7 @@ namespace LostArkAction.Model
                 }
                 if (ablitySum <= auctionIItemSum)
                 {
-                    ComputeAblity(index, abliName, tmpCases, tmpItem, tmpSearch);
+                    ComputeAblity(index, abliName, tmpCases, tmpItem, AblitiesCombi);
                 }
                 index[index.Count - 1]++;
                 for (int i = 1; i <= index.Count; i++)
@@ -274,65 +275,13 @@ namespace LostArkAction.Model
                 }
             }
 
-            List<bool> samecheck = new List<bool>();
-            for (int i = 0; i < tmpSearch.Count; i++)
+            
+            if (AblitiesCombi.Count == 0)
             {
-                samecheck.Add(false);
-            }
-            for (int i = 0; i < tmpSearch.Count - 1; i++)
-            {
-                for (int j = i + 1; j < tmpSearch.Count; j++)
-                {
-                    int cnt = 0;
-                    for (int k = 0; k < tmpSearch[i].Count; k++)
-                    {
-                        for (int p = 0; p < tmpSearch[j].Count; p++)
-                        {
-                            if (tmpSearch[i][k].FirstAblity.Keys.ToList()[0] == tmpSearch[j][p].FirstAblity.Keys.ToList()[0])
-                            {
-                                if (tmpSearch[i][k].FirstAblity.Values.ToList()[0] == tmpSearch[j][p].FirstAblity.Values.ToList()[0])
-                                {
-                                    if (tmpSearch[i][k].SecondAblity.Keys.ToList()[0] == tmpSearch[j][p].SecondAblity.Keys.ToList()[0])
-                                    {
-                                        if (tmpSearch[i][k].SecondAblity.Values.ToList()[0] == tmpSearch[j][p].SecondAblity.Values.ToList()[0])
-                                        {
-                                            cnt++;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (cnt == tmpSearch[i].Count)
-                    {
-                        if (tmpSearch[i].Count > tmpSearch[j].Count)
-                        {
-                            samecheck[j] = true;
-                        }
-                        else
-                        {
-                            samecheck[i] = true;
-                        }
-                    }
-                    else if (cnt == tmpSearch[j].Count)
-                    {
-                        if (tmpSearch[i].Count > tmpSearch[j].Count)
-                        {
-                            samecheck[j] = true;
-                        }
-                        else
-                        {
-                            samecheck[i] = true;
-                        }
-                    }
-                }
-            }
-            for (int i = 0; i < tmpSearch.Count; i++)
-            {
-                //if (!samecheck[i])
-                {
-                    AblitiesCombi.Add(tmpSearch[i]);
-                }
+                MessageBox.Show("구성할 수 없는 각인 입니다.");
+                DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
+
+                return;
             }
             Console.WriteLine("----------------------result------------------------");
             for (int i = 0; i < AblitiesCombi.Count; i++)
@@ -773,22 +722,7 @@ namespace LostArkAction.Model
                         }
                     }
                 }
-                if (type == 0)
-                {
-                    RingCombi[o] = RingCombi[o].OrderBy(x => x[0].Price + x[1].Price).ToList();
-                    int size = 3000;
-                    size = size > RingCombi[o].Count ? RingCombi[o].Count : size;
-                    RingCombi[o] = RingCombi[o].GetRange(0, size);
-                }
-                else
-                {
-                    int size = 3000;
-                    EarCombi[o] = EarCombi[o].OrderBy(x => x[0].Price + x[1].Price).ToList();
-                    size = size > EarCombi[o].Count ? EarCombi[o].Count : size;
-                    EarCombi[o] = EarCombi[o].GetRange(0, size);
-
-
-                }
+ 
             }
         }
 
@@ -969,24 +903,29 @@ namespace LostArkAction.Model
                 {
                     Parallel.For(0, Accs[o].Count, j =>
                     {
-                        Dictionary<string, int> equipCheck = new Dictionary<string, int>(TargetItems);
                         Dictionary<string, int> panaltyCheck = new Dictionary<string, int> { { "공격력 감소", 0 }, { "공격속도 감소", 0 }, { "방어력 감소", 0 }, { "이동속도 감소", 0 } };
+                        Dictionary<string, List<int>> candidate = new Dictionary<string, List<int>>();
+                        foreach (var canTmp in SearchAblityCandidate[o])
+                        {
+                            List<int> value = new List<int>(canTmp.Value);
+                            candidate.Add(canTmp.Key, value);
+                        }
                         panaltyCheck[PanaltyItems.Keys.ToList()[0]] += PanaltyItems[PanaltyItems.Keys.ToList()[0]];
-                        equipCheck.Add("random", -10000);
 
                         panaltyCheck[FinalNeckAcc[o][i].PenaltyName] += FinalNeckAcc[o][i].PenaltyValue;
-                        equipCheck[FinalNeckAcc[o][i].Name1] -= FinalNeckAcc[o][i].Value1;
-                        string Name2 = equipCheck.ContainsKey(FinalNeckAcc[o][i].Name2) ? FinalNeckAcc[o][i].Name2 : "random";
-                        equipCheck[Name2] -= FinalNeckAcc[o][i].Value2;
+                        string Name2 = candidate.ContainsKey(FinalNeckAcc[o][i].Name2) ? FinalNeckAcc[o][i].Name2 : "random";
+                        candidate[FinalNeckAcc[o][i].Name1][FinalNeckAcc[o][i].Value1-1]--;
+                        candidate[Name2][2]--;
                         bool check2 = false;
                         for (int k = 0; k < Accs[o][j].Count; k++)
                         {
-                            string AccName2 = equipCheck.ContainsKey(Accs[o][j][k].Name2) ? Accs[o][j][k].Name2 : "random";
+                            string AccName2 = candidate.ContainsKey(Accs[o][j][k].Name2) ? Accs[o][j][k].Name2 : "random";
 
                             panaltyCheck[Accs[o][j][k].PenaltyName] += Accs[o][j][k].PenaltyValue;
-                            equipCheck[Accs[o][j][k].Name1] -= Accs[o][j][k].Value1;
-                            equipCheck[AccName2] -= Accs[o][j][k].Value2;
-                            if (panaltyCheck[Accs[o][j][k].PenaltyName] >= 5)
+                            candidate[Accs[o][j][k].Name1][Accs[o][j][k].Value1-1]--;
+                            candidate[AccName2][2]--;
+
+                            if (panaltyCheck[Accs[o][j][k].PenaltyName] >= 5|| candidate[Accs[o][j][k].Name1][Accs[o][j][k].Value1-1] < 0 || candidate[AccName2][2] < 0)
                             {
                                 check2 = true;
                                 break;
@@ -996,8 +935,7 @@ namespace LostArkAction.Model
                         {
                             return;
                         }
-                        var check = equipCheck.Where(x => x.Value > 0).ToList();
-                        if (check.Count == 0)
+                        
                         {
                             Dictionary<string, int> totalChar = new Dictionary<string, int>();
                             totalChar.Add(FinalNeckAcc[o][i].FirstCharaterics, FinalNeckAcc[o][i].FirstCharValue);
@@ -1029,11 +967,13 @@ namespace LostArkAction.Model
                                 TotalChar = result,
                                 TotalPrice = FinalNeckAcc[o][i].Price + Accs[o][j][0].Price + Accs[o][j][1].Price + Accs[o][j][2].Price + Accs[o][j][3].Price
                             };
-                            findAccVMsTmp.Add(findAcc);
+                            if (findAcc != null)
+                            {
+                                findAccVMsTmp.Add(findAcc);
+                                
+                            }
                         }
                     });
-                    Thread.Sleep(1);
-
                     Cnt++;
                     MainWinodwVM.ProgressValue = (float)(((double)Cnt / TotalValue) * 100.0);
                 }
@@ -1047,6 +987,7 @@ namespace LostArkAction.Model
 
                 return;
             }
+
             for (int i = 0; i < findAccVMsTmp.Count; i++)
             {
                 if (findAccVMsTmp[i] != null)
@@ -1102,6 +1043,8 @@ namespace LostArkAction.Model
             AccVM searchAblity = new AccVM();
             if (accName == "목걸이")
             {
+                searchAblity.ImagePath = auctionItem.Icon;
+
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
@@ -1165,6 +1108,8 @@ namespace LostArkAction.Model
             }
             else if (accName == "반지1" || accName == "반지2")
             {
+                searchAblity.ImagePath = auctionItem.Icon;
+
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
@@ -1217,6 +1162,8 @@ namespace LostArkAction.Model
             }
             else if (accName == "귀걸이1" || accName == "귀걸이2")
             {
+                searchAblity.ImagePath = auctionItem.Icon;
+
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
@@ -1286,7 +1233,7 @@ namespace LostArkAction.Model
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
-
+                searchAblity.ImagePath = auctionItem.Icon;
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
                     if (auctionItem.Options[i].Type == "STAT")
@@ -1351,6 +1298,8 @@ namespace LostArkAction.Model
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
+                searchAblity.ImagePath = auctionItem.Icon;
+
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
                     if (auctionItem.Options[i].Type == "STAT")
@@ -1404,6 +1353,8 @@ namespace LostArkAction.Model
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
+                searchAblity.ImagePath = auctionItem.Icon;
+
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
                     if (auctionItem.Options[i].Type == "STAT")
@@ -1457,6 +1408,8 @@ namespace LostArkAction.Model
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
+                searchAblity.ImagePath = auctionItem.Icon;
+
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
                     if (auctionItem.Options[i].Type == "STAT")
@@ -1511,6 +1464,8 @@ namespace LostArkAction.Model
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
+                searchAblity.ImagePath = auctionItem.Icon;
+
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
                     if (auctionItem.Options[i].Type == "STAT")
