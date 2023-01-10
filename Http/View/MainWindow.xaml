@@ -18,7 +18,8 @@
             <RowDefinition
                 Height="30"></RowDefinition>
 
-            <RowDefinition Height="0.7*"></RowDefinition>
+            <RowDefinition
+                Height="0.7*"></RowDefinition>
             <RowDefinition
                 Height="*"></RowDefinition>
             <RowDefinition
@@ -33,10 +34,31 @@
                 Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+        <Grid
+            Margin="150,0,150,0"
+            Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="*"></ColumnDefinition>
+                <ColumnDefinition
+                    Width="0.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox
+                Margin="2"
+                FontSize="17"
+                Text="{Binding SetupAblityText}"
+                VerticalAlignment="Center"></TextBox>
+            <Button
+                Margin="2"
+                Grid.Column="1"
+                FontSize="17"
+                FontWeight="Bold"
+                Command="{Binding SetupCommand}"
+                Content="각인 설정"></Button>
+        </Grid>
         <view:TargetAblity
             DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"
             Grid.RowSpan="2"
@@ -74,7 +96,6 @@
             Maximum="100"
             Grid.ColumnSpan="2"
             Margin="10,2,10,2"
-            
             Value="{Binding AccProgressValue}"
             Foreground="#FFF57E2A">
         </ProgressBar>
@@ -84,13 +105,13 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Text="{Binding ElementName=searchProgress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>
-        <ProgressBar 
+        <ProgressBar
             Name="progress"
             Grid.Row="6"
             Minimum="0"
             Maximum="100"
-                     Grid.ColumnSpan="2"
-                     Margin="10"
+            Grid.ColumnSpan="2"
+            Margin="10"
             Value="{Binding ProgressValue}">
         </ProgressBar>
         <TextBlock
@@ -134,13 +155,14 @@
                 Foreground="GhostWhite"
                 IsChecked="{Binding IsAll}"
                 Content="전체"></RadioButton>
-            <Button Content="  검 색  "
-                    FontWeight="Bold"
-                    FontSize="20"
+            <Button
+                Content="  검 색  "
+                FontWeight="Bold"
+                FontSize="20"
                 Command="{Binding SearchCommand}"
-                    HorizontalAlignment="Center"
+                HorizontalAlignment="Center"
                 IsEnabled="{Binding IsEnableSearchBtn}"
-                    Grid.Column="5"></Button>
+                Grid.Column="5"></Button>
         </Grid>
     </Grid>
 </Window>

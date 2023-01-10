@@ -24,6 +24,8 @@ namespace LostArkAction.viewModel
 
         #region Field
         private ICommand _searchCommand;
+        private ICommand _setupCommand;
+
         private float _progressValue;
         private float _searchProgressValue;
         private float _accProgressValue;
@@ -31,6 +33,7 @@ namespace LostArkAction.viewModel
         private bool isRelic  = true;
         private bool isAncient;
         private bool isAll;
+        private string _setupAblityText;
         #endregion
         #region Property
         public List<FindAccVM> FindAccVMs  = new List<FindAccVM>();
@@ -40,7 +43,15 @@ namespace LostArkAction.viewModel
         public AccessoriesVM AccessoriesVM { get; set; } = new AccessoriesVM();
         public Ablity Ablity { get; set; }
         public Thread ThreadSearch { get; set; }
-
+        public string SetupAblityText
+        {
+            get { return _setupAblityText; }
+            set
+            {
+                _setupAblityText = value;
+                OnPropertyChanged("SetupAblityText");
+            }
+        }
         public bool IsEnableSearchBtn
         {
             get
@@ -142,6 +153,17 @@ namespace LostArkAction.viewModel
                 return _searchCommand;
             }
         }
+        public ICommand SetupCommand
+        {
+            get
+            {
+                if (_setupCommand == null)
+                {
+                    _setupCommand = new RelayCommand(SetupMethod);
+                }
+                return _setupCommand;
+            }
+        }
         #endregion
 
         #region Constroctor
@@ -172,6 +194,59 @@ namespace LostArkAction.viewModel
         #endregion
 
         #region Method
+        public void SetupMethod(object sender)
+        {
+            string tmp = SetupAblityText;
+            string[] strList = new string[7]{"","","","","","","" };
+            int[] ablityVal = new int[7];
+            int idx = 0;
+            for (int i = 0; i < tmp.Length; i++)
+            {
+                
+                char tmp2 = tmp[i];
+                if (tmp2 >= '0' && tmp2 <= '9')
+                {
+                    ablityVal[idx]= Convert.ToInt32(tmp[i])-48;
+                    idx++;
+
+                }else if(tmp2==' ')
+                {
+
+                }
+                else
+                {
+                    strList[idx] += tmp[i];
+                }
+            }
+            for(int i = 0; i < 7; i++)
+            {
+                if (strList[i] != "")
+                {
+                    if (!Ablity.AblityShort.ContainsKey(strList[i]))
+                    {
+                        MessageBox.Show("["+ strList[i] + "] 에 해당 하는 각인이 없습니다. 다시 입력해 주세요!");
+                        return;
+                    }
+                    if (ablityVal[i] > 3 || ablityVal[i] < 0)
+                    {
+                        MessageBox.Show("[" + strList[i] + "] 의 각인 수치를 벗어났습니다. 다시 입력해 주세요!");
+                        return;
+                    }
+                }
+                
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                if ( strList[i] != "")
+                {
+                    TargetAblityVM.SelectItems[i] = Ablity.AblityShort[strList[i]];
+                    TargetAblityVM.SelectFigureItems[i] =(4- ablityVal[i]);
+                    Console.WriteLine(ablityVal[i]);
+                }
+            }
+            TargetAblityVM.SelectItems = TargetAblityVM.SelectItems;
+            TargetAblityVM.SelectFigureItems = TargetAblityVM.SelectFigureItems;
+        }
         public void SearchMethod(object sender)
         {
             IsEnableSearchBtn = false;
