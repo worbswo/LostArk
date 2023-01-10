@@ -16,6 +16,7 @@ using Http.View;
 using Http.viewModel;
 using System.Threading;
 using System.IO;
+using System.Drawing;
 
 namespace LostArkAction.viewModel
 {
