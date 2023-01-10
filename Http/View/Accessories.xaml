@@ -134,32 +134,32 @@
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
-                Text="{Binding DataContext.AccessoriesVM.Qulity[0],Mode=TwoWay}"
+                Text="{Binding DataContext.AccessoriesVM.Qulity1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
   
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
-                Text="{Binding DataContext.AccessoriesVM.Qulity[1],Mode=TwoWay}"
+                Text="{Binding DataContext.AccessoriesVM.Qulity2,Mode=TwoWay}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
             <TextBox
                 Grid.Row="3"
                 Grid.Column="1"
-                Text="{Binding DataContext.AccessoriesVM.Qulity[2],Mode=TwoWay}"
+                Text="{Binding DataContext.AccessoriesVM.Qulity3,Mode=TwoWay}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
             <TextBox
                 Grid.Row="4"
                 Grid.Column="1"
-                Text="{Binding DataContext.AccessoriesVM.Qulity[3],Mode=TwoWay}"
+                Text="{Binding DataContext.AccessoriesVM.Qulity4,Mode=TwoWay}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
             <TextBox
                 Grid.Row="5"
                 Grid.Column="1"
-                Text="{Binding DataContext.AccessoriesVM.Qulity[4],Mode=TwoWay}"
+                Text="{Binding DataContext.AccessoriesVM.Qulity5,Mode=TwoWay}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
             <ComboBox

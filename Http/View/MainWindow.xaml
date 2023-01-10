@@ -155,6 +155,10 @@
                 Foreground="GhostWhite"
                 IsChecked="{Binding IsAll}"
                 Content="전체"></RadioButton>
+            <TextBlock
+                Grid.ColumnSpan="2"
+                Grid.Column="3"
+                Text="후원    서버 : 아브렐슈드  &#10;       아이디 : 란후라이"  FontWeight="Bold" Foreground="White"></TextBlock>
             <Button
                 Content="  검 색  "
                 FontWeight="Bold"
