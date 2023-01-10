@@ -16,6 +16,7 @@ namespace LostArkAction.viewModel
         private string _firstChar;
         private string _secondChar;
         private string _TotalChar;
+        private int _index;
 
         #endregion
 
@@ -25,6 +26,18 @@ namespace LostArkAction.viewModel
         public AccVM SecondRingAblity { get; set; } = new AccVM();
         public AccVM FirstEarAblity { get; set; } = new AccVM();
         public AccVM SecondEarAblity { get; set; } = new AccVM();
+        public int Index
+        {
+            get { return _index; }
+            set
+            {
+                if (_index != value)
+                {
+                    _index = value;
+                }
+                OnPropertyChanged("Index");
+            }
+        }
         public int TotalPrice
         {
             get

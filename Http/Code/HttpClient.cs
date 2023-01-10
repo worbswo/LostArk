@@ -49,12 +49,40 @@ namespace LostArkAction.Code
             for (int k = 0; k < 5; k++)
             {
                 string AcceccesoryType = Ablity.AccessoryCode.Keys.ToList()[k];
+                int qulity = (int)(accesory[AcceccesoryType].Qulity);
+                if (AcceccesoryType.Contains("반지1"))
+                {
+                    if (accesory[AcceccesoryType].Characteristic[0] == accesory["반지2"].Characteristic[0])
+                    {
+                       if(accesory[AcceccesoryType].Qulity> accesory["반지2"].Qulity)
+                        {
+                            qulity = accesory["반지2"].Qulity;
+                            accesory["반지2"].Qulity = accesory["반지1"].Qulity;
+                        }
+                    }
+                }
+                else if (AcceccesoryType.Contains("귀걸이1"))
+                {
+                    if (accesory[AcceccesoryType].Characteristic[0] == accesory["귀걸이2"].Characteristic[0])
+                    {
+                        if (accesory[AcceccesoryType].Qulity > accesory["귀걸이2"].Qulity)
+                        {
+                            qulity = accesory["귀걸이2"].Qulity;
+                            accesory["귀걸이2"].Qulity = accesory["귀걸이1"].Qulity;
+
+                        }
+                    }
+                }
                 if (AcceccesoryType.Contains("반지2"))
                 {
                     if (accesory[AcceccesoryType].Characteristic[0] == accesory["반지1"].Characteristic[0])
                     {
-                        (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2 = new List<AccVM>((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1);
-
+                        for (int i = 0;i< (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1.Count; i++) {
+                            if (accesory[AcceccesoryType].Qulity <= (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[i].Quality)
+                            {
+                                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2.Add(new AccVM((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[i]));
+                            }
+                        }
                         continue;
                     }
                 }
@@ -62,7 +90,13 @@ namespace LostArkAction.Code
                 {
                     if (accesory[AcceccesoryType].Characteristic[0] == accesory["귀걸이1"].Characteristic[0])
                     {
-                        (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2 = new List<AccVM>((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1);
+                        for (int i = 0; i < (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1.Count; i++)
+                        {
+                            if (accesory[AcceccesoryType].Qulity <= (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[i].Quality)
+                            {
+                                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2.Add(new AccVM((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[i]));
+                            }
+                        }
 
                         continue;
                     }
@@ -85,7 +119,7 @@ namespace LostArkAction.Code
                         item.ItemGrade = "";
                     }
                     item.CategoryCode = Ablity.AccessoryCode[AcceccesoryType];
-                    item.ItemGradeQuality = (int)(accesory[AcceccesoryType].Qulity / 10) * 10;
+                    item.ItemGradeQuality = (int)(qulity/ 10) * 10;
                     item.EtcOptions.Add(new EtcOption()
                     {
                         FirstOption = 3,
@@ -174,7 +208,7 @@ namespace LostArkAction.Code
                                 for (int j = 0; j < tmp.Items.Count; j++)
                                 {
 
-                                    if (tmp.Items[j].GradeQuality < (accesory[AcceccesoryType].Qulity))
+                                    if (tmp.Items[j].GradeQuality < (qulity))
                                     {
                                         isQuality = true;
                                         continue;

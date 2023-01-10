@@ -10,9 +10,9 @@
     d:DesignHeight="450"
     d:DesignWidth="800">
     <Border
-        Background="GhostWhite"
+        Background="#FF636366"
         Margin="10"
-        BorderBrush="DodgerBlue"
+        BorderBrush="#FF0A3C6D"
         BorderThickness="2"
         CornerRadius="10">
         <Grid
@@ -22,6 +22,7 @@
                 FontSize="25"
                 FontWeight="Bold"
                 FontFamily="MaruBuri"
+                Foreground="White"
                 HorizontalAlignment="Left"></TextBlock>
             <ComboBox
                 Name="Combo1"
@@ -37,7 +38,7 @@
                 Grid.Row="2"
                 Grid.ColumnSpan="3"
                 Height="1"
-                Fill="Gray"
+                Fill="White"
                 VerticalAlignment="Bottom"></Rectangle>
             <ComboBox
                 Name="Combo2"
@@ -54,7 +55,7 @@
                 Grid.Row="4"
                 Grid.ColumnSpan="3"
                 Height="1"
-                Fill="Gray"
+                Fill="White"
                 VerticalAlignment="Bottom"></Rectangle>
             <ComboBox
                 Name="Combo3"
@@ -71,7 +72,7 @@
                 Grid.Row="6"
                 Grid.ColumnSpan="3"
                 Height="1"
-                Fill="Gray"
+                Fill="White"
                 VerticalAlignment="Bottom"></Rectangle>
             <ComboBox
                 Name="Combo4"
@@ -87,7 +88,7 @@
                 Grid.Row="8"
                 Grid.ColumnSpan="3"
                 Height="1"
-                Fill="Gray"
+                Fill="White"
                 VerticalAlignment="Bottom"></Rectangle>
             <ComboBox
                 Name="Combo5"
@@ -103,7 +104,7 @@
                 Grid.Row="10"
                 Grid.ColumnSpan="3"
                 Height="1"
-                Fill="Gray"
+                Fill="White"
                 VerticalAlignment="Bottom"></Rectangle>
             <ComboBox
                 Name="Combo6"
@@ -119,7 +120,7 @@
                 Grid.Row="12"
                 Grid.ColumnSpan="3"
                 Height="1"
-                Fill="Gray"
+                Fill="White"
                 VerticalAlignment="Bottom"></Rectangle>
             <ComboBox
                 Name="Combo7"
@@ -135,7 +136,7 @@
                 Grid.Row="14"
                 Grid.ColumnSpan="3"
                 Height="1"
-                Fill="Gray"
+                Fill="White"
                 VerticalAlignment="Bottom"></Rectangle>
             <ComboBox
                 Grid.Row="2"
@@ -206,79 +207,79 @@
                 Text="각인1"
                 
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="2"
                 Text="수치"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="3"
                 Text="각인2"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="2"
                 Text="수치"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="5"
                 Text="각인3"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="5"
                 Grid.Column="2"
                 Text="수치"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="7"
                 Text="각인4"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="7"
                 Grid.Column="2"
                 Text="수치"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="9"
                 Text="각인5"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="9"
                 Grid.Column="2"
                 Text="수치"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="11"
                 Text="각인6"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="11"
                 Grid.Column="2"
                 Text="수치"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="13"
                 Text="각인7"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="13"
                 Grid.Column="2"
                 Text="수치"
                 VerticalAlignment="Bottom"
-                Foreground="Gray"></TextBlock>
+                Foreground="White"></TextBlock>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition></RowDefinition>

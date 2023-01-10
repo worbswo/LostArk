@@ -27,7 +27,7 @@ namespace LostArkAction.viewModel
         #endregion
 
         #region Property
-
+       
         public string ImagePath
         {
             get { return _imagePath; }
@@ -197,7 +197,31 @@ namespace LostArkAction.viewModel
             }
         }
         #endregion
+        #region Constructor
+        public AccVM()
+        {
 
+        }
+
+        public AccVM(AccVM accvm)
+        {
+            Name = accvm.Name;
+            Name1 = accvm.Name1;
+            Name2 = accvm.Name2;
+            Value1 = accvm.Value1;
+            Value2 = accvm.Value2;
+            Quality = accvm.Quality;
+            PenaltyName = accvm.PenaltyName;
+            PenaltyValue = accvm.PenaltyValue;
+            Price = accvm.Price;
+            FirstCharaterics = accvm.FirstCharaterics;
+            FirstCharValue = accvm.FirstCharValue;
+            Secondcharaterics = accvm.Secondcharaterics;
+            SecondCharValue = accvm.SecondCharValue;
+            ImagePath = accvm.ImagePath;
+
+    }
+        #endregion
         #region Method
         public bool Contain(AccVM accVM, bool ran = false)
         {

@@ -14,8 +14,8 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Border
-            BorderBrush="DodgerBlue"
-            Background="GhostWhite"
+            BorderBrush="#FF0A3C6D"
+            Background="#FF636366"
             Margin="10"
             BorderThickness="2"
             CornerRadius="10">
@@ -39,18 +39,20 @@
                     FontFamily="MaruBuri"
                     Text="장착 각인"
                     FontSize="25"
-                    FontWeight="Bold"></TextBlock>
+                    FontWeight="Bold"
+                    Foreground="White"></TextBlock>
                 <TextBlock
                     Grid.Row="1"
                     Text="각인1"
+                    
                     VerticalAlignment="Bottom"
-                    Foreground="Gray"></TextBlock>
+                    Foreground="White"></TextBlock>
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    Foreground="Gray"></TextBlock>
+                    Foreground="White"></TextBlock>
                 <ComboBox
                     Name="option1"
                     Grid.Row="2"
@@ -76,13 +78,13 @@
                     Grid.Row="3"
                     Text="각인2"
                     VerticalAlignment="Bottom"
-                    Foreground="Gray"></TextBlock>
+                    Foreground="White"></TextBlock>
                 <TextBlock
                     Grid.Row="3"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    Foreground="Gray"></TextBlock>
+                    Foreground="White"></TextBlock>
                 <ComboBox
                     Grid.Row="4"
                     FontSize="18"
@@ -108,8 +110,8 @@
         <Border
             Grid.Row="1"
             Margin="10"
-            Background="GhostWhite"
-            BorderBrush="DodgerBlue"
+            Background="#FF636366"
+            BorderBrush="#FF0A3C6D"
             BorderThickness="2"
             CornerRadius="10">
             <Grid
@@ -135,18 +137,19 @@
                     Text="어빌리티 스톤 각인"
                     FontSize="25"
                     Grid.ColumnSpan="3"
+                    Foreground="White"
                     FontWeight="Bold"></TextBlock>
                 <TextBlock
                     Grid.Row="1"
                     Text="각인1"
                     VerticalAlignment="Bottom"
-                    Foreground="Gray"></TextBlock>
+                    Foreground="White"></TextBlock>
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    Foreground="Gray"></TextBlock>
+                    Foreground="White"></TextBlock>
                 <ComboBox
                     Grid.Row="2"
                     FontSize="18"
@@ -165,19 +168,19 @@
                     Grid.Row="2"
                     Grid.ColumnSpan="3"
                     Height="1"
-                    Fill="Gray"
+                    Fill="White"
                     VerticalAlignment="Bottom"></Rectangle>
                 <TextBlock
                     Grid.Row="3"
                     Text="각인2"
                     VerticalAlignment="Bottom"
-                    Foreground="Gray"></TextBlock>
+                    Foreground="White"></TextBlock>
                 <TextBlock
                     Grid.Row="3"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    Foreground="Gray"></TextBlock>
+                    Foreground="White"></TextBlock>
                 <ComboBox
                     Grid.Row="4"
                     FontSize="18"
@@ -202,13 +205,13 @@
                     Grid.Row="5"
                     Text="감소 각인"
                     VerticalAlignment="Bottom"
-                    Foreground="Gray"></TextBlock>
+                    Foreground="White"></TextBlock>
                 <TextBlock
                     Grid.Row="5"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    Foreground="Gray"></TextBlock>
+                    Foreground="White"></TextBlock>
                 <ComboBox
                     Grid.Row="6"
                     FontSize="18"

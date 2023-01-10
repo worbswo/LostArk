@@ -8,10 +8,10 @@
     xmlns:code="clr-namespace:Http.Code"
     mc:Ignorable="d"
     Title="FindAccWindow"
-    Height="600"
-    Width="1200"
-    MaxWidth="1200"
-    MinWidth="1200">
+    Height="800"
+    Width="1230"
+    MaxWidth="1230"
+    MinWidth="1230">
     <Window.Resources>
         <code:StringToImageSourceConverter
             x:Key="MyImageConverter"></code:StringToImageSourceConverter>
@@ -20,8 +20,9 @@
         <ListView
             Margin="10"
             ItemsSource="{Binding AccCollectionView}"
-            Width="1150"
-
+            Width="1180"
+            Name="lstView"
+            
             AlternationCount="2">
             <ListView.ItemContainerStyle>
                 <Style
@@ -121,6 +122,22 @@
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
+                        <GridViewColumn
+                            Width="30">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader
+                                Tag="ReceivingDate"
+                                Content="NO"></GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                    <TextBlock
+                                        Text="{Binding Index}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn
                             Width="120">
                             <GridViewColumn.Header>

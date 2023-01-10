@@ -9,8 +9,8 @@
     <Border
 
         Margin="10"
-        Background="GhostWhite"
-        BorderBrush="DodgerBlue"
+        Background="#FF636366"
+        BorderBrush="#FF0A3C6D"
         BorderThickness="2"
         CornerRadius="10">
         <Grid
@@ -38,7 +38,7 @@
                 Grid.Row="0"
                 Grid.ColumnSpan="5"
                 Height="1"
-                Fill="Gray"
+                Fill="White"
                 VerticalAlignment="Bottom"></Rectangle>
             <Rectangle
                 Grid.Row="1"
@@ -66,50 +66,68 @@
                 VerticalAlignment="Bottom"></Rectangle>
             <TextBlock
                 Text="부위"
+                Foreground="White"
+                FontWeight="Bold"
                 HorizontalAlignment="Center"
                 FontSize="20"></TextBlock>
             <TextBlock
                 Grid.Column="1"
                 Text="품질"
+                Foreground="White"
+                FontWeight="Bold"
                 HorizontalAlignment="Center"
                 FontSize="20"></TextBlock>
             <TextBlock
                 Grid.Column="2"
                 Text="전투 특성1"
+                Foreground="White"
+                FontWeight="Bold"
                 HorizontalAlignment="Center"
                 FontSize="20"></TextBlock>
             <TextBlock
                 Grid.Column="3"
                 Text="전투 특성2"
+                Foreground="White"
+                FontWeight="Bold"
                 HorizontalAlignment="Center"
                 FontSize="20"></TextBlock>
             <TextBlock
                 Grid.Row="1"
                 Text="목걸이"
+                Foreground="White"
+                FontWeight="Bold"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBlock>
             <TextBlock
                 Grid.Row="2"
                 Text="귀걸이"
+                Foreground="White"
+                FontWeight="Bold"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBlock>
             <TextBlock
                 Grid.Row="3"
                 Text="귀걸이"
+                Foreground="White"
+                FontWeight="Bold"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBlock>
             <TextBlock
                 Grid.Row="4"
                 Text="반지"
+                Foreground="White"
+                FontWeight="Bold"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBlock>
             <TextBlock
                 Grid.Row="5"
                 Text="반지"
+                Foreground="White"
+                FontWeight="Bold"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBlock>
