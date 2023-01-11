@@ -4,6 +4,7 @@ using LostArkAction.viewModel;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -57,6 +58,8 @@ namespace LostArkAction.Model
         public Dictionary<string, int> TargetItems = new Dictionary<string, int>();
         public Dictionary<string, List<int>> EquipItems = new Dictionary<string, List<int>>();
         public Dictionary<string, int> PanaltyItems = new Dictionary<string, int>();
+        List<Dictionary<string, List<SearchAblity>>> AblityCombinationCases = new List<Dictionary<string, List<SearchAblity>>>();
+
         #region Accesory
         public Accesories Accesories = new Accesories();
         public List<AccVM> NeckAcc = new List<AccVM>();
@@ -150,22 +153,35 @@ namespace LostArkAction.Model
 
             AccAncientCases[15].Add(new List<int> { 6, 6, 3 });
             AccAncientCases[15].Add(new List<int> { 6, 5, 4 });
+            AccAncientCases[15].Add(new List<int> { 6, 5, 5 });
+            AccAncientCases[15].Add(new List<int> { 6, 5, 4,3 });
             AccAncientCases[15].Add(new List<int> { 6, 5, 3, 3 });
+            AccAncientCases[15].Add(new List<int> { 6, 4, 4, 3 });
             AccAncientCases[15].Add(new List<int> { 6, 4, 3, 3 });
             AccAncientCases[15].Add(new List<int> { 6, 3, 3, 3 });
+            AccAncientCases[14].Add(new List<int> { 6, 6, 3 });
             AccAncientCases[14].Add(new List<int> { 6, 5, 3 });
+            AccAncientCases[14].Add(new List<int> { 6, 5, 5 });
+            AccAncientCases[14].Add(new List<int> { 6, 5, 4 });
+            AccAncientCases[14].Add(new List<int> { 6, 4, 4, 3 });
             AccAncientCases[14].Add(new List<int> { 6, 4, 3, 3 });
             AccAncientCases[14].Add(new List<int> { 6, 3, 3, 3 });
             AccAncientCases[13].Add(new List<int> { 6, 4, 3 });
+            AccAncientCases[13].Add(new List<int> { 6, 4, 4 });
             AccAncientCases[13].Add(new List<int> { 6, 3, 3, 3 });
             AccAncientCases[12].Add(new List<int> { 6, 6 });
+            AccAncientCases[12].Add(new List<int> { 6, 5, 5 });
             AccAncientCases[12].Add(new List<int> { 6, 5, 4 });
             AccAncientCases[12].Add(new List<int> { 6, 5, 3, 3 });
+            AccAncientCases[12].Add(new List<int> { 6, 4, 4 });
             AccAncientCases[12].Add(new List<int> { 6, 4, 3 });
             AccAncientCases[12].Add(new List<int> { 6, 3, 3 });
+            AccAncientCases[11].Add(new List<int> { 6, 6 });
             AccAncientCases[11].Add(new List<int> { 6, 5 });
             AccAncientCases[11].Add(new List<int> { 6, 4, 3 });
             AccAncientCases[11].Add(new List<int> { 6, 3, 3 });
+            AccAncientCases[10].Add(new List<int> { 6, 5 });
+            AccAncientCases[10].Add(new List<int> { 6, 6 });
             AccAncientCases[10].Add(new List<int> { 6, 4 });
             AccAncientCases[10].Add(new List<int> { 6, 3, 3 });
             AccAncientCases[9].Add(new List<int> { 6, 3 });
@@ -516,21 +532,126 @@ namespace LostArkAction.Model
             Console.WriteLine("----------------------------");
             Console.WriteLine("----------------------------");
             Console.WriteLine("----------------------------");
-
             #endregion
             SearchAblityCandidate.Add(candidate);
             SearchSecondAblityCandidate.Add(secondAblityCandidate2);
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("조합");
+            Dictionary<string,List<SearchAblity>> tmep2 = new Dictionary<string,List<SearchAblity>>();
+
+            for (int i = 0; i < tmpSearchAblities.Count; i++)
+            {
+                if (!candidateCheck(tmpSearchAblities[i], candidate))
+                {
+                    continue;
+                }
+                for (int j = 0; j < tmpSearchAblities.Count; j++)
+                {
+                    if (!candidateCheck(tmpSearchAblities[j], candidate))
+                    {
+                        continue;
+                    }
+                    for (int k = 0; k < tmpSearchAblities.Count; k++)
+                    {
+                        if (!candidateCheck(tmpSearchAblities[k], candidate))
+                        {
+                            continue;
+                        }
+                        for (int o = 0; o < tmpSearchAblities.Count; o++)
+                        {
+                            if (!candidateCheck(tmpSearchAblities[o], candidate))
+                            {
+                                continue;
+                            }
+                            for (int c = 0; c < tmpSearchAblities.Count; c++)
+                            {
+                                if (!candidateCheck(tmpSearchAblities[c], candidate))
+                                {
+                                    continue;
+                                }
+                                List<SearchAblity> tmep = new List<SearchAblity>();
+
+                                tmep.Add(tmpSearchAblities[i]);
+                                tmep.Add(tmpSearchAblities[j]);
+                                tmep.Add(tmpSearchAblities[k]);
+                                tmep.Add(tmpSearchAblities[o]);
+                                tmep.Add(tmpSearchAblities[c]);
+                                tmep= tmep.OrderBy(x => x.FirstAblity.Keys.ToList()[0]).ThenBy(x => x.SecondAblity.Keys.ToList()[0]).ToList(); ;
+                                List<string> str = new List<string>();
+                                for (int n = 0; n < tmep.Count; n++)
+                                {
+                                    string strtmp = tmep[n].FirstAblity.Keys.ToList()[0] + tmep[n].FirstAblity.Values.ToList()[0] + tmep[n].SecondAblity.Keys.ToList()[0] + tmep[n].SecondAblity.Values.ToList()[0];
+                                    str.Add(strtmp);
+                                }
+                                if (!tmep2.ContainsKey(String.Join("_", str.ToArray())))
+                                {
+                                    tmep2.Add(String.Join("_", str.ToArray()), tmep);
+                                }
+                                candidateReturn(tmpSearchAblities[c], candidate);
+                            }
+                            candidateReturn(tmpSearchAblities[o], candidate);
+                        }
+                        candidateReturn(tmpSearchAblities[k], candidate);
+                    }
+                    candidateReturn(tmpSearchAblities[j], candidate);
+                }
+                candidateReturn(tmpSearchAblities[i], candidate);
+            }
+            foreach(var tmp2 in tmep2)
+            {
+                for (int j = 0; j < tmp2.Value.Count; j++)
+                {
+                    foreach (var tmp in tmp2.Value[j].FirstAblity) { Console.Write("{ " + tmp.Key + " : " + tmp.Value + " , "); }
+                    foreach (var tmp in tmp2.Value[j].SecondAblity) { Console.Write(tmp.Key + " : " + tmp.Value + " }"); }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+            }
+            AblityCombinationCases.Add(tmep2);
             searchAblities.Add(tmpSearchAblities);
         }
+        public bool candidateCheck(SearchAblity searchAblity,Dictionary<string,List<int>> candidate)
+        {
+            string name1 = searchAblity.FirstAblity.Keys.ToList()[0];
+            string name2 = searchAblity.SecondAblity.Keys.ToList()[0];
+            int value1 = searchAblity.FirstAblity.Values.ToList()[0];
+            int value2 = searchAblity.SecondAblity.Values.ToList()[0];
 
+            candidate[name1][value1 - 1]--;
+            candidate[name2][value2-1]--;
+            if(candidate[name1][value1 - 1]<0|| candidate[name2][value2 - 1] < 0)
+            {
+                candidate[name1][value1 - 1]++;
+                candidate[name2][value2 - 1]++;
+                return false;
+            }
+            return true;
+        }
+        public void candidateReturn(SearchAblity searchAblity, Dictionary<string, List<int>> candidate)
+        {
+            string name1 = searchAblity.FirstAblity.Keys.ToList()[0];
+            string name2 = searchAblity.SecondAblity.Keys.ToList()[0];
+            int value1 = searchAblity.FirstAblity.Values.ToList()[0];
+            int value2 = searchAblity.SecondAblity.Values.ToList()[0];
+
+  
+                candidate[name1][value1 - 1]++;
+                candidate[name2][value2 - 1]++;
+             
+        }
         public void combination(int type)
         {
             List<List<AccVM>> arr = new List<List<AccVM>>();
             bool SameChar = false;
             if (type == 0)
             {
+                RingAcc1 = RingAcc1.OrderBy(x => x.Price).ToList();
+                RingAcc2 = RingAcc2.OrderBy(x => x.Price).ToList();
+
                 arr.Add(RingAcc1);
                 arr.Add(RingAcc2);
+
                 if (Accesories["반지2"].Characteristic[0] == Accesories["반지1"].Characteristic[0])
                 {
                     SameChar = true;
@@ -538,6 +659,8 @@ namespace LostArkAction.Model
             }
             else
             {
+                EarAcc1 = EarAcc1.OrderBy(x => x.Price).ToList();
+                EarAcc2 = EarAcc2.OrderBy(x => x.Price).ToList();
                 arr.Add(EarAcc1);
                 arr.Add(EarAcc2);
                 if (Accesories["귀걸이1"].Characteristic[0] == Accesories["귀걸이2"].Characteristic[0])
@@ -738,6 +861,7 @@ namespace LostArkAction.Model
 
         public void SetNeck()
         {
+            NeckAcc = NeckAcc.OrderBy(x => x.Price).ToList();
             Parallel.For(0, AblitiesCombi.Count, j =>
             {
                 List<AccVM> tmp = new List<AccVM>();
@@ -899,14 +1023,14 @@ namespace LostArkAction.Model
         public void ResultAcc()
         {
             Cnt = 0;
-            List<FindAccVM> findAccVMsTmp = new List<FindAccVM>();
-
+            ConcurrentQueue<FindAccVM> findAccVMsTmp = new ConcurrentQueue<FindAccVM>();
+            int capacity = 1000;
             TotalValue = 0;
             for (int i = 0; i < FinalNeckAcc.Count; i++)
             {
                 TotalValue += (uint)(FinalNeckAcc[i].Count);
             }
-
+            bool check= false;
             for (int o = 0; o < AblitiesCombi.Count; o++)
             {
                 for (int i = 0; i < FinalNeckAcc[o].Count; i++)
@@ -979,8 +1103,7 @@ namespace LostArkAction.Model
                             };
                             if (findAcc != null)
                             {
-                                findAccVMsTmp.Add(findAcc);
-                                
+                                    findAccVMsTmp.Enqueue(findAcc);
                             }
                         }
                     });
@@ -998,13 +1121,15 @@ namespace LostArkAction.Model
                 return;
             }
 
-            for (int i = 0; i < findAccVMsTmp.Count; i++)
+            while (true)
             {
-                if (findAccVMsTmp[i] != null)
+                if (findAccVMsTmp.TryDequeue(out FindAccVM tmp))
                 {
-                    MainWinodwVM.FindAccVMs.Add(findAccVMsTmp[i]);
+                    MainWinodwVM.FindAccVMs.Add(tmp);
                 }
+                if (findAccVMsTmp.Count == 0) break;
             }
+            
 
             DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
             DispatcherService.Invoke(() => { MainWinodwVM.OpenFindACC(); });

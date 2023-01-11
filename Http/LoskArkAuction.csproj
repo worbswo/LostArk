@@ -73,6 +73,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Code\Combination.cs" />
     <Compile Include="Code\CommandBehavior.cs" />
     <Compile Include="Code\DispatcherService.cs" />
     <Compile Include="Code\EtcOption.cs" />
