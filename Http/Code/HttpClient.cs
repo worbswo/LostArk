@@ -77,12 +77,9 @@ namespace LostArkAction.Code
                 {
                     if (accesory[AcceccesoryType].Characteristic[0] == accesory["반지1"].Characteristic[0])
                     {
-                        for (int i = 0;i< (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1.Count; i++) {
-                            if (accesory[AcceccesoryType].Qulity <= (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[i].Quality)
-                            {
-                                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2.Add(new AccVM((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[i]));
-                            }
-                        }
+                        
+                        (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2=new List<AccVM>((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1);
+                     
                         continue;
                     }
                 }
@@ -90,13 +87,8 @@ namespace LostArkAction.Code
                 {
                     if (accesory[AcceccesoryType].Characteristic[0] == accesory["귀걸이1"].Characteristic[0])
                     {
-                        for (int i = 0; i < (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1.Count; i++)
-                        {
-                            if (accesory[AcceccesoryType].Qulity <= (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[i].Quality)
-                            {
-                                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2.Add(new AccVM((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[i]));
-                            }
-                        }
+                       
+                        (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2 = new List<AccVM>((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1);
 
                         continue;
                     }

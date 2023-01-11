@@ -616,6 +616,21 @@ namespace LostArkAction.Model
                 }
                 Parallel.For(0, list[0].Count - minus, i =>
                 {
+                    if (type == 0)
+                    {
+                        if (Accesories["반지1"].Qulity > list[0][i].Quality)
+                        {
+                            return;
+                        }
+
+                    }
+                    else
+                    {
+                        if(Accesories["귀걸이1"].Qulity > list[0][i].Quality)
+                        {
+                            return;
+                        }
+                    }
                     bool check = true;
                     Dictionary<string, List<int>> candidate = new Dictionary<string, List<int>>();
                     foreach (var canTmp in SearchAblityCandidate[o])
@@ -646,6 +661,21 @@ namespace LostArkAction.Model
                     }
                     for (int j = startIdx; j < list[1].Count; j++)
                     {
+                        if (type == 0)
+                        {
+                            if (Accesories["반지2"].Qulity > list[0][i].Quality)
+                            {
+                                return;
+                            }
+
+                        }
+                        else
+                        {
+                            if (Accesories["귀걸이2"].Qulity > list[0][i].Quality)
+                            {
+                                return;
+                            }
+                        }
                         check = true;
                         candidate[list[1][j].Name1][list[1][j].Value1 - 1]--;
                         string Name2 = candidate.ContainsKey(list[1][j].Name2) ? list[1][j].Name2 : "random";
