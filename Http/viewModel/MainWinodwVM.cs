@@ -34,7 +34,7 @@ namespace LostArkAction.viewModel
         private bool isRelic  = true;
         private bool isAncient;
         private bool isAll;
-        private string _setupAblityText;
+        private string _setupAblityText="";
         #endregion
         #region Property
         public List<FindAccVM> FindAccVMs  = new List<FindAccVM>();
