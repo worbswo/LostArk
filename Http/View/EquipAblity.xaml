@@ -36,7 +36,6 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock
-                    FontFamily="MaruBuri"
                     Text="장착 각인"
                     FontSize="25"
                     FontWeight="Bold"
@@ -44,7 +43,6 @@
                 <TextBlock
                     Grid.Row="1"
                     Text="각인1"
-                    
                     VerticalAlignment="Bottom"
                     Foreground="White"></TextBlock>
                 <TextBlock
@@ -133,7 +131,6 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock
-                    FontFamily="MaruBuri"
                     Text="어빌리티 스톤 각인"
                     FontSize="25"
                     Grid.ColumnSpan="3"

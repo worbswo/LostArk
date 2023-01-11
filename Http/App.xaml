@@ -11,27 +11,48 @@
                     Source="Resources\ButtonStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <FontFamily
-                x:Key="MaruBuri">pack://application:,,,/Fonts/#MaruBuri</FontFamily>
+                x:Key="MaruBuri">pack://application:,,,/Fonts/#NanumSquareRound</FontFamily>
             <Style
                 TargetType="{x:Type Control}"
                 x:Key="baseStyle">
                 <Setter
                     Property="FontFamily"
-                    Value=" pack://application:,,,/Fonts/#MaruBuri"></Setter>
+                    Value=" pack://application:,,,/Fonts/#NanumSquareRound"></Setter>
             </Style>
             <Style
-                TargetType="{x:Type ComboBox}"
-                BasedOn="{StaticResource baseStyle}"></Style>
+                TargetType="{x:Type ComboBox}">
+                <Setter
+                    Property="FontFamily"
+                    Value="{StaticResource MaruBuri}"></Setter>
+            </Style>
             <Style
                 TargetType="{x:Type TextBox}"
-                BasedOn="{StaticResource baseStyle}"></Style>
+                BasedOn="{StaticResource baseStyle}">
+
+                <Setter
+                    Property="FontFamily"
+                    Value="{StaticResource MaruBuri}"></Setter>
+            </Style>
 
             <Style
                 TargetType="{x:Type RadioButton}"
-                BasedOn="{StaticResource baseStyle}"></Style>
+                BasedOn="{StaticResource baseStyle}">
+                <Setter
+                    Property="FontFamily"
+                    Value="{StaticResource MaruBuri}"></Setter>
+            </Style>
             <Style
                 TargetType="{x:Type Button}"
-                BasedOn="{StaticResource baseStyle}"></Style>
+                BasedOn="{StaticResource baseStyle}">
+                <Setter
+                    Property="FontFamily"
+                    Value="{StaticResource MaruBuri}"></Setter>
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter
+                    Property="FontFamily"
+                    Value="{StaticResource MaruBuri}"></Setter>
+            </Style>
  
         </ResourceDictionary>
 

@@ -7,7 +7,7 @@
     <ProjectGuid>{AB300229-9A6D-4002-A4CD-A9F94FA07E41}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Http</RootNamespace>
-    <AssemblyName>Http</AssemblyName>
+    <AssemblyName>각인 최적화 v1.0.0</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -128,6 +128,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\NanumSquareRound-Bold.ttf" />
+    <Resource Include="Fonts\NanumSquareRound-ExtraBold.ttf" />
+    <Resource Include="Fonts\NanumSquareRound-Light.ttf" />
+    <Resource Include="Fonts\NanumSquareRound-Regular.ttf" />
+    <Resource Include="Fonts\Katuri.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

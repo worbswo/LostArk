@@ -9,6 +9,7 @@
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800">
+    
     <Border
         Background="#FF636366"
         Margin="10"
@@ -21,7 +22,6 @@
                 Text="목표 각인"
                 FontSize="25"
                 FontWeight="Bold"
-                FontFamily="MaruBuri"
                 Foreground="White"
                 HorizontalAlignment="Left"></TextBlock>
             <ComboBox
@@ -44,7 +44,6 @@
                 Name="Combo2"
                 Grid.Row="4"
                 FontSize="18"
-
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[1],Mode=TwoWay}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
                 command:CommandBehavior.Event="SelectionChanged"
@@ -61,7 +60,7 @@
                 Name="Combo3"
                 Grid.Row="6"
                 FontSize="18"
-
+                
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[2],Mode=TwoWay}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
                 command:CommandBehavior.Event="SelectionChanged"
@@ -78,6 +77,7 @@
                 Name="Combo4"
                 Grid.Row="8"
                 FontSize="18"
+                
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[3],Mode=TwoWay}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
                 command:CommandBehavior.Event="SelectionChanged"
@@ -93,6 +93,7 @@
             <ComboBox
                 Name="Combo5"
                 Grid.Row="10"
+                
                 FontSize="18"
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[4],Mode=TwoWay}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
@@ -110,6 +111,7 @@
                 Name="Combo6"
                 Grid.Row="12"
                 FontSize="18"
+                
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[5],Mode=TwoWay}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
                 command:CommandBehavior.Event="SelectionChanged"
@@ -126,6 +128,7 @@
                 Name="Combo7"
                 Grid.Row="14"
                 FontSize="18"
+                
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[6],Mode=TwoWay}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
                 command:CommandBehavior.Event="SelectionChanged"
@@ -142,6 +145,7 @@
                 Grid.Row="2"
                 Grid.Column="3"
                 FontSize="18"
+                
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[0],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
                 VerticalAlignment="Center">
@@ -151,6 +155,7 @@
                 Grid.Row="4"
                 Grid.Column="2"
                 FontSize="18"
+                
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[1],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
                 VerticalAlignment="Center">
@@ -160,6 +165,7 @@
                 Grid.Row="6"
                 Grid.Column="2"
                 FontSize="18"
+                
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[2],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
                 VerticalAlignment="Center">
@@ -179,6 +185,7 @@
                 Grid.Row="10"
                 Grid.Column="2"
                 FontSize="18"
+                
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[4],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
                 VerticalAlignment="Center">
@@ -188,6 +195,7 @@
                 Grid.Row="12"
                 Grid.Column="2"
                 FontSize="18"
+                
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[5],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
                 VerticalAlignment="Center">
@@ -197,6 +205,7 @@
                 Grid.Row="14"
                 Grid.Column="2"
                 FontSize="18"
+                
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[6],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
                 VerticalAlignment="Center">
@@ -212,28 +221,33 @@
                 Grid.Row="1"
                 Grid.Column="2"
                 Text="수치"
+                
                 VerticalAlignment="Bottom"
                 Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="3"
                 Text="각인2"
+                
                 VerticalAlignment="Bottom"
                 Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="2"
                 Text="수치"
+                
                 VerticalAlignment="Bottom"
                 Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="5"
                 Text="각인3"
+                
                 VerticalAlignment="Bottom"
                 Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="5"
                 Grid.Column="2"
                 Text="수치"
+                
                 VerticalAlignment="Bottom"
                 Foreground="White"></TextBlock>
             <TextBlock
@@ -245,22 +259,26 @@
                 Grid.Row="7"
                 Grid.Column="2"
                 Text="수치"
+                
                 VerticalAlignment="Bottom"
                 Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="9"
                 Text="각인5"
+                
                 VerticalAlignment="Bottom"
                 Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="9"
                 Grid.Column="2"
                 Text="수치"
+                
                 VerticalAlignment="Bottom"
                 Foreground="White"></TextBlock>
             <TextBlock
                 Grid.Row="11"
                 Text="각인6"
+                
                 VerticalAlignment="Bottom"
                 Foreground="White"></TextBlock>
             <TextBlock

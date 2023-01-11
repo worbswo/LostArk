@@ -141,25 +141,25 @@
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
-                Text="{Binding DataContext.AccessoriesVM.Qulity2,Mode=TwoWay}"
+                Text="{Binding DataContext.AccessoriesVM.Qulity2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
             <TextBox
                 Grid.Row="3"
                 Grid.Column="1"
-                Text="{Binding DataContext.AccessoriesVM.Qulity3,Mode=TwoWay}"
+                Text="{Binding DataContext.AccessoriesVM.Qulity3,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
             <TextBox
                 Grid.Row="4"
                 Grid.Column="1"
-                Text="{Binding DataContext.AccessoriesVM.Qulity4,Mode=TwoWay}"
+                Text="{Binding DataContext.AccessoriesVM.Qulity4,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
             <TextBox
                 Grid.Row="5"
                 Grid.Column="1"
-                Text="{Binding DataContext.AccessoriesVM.Qulity5,Mode=TwoWay}"
+                Text="{Binding DataContext.AccessoriesVM.Qulity5,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 FontSize="20"></TextBox>
             <ComboBox

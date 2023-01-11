@@ -54,7 +54,7 @@ namespace LostArkAction.viewModel
         }
         public int Qulity3
         {
-            get { return _qulity1; }
+            get { return _qulity3; }
             set
             {
                 _qulity3 = value;
@@ -69,7 +69,7 @@ namespace LostArkAction.viewModel
         }
         public int Qulity4
         {
-            get { return _qulity1; }
+            get { return _qulity4; }
             set
             {
                 _qulity4 = value;
@@ -84,7 +84,7 @@ namespace LostArkAction.viewModel
         }
         public int Qulity5
         {
-            get { return _qulity1; }
+            get { return _qulity5; }
             set
             {
                 _qulity5= value;
