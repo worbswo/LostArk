@@ -50,6 +50,7 @@ namespace LostArkAction.Model
         public static Dictionary<string, int> AccessoryCode = new Dictionary<string, int> { { "목걸이", 200010 }, { "반지1", 200030 }, { "반지2", 200030 }, { "귀걸이1", 200020 }, { "귀걸이2", 200020 } };
         public static int selectClass { get; set; } = 0;
         #endregion
+
         List<List<SearchAblity>> AblitiesCombi = new List<List<SearchAblity>>();
         List<SearchAblity> SearchAblities = new List<SearchAblity>();
         List<Dictionary<string, List<int>>> SearchAblityCandidate = new List<Dictionary<string, List<int>>>();
@@ -64,10 +65,6 @@ namespace LostArkAction.Model
         #region Accesory
         public Accesories Accesories = new Accesories();
         public List<AccVM> NeckAcc = new List<AccVM>();
-        public List<List<AccVM>> FinalNeckAcc = new List<List<AccVM>>();
-
-        public List<List<List<AccVM>>> RingCombi = new List<List<List<AccVM>>>();
-        public List<List<List<AccVM>>> EarCombi = new List<List<List<AccVM>>>();
 
         public List<AccVM> RingAcc1 = new List<AccVM>();
         public List<AccVM> EarAcc1 = new List<AccVM>();
@@ -83,8 +80,8 @@ namespace LostArkAction.Model
         public HttpClient2 HttpClient;
 
         uint TotalValue;
-
         uint Cnt;
+
         int[] Arr = { 0, 1, 2, 3, 4 };
         bool[] Check = { false, false, false, false, false };
         List<int> V = new List<int>();
@@ -100,7 +97,6 @@ namespace LostArkAction.Model
                     V[3],
                     V[4],
                 });
-                Console.WriteLine();
                 return;
             }
 
@@ -225,7 +221,12 @@ namespace LostArkAction.Model
         #region Method
         public void Start()
         {
-            Thread = new Thread(SetAcc);
+            Accs.Add(NeckAcc);
+            Accs.Add(EarAcc1);
+            Accs.Add(EarAcc2);
+            Accs.Add(RingAcc1);
+            Accs.Add(RingAcc2);
+            Thread = new Thread(ResultAcc);
             Thread.Start();
         }
         public void SelectedAblity()
@@ -342,6 +343,7 @@ namespace LostArkAction.Model
 
                 return;
             }
+#if DEBUG
             Console.WriteLine("----------------------result------------------------");
             for (int i = 0; i < AblitiesCombi.Count; i++)
             {
@@ -392,15 +394,8 @@ namespace LostArkAction.Model
                 Console.WriteLine();
             }
             Console.WriteLine("검색 개수 {0}", SearchAblities.Count);
-            RingCombi = new List<List<List<AccVM>>>();
-            EarCombi = new List<List<List<AccVM>>>();
-            FinalNeckAcc = new List<List<AccVM>>();
-            for (int i = 0; i < AblityCombinationCases.Count; i++)
-            {
-                RingCombi.Add(new List<List<AccVM>>());
-                EarCombi.Add(new List<List<AccVM>>());
-                FinalNeckAcc.Add(new List<AccVM>());
-            }
+#endif
+
             HttpClient2.GetAsync(SearchAblities, Accesories);
         }
         public void ComputeAblity(List<int> index, List<string> abliName, Dictionary<int, List<List<int>>> accCases, Dictionary<string, int> targetItems, List<List<SearchAblity>> searchAblities)
@@ -578,9 +573,6 @@ namespace LostArkAction.Model
             #endregion
             SearchAblityCandidate.Add(candidate);
             SearchSecondAblityCandidate.Add(secondAblityCandidate2);
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("조합");
             Dictionary<string,List<SearchAblity>> tmep2 = new Dictionary<string,List<SearchAblity>>();
 
             for (int i = 0; i < tmpSearchAblities.Count; i++)
@@ -673,26 +665,8 @@ namespace LostArkAction.Model
                 candidate[name2][value2 - 1]++;
              
         }
-        public void combination(int type)
-        {
-            
-        }
-        
-        public void SetNeck()
-        { 
-        }
-        public void SetAcc()
-        {
-            Accs.Add(NeckAcc);
-            Accs.Add(EarAcc1);
-            Accs.Add(EarAcc2);
-            Accs.Add(RingAcc1);
-            Accs.Add(RingAcc2);
 
 
-            Thread2 = new Thread(ResultAcc);
-            Thread2.Start();
-        }
         public void ResultAcc()
         {
             Cnt = 0;

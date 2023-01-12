@@ -418,9 +418,6 @@ namespace LostArkAction.Code
                 }
             }
             Console.WriteLine("검색완료");
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.SetNeck();
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.combination(0);
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.combination(1);
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.Start();
         }
 
