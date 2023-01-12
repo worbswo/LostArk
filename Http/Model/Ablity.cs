@@ -137,7 +137,7 @@ namespace LostArkAction.Model
             AccRelicCases.Add(2, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 3 } };
             AccRelicCases.Add(1, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 } };
+            tmp = new List<List<int>>() { new List<int> { 3 } , new List<int> { 4 } };
             AccRelicCases.Add(3, new List<List<int>>(tmp));
             AccRelicCases.Add(0, new List<List<int>>());
 
@@ -167,7 +167,7 @@ namespace LostArkAction.Model
             AccAncientCases.Add(4, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 3 } };
             AccAncientCases.Add(2, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 } };
+            tmp = new List<List<int>>() { new List<int> { 3 }, new List<int> { 4 } };
             AccAncientCases.Add(1, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 3 } };
             AccAncientCases.Add(3, new List<List<int>>(tmp));
