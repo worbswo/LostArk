@@ -133,6 +133,7 @@
                             <DataTemplate>
                                     <TextBlock
                                         Text="{Binding Index}"
+                                        TextWrapping="Wrap"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"/>
                                 </DataTemplate>

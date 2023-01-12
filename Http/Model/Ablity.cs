@@ -1,4 +1,5 @@
-﻿using Http.Code;
+﻿using DotNetty.Common.Utilities;
+using Http.Code;
 using LostArkAction.Code;
 using LostArkAction.viewModel;
 using Newtonsoft.Json.Linq;
@@ -58,7 +59,7 @@ namespace LostArkAction.Model
         public Dictionary<string, int> TargetItems = new Dictionary<string, int>();
         public Dictionary<string, List<int>> EquipItems = new Dictionary<string, List<int>>();
         public Dictionary<string, int> PanaltyItems = new Dictionary<string, int>();
-        List<Dictionary<string, List<SearchAblity>>> AblityCombinationCases = new List<Dictionary<string, List<SearchAblity>>>();
+        Dictionary<string, List<SearchAblity>> AblityCombinationCases = new Dictionary<string, List<SearchAblity>>();
 
         #region Accesory
         public Accesories Accesories = new Accesories();
@@ -67,12 +68,13 @@ namespace LostArkAction.Model
 
         public List<List<List<AccVM>>> RingCombi = new List<List<List<AccVM>>>();
         public List<List<List<AccVM>>> EarCombi = new List<List<List<AccVM>>>();
-        public List<List<List<AccVM>>> Accs = new List<List<List<AccVM>>>();
 
         public List<AccVM> RingAcc1 = new List<AccVM>();
         public List<AccVM> EarAcc1 = new List<AccVM>();
         public List<AccVM> RingAcc2 = new List<AccVM>();
         public List<AccVM> EarAcc2 = new List<AccVM>();
+        public List<List<AccVM>> Accs = new List<List<AccVM>>();
+        public List<List<int>> perAccs = new List<List<int>>(); 
         public Thread Thread;
         public Thread Thread2;
         MainWinodwVM MainWinodwVM;
@@ -81,10 +83,41 @@ namespace LostArkAction.Model
         public HttpClient2 HttpClient;
 
         uint TotalValue;
+
         uint Cnt;
+        int[] Arr = { 0, 1, 2, 3, 4 };
+        bool[] Check = { false, false, false, false, false };
+        List<int> V = new List<int>();
+        void Permutation(int n, int r)
+        {
+            if (n == r)
+            {
+                perAccs.Add(new List<int>
+                {
+                    V[0],
+                    V[1],
+                    V[2],
+                    V[3],
+                    V[4],
+                });
+                Console.WriteLine();
+                return;
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (Check[i] == true) continue;
+                Check[i] = true;
+                V.Add(Arr[i]);
+                Permutation(n + 1, r);
+                V.RemoveAt(V.Count-1);
+                Check[i] = false;
+            }
+        }
         #endregion
         public Ablity(MainWinodwVM mainWinodw)
         {
+            Permutation(0, 5);
             MainWinodwVM = mainWinodw;
             HttpClient = new HttpClient2();
             List<List<int>> tmp = new List<List<int>>() { new List<int> { 5, 5, 5 }, new List<int> { 5, 5, 4, 3 }, new List<int> { 5, 4, 4, 3 }, new List<int> { 5, 4, 3, 3 }, new List<int> { 4, 4, 4, 3 } };
@@ -348,11 +381,21 @@ namespace LostArkAction.Model
                     }
                 }
             }
+            foreach (var tmp2 in AblityCombinationCases)
+            {
+                for (int j = 0; j < tmp2.Value.Count; j++)
+                {
+                    foreach (var tmp in tmp2.Value[j].FirstAblity) { Console.Write("{ " + tmp.Key + " : " + tmp.Value + " , "); }
+                    foreach (var tmp in tmp2.Value[j].SecondAblity) { Console.Write(tmp.Key + " : " + tmp.Value + " }"); }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+            }
             Console.WriteLine("검색 개수 {0}", SearchAblities.Count);
             RingCombi = new List<List<List<AccVM>>>();
             EarCombi = new List<List<List<AccVM>>>();
             FinalNeckAcc = new List<List<AccVM>>();
-            for (int i = 0; i < AblitiesCombi.Count; i++)
+            for (int i = 0; i < AblityCombinationCases.Count; i++)
             {
                 RingCombi.Add(new List<List<AccVM>>());
                 EarCombi.Add(new List<List<AccVM>>());
@@ -584,9 +627,9 @@ namespace LostArkAction.Model
                                     string strtmp = tmep[n].FirstAblity.Keys.ToList()[0] + tmep[n].FirstAblity.Values.ToList()[0] + tmep[n].SecondAblity.Keys.ToList()[0] + tmep[n].SecondAblity.Values.ToList()[0];
                                     str.Add(strtmp);
                                 }
-                                if (!tmep2.ContainsKey(String.Join("_", str.ToArray())))
+                                if (!AblityCombinationCases.ContainsKey(String.Join("_", str.ToArray())))
                                 {
-                                    tmep2.Add(String.Join("_", str.ToArray()), tmep);
+                                    AblityCombinationCases.Add(String.Join("_", str.ToArray()), tmep);
                                 }
                                 candidateReturn(tmpSearchAblities[c], candidate);
                             }
@@ -598,17 +641,7 @@ namespace LostArkAction.Model
                 }
                 candidateReturn(tmpSearchAblities[i], candidate);
             }
-            foreach(var tmp2 in tmep2)
-            {
-                for (int j = 0; j < tmp2.Value.Count; j++)
-                {
-                    foreach (var tmp in tmp2.Value[j].FirstAblity) { Console.Write("{ " + tmp.Key + " : " + tmp.Value + " , "); }
-                    foreach (var tmp in tmp2.Value[j].SecondAblity) { Console.Write(tmp.Key + " : " + tmp.Value + " }"); }
-                    Console.WriteLine();
-                }
-                Console.WriteLine();
-            }
-            AblityCombinationCases.Add(tmep2);
+   
             searchAblities.Add(tmpSearchAblities);
         }
         public bool candidateCheck(SearchAblity searchAblity,Dictionary<string,List<int>> candidate)
@@ -642,380 +675,20 @@ namespace LostArkAction.Model
         }
         public void combination(int type)
         {
-            List<List<AccVM>> arr = new List<List<AccVM>>();
-            bool SameChar = false;
-            if (type == 0)
-            {
-                RingAcc1 = RingAcc1.OrderBy(x => x.Price).ToList();
-                RingAcc2 = RingAcc2.OrderBy(x => x.Price).ToList();
-
-                arr.Add(RingAcc1);
-                arr.Add(RingAcc2);
-
-                if (Accesories["반지2"].Characteristic[0] == Accesories["반지1"].Characteristic[0])
-                {
-                    SameChar = true;
-                }
-            }
-            else
-            {
-                EarAcc1 = EarAcc1.OrderBy(x => x.Price).ToList();
-                EarAcc2 = EarAcc2.OrderBy(x => x.Price).ToList();
-                arr.Add(EarAcc1);
-                arr.Add(EarAcc2);
-                if (Accesories["귀걸이1"].Characteristic[0] == Accesories["귀걸이2"].Characteristic[0])
-                {
-                    SameChar = true;
-                }
-            }
-            for (int o = 0; o < AblitiesCombi.Count; o++)
-            {
-                List<List<AccVM>> list = new List<List<AccVM>>();
-                for (int j = 0; j < 2; j++)
-                {
-                    List<AccVM> listTmp = new List<AccVM>();
-                    for (int i = 0; i < arr[j].Count; i++)
-                    {
-                        if (PanaltyItems.Keys.ToList()[0] == arr[j][i].PenaltyName)
-                        {
-                            if (arr[j][i].PenaltyValue + PanaltyItems[PanaltyItems.Keys.ToList()[0]] >= 5)
-                            {
-                                continue;
-                            }
-                        }
-                        for (int k = 0; k < AblitiesCombi[o].Count; k++)
-                        {
-                            if (arr[j][i].Name1.Equals(AblitiesCombi[o][k].FirstAblity.Keys.ToList()[0]))
-                            {
-                                if (arr[j][i].Value1 == AblitiesCombi[o][k].FirstAblity.Values.ToList()[0])
-                                {
-                                    if (TargetItems.ContainsKey(arr[j][i].Name2))
-                                    {
-                                        if (arr[j][i].Name2.Equals(AblitiesCombi[o][k].SecondAblity.Keys.ToList()[0]))
-                                        {
-                                            if (arr[j][i].Value2 == AblitiesCombi[o][k].SecondAblity.Values.ToList()[0])
-                                            {
-                                                listTmp.Add(arr[j][i]);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if ("random".Equals(AblitiesCombi[o][k].SecondAblity.Keys.ToList()[0]))
-                                        {
-                                            if (arr[j][i].Value2 == AblitiesCombi[o][k].SecondAblity.Values.ToList()[0])
-                                            {
-                                                listTmp.Add(arr[j][i]);
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                    list.Add(listTmp);
-                }
-                int checkValue = selectClass == 0 ? 16 : 18;
-                int checkValue2 = selectClass == 0 ? 5 : 6;
-                List<Dictionary<string, int>> equipCheck = new List<Dictionary<string, int>>();
-                List<Dictionary<string, int>> panaltyCheck = new List<Dictionary<string, int>>();
-                List<List<List<AccVM>>> tmp = new List<List<List<AccVM>>>();
-                for (int i = 0; i < list[0].Count; i++)
-                {
-                    panaltyCheck.Add(new Dictionary<string, int> { { "공격력 감소", 0 }, { "공격속도 감소", 0 }, { "방어력 감소", 0 }, { "이동속도 감소", 0 } });
-                    panaltyCheck[i][PanaltyItems.Keys.ToList()[0]] += PanaltyItems[PanaltyItems.Keys.ToList()[0]];
-                    equipCheck.Add(new Dictionary<string, int>());
-                    tmp.Add(new List<List<AccVM>>());
-                }
-
-
-                int minus = 0;
-                if (SameChar)
-                {
-                    minus = 1;
-                }
-                Parallel.For(0, list[0].Count - minus, i =>
-                {
-                    bool check = true;
-                    Dictionary<string, List<int>> candidate = new Dictionary<string, List<int>>();
-                    foreach (var canTmp in SearchAblityCandidate[o])
-                    {
-                        candidate.Add(canTmp.Key, new List<int> { canTmp.Value[0], canTmp.Value[1], canTmp.Value[2], canTmp.Value[3], canTmp.Value[4], canTmp.Value[5] });
-                    }
-                    panaltyCheck[i][list[0][i].PenaltyName] += list[0][i].PenaltyValue;
-                    if (panaltyCheck[i][list[0][i].PenaltyName] >= 5)
-                    {
-                        panaltyCheck[i][list[0][i].PenaltyName] -= list[0][i].PenaltyValue;
-                        return;
-                    }
-
-                    int startIdx = 0;
-                    if (SameChar)
-                    {
-                        startIdx = i + 1;
-                    }
-                    candidate[list[0][i].Name1][list[0][i].Value1 - 1]--;
-                    if (candidate.ContainsKey(list[0][i].Name2))
-                    {
-                        candidate[list[0][i].Name2][2]--;
-
-                    }
-                    else
-                    {
-                        candidate["random"][2]--;
-                    }
-                    for (int j = startIdx; j < list[1].Count; j++)
-                    {
-                        check = true;
-                        candidate[list[1][j].Name1][list[1][j].Value1 - 1]--;
-                        string Name2 = candidate.ContainsKey(list[1][j].Name2) ? list[1][j].Name2 : "random";
-                        candidate[Name2][2]--;
-                        if (candidate[list[1][j].Name1][list[1][j].Value1 - 1] < 0 || candidate[Name2][2] < 0)
-                        {
-                            candidate[list[1][j].Name1][list[1][j].Value1 - 1]++;
-                            candidate[Name2][2]++;
-                            continue;
-                        }
-                        panaltyCheck[i][list[1][j].PenaltyName] += list[1][j].PenaltyValue;
-                        if (panaltyCheck[i][list[1][j].PenaltyName] >= 5)
-                        {
-                            panaltyCheck[i][list[1][j].PenaltyName] -= list[1][j].PenaltyValue;
-                            candidate[list[1][j].Name1][list[1][j].Value1 - 1]++;
-                            candidate[Name2][2]++;
-                            continue;
-                        }
-
-
-                        for (int k = 0; k < FinalNeckAcc[o].Count; k++)
-                        {
-                            candidate[FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1]--;
-                            string NeckName2 = candidate.ContainsKey(FinalNeckAcc[o][k].Name2) ? FinalNeckAcc[o][k].Name2 : "random";
-                            candidate[NeckName2][2]--;
-
-                            if (candidate[FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1] < 0 || candidate[NeckName2][2] < 0)
-                            {
-                                candidate[FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1]++;
-                                candidate[NeckName2][2]++;
-                                check = false;
-
-                                continue;
-                            }
-                            panaltyCheck[i][FinalNeckAcc[o][k].PenaltyName] += FinalNeckAcc[o][k].PenaltyValue;
-                            if (panaltyCheck[i][FinalNeckAcc[o][k].PenaltyName] >= 5)
-                            {
-                                panaltyCheck[i][FinalNeckAcc[o][k].PenaltyName] -= FinalNeckAcc[o][k].PenaltyValue;
-                                candidate[FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1]++;
-                                candidate[NeckName2][2]++;
-                                check = false;
-
-                                continue;
-                            }
-
-                            check = true;
-                            panaltyCheck[i][FinalNeckAcc[o][k].PenaltyName] -= FinalNeckAcc[o][k].PenaltyValue;
-
-                            candidate[FinalNeckAcc[o][k].Name1][FinalNeckAcc[o][k].Value1 - 1]++;
-                            candidate[NeckName2][2]++;
-                            break;
-                        }
-                        if (check)
-                        {
-                            tmp[i].Add(new List<AccVM> { list[0][i], list[1][j] });
-                            check = true;
-                        }
-                        panaltyCheck[i][list[1][j].PenaltyName] -= list[1][j].PenaltyValue;
-                        candidate[list[1][j].Name1][list[1][j].Value1 - 1]++;
-                        candidate[Name2][2]++;
-                    }
-
-                    panaltyCheck[i][list[0][i].PenaltyName] -= list[0][i].PenaltyValue;
-
-                });
-                for (int i = 0; i < tmp.Count; i++)
-                {
-                    if (tmp[i] == null)
-                    {
-                        continue;
-                    }
-
-                    for (int j = 0; j < tmp[i].Count; j++)
-                    {
-
-                        if (type == 0)
-                        {
-                            RingCombi[o].Add(tmp[i][j]);
-                        }
-                        else
-                        {
-                            EarCombi[o].Add(tmp[i][j]);
-
-                        }
-                    }
-                }
- 
-            }
+            
         }
-
+        
         public void SetNeck()
-        {
-            NeckAcc = NeckAcc.OrderBy(x => x.Price).ToList();
-            Parallel.For(0, AblitiesCombi.Count, j =>
-            {
-                List<AccVM> tmp = new List<AccVM>();
-                for (int i = 0; i < NeckAcc.Count; i++)
-                {
-
-                    if (PanaltyItems.Keys.ToList()[0] == NeckAcc[i].PenaltyName)
-                    {
-                        if (PanaltyItems[PanaltyItems.Keys.ToList()[0]] + NeckAcc[i].PenaltyValue >= 5)
-                        {
-                            continue;
-                        }
-                    }
-                    for (int k = 0; k < AblitiesCombi[j].Count; k++)
-                    {
-                        if (NeckAcc[i].Name1.Equals(AblitiesCombi[j][k].FirstAblity.Keys.ToList()[0]))
-                        {
-                            if (NeckAcc[i].Value1 == AblitiesCombi[j][k].FirstAblity.Values.ToList()[0])
-                            {
-                                if (TargetItems.ContainsKey(NeckAcc[i].Name2))
-                                {
-                                    if (NeckAcc[i].Name2.Equals(AblitiesCombi[j][k].SecondAblity.Keys.ToList()[0]))
-                                    {
-                                        if (NeckAcc[i].Value2 == AblitiesCombi[j][k].SecondAblity.Values.ToList()[0])
-                                        {
-                                            tmp.Add(NeckAcc[i]);
-                                            break;
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    if ("random".Equals(AblitiesCombi[j][k].SecondAblity.Keys.ToList()[0]))
-                                    {
-                                        if (NeckAcc[i].Value2 == AblitiesCombi[j][k].SecondAblity.Values.ToList()[0])
-                                        {
-                                            tmp.Add(NeckAcc[i]);
-                                            break;
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-                }
-                FinalNeckAcc[j] = new List<AccVM>(tmp);
-            });
+        { 
         }
         public void SetAcc()
         {
+            Accs.Add(NeckAcc);
+            Accs.Add(EarAcc1);
+            Accs.Add(EarAcc2);
+            Accs.Add(RingAcc1);
+            Accs.Add(RingAcc2);
 
-            int checkValue = selectClass == 0 ? 8 : 9;
-            int checkValue2 = selectClass == 0 ? 5 : 6;
-
-            uint total = 0;
-            for (int i = 0; i < RingCombi.Count; i++)
-            {
-                total += (uint)(RingCombi[i].Count * EarCombi[i].Count);
-            }
-            uint cnt = 0;
-            for (int i = 0; i < FinalNeckAcc.Count; i++)
-            {
-                Accs.Add(new List<List<AccVM>>());
-            }
-
-
-            for (int o = 0; o < FinalNeckAcc.Count; o++)
-            {
-                List<List<List<AccVM>>> tmpAccVMs = new List<List<List<AccVM>>>();
-                List<Dictionary<string, List<int>>> candidate = new List<Dictionary<string, List<int>>>();
-                for (int i = 0; i < RingCombi[o].Count; i++)
-                {
-                    tmpAccVMs.Add(new List<List<AccVM>>());
-
-                    candidate.Add(new Dictionary<string, List<int>>());
-                }
-                for (int i = 0; i < RingCombi[o].Count; i++)
-                {
-                    foreach (var canTmp in SearchAblityCandidate[o])
-                    {
-                        List<int> value = new List<int>(canTmp.Value);
-                        candidate[i].Add(canTmp.Key, value);
-                    }
-                }
-                Parallel.For(0, RingCombi[o].Count, i =>
-                {
-                    Dictionary<string, int> panaltyCheck = new Dictionary<string, int> { { "공격력 감소", 0 }, { "공격속도 감소", 0 }, { "방어력 감소", 0 }, { "이동속도 감소", 0 } };
-                    panaltyCheck[PanaltyItems.Keys.ToList()[0]] += PanaltyItems[PanaltyItems.Keys.ToList()[0]];
-                    panaltyCheck[RingCombi[o][i][0].PenaltyName] += RingCombi[o][i][0].PenaltyValue;
-                    panaltyCheck[RingCombi[o][i][1].PenaltyName] += RingCombi[o][i][1].PenaltyValue;
-                    candidate[i][RingCombi[o][i][0].Name1][RingCombi[o][i][0].Value1 - 1]--;
-                    candidate[i][RingCombi[o][i][1].Name1][RingCombi[o][i][1].Value1 - 1]--;
-                    string FirstRingName2 = candidate[i].ContainsKey(RingCombi[o][i][0].Name2) ? RingCombi[o][i][0].Name2 : "random";
-                    string SecondRingName2 = candidate[i].ContainsKey(RingCombi[o][i][1].Name2) ? RingCombi[o][i][1].Name2 : "random";
-
-                    candidate[i][FirstRingName2][2]--;
-                    candidate[i][SecondRingName2][2]--;
-
-                    if (panaltyCheck[RingCombi[o][i][0].PenaltyName] >= 5 || panaltyCheck[RingCombi[o][i][1].PenaltyName] >= 5)
-                    {
-                        cnt += (uint)EarCombi[o].Count;
-                        MainWinodwVM.AccProgressValue = (float)(((double)cnt / total) * 100.0);
-                        return;
-                    }
-                    for (int j = 0; j < EarCombi[o].Count; j++)
-                    {
-                        panaltyCheck[EarCombi[o][j][0].PenaltyName] += EarCombi[o][j][0].PenaltyValue;
-                        panaltyCheck[EarCombi[o][j][1].PenaltyName] += EarCombi[o][j][1].PenaltyValue;
-                        candidate[i][EarCombi[o][j][0].Name1][EarCombi[o][j][0].Value1 - 1]--;
-                        candidate[i][EarCombi[o][j][1].Name1][EarCombi[o][j][1].Value1 - 1]--;
-                        string FirstEarName2 = candidate[i].ContainsKey(EarCombi[o][j][0].Name2) ? EarCombi[o][j][0].Name2 : "random";
-                        string SecondEarName2 = candidate[i].ContainsKey(EarCombi[o][j][1].Name2) ? EarCombi[o][j][1].Name2 : "random";
-                        candidate[i][FirstEarName2][2]--;
-                        candidate[i][SecondEarName2][2]--;
-
-                        if (panaltyCheck[EarCombi[o][j][0].PenaltyName] >= 5 || panaltyCheck[EarCombi[o][j][1].PenaltyName] >= 5
-                        || candidate[i][EarCombi[o][j][0].Name1][EarCombi[o][j][0].Value1 - 1] < 0 || candidate[i][EarCombi[o][j][1].Name1][EarCombi[o][j][1].Value1 - 1] < 0 ||
-                        candidate[i][SecondEarName2][2] < 0 || candidate[i][FirstEarName2][2] < 0)
-                        {
-                        }
-                        else
-                        {
-                            List<AccVM> tmp = new List<AccVM>
-                            {
-                                RingCombi[o][i][0],
-                                RingCombi[o][i][1],
-                                EarCombi[o][j][0],
-                                EarCombi[o][j][1]
-                            };
-                            tmpAccVMs[i].Add(tmp);
-                        }
-                        panaltyCheck[EarCombi[o][j][0].PenaltyName] -= EarCombi[o][j][0].PenaltyValue;
-                        panaltyCheck[EarCombi[o][j][1].PenaltyName] -= EarCombi[o][j][1].PenaltyValue;
-                        candidate[i][EarCombi[o][j][0].Name1][EarCombi[o][j][0].Value1 - 1]++;
-                        candidate[i][EarCombi[o][j][1].Name1][EarCombi[o][j][1].Value1 - 1]++;
-                        candidate[i][FirstEarName2][2]++;
-                        candidate[i][SecondEarName2][2]++;
-                        cnt++;
-                        MainWinodwVM.AccProgressValue = (float)(((double)cnt / total) * 100.0);
-                    }
-                });
-                for (int i = 0; i < tmpAccVMs.Count; i++)
-                {
-                    for (int j = 0; j < tmpAccVMs[i].Count; j++)
-                    {
-                        if (tmpAccVMs[i][j] != null)
-                        {
-                            Accs[o].Add(tmpAccVMs[i][j]);
-                        }
-                    }
-                }
-            }
-            MainWinodwVM.AccProgressValue = 100;
 
             Thread2 = new Thread(ResultAcc);
             Thread2.Start();
@@ -1023,113 +696,174 @@ namespace LostArkAction.Model
         public void ResultAcc()
         {
             Cnt = 0;
-            ConcurrentQueue<FindAccVM> findAccVMsTmp = new ConcurrentQueue<FindAccVM>();
-            int capacity = 1000;
-            TotalValue = 0;
-            for (int i = 0; i < FinalNeckAcc.Count; i++)
+            bool ringSameChar = false;
+            bool earSameChar = false;
+            if (Accesories["반지2"].Characteristic[0] == Accesories["반지1"].Characteristic[0])
             {
-                TotalValue += (uint)(FinalNeckAcc[i].Count);
+                ringSameChar = true;
             }
-            bool check= false;
-            for (int o = 0; o < AblitiesCombi.Count; o++)
+            if (Accesories["귀걸이1"].Characteristic[0] == Accesories["귀걸이2"].Characteristic[0])
             {
-                for (int i = 0; i < FinalNeckAcc[o].Count; i++)
+                earSameChar = true;
+            }
+            List<FindAccVM> findAccVMsTmp = new List<FindAccVM>();
+            List<List<AccVM>> tmpAccs = new List<List<AccVM>>();
+            Dictionary<string, int> sameIndex = new Dictionary<string, int>();
+            for (int i = 0; i < perAccs.Count; i++)
+            {
+                string strTmp = "";
+                for (int k = 0; k < 5; k++)
                 {
-                    Parallel.For(0, Accs[o].Count, j =>
+                    if (earSameChar&& perAccs[i][k] == 2)
+                    {
+                         strTmp += "1";
+                        continue;
+                    }
+                    if (ringSameChar&& perAccs[i][k] == 4)
+                    {
+                        strTmp += "3";
+                        continue;
+                    }
+                    
+                    
+                        strTmp += perAccs[i][k];
+                    
+                }
+                if (sameIndex.ContainsKey(strTmp))
+                {
+                    continue;
+                }
+                else
+                {
+                    sameIndex.Add(strTmp, i);
+                }
+            }
+            for (int i = 0; i < Accs.Count; i++)
+            {
+                tmpAccs.Add(Accs[i]);
+            }
+            TotalValue = (uint)(AblityCombinationCases.Count * sameIndex.Count) ;
+            
+            foreach (var cases in AblityCombinationCases)
+            {
+                for(int i = 0; i < sameIndex.Count; i++)
+                {
+                    int index = sameIndex.Values.ToList()[i];
+                    for (int k = 0; k < 5; k++)
+                    {
+                        tmpAccs[perAccs[index][k]] = Accs[perAccs[index][k]].Where((x => {
+                            string name = x.Name2;
+                            if (!TargetItems.ContainsKey(x.Name2))
+                            {
+                                name = "random";
+                            }
+                            return (x.Name1 == cases.Value[k].FirstAblity.Keys.ToList()[0] &&
+                                                                                    x.Value1 == cases.Value[k].FirstAblity.Values.ToList()[0] &&
+                                                                                     name == cases.Value[k].SecondAblity.Keys.ToList()[0] &&
+                                                                                    x.Value2 == cases.Value[k].SecondAblity.Values.ToList()[0]); }
+                        )).ToList();
+                        tmpAccs[perAccs[index][k]] = tmpAccs[perAccs[index][k]].OrderBy(x=>x.Price).ToList();
+                    }
+                    int[] idx = { 0, 0, 0, 0, 0 };
+
+                    for (idx[0]=0;idx[0] < tmpAccs[0].Count;idx[0]++)
                     {
                         Dictionary<string, int> panaltyCheck = new Dictionary<string, int> { { "공격력 감소", 0 }, { "공격속도 감소", 0 }, { "방어력 감소", 0 }, { "이동속도 감소", 0 } };
-                        Dictionary<string, List<int>> candidate = new Dictionary<string, List<int>>();
-                        foreach (var canTmp in SearchAblityCandidate[o])
-                        {
-                            List<int> value = new List<int>(canTmp.Value);
-                            candidate.Add(canTmp.Key, value);
-                        }
                         panaltyCheck[PanaltyItems.Keys.ToList()[0]] += PanaltyItems[PanaltyItems.Keys.ToList()[0]];
-
-                        panaltyCheck[FinalNeckAcc[o][i].PenaltyName] += FinalNeckAcc[o][i].PenaltyValue;
-                        string Name2 = candidate.ContainsKey(FinalNeckAcc[o][i].Name2) ? FinalNeckAcc[o][i].Name2 : "random";
-                        candidate[FinalNeckAcc[o][i].Name1][FinalNeckAcc[o][i].Value1-1]--;
-                        candidate[Name2][2]--;
-                        bool check2 = false;
-                        for (int k = 0; k < Accs[o][j].Count; k++)
+                        panaltyCheck[tmpAccs[0][idx[0]].PenaltyName] += tmpAccs[0][idx[0]].PenaltyValue;
+                        if (panaltyCheck[tmpAccs[0][idx[0]].PenaltyName] >= 5)
                         {
-                            string AccName2 = candidate.ContainsKey(Accs[o][j][k].Name2) ? Accs[o][j][k].Name2 : "random";
-
-                            panaltyCheck[Accs[o][j][k].PenaltyName] += Accs[o][j][k].PenaltyValue;
-                            candidate[Accs[o][j][k].Name1][Accs[o][j][k].Value1-1]--;
-                            candidate[AccName2][2]--;
-
-                            if (panaltyCheck[Accs[o][j][k].PenaltyName] >= 5|| candidate[Accs[o][j][k].Name1][Accs[o][j][k].Value1-1] < 0 || candidate[AccName2][2] < 0)
+                            continue;
+                        }
+                        for (idx[1] = 0; idx[1] < tmpAccs[1].Count; idx[1]++)
+                        {
+                            panaltyCheck[tmpAccs[1][idx[1]].PenaltyName] += tmpAccs[1][idx[1]].PenaltyValue;
+                            if (panaltyCheck[tmpAccs[1][idx[1]].PenaltyName] >= 5)
                             {
-                                check2 = true;
-                                break;
+                                panaltyCheck[tmpAccs[1][idx[1]].PenaltyName] -= tmpAccs[1][idx[1]].PenaltyValue;
+                                continue;
                             }
-                        }
-                        if (check2)
-                        {
-                            return;
-                        }
-                        
-                        {
-                            Dictionary<string, int> totalChar = new Dictionary<string, int>();
-                            totalChar.Add(FinalNeckAcc[o][i].FirstCharaterics, FinalNeckAcc[o][i].FirstCharValue);
-                            totalChar.Add(FinalNeckAcc[o][i].Secondcharaterics, FinalNeckAcc[o][i].SecondCharValue);
-                            for (int c = 0; c < 4; c++)
+                            for (idx[2] = 0; idx[2] < tmpAccs[2].Count; idx[2]++)
                             {
-                                if (totalChar.ContainsKey(Accs[o][j][c].FirstCharaterics))
+                                
+                                panaltyCheck[tmpAccs[2][idx[2]].PenaltyName] += tmpAccs[2][idx[2]].PenaltyValue;
+                                if (panaltyCheck[tmpAccs[2][idx[2]].PenaltyName] >= 5)
                                 {
-                                    totalChar[Accs[o][j][c].FirstCharaterics] += Accs[o][j][c].FirstCharValue;
+                                    panaltyCheck[tmpAccs[2][idx[2]].PenaltyName] -= tmpAccs[2][idx[2]].PenaltyValue;
+                                    continue;
                                 }
-                                else
+                                for (idx[3] = 0; idx[3] < tmpAccs[3].Count; idx[3]++)
                                 {
-                                    totalChar.Add(Accs[o][j][c].FirstCharaterics, Accs[o][j][c].FirstCharValue);
+                                    panaltyCheck[tmpAccs[3][idx[3]].PenaltyName] += tmpAccs[3][idx[3]].PenaltyValue;
+                                    if (panaltyCheck[tmpAccs[3][idx[3]].PenaltyName] >= 5)
+                                    {
+                                        panaltyCheck[tmpAccs[3][idx[3]].PenaltyName] -= tmpAccs[3][idx[3]].PenaltyValue;
+                                        continue;
+                                    }
+                                    for (idx[4] = 0; idx[4] < tmpAccs[4].Count; idx[4]++)
+                                    {
+                                       
+                                        panaltyCheck[tmpAccs[4][idx[4]].PenaltyName] += tmpAccs[4][idx[4]].PenaltyValue;
+                                        if (panaltyCheck[tmpAccs[4][idx[4]].PenaltyName] >= 5)
+                                        {
+                                            panaltyCheck[tmpAccs[4][idx[4]].PenaltyName] -= tmpAccs[4][idx[4]].PenaltyValue;
+                                            continue;
+                                        }
+                                        Dictionary<string, int> totalChar = new Dictionary<string, int>();
+                                        totalChar.Add(tmpAccs[0][idx[0]].Secondcharaterics ,tmpAccs[0][idx[0]].SecondCharValue);
+                                        totalChar.Add(tmpAccs[0][idx[0]].FirstCharaterics ,tmpAccs[0][idx[0]].FirstCharValue);
+                                        for (int c = 1; c < 5; c++)
+                                        {
+                                            if (totalChar.ContainsKey(tmpAccs[c][idx[c]].FirstCharaterics))
+                                            {
+                                                totalChar[tmpAccs[c][idx[c]].FirstCharaterics] += tmpAccs[c][idx[c]].FirstCharValue;
+                                            }
+                                            else
+                                            {
+                                                totalChar.Add(tmpAccs[c][idx[c]].FirstCharaterics, tmpAccs[c][idx[c]].FirstCharValue);
+                                            }
+                                        }
+                                        string result = "";
+                                        var sortChar = from entry in totalChar orderby entry.Value ascending select entry;
+                                        foreach (var tmp in sortChar)
+                                        {
+                                            result += tmp.Key + " : " + tmp.Value.ToString() + '\n';
+                                        }
+                                        FindAccVM findAcc = new FindAccVM
+                                        {
+                                            NeckAblity = tmpAccs[0][idx[0]],
+                                            FirstRingAblity = tmpAccs[3][idx[3]],
+                                            SecondRingAblity = tmpAccs[4][idx[4]],
+                                            FirstEarAblity = tmpAccs[1][idx[1]],
+                                            SecondEarAblity = tmpAccs[2][idx[2]],
+                                            TotalChar = result,
+                                            TotalPrice = tmpAccs[0][idx[0]].Price + tmpAccs[1][idx[1]].Price + tmpAccs[2][idx[2]].Price + tmpAccs[3][idx[3]].Price + tmpAccs[4][idx[4]].Price
+                                        };
+
+                                        MainWinodwVM.FindAccVMs.Add(findAcc);
+                                        
+                                        panaltyCheck[tmpAccs[4][idx[4]].PenaltyName] -= tmpAccs[4][idx[4]].PenaltyValue;
+                                    }
+                                    panaltyCheck[tmpAccs[3][idx[3]].PenaltyName] -= tmpAccs[3][idx[3]].PenaltyValue;
                                 }
+                                panaltyCheck[tmpAccs[2][idx[2]].PenaltyName] -= tmpAccs[2][idx[2]].PenaltyValue;
                             }
-                            string result = "";
-                            var sortChar = from entry in totalChar orderby entry.Value ascending select entry;
-                            foreach (var tmp in sortChar)
-                            {
-                                result += tmp.Key + " : " + tmp.Value.ToString() + '\n';
-                            }
-                            FindAccVM findAcc = new FindAccVM
-                            {
-                                NeckAblity = FinalNeckAcc[o][i],
-                                FirstRingAblity = Accs[o][j][0],
-                                SecondRingAblity = Accs[o][j][1],
-                                FirstEarAblity = Accs[o][j][2],
-                                SecondEarAblity = Accs[o][j][3],
-                                TotalChar = result,
-                                TotalPrice = FinalNeckAcc[o][i].Price + Accs[o][j][0].Price + Accs[o][j][1].Price + Accs[o][j][2].Price + Accs[o][j][3].Price
-                            };
-                            if (findAcc != null)
-                            {
-                                    findAccVMsTmp.Enqueue(findAcc);
-                            }
+                            panaltyCheck[tmpAccs[1][idx[1]].PenaltyName] -= tmpAccs[1][idx[1]].PenaltyValue;
                         }
-                    });
+                    }
                     Cnt++;
                     MainWinodwVM.ProgressValue = (float)(((double)Cnt / TotalValue) * 100.0);
                 }
+                
 
             }
-            if (findAccVMsTmp.Count == 0)
+            if (MainWinodwVM.FindAccVMs.Count == 0)
             {
                 MessageBox.Show("각인을 구성할 수 있는 매물이 없습니다.");
                 DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
-
-
                 return;
             }
 
-            while (true)
-            {
-                if (findAccVMsTmp.TryDequeue(out FindAccVM tmp))
-                {
-                    MainWinodwVM.FindAccVMs.Add(tmp);
-                }
-                if (findAccVMsTmp.Count == 0) break;
-            }
-            
 
             DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
             DispatcherService.Invoke(() => { MainWinodwVM.OpenFindACC(); });
@@ -1173,8 +907,7 @@ namespace LostArkAction.Model
             bool isCheck = false;
             int value1 = -1;
             int value2 = -1;
-            int idx1 = 0;
-            int idx2 = 0;
+            int[] idx = { 0, 0 };
             AccVM searchAblity = new AccVM();
             if (accName == "목걸이")
             {
@@ -1215,12 +948,12 @@ namespace LostArkAction.Model
                             if (value1 == -1)
                             {
                                 value1 = auctionItem.Options[i].Value;
-                                idx1 = i;
+                                idx[0] = i;
                             }
                             else
                             {
                                 value2 = auctionItem.Options[i].Value;
-                                idx2 = i;
+                                idx[1] = i;
                             }
                         }
                     }
@@ -1229,16 +962,16 @@ namespace LostArkAction.Model
                 {
                     searchAblity.Value1 = value1;
                     searchAblity.Value2 = value2;
-                    searchAblity.Name1 = auctionItem.Options[idx1].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx2].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[0]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[1]].OptionName;
 
                 }
                 else
                 {
                     searchAblity.Value1 = value2;
                     searchAblity.Value2 = value1;
-                    searchAblity.Name1 = auctionItem.Options[idx2].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx1].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[1]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[0]].OptionName;
                 }
             }
             else if (accName == "반지1" || accName == "반지2")
@@ -1269,12 +1002,12 @@ namespace LostArkAction.Model
                             if (value1 == -1)
                             {
                                 value1 = auctionItem.Options[i].Value;
-                                idx1 = i;
+                                idx[0] = i;
                             }
                             else
                             {
                                 value2 = auctionItem.Options[i].Value;
-                                idx2 = i;
+                                idx[1] = i;
                             }
                         }
                     }
@@ -1283,16 +1016,16 @@ namespace LostArkAction.Model
                 {
                     searchAblity.Value1 = value1;
                     searchAblity.Value2 = value2;
-                    searchAblity.Name1 = auctionItem.Options[idx1].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx2].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[0]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[1]].OptionName;
 
                 }
                 else
                 {
                     searchAblity.Value1 = value2;
                     searchAblity.Value2 = value1;
-                    searchAblity.Name1 = auctionItem.Options[idx2].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx1].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[1]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[0]].OptionName;
                 }
             }
             else if (accName == "귀걸이1" || accName == "귀걸이2")
@@ -1323,12 +1056,12 @@ namespace LostArkAction.Model
                             if (value1 == -1)
                             {
                                 value1 = auctionItem.Options[i].Value;
-                                idx1 = i;
+                                idx[0] = i;
                             }
                             else
                             {
                                 value2 = auctionItem.Options[i].Value;
-                                idx2 = i;
+                                idx[1] = i;
                             }
                         }
                     }
@@ -1337,16 +1070,16 @@ namespace LostArkAction.Model
                 {
                     searchAblity.Value1 = value1;
                     searchAblity.Value2 = value2;
-                    searchAblity.Name1 = auctionItem.Options[idx1].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx2].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[0]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[1]].OptionName;
 
                 }
                 else
                 {
                     searchAblity.Value1 = value2;
                     searchAblity.Value2 = value1;
-                    searchAblity.Name1 = auctionItem.Options[idx2].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx1].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[1]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[0]].OptionName;
                 }
             }
             else
@@ -1360,8 +1093,8 @@ namespace LostArkAction.Model
             bool isCheck = false;
             int value1 = -1;
             int value2 = -1;
-            int idx1 = 0;
-            int idx2 = 0;
+            int[] idx = { 0, 0 };
+
             if (accName == "목걸이")
             {
                 AccVM searchAblity = new AccVM();
@@ -1400,12 +1133,12 @@ namespace LostArkAction.Model
                             if (value1 == -1)
                             {
                                 value1 = auctionItem.Options[i].Value;
-                                idx1 = i;
+                                idx[0] = i;
                             }
                             else
                             {
                                 value2 = auctionItem.Options[i].Value;
-                                idx2 = i;
+                                idx[1] = i;
                             }
                         }
                     }
@@ -1414,16 +1147,16 @@ namespace LostArkAction.Model
                 {
                     searchAblity.Value1 = value1;
                     searchAblity.Value2 = value2;
-                    searchAblity.Name1 = auctionItem.Options[idx1].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx2].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[0]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[1]].OptionName;
 
                 }
                 else
                 {
                     searchAblity.Value1 = value2;
                     searchAblity.Value2 = value1;
-                    searchAblity.Name1 = auctionItem.Options[idx2].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx1].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[1]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[0]].OptionName;
                 }
                 NeckAcc.Add(searchAblity);
             }
@@ -1455,12 +1188,12 @@ namespace LostArkAction.Model
                             if (value1 == -1)
                             {
                                 value1 = auctionItem.Options[i].Value;
-                                idx1 = i;
+                                idx[0] = i;
                             }
                             else
                             {
                                 value2 = auctionItem.Options[i].Value;
-                                idx2 = i;
+                                idx[1] = i;
                             }
                         }
                     }
@@ -1469,16 +1202,16 @@ namespace LostArkAction.Model
                 {
                     searchAblity.Value1 = value1;
                     searchAblity.Value2 = value2;
-                    searchAblity.Name1 = auctionItem.Options[idx1].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx2].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[0]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[1]].OptionName;
 
                 }
                 else
                 {
                     searchAblity.Value1 = value2;
                     searchAblity.Value2 = value1;
-                    searchAblity.Name1 = auctionItem.Options[idx2].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx1].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[1]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[0]].OptionName;
                 }
                 RingAcc1.Add(searchAblity);
             }
@@ -1510,12 +1243,12 @@ namespace LostArkAction.Model
                             if (value1 == -1)
                             {
                                 value1 = auctionItem.Options[i].Value;
-                                idx1 = i;
+                                idx[0] = i;
                             }
                             else
                             {
                                 value2 = auctionItem.Options[i].Value;
-                                idx2 = i;
+                                idx[1] = i;
                             }
                         }
                     }
@@ -1524,16 +1257,16 @@ namespace LostArkAction.Model
                 {
                     searchAblity.Value1 = value1;
                     searchAblity.Value2 = value2;
-                    searchAblity.Name1 = auctionItem.Options[idx1].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx2].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[0]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[1]].OptionName;
 
                 }
                 else
                 {
                     searchAblity.Value1 = value2;
                     searchAblity.Value2 = value1;
-                    searchAblity.Name1 = auctionItem.Options[idx2].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx1].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[1]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[0]].OptionName;
                 }
                 RingAcc2.Add(searchAblity);
             }
@@ -1566,12 +1299,12 @@ namespace LostArkAction.Model
                             if (value1 == -1)
                             {
                                 value1 = auctionItem.Options[i].Value;
-                                idx1 = i;
+                                idx[0] = i;
                             }
                             else
                             {
                                 value2 = auctionItem.Options[i].Value;
-                                idx2 = i;
+                                idx[1] = i;
                             }
                         }
                     }
@@ -1580,16 +1313,16 @@ namespace LostArkAction.Model
                 {
                     searchAblity.Value1 = value1;
                     searchAblity.Value2 = value2;
-                    searchAblity.Name1 = auctionItem.Options[idx1].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx2].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[0]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[1]].OptionName;
 
                 }
                 else
                 {
                     searchAblity.Value1 = value2;
                     searchAblity.Value2 = value1;
-                    searchAblity.Name1 = auctionItem.Options[idx2].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx1].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[1]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[0]].OptionName;
                 }
                 EarAcc1.Add(searchAblity);
             }
@@ -1622,12 +1355,12 @@ namespace LostArkAction.Model
                             if (value1 == -1)
                             {
                                 value1 = auctionItem.Options[i].Value;
-                                idx1 = i;
+                                idx[0] = i;
                             }
                             else
                             {
                                 value2 = auctionItem.Options[i].Value;
-                                idx2 = i;
+                                idx[1] = i;
                             }
                         }
                     }
@@ -1636,16 +1369,16 @@ namespace LostArkAction.Model
                 {
                     searchAblity.Value1 = value1;
                     searchAblity.Value2 = value2;
-                    searchAblity.Name1 = auctionItem.Options[idx1].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx2].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[0]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[1]].OptionName;
 
                 }
                 else
                 {
                     searchAblity.Value1 = value2;
                     searchAblity.Value2 = value1;
-                    searchAblity.Name1 = auctionItem.Options[idx2].OptionName;
-                    searchAblity.Name2 = auctionItem.Options[idx1].OptionName;
+                    searchAblity.Name1 = auctionItem.Options[idx[1]].OptionName;
+                    searchAblity.Name2 = auctionItem.Options[idx[0]].OptionName;
                 }
                 EarAcc2.Add(searchAblity);
             }

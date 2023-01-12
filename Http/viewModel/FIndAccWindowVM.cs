@@ -33,7 +33,6 @@ namespace Http.viewModel
         {
             int size = 1000 > findAccVMs.Count ? findAccVMs.Count : 1000;
             findAccVMs = findAccVMs.OrderBy(x=>x.TotalPrice).ToList();
-            findAccVMs = findAccVMs.GetRange(0, size);
             for(int i = 0; i < findAccVMs.Count; i++)
             {
                 findAccVMs[i].Index = i;
