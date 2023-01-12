@@ -336,19 +336,6 @@ namespace LostArkAction.Model
 
                 return;
             }
-#if DEBUG
-            Console.WriteLine("----------------------result------------------------");
-            for (int i = 0; i < AblitiesCombi.Count; i++)
-            {
-                for (int j = 0; j < AblitiesCombi[i].Count; j++)
-                {
-                    foreach (var tmp in AblitiesCombi[i][j].FirstAblity) { Console.Write("{ " + tmp.Key + " : " + tmp.Value + " , "); }
-                    foreach (var tmp in AblitiesCombi[i][j].SecondAblity) { Console.Write(tmp.Key + " : " + tmp.Value + " }"); }
-                    Console.WriteLine();
-
-                }
-                Console.WriteLine("----------------------------");
-            }
             for (int i = 0; i < AblitiesCombi.Count; i++)
             {
                 for (int j = 0; j < AblitiesCombi[i].Count; j++)
@@ -376,6 +363,20 @@ namespace LostArkAction.Model
                     }
                 }
             }
+#if DEBUG
+            Console.WriteLine("----------------------result------------------------");
+            for (int i = 0; i < AblitiesCombi.Count; i++)
+            {
+                for (int j = 0; j < AblitiesCombi[i].Count; j++)
+                {
+                    foreach (var tmp in AblitiesCombi[i][j].FirstAblity) { Console.Write("{ " + tmp.Key + " : " + tmp.Value + " , "); }
+                    foreach (var tmp in AblitiesCombi[i][j].SecondAblity) { Console.Write(tmp.Key + " : " + tmp.Value + " }"); }
+                    Console.WriteLine();
+
+                }
+                Console.WriteLine("----------------------------");
+            }
+           
             foreach (var tmp2 in AblityCombinationCases)
             {
                 for (int j = 0; j < tmp2.Value.Count; j++)
