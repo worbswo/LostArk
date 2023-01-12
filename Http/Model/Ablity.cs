@@ -1,21 +1,14 @@
-﻿using DotNetty.Common.Utilities;
-using Http.Code;
+﻿using Http.Code;
 using LostArkAction.Code;
 using LostArkAction.viewModel;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
+
 using System.Threading;
-using System.Threading.Tasks;
+
 using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media.Animation;
-using System.Windows.Media.TextFormatting;
+
 
 namespace LostArkAction.Model
 {
