@@ -178,13 +178,18 @@ namespace LostArkAction.Code
                     while (true)
                     {
                         item.PageNo = pageNo;
-                        ResultItem tmp;
-                        StringContent a = new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json");
-                        using (HttpResponseMessage response = await SharedClient.PostAsync("https://developer-lostark.game.onstove.com/auctions/items", a))
+                        ResultItem tmp = new ResultItem() ;
+                        using (HttpResponseMessage response = await SharedClient.PostAsync("https://developer-lostark.game.onstove.com/auctions/items", new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json")))
                         {
-                            if (response.StatusCode == HttpStatusCode.Unauthorized)
+                            if(response.StatusCode== HttpStatusCode.OK)
+                            {
+                                string jsonString = await response.Content.ReadAsStringAsync();
+                                tmp = JsonConvert.DeserializeObject<ResultItem>(jsonString);
+                            }
+                            else if (response.StatusCode == HttpStatusCode.Unauthorized)
                             {
                                 MessageBox.Show("API key is failed");
+                                continue;
                             }
                             else if(response.StatusCode.ToString() =="429")
                             {
@@ -194,16 +199,9 @@ namespace LostArkAction.Code
                                     apiKeyidx = 0;
                                 }
                                 SharedClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", APIkeys[apiKeyidx]);
-
-                                Cnt = 0;
                                 continue;
                             }
-
-                            string jsonResponse = await response.Content.ReadAsStringAsync();
-                            tmp = JsonConvert.DeserializeObject<ResultItem>(jsonResponse);
-                           
                         }
-
                         if (tmp != null)
                         {
                             if (tmp.TotalCount == 0)
@@ -217,178 +215,28 @@ namespace LostArkAction.Code
                                     if (tmp.Items[j].AuctionInfo.BuyPrice != 0 && tmp.Items[j].AuctionInfo.BuyPrice != null)
                                     {
                                         bool isSame = false;
+                                        bool isRandom = searchAblitie[i].SecondAblity.Keys.ToList()[0] == "random";
                                         AccVM tmp2 = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.ConvertAuctionItemToAcc(tmp.Items[j], AcceccesoryType);
 
                                         if (AcceccesoryType == "목걸이")
                                         {
-                                            for (int p = 0; p < (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc.Count; p++)
-                                            {
-                                                bool check = false;
-                                                if (searchAblitie[i].SecondAblity.Keys.ToList()[0] != "random")
-                                                {
-                                                    check = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc[p].Contain(tmp2);
-                                                }
-                                                else
-                                                {
-                                                    check = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc[p].Contain(tmp2, true);
-                                                }
-                                                if (check)
-                                                {
-                                                    if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc[p].Price >= tmp2.Price)
-                                                    {
-                                                        if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc[p].Price == tmp2.Price)
-                                                        {
-                                                            if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc[p].Quality < tmp2.Quality)
-                                                            {
-                                                                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc[p] = tmp2;
-                                                            }
-
-                                                        }
-                                                        else
-                                                        {
-                                                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc[p] = tmp2;
-                                                        }
-                                                    }
-                                                    isSame = true;
-                                                    break;
-                                                }
-                                            }
+                                            isSame=MatchingAcc((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc, tmp2, isRandom);
                                         }
                                         else if (AcceccesoryType == "반지1")
                                         {
-                                            for (int p = 0; p < (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1.Count; p++)
-                                            {
-                                                bool check = false;
-                                                if (searchAblitie[i].SecondAblity.Keys.ToList()[0] != "random")
-                                                {
-                                                    check = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[p].Contain(tmp2);
-                                                }
-                                                else
-                                                {
-                                                    check = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[p].Contain(tmp2, true);
-                                                }
-                                                if (check)
-                                                {
-                                                    if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[p].Price >= tmp2.Price)
-                                                    {
-                                                        if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[p].Price == tmp2.Price)
-                                                        {
-                                                            if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[p].Quality < tmp2.Quality)
-                                                            {
-                                                                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[p] = tmp2;
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[p] = tmp2;
-                                                        }
-                                                    }
-                                                    isSame = true;
-                                                    break;
-                                                }
-                                            }
+                                            isSame = MatchingAcc((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1, tmp2, isRandom);
                                         }
                                         else if (AcceccesoryType == "반지2")
                                         {
-                                            for (int p = 0; p < (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2.Count; p++)
-                                            {
-                                                bool check = false;
-                                                if (searchAblitie[i].SecondAblity.Keys.ToList()[0] != "random")
-                                                {
-                                                    check = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2[p].Contain(tmp2);
-                                                }
-                                                else
-                                                {
-                                                    check = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2[p].Contain(tmp2, true);
-                                                }
-                                                if (check)
-                                                {
-                                                    if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2[p].Price >= tmp2.Price)
-                                                    {
-                                                        if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2[p].Price == tmp2.Price)
-                                                        {
-                                                            if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2[p].Quality < tmp2.Quality)
-                                                            {
-                                                                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2[p] = tmp2;
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2[p] = tmp2;
-                                                        }
-                                                    }
-                                                    isSame = true;
-                                                    break;
-                                                }
-                                            }
+                                            isSame = MatchingAcc((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2, tmp2, isRandom);
                                         }
                                         else if (AcceccesoryType == "귀걸이1")
                                         {
-                                            for (int p = 0; p < (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1.Count; p++)
-                                            {
-                                                bool check = false;
-                                                if (searchAblitie[i].SecondAblity.Keys.ToList()[0] != "random")
-                                                {
-                                                    check = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[p].Contain(tmp2);
-                                                }
-                                                else
-                                                {
-                                                    check = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[p].Contain(tmp2, true);
-                                                }
-                                                if (check)
-                                                {
-                                                    if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[p].Price >= tmp2.Price)
-                                                    {
-                                                        if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[p].Price == tmp2.Price)
-                                                        {
-                                                            if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[p].Quality < tmp2.Quality)
-                                                            {
-                                                                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[p] = tmp2;
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[p] = tmp2;
-                                                        }
-                                                    }
-                                                    isSame = true;
-                                                    break;
-                                                }
-                                            }
+                                            isSame = MatchingAcc((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1, tmp2, isRandom);
                                         }
                                         else if (AcceccesoryType == "귀걸이2")
                                         {
-                                            for (int p = 0; p < (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2.Count; p++)
-                                            {
-                                                bool check = false;
-                                                if (searchAblitie[i].SecondAblity.Keys.ToList()[0] != "random")
-                                                {
-                                                    check = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2[p].Contain(tmp2);
-                                                }
-                                                else
-                                                {
-                                                    check = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2[p].Contain(tmp2, true);
-                                                }
-                                                if (check)
-                                                {
-                                                    if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2[p].Price >= tmp2.Price)
-                                                    {
-                                                        if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2[p].Price == tmp2.Price)
-                                                        {
-                                                            if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2[p].Quality < tmp2.Quality)
-                                                            {
-                                                                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2[p] = tmp2;
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2[p] = tmp2;
-                                                        }
-                                                    }
-                                                    isSame = true;
-                                                    break;
-                                                }
-                                            }
+                                            isSame = MatchingAcc((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2, tmp2, isRandom);
                                         }
                                         if (!isSame)
                                         {
@@ -418,7 +266,37 @@ namespace LostArkAction.Code
             Console.WriteLine("검색완료");
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.Start();
         }
+        public static bool MatchingAcc(List<AccVM> Accs, AccVM inputAccVM, bool isRandom)
+        {
+            bool isSame = false;
+            for (int p = 0; p < Accs.Count; p++)
+            {
+                bool check = false;
 
+                check = isRandom ? Accs[p].Contain(inputAccVM, true):Accs[p].Contain(inputAccVM);
+
+                if (check)
+                {
+                    if (Accs[p].Price >= inputAccVM.Price)
+                    {
+                        if (Accs[p].Price == inputAccVM.Price)
+                        {
+                            if (Accs[p].Quality < inputAccVM.Quality)
+                            {
+                                Accs[p] = inputAccVM;
+                            }
+                        }
+                        else
+                        {
+                            Accs[p] = inputAccVM;
+                        }
+                    }
+                    isSame = true;
+                    break;
+                }
+            }
+            return isSame;
+        }
     }
-
+    
 }

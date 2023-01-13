@@ -14,7 +14,7 @@ namespace LostArkAction.Code
         public int ItemGradeQuality = 10;
         public List<SkillOption> SkillOptions = new List<SkillOption>();
         public List<EtcOption> EtcOptions = new List<EtcOption>();
-        public string Sort = "ITEM_GRADE";
+        public string Sort = "BUY_PRICE";
         public int CategoryCode;
         public string CharacterClass;
         public int ItemTier = 3;
