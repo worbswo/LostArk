@@ -188,9 +188,9 @@ namespace LostArkAction.viewModel
                 {
                     MessageBox.Show("API 키가 존재하지 않습니다.");
                     App.Current.Shutdown();
-
                 }
             }
+            HttpClient2.testAPIKey();
         }
         #endregion
 

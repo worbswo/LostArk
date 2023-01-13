@@ -33,6 +33,22 @@ namespace LostArkAction.Code
             SharedClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             SharedClient.DefaultRequestHeaders.Add("ContentType", "application/json");
         }
+        public static async void testAPIKey()
+        {
+            SharedClient = new HttpClient();
+            for (int i = 0; i < APIkeys.Count; i++)
+            {
+                SharedClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", APIkeys[i]);
+                SharedClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                using (HttpResponseMessage response = await SharedClient.GetAsync("https://developer-lostark.game.onstove.com/auctions/options"))
+                {
+                     if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        MessageBox.Show(i + 1 + "번째 API KEY가 올바르지 않습니다.");
+                    }
+                }
+            }
+        }
         public static async void GetAsync(List<SearchAblity> searchAblitie, Accesories accesory)
         {
             int apiKeyidx = 0;
@@ -179,8 +195,12 @@ namespace LostArkAction.Code
                         StringContent a = new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json");
                         using (HttpResponseMessage response = await SharedClient.PostAsync("https://developer-lostark.game.onstove.com/auctions/items", a))
                         {
-                            string jsonResponse = await response.Content.ReadAsStringAsync();
-                            if (jsonResponse.Contains("Rate Limit Exceeded") || jsonResponse.Contains("Unauthorized"))
+                            
+                            if (response.StatusCode == HttpStatusCode.Unauthorized)
+                            {
+                                MessageBox.Show("API key is failed");
+                            }
+                            else if(response.StatusCode.ToString() =="429")
                             {
                                 apiKeyidx++;
                                 if (apiKeyidx > APIkeys.Count - 1)
@@ -192,6 +212,8 @@ namespace LostArkAction.Code
                                 Cnt = 0;
                                 continue;
                             }
+                            string jsonResponse = await response.Content.ReadAsStringAsync();
+                            
                             tmp = JsonConvert.DeserializeObject<ResultItem>(jsonResponse);
                         }
 
