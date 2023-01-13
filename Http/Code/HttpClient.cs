@@ -177,25 +177,12 @@ namespace LostArkAction.Code
                     while (true)
                     {
 
-                        Cnt++;
-                        if (Cnt >= 90)
-                        {
-                            apiKeyidx++;
-                            if (apiKeyidx > APIkeys.Count - 1)
-                            {
-                                apiKeyidx = 0;
-                            }
-                            SharedClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", APIkeys[apiKeyidx]);
-
-                            Cnt = 0;
-
-                        }
+                 
                         item.PageNo = pageNo;
                         ResultItem tmp;
                         StringContent a = new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json");
                         using (HttpResponseMessage response = await SharedClient.PostAsync("https://developer-lostark.game.onstove.com/auctions/items", a))
                         {
-                            
                             if (response.StatusCode == HttpStatusCode.Unauthorized)
                             {
                                 MessageBox.Show("API key is failed");
@@ -212,8 +199,9 @@ namespace LostArkAction.Code
                                 Cnt = 0;
                                 continue;
                             }
+
                             string jsonResponse = await response.Content.ReadAsStringAsync();
-                            
+
                             tmp = JsonConvert.DeserializeObject<ResultItem>(jsonResponse);
                         }
 
@@ -422,6 +410,10 @@ namespace LostArkAction.Code
                                   //  break;
                                 }
                                 pageNo++;
+                                if(pageNo > tmp.TotalCount / 10 + 1)
+                                {
+                                    break;
+                                }
                             }
                             else
                             {
