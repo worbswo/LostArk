@@ -406,34 +406,23 @@ namespace LostArkAction.Model
                 List<int> tmp = accCases[targetItems[abliName[i]]][index[i]];
                 for (int j = 0; j < tmp.Count; j++)
                 {
-                    if (tmp[j] > 3)
-                    {
+                    if (tmp[j] > 3) {
                         firstCnt++;
-                        if (firstAblityCandidate.ContainsKey(abliName[i]))
-                        {
+                        if (firstAblityCandidate.ContainsKey(abliName[i])) {
                             if (!firstAblityCandidate[abliName[i]].Contains(tmp[j]))
                             {
                                 firstAblityCandidate[abliName[i]].Add(tmp[j]);
                             }
-                        }
-                        else
-                        {
+                        } else {
                             firstAblityCandidate.Add(abliName[i], new List<int> { tmp[j] });
                         }
-
-                    }
-                    else
-                    {
+                    }else {
                         secondCnt++;
-                        if (secondAblityCandidate.ContainsKey(abliName[i]))
-                        {
-                            if (!secondAblityCandidate[abliName[i]].Contains(tmp[j]))
-                            {
+                        if (secondAblityCandidate.ContainsKey(abliName[i]))  {
+                            if (!secondAblityCandidate[abliName[i]].Contains(tmp[j])) {
                                 secondAblityCandidate[abliName[i]].Add(tmp[j]);
                             }
-                        }
-                        else
-                        {
+                        } else {
                             secondAblityCandidate.Add(abliName[i], new List<int> { tmp[j] });
                         }
 
@@ -448,7 +437,6 @@ namespace LostArkAction.Model
                         {
                             candidate[abliName[i]][tmp[j] - 1]++;
                         }
-
                     }
                     else
                     {
@@ -653,11 +641,8 @@ namespace LostArkAction.Model
             string name2 = searchAblity.SecondAblity.Keys.ToList()[0];
             int value1 = searchAblity.FirstAblity.Values.ToList()[0];
             int value2 = searchAblity.SecondAblity.Values.ToList()[0];
-
-  
-                candidate[name1][value1 - 1]++;
-                candidate[name2][value2 - 1]++;
-             
+            candidate[name1][value1 - 1]++;
+            candidate[name2][value2 - 1]++;
         }
 
 
@@ -831,44 +816,8 @@ namespace LostArkAction.Model
                 DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
                 return;
             }
-
-
             DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
             DispatcherService.Invoke(() => { MainWinodwVM.OpenFindACC(); });
-
-        }
-        public string SetTotalChar(AccVM neck, List<AccVM> accs)
-        {
-            Dictionary<string, int> totalChar = new Dictionary<string, int>();
-            totalChar.Add(neck.FirstCharaterics, neck.FirstCharValue);
-            totalChar.Add(neck.Secondcharaterics, neck.SecondCharValue);
-            for (int i = 0; i < 4; i++)
-            {
-                if (totalChar.ContainsKey(accs[i].FirstCharaterics))
-                {
-                    totalChar[accs[i].FirstCharaterics] += accs[i].FirstCharValue;
-                }
-                else
-                {
-                    totalChar.Add(accs[i].FirstCharaterics, accs[i].FirstCharValue);
-                }
-                if (totalChar.ContainsKey(accs[i].Secondcharaterics))
-                {
-                    totalChar[accs[i].Secondcharaterics] += accs[i].SecondCharValue;
-                }
-                else
-                {
-                    totalChar.Add(accs[i].Secondcharaterics, accs[i].SecondCharValue);
-                }
-
-            }
-            string result = "";
-            var sortChar = from entry in totalChar orderby entry.Value ascending select entry;
-            foreach (var tmp in sortChar)
-            {
-                result += tmp.Key + tmp.Value.ToString() + '\n';
-            }
-            return result;
         }
         public AccVM ConvertAuctionItemToAcc(AuctionItem auctionItem, string accName)
         {

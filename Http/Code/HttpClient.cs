@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -121,7 +122,7 @@ namespace LostArkAction.Code
                 {
                     int pageNo = 1;
                     SearchItem item = new SearchItem();
-                    item.Sort = "ITEM_QUALITY";
+                    item.Sort = "BUY_PRICE";
                     if (Ablity.selectClass == 0)
                     {
                         item.ItemGrade = "유물";
@@ -135,7 +136,7 @@ namespace LostArkAction.Code
                         item.ItemGrade = "";
                     }
                     item.CategoryCode = Ablity.AccessoryCode[AcceccesoryType];
-                    item.ItemGradeQuality = (int)(qulity/ 10) * 10;
+                    item.ItemGradeQuality = (int)(qulity);
                     item.EtcOptions.Add(new EtcOption()
                     {
                         FirstOption = 3,
@@ -176,8 +177,6 @@ namespace LostArkAction.Code
 
                     while (true)
                     {
-
-                 
                         item.PageNo = pageNo;
                         ResultItem tmp;
                         StringContent a = new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json");
@@ -201,8 +200,8 @@ namespace LostArkAction.Code
                             }
 
                             string jsonResponse = await response.Content.ReadAsStringAsync();
-
                             tmp = JsonConvert.DeserializeObject<ResultItem>(jsonResponse);
+                           
                         }
 
                         if (tmp != null)
@@ -213,16 +212,8 @@ namespace LostArkAction.Code
                             }
                             if (tmp.Items != null)
                             {
-                                bool isQuality = false;
-
                                 for (int j = 0; j < tmp.Items.Count; j++)
                                 {
-
-                                    if (tmp.Items[j].GradeQuality < (qulity))
-                                    {
-                                        isQuality = true;
-                                        continue;
-                                    }
                                     if (tmp.Items[j].AuctionInfo.BuyPrice != 0 && tmp.Items[j].AuctionInfo.BuyPrice != null)
                                     {
                                         bool isSame = false;
@@ -404,11 +395,7 @@ namespace LostArkAction.Code
                                             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.SetAcc(tmp.Items[j], AcceccesoryType);
                                         }
                                     }
-                                }
-                                if (isQuality)
-                                {
-                                  //  break;
-                                }
+                                }                               
                                 pageNo++;
                                 if(pageNo > tmp.TotalCount / 10 + 1)
                                 {
@@ -423,9 +410,6 @@ namespace LostArkAction.Code
                         else
                         {
                         }
-                    }
-                    if (auctionItem.Name != "")
-                    {
                     }
                     searchCnt++;
                     (App.Current.MainWindow.DataContext as MainWinodwVM).SearchProgressValue = (float)searchCnt / searchTotal * 100;
