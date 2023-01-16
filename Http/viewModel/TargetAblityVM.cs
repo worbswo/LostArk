@@ -136,10 +136,6 @@ namespace LostArkAction.viewModel
                     }
                     (App.Current.MainWindow.DataContext as MainWinodwVM).EquipAblityVM.SelectOptions = new List<string>();
                     (App.Current.MainWindow.DataContext as MainWinodwVM).EquipAblityVM.SelectOptions = _optionsList;
-                    for (int j = 0; j < _optionsList.Count; j++)
-                    {
-                        //(App.Current.MainWindow.DataContext as MainWinodwVM).EquipAblityVM.SelectOptions.Add(_optionsList[j]);
-                    }
                 }
             }
         }

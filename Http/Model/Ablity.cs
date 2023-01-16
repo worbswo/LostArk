@@ -566,12 +566,14 @@ namespace LostArkAction.Model
                 for (int j = 0; j < tmpSearchAblities.Count; j++)
                 {
                     if (!candidateCheck(tmpSearchAblities[j], candidate))
+
                     {
                         continue;
                     }
                     for (int k = 0; k < tmpSearchAblities.Count; k++)
                     {
                         if (!candidateCheck(tmpSearchAblities[k], candidate))
+
                         {
                             continue;
                         }

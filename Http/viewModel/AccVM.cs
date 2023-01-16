@@ -1,11 +1,4 @@
-﻿using LostArkAction.viewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LostArkAction.viewModel
+﻿namespace LostArkAction.viewModel
 {
     public class AccVM : ViewModelBase
     {
@@ -27,7 +20,7 @@ namespace LostArkAction.viewModel
         #endregion
 
         #region Property
-       
+
         public string ImagePath
         {
             get { return _imagePath; }
@@ -220,7 +213,7 @@ namespace LostArkAction.viewModel
             SecondCharValue = accvm.SecondCharValue;
             ImagePath = accvm.ImagePath;
 
-    }
+        }
         #endregion
         #region Method
         public bool Contain(AccVM accVM, bool ran = false)

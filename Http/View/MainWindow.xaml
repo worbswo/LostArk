@@ -286,7 +286,7 @@
                 Foreground="GhostWhite"
                 IsChecked="{Binding IsAll}"
                 Content="전체"></RadioButton>
-          
+
             <Button
                 Content="  검 색  "
                 FontWeight="Bold"
