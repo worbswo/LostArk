@@ -434,10 +434,13 @@ namespace LostArkAction.viewModel
             {
                 if (Ablity != null)
                 {
-                    Ablity.Thread.Abort();
-                    if(Ablity.Thread2 != null)
+                    if (Ablity.Thread != null)
                     {
-                        Ablity.Thread2.Abort();
+                        Ablity.Thread.Abort();
+                        if (Ablity.Thread2 != null)
+                        {
+                            Ablity.Thread2.Abort();
+                        }
                     }
                 }
                 

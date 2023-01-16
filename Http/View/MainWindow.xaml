@@ -174,7 +174,7 @@
             </DockPanel>
         </Border>
         <Grid
-            Margin="150,0,150,0"
+            Margin="50,0,50,0"
             Grid.Row="1"
             Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
