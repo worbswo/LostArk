@@ -35,7 +35,7 @@ namespace LostArkAction.viewModel
         private bool isRelic  = true;
         private bool isAncient;
         private bool isAll;
-        private string _setupAblityText;
+        private string _setupAblityText="";
         #endregion
         #region Property
         public List<FindAccVM> FindAccVMs  = new List<FindAccVM>();
@@ -225,6 +225,7 @@ namespace LostArkAction.viewModel
             string[] strList = new string[7]{"","","","","","","" };
             int[] ablityVal = new int[7];
             int idx = 0;
+
             for (int i = 0; i < tmp.Length; i++)
             {
                 
