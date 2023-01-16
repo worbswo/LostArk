@@ -11,7 +11,7 @@
         Margin="10"
         Background="#FF636366"
         BorderBrush="#FF0A3C6D"
-        BorderThickness="2"
+        BorderThickness="0"
         CornerRadius="10">
         <Grid
             Margin="15">
@@ -165,7 +165,9 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="1"
-                FontSize="18"
+                FontSize="16"
+                Foreground="White"
+                Style="{StaticResource ComboBoxTest2}"
                 Margin="5"
                 Width="70"
                 Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[0],Mode=TwoWay}"
@@ -174,7 +176,9 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="2"
-                FontSize="18"
+                FontSize="16"
+                Foreground="White"
+                Style="{StaticResource ComboBoxTest2}"
                 Margin="5"
                 Width="70"
                 Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[2],Mode=TwoWay}"
@@ -183,7 +187,9 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="3"
-                FontSize="18"
+                FontSize="16"
+                Foreground="White"
+                Style="{StaticResource ComboBoxTest2}"
                 Margin="5"
                 Width="70"
                 Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[3],Mode=TwoWay}"
@@ -192,7 +198,9 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="4"
-                FontSize="18"
+                FontSize="16"
+                Foreground="White"
+                Style="{StaticResource ComboBoxTest2}"
                 Margin="5"
                 Width="70"
                 Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[4],Mode=TwoWay}"
@@ -201,7 +209,9 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="5"
-                FontSize="18"
+                FontSize="16"
+                Foreground="White"
+                Style="{StaticResource ComboBoxTest2}"
                 Margin="5"
                 Width="70"
                 Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[5],Mode=TwoWay}"
@@ -210,7 +220,9 @@
             <ComboBox
                 Grid.Column="3"
                 Grid.Row="1"
-                FontSize="18"
+                FontSize="16"
+                Foreground="White"
+                Style="{StaticResource ComboBoxTest2}"
                 Margin="5"
                 Width="70"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"

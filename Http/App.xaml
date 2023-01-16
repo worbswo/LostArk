@@ -9,6 +9,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary
                     Source="Resources\ButtonStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary
+                    Source="Resources\ComboBoxStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <FontFamily
                 x:Key="MaruBuri">pack://application:,,,/Fonts/#MaruBuri</FontFamily>

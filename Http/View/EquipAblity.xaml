@@ -17,7 +17,7 @@
             BorderBrush="#FF0A3C6D"
             Background="#FF636366"
             Margin="10"
-            BorderThickness="2"
+            BorderThickness="0"
             CornerRadius="10">
             <Grid
                 Margin="15">
@@ -46,17 +46,22 @@
                     Text="각인1"
                     
                     VerticalAlignment="Bottom"
-                    Foreground="White"></TextBlock>
+                    FontSize="10"
+                    Foreground="DarkGray"></TextBlock>
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    Foreground="White"></TextBlock>
+                    FontSize="10"
+                    Foreground="DarkGray"></TextBlock>
                 <ComboBox
                     Name="option1"
                     Grid.Row="2"
-                    FontSize="18"
+                    FontSize="16"
+                    Foreground="White"
+                    Margin="0,0,0,2"
+                    Style="{StaticResource ComboBoxTest2}"
                     SelectedItem="{Binding DataContext.EquipAblityVM.SelectItems[0]}"
                     ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions}"
                     VerticalAlignment="Center">
@@ -78,16 +83,21 @@
                     Grid.Row="3"
                     Text="각인2"
                     VerticalAlignment="Bottom"
-                    Foreground="White"></TextBlock>
+                    FontSize="10"
+                    Foreground="DarkGray"></TextBlock>
                 <TextBlock
                     Grid.Row="3"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    Foreground="White"></TextBlock>
+                    FontSize="10"
+                    Foreground="DarkGray"></TextBlock>
                 <ComboBox
                     Grid.Row="4"
-                    FontSize="18"
+                    FontSize="16"
+                    Foreground="White"
+                    Margin="0,0,0,2"
+                    Style="{StaticResource ComboBoxTest2}"
                     SelectedItem="{Binding DataContext.EquipAblityVM.SelectItems[1]}"
                     ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions}"
                     VerticalAlignment="Center">
@@ -112,7 +122,7 @@
             Margin="10"
             Background="#FF636366"
             BorderBrush="#FF0A3C6D"
-            BorderThickness="2"
+            BorderThickness="0"
             CornerRadius="10">
             <Grid
                 Margin="15">
@@ -143,16 +153,21 @@
                     Grid.Row="1"
                     Text="각인1"
                     VerticalAlignment="Bottom"
-                    Foreground="White"></TextBlock>
+                    FontSize="10"
+                    Foreground="DarkGray"></TextBlock>
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    Foreground="White"></TextBlock>
+                    FontSize="10"
+                    Foreground="DarkGray"></TextBlock>
                 <ComboBox
                     Grid.Row="2"
-                    FontSize="18"
+                    FontSize="16"
+                    Foreground="White"
+                    Margin="0,0,0,2"
+                    Style="{StaticResource ComboBoxTest2}"
                     SelectedItem="{Binding DataContext.EquipAblityVM.SelectItems[2]}"
                     ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions}"
                     VerticalAlignment="Center">
@@ -168,22 +183,27 @@
                     Grid.Row="2"
                     Grid.ColumnSpan="3"
                     Height="1"
-                    Fill="White"
+                    Fill="Gray"
                     VerticalAlignment="Bottom"></Rectangle>
                 <TextBlock
                     Grid.Row="3"
                     Text="각인2"
                     VerticalAlignment="Bottom"
-                    Foreground="White"></TextBlock>
+                    FontSize="10"
+                    Foreground="DarkGray"></TextBlock>
                 <TextBlock
                     Grid.Row="3"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    Foreground="White"></TextBlock>
+                    FontSize="10"
+                    Foreground="DarkGray"></TextBlock>
                 <ComboBox
                     Grid.Row="4"
-                    FontSize="18"
+                    FontSize="16"
+                    Foreground="White"
+                    Margin="0,0,0,2"
+                    Style="{StaticResource ComboBoxTest2}"
                     SelectedItem="{Binding DataContext.EquipAblityVM.SelectItems[3]}"
                     ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions}"
                     VerticalAlignment="Center">
@@ -205,16 +225,21 @@
                     Grid.Row="5"
                     Text="감소 각인"
                     VerticalAlignment="Bottom"
-                    Foreground="White"></TextBlock>
+                    FontSize="10"
+                    Foreground="DarkGray"></TextBlock>
                 <TextBlock
                     Grid.Row="5"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    Foreground="White"></TextBlock>
+                    FontSize="10"
+                    Foreground="DarkGray"></TextBlock>
                 <ComboBox
                     Grid.Row="6"
-                    FontSize="18"
+                    FontSize="16"
+                    Foreground="White"
+                    Margin="0,0,0,2"
+                    Style="{StaticResource ComboBoxTest2}"
                     SelectedItem="{Binding DataContext.EquipAblityVM.SelectItems[4]}"
                     ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions2}"
                     VerticalAlignment="Center">

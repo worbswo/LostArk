@@ -131,13 +131,13 @@ namespace LostArkAction.Model
             AccRelicCases.Add(6, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 5 } };
             AccRelicCases.Add(5, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 4 } };
+            tmp = new List<List<int>>() { new List<int> { 4 }, new List<int> { 5 } };
             AccRelicCases.Add(4, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 } };
+            tmp = new List<List<int>>() { new List<int> { 3 }, new List<int> { 4 }, new List<int> { 5 } };
             AccRelicCases.Add(2, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 } };
+            tmp = new List<List<int>>() { new List<int> { 3 }, new List<int> { 4 }, new List<int> { 5 } };
             AccRelicCases.Add(1, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 } , new List<int> { 4 } };
+            tmp = new List<List<int>>() { new List<int> { 3 } , new List<int> { 4 }, new List<int> { 5 } };
             AccRelicCases.Add(3, new List<List<int>>(tmp));
             AccRelicCases.Add(0, new List<List<int>>());
 
@@ -163,13 +163,13 @@ namespace LostArkAction.Model
             AccAncientCases.Add(6, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 5 } };
             AccAncientCases.Add(5, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 4 } };
+            tmp = new List<List<int>>() { new List<int> { 4 }, new List<int> { 5 } };
             AccAncientCases.Add(4, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 } };
+            tmp = new List<List<int>>() { new List<int> { 3 }, new List<int> { 4 }, new List<int> { 5 } };
             AccAncientCases.Add(2, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 }, new List<int> { 4 } };
+            tmp = new List<List<int>>() { new List<int> { 3 }, new List<int> { 4 }, new List<int> { 5 } };
             AccAncientCases.Add(1, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 } };
+            tmp = new List<List<int>>() { new List<int> { 3 }, new List<int> { 4 }, new List<int> { 5 } };
             AccAncientCases.Add(3, new List<List<int>>(tmp));
             AccAncientCases.Add(0, new List<List<int>>());
 
