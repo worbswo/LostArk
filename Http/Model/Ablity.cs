@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using System.Threading;
-
+using System.Threading.Tasks;
 using System.Windows;
 
 
@@ -78,31 +78,6 @@ namespace LostArkAction.Model
         int[] Arr = { 0, 1, 2, 3, 4 };
         bool[] Check = { false, false, false, false, false };
         List<int> V = new List<int>();
-        void Permutation(int n, int r)
-        {
-            if (n == r)
-            {
-                perAccs.Add(new List<int>
-                {
-                    V[0],
-                    V[1],
-                    V[2],
-                    V[3],
-                    V[4],
-                });
-                return;
-            }
-
-            for (int i = 0; i < 5; i++)
-            {
-                if (Check[i] == true) continue;
-                Check[i] = true;
-                V.Add(Arr[i]);
-                Permutation(n + 1, r);
-                V.RemoveAt(V.Count-1);
-                Check[i] = false;
-            }
-        }
         #endregion
         public Ablity(MainWinodwVM mainWinodw)
         {
@@ -133,11 +108,11 @@ namespace LostArkAction.Model
             AccRelicCases.Add(5, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 4 }, new List<int> { 5 } };
             AccRelicCases.Add(4, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 }, new List<int> { 4 }, new List<int> { 5 } };
+            tmp = new List<List<int>>() { new List<int> { 3 }};
             AccRelicCases.Add(2, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 }, new List<int> { 4 }, new List<int> { 5 } };
+            tmp = new List<List<int>>() { new List<int> { 3 }};
             AccRelicCases.Add(1, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 } , new List<int> { 4 }, new List<int> { 5 } };
+            tmp = new List<List<int>>() { new List<int> { 3 } };
             AccRelicCases.Add(3, new List<List<int>>(tmp));
             AccRelicCases.Add(0, new List<List<int>>());
 
@@ -165,11 +140,11 @@ namespace LostArkAction.Model
             AccAncientCases.Add(5, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 4 }, new List<int> { 5 } };
             AccAncientCases.Add(4, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 }, new List<int> { 4 }, new List<int> { 5 } };
+            tmp = new List<List<int>>() { new List<int> { 3 }};
             AccAncientCases.Add(2, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 }, new List<int> { 4 }, new List<int> { 5 } };
+            tmp = new List<List<int>>() { new List<int> { 3 } };
             AccAncientCases.Add(1, new List<List<int>>(tmp));
-            tmp = new List<List<int>>() { new List<int> { 3 }, new List<int> { 4 }, new List<int> { 5 } };
+            tmp = new List<List<int>>() { new List<int> { 3 } };
             AccAncientCases.Add(3, new List<List<int>>(tmp));
             AccAncientCases.Add(0, new List<List<int>>());
 
@@ -210,8 +185,37 @@ namespace LostArkAction.Model
             AccAncientCases[8].Add(new List<int> { 6, 3 });
             AccAncientCases[7].Add(new List<int> { 6, 3 });
             AccAncientCases[6].Add(new List<int> { 6 });
+            AccAncientCases[5].Add(new List<int> { 6 });
+            AccAncientCases[4].Add(new List<int> { 6 });
+
         }
         #region Method
+        void Permutation(int n, int r)
+        {
+            if (n == r)
+            {
+                perAccs.Add(new List<int>
+                {
+                    V[0],
+                    V[1],
+                    V[2],
+                    V[3],
+                    V[4],
+                });
+                return;
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (Check[i] == true) continue;
+                Check[i] = true;
+                V.Add(Arr[i]);
+                Permutation(n + 1, r);
+                V.RemoveAt(V.Count - 1);
+                Check[i] = false;
+            }
+        }
+
         public void Start()
         {
             Accs.Add(NeckAcc);
@@ -389,15 +393,13 @@ namespace LostArkAction.Model
             }
             Console.WriteLine("검색 개수 {0}", SearchAblities.Count);
 #endif
-
-            HttpClient2.GetAsync(SearchAblities, Accesories);
+           HttpClient2.GetAsync(SearchAblities, Accesories);
         }
         public void ComputeAblity(List<int> index, List<string> abliName, Dictionary<int, List<List<int>>> accCases, Dictionary<string, int> targetItems, List<List<SearchAblity>> searchAblities)
         {
             Dictionary<string, List<int>> firstAblityCandidate = new Dictionary<string, List<int>>();
             Dictionary<string, List<int>> secondAblityCandidate = new Dictionary<string, List<int>>();
             Dictionary<string, List<int>> candidate = new Dictionary<string, List<int>>();
-            Dictionary<string, List<int>> secondAblityCandidate2 = new Dictionary<string, List<int>>();
             List<SearchAblity> tmpSearchAblities = new List<SearchAblity>();
             int firstCnt = 0;
             int secondCnt = 0;
@@ -554,7 +556,6 @@ namespace LostArkAction.Model
             Console.WriteLine("----------------------------");
             #endregion
             SearchAblityCandidate.Add(candidate);
-            SearchSecondAblityCandidate.Add(secondAblityCandidate2);
             Dictionary<string,List<SearchAblity>> tmep2 = new Dictionary<string,List<SearchAblity>>();
 
             for (int i = 0; i < tmpSearchAblities.Count; i++)

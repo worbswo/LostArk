@@ -172,8 +172,6 @@ namespace LostArkAction.Code
                             MaxValue = 500
                         });
                     }
-                    AuctionItem auctionItem = new AuctionItem();
-                    auctionItem.Name = "";
 
                     while (true)
                     {

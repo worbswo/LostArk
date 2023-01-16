@@ -26,6 +26,7 @@ namespace LostArkAction.viewModel
         #region Field
         private ICommand _searchCommand;
         private ICommand _setupCommand;
+        private ICommand _keyDownCommand;
 
         private float _progressValue;
         private float _searchProgressValue;
@@ -143,6 +144,17 @@ namespace LostArkAction.viewModel
         #endregion
 
         #region Command
+        public ICommand KeyDownCommand
+        {
+            get
+            {
+                if (_keyDownCommand == null)
+                {
+                    _keyDownCommand = new RelayCommand(KeyDownMethod,null);
+                }
+                return _keyDownCommand;
+            }
+        }
         public ICommand SearchCommand
         {
             get
@@ -195,6 +207,18 @@ namespace LostArkAction.viewModel
         #endregion
 
         #region Method
+        public void KeyDownMethod(object obj, object args)
+        {
+            KeyEventArgs e = args as KeyEventArgs;
+            if (e != null)
+            {
+                if (e.Key == Key.Enter)
+                {
+                    SetupMethod(obj);
+                }
+               
+            }
+        }
         public void SetupMethod(object sender)
         {
             string tmp = SetupAblityText;
@@ -242,7 +266,6 @@ namespace LostArkAction.viewModel
                 {
                     TargetAblityVM.SelectItems[i] = Ablity.AblityShort[strList[i]];
                     TargetAblityVM.SelectFigureItems[i] =(4- ablityVal[i]);
-                    Console.WriteLine(ablityVal[i]);
                 }
             }
             TargetAblityVM.SelectItems = TargetAblityVM.SelectItems;

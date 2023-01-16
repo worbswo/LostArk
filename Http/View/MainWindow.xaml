@@ -186,7 +186,9 @@
             <TextBox
                 Margin="2"
                 FontSize="17"
-                Text="{Binding SetupAblityText}"
+                command:CommandBehavior.Event="KeyDown"
+                command:CommandBehavior.Command="{Binding KeyDownCommand}"
+                Text="{Binding SetupAblityText,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"></TextBox>
             <Button
                 Margin="2"
