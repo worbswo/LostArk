@@ -25,14 +25,13 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="100"></ColumnDefinition>
+                    Width="0.25*"></ColumnDefinition>
                 <ColumnDefinition
-                    Width="50"></ColumnDefinition>
+                    Width="0.15*"></ColumnDefinition>
                 <ColumnDefinition
-                    Width="150"></ColumnDefinition>
+                    Width="0.35*"></ColumnDefinition>
                 <ColumnDefinition
-                    Width="150"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                    Width="0.35*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Rectangle
                 Grid.Row="0"
@@ -137,7 +136,7 @@
 
                 Text="{Binding DataContext.AccessoriesVM.Qulity1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
-                
+                HorizontalAlignment="Center"
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
@@ -147,7 +146,7 @@
                 Grid.Column="1"
                 Text="{Binding DataContext.AccessoriesVM.Qulity2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
-                
+                HorizontalAlignment="Center"
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
@@ -156,7 +155,7 @@
                 Grid.Column="1"
                 Text="{Binding DataContext.AccessoriesVM.Qulity3,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
-                
+                HorizontalAlignment="Center"
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
@@ -165,7 +164,7 @@
                 Grid.Column="1"
                 Text="{Binding DataContext.AccessoriesVM.Qulity4,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
-                
+                HorizontalAlignment="Center"
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
@@ -174,7 +173,7 @@
                 Grid.Column="1"
                 Text="{Binding DataContext.AccessoriesVM.Qulity5,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
-                
+                HorizontalAlignment="Center"
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
