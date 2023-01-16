@@ -137,7 +137,7 @@
 
                 Text="{Binding DataContext.AccessoriesVM.Qulity1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
-                FontSize="16"
+                
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
@@ -147,7 +147,7 @@
                 Grid.Column="1"
                 Text="{Binding DataContext.AccessoriesVM.Qulity2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
-                FontSize="16"
+                
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
@@ -156,7 +156,7 @@
                 Grid.Column="1"
                 Text="{Binding DataContext.AccessoriesVM.Qulity3,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
-                FontSize="16"
+                
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
@@ -165,7 +165,7 @@
                 Grid.Column="1"
                 Text="{Binding DataContext.AccessoriesVM.Qulity4,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
-                FontSize="16"
+                
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
@@ -174,14 +174,14 @@
                 Grid.Column="1"
                 Text="{Binding DataContext.AccessoriesVM.Qulity5,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
-                FontSize="16"
+                
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="1"
-                FontSize="16"
+                
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest2}"
                 Margin="5"
@@ -192,7 +192,7 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="2"
-                FontSize="16"
+                
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest2}"
                 Margin="5"
@@ -203,7 +203,7 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="3"
-                FontSize="16"
+                
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest2}"
                 Margin="5"
@@ -214,7 +214,7 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="4"
-                FontSize="16"
+                
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest2}"
                 Margin="5"
@@ -225,7 +225,7 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="5"
-                FontSize="16"
+                
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest2}"
                 Margin="5"
@@ -236,7 +236,7 @@
             <ComboBox
                 Grid.Column="3"
                 Grid.Row="1"
-                FontSize="16"
+                
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest2}"
                 Margin="5"

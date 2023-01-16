@@ -9,8 +9,14 @@
                 <ControlTemplate
                     TargetType="ComboBox">
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Width="5*" />
+                            <ColumnDefinition
+                                Width="*" />
+                        </Grid.ColumnDefinitions>
                         <ToggleButton
-                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
                             Focusable="false"
                             IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}">
                             <ToggleButton.Template>
@@ -69,10 +75,7 @@
                             ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                             ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                             Margin="3" />
-                        <TextBox
-                            x:Name="PART_EditableTextBox"
-                            Visibility="Hidden"
-                            IsReadOnly="{TemplateBinding IsReadOnly}" />
+                
                         <Popup
                             Name="Popup"
                             Placement="Bottom"

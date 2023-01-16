@@ -9,8 +9,8 @@
     xmlns:view="clr-namespace:LostArkAction.View"
     mc:Ignorable="d"
     Title="LostArkAblity"
-    Height="980"
-    Width="800"
+    Height="800"
+    Width="700"
     WindowStyle="None"
     ResizeMode="CanMinimize">
     
@@ -33,7 +33,7 @@
             <RowDefinition
                 Height="25"></RowDefinition>
             <RowDefinition
-                Height="50"></RowDefinition>
+                Height="25"></RowDefinition>
             <RowDefinition
                 Height="50"></RowDefinition>
         </Grid.RowDefinitions>

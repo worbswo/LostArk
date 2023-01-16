@@ -46,19 +46,19 @@
                     Text="각인1"
                     
                     VerticalAlignment="Bottom"
-                    FontSize="10"
+                    FontSize="7"
                     Foreground="DarkGray"></TextBlock>
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    FontSize="10"
+                    FontSize="7"
                     Foreground="DarkGray"></TextBlock>
                 <ComboBox
                     Name="option1"
                     Grid.Row="2"
-                    FontSize="16"
+                    
                     Foreground="White"
                     Margin="0,0,0,2"
                     Style="{StaticResource ComboBoxTest2}"
@@ -69,7 +69,7 @@
                 <TextBox
                     Grid.Row="2"
                     Grid.Column="2"
-                    FontSize="16"
+                    
                     Foreground="White"
                     Background="#FF636366"
                     BorderThickness="0"
@@ -86,18 +86,18 @@
                     Grid.Row="3"
                     Text="각인2"
                     VerticalAlignment="Bottom"
-                    FontSize="10"
+                    FontSize="7"
                     Foreground="DarkGray"></TextBlock>
                 <TextBlock
                     Grid.Row="3"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    FontSize="10"
+                    FontSize="7"
                     Foreground="DarkGray"></TextBlock>
                 <ComboBox
                     Grid.Row="4"
-                    FontSize="16"
+                    
                     Foreground="White"
                     Margin="0,0,0,2"
                     Style="{StaticResource ComboBoxTest2}"
@@ -108,7 +108,7 @@
                 <TextBox
                     Grid.Row="4"
                     Grid.Column="2"
-                    FontSize="16"
+                    
                     Foreground="White"
                     Background="#FF636366"
                     BorderThickness="0"
@@ -159,18 +159,18 @@
                     Grid.Row="1"
                     Text="각인1"
                     VerticalAlignment="Bottom"
-                    FontSize="10"
+                    FontSize="7"
                     Foreground="DarkGray"></TextBlock>
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    FontSize="10"
+                    FontSize="7"
                     Foreground="DarkGray"></TextBlock>
                 <ComboBox
                     Grid.Row="2"
-                    FontSize="16"
+                    
                     Foreground="White"
                     Margin="0,0,0,2"
                     Style="{StaticResource ComboBoxTest2}"
@@ -181,7 +181,7 @@
                 <TextBox
                     Grid.Row="2"
                     Grid.Column="2"
-                    FontSize="16"
+                    
                     Foreground="White"
                     Background="#FF636366"
                     BorderThickness="0"
@@ -198,18 +198,18 @@
                     Grid.Row="3"
                     Text="각인2"
                     VerticalAlignment="Bottom"
-                    FontSize="10"
+                    FontSize="7"
                     Foreground="DarkGray"></TextBlock>
                 <TextBlock
                     Grid.Row="3"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    FontSize="10"
+                    FontSize="7"
                     Foreground="DarkGray"></TextBlock>
                 <ComboBox
                     Grid.Row="4"
-                    FontSize="16"
+                    
                     Foreground="White"
                     Margin="0,0,0,2"
                     Style="{StaticResource ComboBoxTest2}"
@@ -220,7 +220,7 @@
                 <TextBox
                     Grid.Row="4"
                     Grid.Column="2"
-                    FontSize="16"
+                    
                     Foreground="White"
                     Background="#FF636366"
                     BorderThickness="0"
@@ -237,18 +237,18 @@
                     Grid.Row="5"
                     Text="감소 각인"
                     VerticalAlignment="Bottom"
-                    FontSize="10"
+                    FontSize="7"
                     Foreground="DarkGray"></TextBlock>
                 <TextBlock
                     Grid.Row="5"
                     Grid.Column="2"
                     Text="수치"
                     VerticalAlignment="Bottom"
-                    FontSize="10"
+                    FontSize="7"
                     Foreground="DarkGray"></TextBlock>
                 <ComboBox
                     Grid.Row="6"
-                    FontSize="16"
+                    
                     Foreground="White"
                     Margin="0,0,0,2"
                     Style="{StaticResource ComboBoxTest2}"
@@ -261,7 +261,7 @@
                 <TextBox
                     Grid.Row="6"
                     Grid.Column="2"
-                    FontSize="16"
+                    
                     Foreground="White"
                     Background="#FF636366"
                     BorderThickness="0"
