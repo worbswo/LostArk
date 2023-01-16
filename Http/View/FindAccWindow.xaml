@@ -7,18 +7,18 @@
     xmlns:local="clr-namespace:Http.View"
     xmlns:code="clr-namespace:Http.Code"
     mc:Ignorable="d"
-    Title="FindAccWindow"
+    Title="검색 결과"
     Height="800"
-    Width="1230"
-    MaxWidth="1230"
-    MinWidth="1230">
+    Width="1180"
+
+    ResizeMode="NoResize">
     <Window.Resources>
         <code:StringToImageSourceConverter
             x:Key="MyImageConverter"></code:StringToImageSourceConverter>
     </Window.Resources>
     <Grid>
         <ListView
-            Margin="10"
+            Margin="0"
             ItemsSource="{Binding AccCollectionView}"
             Width="1180"
             Name="lstView"

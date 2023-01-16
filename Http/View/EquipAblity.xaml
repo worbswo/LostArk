@@ -69,7 +69,10 @@
                 <TextBox
                     Grid.Row="2"
                     Grid.Column="2"
-                    FontSize="18"
+                    FontSize="16"
+                    Foreground="White"
+                    Background="#FF636366"
+                    BorderThickness="0"
                     Text="{Binding DataContext.EquipAblityVM.FigureItems[0]}"
                     VerticalAlignment="Center">
                 </TextBox>
@@ -105,7 +108,10 @@
                 <TextBox
                     Grid.Row="4"
                     Grid.Column="2"
-                    FontSize="18"
+                    FontSize="16"
+                    Foreground="White"
+                    Background="#FF636366"
+                    BorderThickness="0"
                     Text="{Binding DataContext.EquipAblityVM.FigureItems[1]}"
                     VerticalAlignment="Center">
                 </TextBox>
@@ -175,7 +181,10 @@
                 <TextBox
                     Grid.Row="2"
                     Grid.Column="2"
-                    FontSize="18"
+                    FontSize="16"
+                    Foreground="White"
+                    Background="#FF636366"
+                    BorderThickness="0"
                     Text="{Binding DataContext.EquipAblityVM.FigureItems[2]}"
                     VerticalAlignment="Center">
                 </TextBox>
@@ -211,7 +220,10 @@
                 <TextBox
                     Grid.Row="4"
                     Grid.Column="2"
-                    FontSize="18"
+                    FontSize="16"
+                    Foreground="White"
+                    Background="#FF636366"
+                    BorderThickness="0"
                     Text="{Binding DataContext.EquipAblityVM.FigureItems[3]}"
                     VerticalAlignment="Center">
                 </TextBox>
@@ -249,7 +261,10 @@
                 <TextBox
                     Grid.Row="6"
                     Grid.Column="2"
-                    FontSize="18"
+                    FontSize="16"
+                    Foreground="White"
+                    Background="#FF636366"
+                    BorderThickness="0"
                     Text="{Binding DataContext.EquipAblityVM.FigureItems[4]}"
                     VerticalAlignment="Center">
                 </TextBox>
