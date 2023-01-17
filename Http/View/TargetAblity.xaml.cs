@@ -22,8 +22,51 @@ namespace LostArkAction.View
     {
         public TargetAblity()
         {
+
             InitializeComponent();
+            init(Combo1);
+            init(Combo2);
+            init(Combo3);
+            init(Combo4);
+            init(Combo5);
+            init(Combo6);
+            init(Combo7);
+
         }
 
+        private void Combo1_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+        private void init(ComboBox comboBox)
+        {
+            comboBox.IsDropDownOpen = true;
+
+            comboBox.Items.Filter = ((o) =>
+            {
+                string sValue = string.Empty;
+                if (o is string)
+                {
+                    sValue = o.ToString();
+                }
+                else if (o is ComboBoxItem)
+                {
+                    System.Reflection.PropertyInfo info = o.GetType().GetProperty(comboBox.DisplayMemberPath);
+                    if (info != null)
+                    {
+                        object oValue = info.GetValue(o, null);
+                        if (oValue != null)
+                        {
+                            sValue = oValue.ToString();
+                        }
+                    }
+                }
+                if (!string.IsNullOrEmpty(sValue) && sValue.Contains(comboBox.Text)) return true;
+                else return false;
+            });
+            comboBox.IsDropDownOpen = false;
+            comboBox.Items.Filter = null;
+            comboBox.SelectedIndex = -1;
+        }
     }
 }

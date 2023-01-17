@@ -2,6 +2,7 @@
 using LostArkAction.viewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace LostArkAction.viewModel
     public class EquipAblityVM : ViewModelBase
     {
         #region Field
-        private List<string> _selectOption;
+        private ObservableCollection<string> _selectOption;
         private List<string> _selectOption2;
 
         private List<string> _selectItems=new List<string> { "", "", "", "", ""};
@@ -46,13 +47,13 @@ namespace LostArkAction.viewModel
 
 
 
-        public List<string> SelectOptions
+        public ObservableCollection<string> SelectOptions
         {
             get
             {
                 if (_selectOption == null)
                 {
-                    _selectOption = new List<string>();
+                    _selectOption = new ObservableCollection<string>();
 
                 }
                 return _selectOption;
@@ -60,7 +61,7 @@ namespace LostArkAction.viewModel
             set
             {
                 _selectOption = value;
-                OnPropertyChanged("SelectOptions");
+                NotifyPropertyChanged("SelectOptions");
             }
         }
         public List<string> SelectOptions2

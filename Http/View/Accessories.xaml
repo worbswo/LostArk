@@ -182,7 +182,7 @@
                 Grid.Row="1"
                 
                 Foreground="White"
-                Style="{StaticResource ComboBoxTest2}"
+                Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
                 Width="70"
                 Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[0],Mode=TwoWay}"
@@ -193,7 +193,7 @@
                 Grid.Row="2"
                 
                 Foreground="White"
-                Style="{StaticResource ComboBoxTest2}"
+                Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
                 Width="70"
                 Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[2],Mode=TwoWay}"
@@ -204,7 +204,7 @@
                 Grid.Row="3"
                 
                 Foreground="White"
-                Style="{StaticResource ComboBoxTest2}"
+                Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
                 Width="70"
                 Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[3],Mode=TwoWay}"
@@ -215,7 +215,7 @@
                 Grid.Row="4"
                 
                 Foreground="White"
-                Style="{StaticResource ComboBoxTest2}"
+                Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
                 Width="70"
                 Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[4],Mode=TwoWay}"
@@ -226,7 +226,7 @@
                 Grid.Row="5"
                 
                 Foreground="White"
-                Style="{StaticResource ComboBoxTest2}"
+                Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
                 Width="70"
                 Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[5],Mode=TwoWay}"
@@ -237,7 +237,7 @@
                 Grid.Row="1"
                 
                 Foreground="White"
-                Style="{StaticResource ComboBoxTest2}"
+                Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
                 Width="70"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"

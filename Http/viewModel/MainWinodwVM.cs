@@ -271,6 +271,13 @@ namespace LostArkAction.viewModel
             }
             TargetAblityVM.SelectItems = TargetAblityVM.SelectItems;
             TargetAblityVM.SelectFigureItems = TargetAblityVM.SelectFigureItems;
+            TargetAblityVM.SelectItem1 = TargetAblityVM.SelectItems[0];
+            TargetAblityVM.SelectItem2 = TargetAblityVM.SelectItems[1];
+            TargetAblityVM.SelectItem3 = TargetAblityVM.SelectItems[2];
+            TargetAblityVM.SelectItem4 = TargetAblityVM.SelectItems[3];
+            TargetAblityVM.SelectItem5 = TargetAblityVM.SelectItems[4];
+            TargetAblityVM.SelectItem6 = TargetAblityVM.SelectItems[5];
+            TargetAblityVM.SelectItem7 = TargetAblityVM.SelectItems[6];
         }
         public void SearchMethod(object sender)
         {

@@ -61,9 +61,9 @@
                     
                     Foreground="White"
                     Margin="0,0,0,2"
-                    Style="{StaticResource ComboBoxTest2}"
+                    Style="{StaticResource ComboBoxTest3}"
                     SelectedItem="{Binding DataContext.EquipAblityVM.SelectItems[0]}"
-                    ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions}"
+                    ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions,Mode=TwoWay}"
                     VerticalAlignment="Center">
                 </ComboBox>
                 <TextBox
@@ -97,10 +97,9 @@
                     Foreground="DarkGray"></TextBlock>
                 <ComboBox
                     Grid.Row="4"
-                    
                     Foreground="White"
                     Margin="0,0,0,2"
-                    Style="{StaticResource ComboBoxTest2}"
+                    Style="{StaticResource ComboBoxTest3}"
                     SelectedItem="{Binding DataContext.EquipAblityVM.SelectItems[1]}"
                     ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions}"
                     VerticalAlignment="Center">
@@ -173,7 +172,7 @@
                     
                     Foreground="White"
                     Margin="0,0,0,2"
-                    Style="{StaticResource ComboBoxTest2}"
+                    Style="{StaticResource ComboBoxTest3}"
                     SelectedItem="{Binding DataContext.EquipAblityVM.SelectItems[2]}"
                     ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions}"
                     VerticalAlignment="Center">
@@ -212,7 +211,7 @@
                     
                     Foreground="White"
                     Margin="0,0,0,2"
-                    Style="{StaticResource ComboBoxTest2}"
+                    Style="{StaticResource ComboBoxTest3}"
                     SelectedItem="{Binding DataContext.EquipAblityVM.SelectItems[3]}"
                     ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions}"
                     VerticalAlignment="Center">
@@ -251,7 +250,7 @@
                     
                     Foreground="White"
                     Margin="0,0,0,2"
-                    Style="{StaticResource ComboBoxTest2}"
+                    Style="{StaticResource ComboBoxTest3}"
                     SelectedItem="{Binding DataContext.EquipAblityVM.SelectItems[4]}"
                     ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions2}"
                     VerticalAlignment="Center">

@@ -29,11 +29,15 @@
                 Grid.Row="2"
                 Foreground="White"
                 Margin="0,0,0,2"
+                IsEditable="True"
+                
                 Style="{StaticResource ComboBoxTest2}"
-                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[0],Mode=TwoWay}"
-                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
-                command:CommandBehavior.Event="SelectionChanged"
-                ItemsSource="{Binding DataContext.TargetAblityVM.Options}"
+                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem1,Mode=TwoWay}"
+                ItemsSource="{Binding DataContext.TargetAblityVM.Options1}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
+                command:CommandBehavior.Event="PreviewKeyUp"
+                IsTextSearchEnabled="False"
+                
                 VerticalAlignment="Center">
             </ComboBox>
             <Rectangle
@@ -45,15 +49,16 @@
             <ComboBox
                 Name="Combo2"
                 Grid.Row="4"
-
+                IsEditable="True"
                 Foreground="White"
                 Margin="0,0,0,2"
                 Style="{StaticResource ComboBoxTest2}"
 
-                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[1],Mode=TwoWay}"
-                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
-                command:CommandBehavior.Event="SelectionChanged"
-                ItemsSource="{Binding DataContext.TargetAblityVM.Options}"
+                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem2,Mode=TwoWay}"
+                ItemsSource="{Binding DataContext.TargetAblityVM.Options2,Mode=OneTime}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
+                command:CommandBehavior.Event="PreviewKeyUp"
+                IsTextSearchEnabled="False"
                 VerticalAlignment="Center">
             </ComboBox>
             <Rectangle
@@ -65,15 +70,15 @@
             <ComboBox
                 Name="Combo3"
                 Grid.Row="6"
-
+                IsEditable="True"
                 Foreground="White"
                 Margin="0,0,0,2"
                 Style="{StaticResource ComboBoxTest2}"
-
-                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[2],Mode=TwoWay}"
-                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
-                command:CommandBehavior.Event="SelectionChanged"
-                ItemsSource="{Binding DataContext.TargetAblityVM.Options}"
+                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem3,Mode=TwoWay}"
+                ItemsSource="{Binding DataContext.TargetAblityVM.Options3,Mode=OneTime}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
+                command:CommandBehavior.Event="PreviewKeyUp"
+                IsTextSearchEnabled="False"
                 VerticalAlignment="Center">
             </ComboBox>
             <Rectangle
@@ -85,14 +90,15 @@
             <ComboBox
                 Name="Combo4"
                 Grid.Row="8"
-
+                IsEditable="True"
                 Foreground="White"
                 Margin="0,0,0,2"
                 Style="{StaticResource ComboBoxTest2}"
-                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[3],Mode=TwoWay}"
-                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
-                command:CommandBehavior.Event="SelectionChanged"
-                ItemsSource="{Binding DataContext.TargetAblityVM.Options}"
+                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem4,Mode=TwoWay}"
+                ItemsSource="{Binding DataContext.TargetAblityVM.Options4}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
+                command:CommandBehavior.Event="PreviewKeyUp"
+                IsTextSearchEnabled="False"
                 VerticalAlignment="Center">
             </ComboBox>
             <Rectangle
@@ -104,14 +110,15 @@
             <ComboBox
                 Name="Combo5"
                 Grid.Row="10"
-
+                IsEditable="True"
                 Foreground="White"
                 Margin="0,0,0,2"
                 Style="{StaticResource ComboBoxTest2}"
-                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[4],Mode=TwoWay}"
-                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
-                command:CommandBehavior.Event="SelectionChanged"
-                ItemsSource="{Binding DataContext.TargetAblityVM.Options}"
+                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem5,Mode=TwoWay}"
+                ItemsSource="{Binding DataContext.TargetAblityVM.Options5}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
+                command:CommandBehavior.Event="PreviewKeyUp"
+                IsTextSearchEnabled="False"
                 VerticalAlignment="Center">
             </ComboBox>
             <Rectangle
@@ -123,14 +130,15 @@
             <ComboBox
                 Name="Combo6"
                 Grid.Row="12"
-
+                IsEditable="True"
                 Foreground="White"
                 Margin="0,0,0,2"
                 Style="{StaticResource ComboBoxTest2}"
-                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[5],Mode=TwoWay}"
-                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
-                command:CommandBehavior.Event="SelectionChanged"
-                ItemsSource="{Binding DataContext.TargetAblityVM.Options}"
+                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem6,Mode=TwoWay}"
+                ItemsSource="{Binding DataContext.TargetAblityVM.Options6}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
+                command:CommandBehavior.Event="PreviewKeyUp"
+                IsTextSearchEnabled="False"
                 VerticalAlignment="Center">
             </ComboBox>
             <Rectangle
@@ -142,14 +150,15 @@
             <ComboBox
                 Name="Combo7"
                 Grid.Row="14"
-
+                IsEditable="True"
                 Foreground="White"
                 Margin="0,0,0,2"
                 Style="{StaticResource ComboBoxTest2}"
-                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItems[6],Mode=TwoWay}"
-                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
-                command:CommandBehavior.Event="SelectionChanged"
-                ItemsSource="{Binding DataContext.TargetAblityVM.Options}"
+                SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem7,Mode=TwoWay}"
+                ItemsSource="{Binding DataContext.TargetAblityVM.Options7}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
+                command:CommandBehavior.Event="PreviewKeyUp"
+                IsTextSearchEnabled="False"
                 VerticalAlignment="Center">
             </ComboBox>
             <Rectangle
@@ -159,86 +168,107 @@
                 Fill="Gray"
                 VerticalAlignment="Bottom"></Rectangle>
             <ComboBox
+                Name="AblityValue1"
                 Grid.Row="2"
                 Grid.Column="3"
-
                 Foreground="White"
                 Margin="0,0,0,2"
-                Style="{StaticResource ComboBoxTest2}"
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[0],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="{Binding ElementName=Combo1}"
+                Style="{StaticResource ComboBoxTest3}" 
                 VerticalAlignment="Center">
                 
             </ComboBox>
             <ComboBox
+                Name="AblityValue2"
                 Grid.Row="4"
                 Grid.Column="2"
-
                 Foreground="White"
                 Margin="0,0,0,2"
-                Style="{StaticResource ComboBoxTest2}"
+                Style="{StaticResource ComboBoxTest3}"
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[1],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="{Binding ElementName=Combo2}"
                 VerticalAlignment="Center">
                 
             </ComboBox>
             <ComboBox
+                Name="AblityValue3"
                 Grid.Row="6"
                 Grid.Column="2"
 
                 Foreground="White"
                 Margin="0,0,0,2"
-                Style="{StaticResource ComboBoxTest2}"
+                Style="{StaticResource ComboBoxTest3}"
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[2],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="{Binding ElementName=Combo3}"
                 VerticalAlignment="Center">
           
             </ComboBox>
             <ComboBox
+                Name="AblityValue4"
                 Grid.Row="8"
                 Grid.Column="2"
-
                 Foreground="White"
                 Margin="0,0,0,2"
-                Style="{StaticResource ComboBoxTest2}"
+                Style="{StaticResource ComboBoxTest3}"
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[3],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="{Binding ElementName=Combo4}"
                 VerticalAlignment="Center">
-         
             </ComboBox>
             <ComboBox
+                Name="AblityValue5"
                 Grid.Row="10"
                 Grid.Column="2"
-
                 Foreground="White"
                 Margin="0,0,0,2"
-                Style="{StaticResource ComboBoxTest2}"
+                Style="{StaticResource ComboBoxTest3}"
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[4],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="{Binding ElementName=Combo5}"
                 VerticalAlignment="Center">
-
             </ComboBox>
             <ComboBox
+                Name="AblityValue6"
                 Grid.Row="12"
                 Grid.Column="2"
 
                 Foreground="White"
                 Margin="0,0,0,2"
-                Style="{StaticResource ComboBoxTest2}"
+                Style="{StaticResource ComboBoxTest3}"
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[5],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="{Binding ElementName=Combo6}"
                 VerticalAlignment="Center">
               
             </ComboBox>
             <ComboBox
+                Name="AblityValue7"
                 Grid.Row="14"
                 Grid.Column="2"
-
                 Foreground="White"
                 Margin="0,0,0,2"
-                Style="{StaticResource ComboBoxTest2}"
+                Style="{StaticResource ComboBoxTest3}"
                 SelectedIndex="{Binding  DataContext.TargetAblityVM.SelectFigureItems[6],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Figure}"
+                command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.MouseDownCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="{Binding ElementName=Combo7}"
                 VerticalAlignment="Center">
 
             </ComboBox>

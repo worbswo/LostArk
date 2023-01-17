@@ -8,11 +8,11 @@
         TargetType="{x:Type TextBox}">
         <Border
             x:Name="PART_ContentHost"
-            Focusable="True"
+            Focusable="False"
             Background="{TemplateBinding Background}" />
     </ControlTemplate>
     <Style
-        x:Key="ComboBoxTest2"
+        x:Key="ComboBoxTest3"
         TargetType="{x:Type ComboBox}">
         <Setter
             Property="SnapsToDevicePixels"
@@ -144,7 +144,6 @@
                         <ContentPresenter
                             Name="ContentSite"
                             IsHitTestVisible="False"
-                            Visibility="Hidden"
                             Content="{TemplateBinding SelectionBoxItem}"
                             ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                             ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
@@ -154,11 +153,12 @@
                             Style="{x:Null}"
                             Template="{StaticResource ComboBoxTextBox}"
                             VerticalAlignment="Bottom"
-                            Margin="3,3,0,3"
+                            Focusable="True"
+                            Margin="3,3,23,3"
                             Foreground="White"
                             Background="Transparent"
-                            Visibility="Visible"
-                            />
+                            Visibility="Hidden"
+                            IsReadOnly="{TemplateBinding IsReadOnly}" />
                         <Popup
                             Name="Popup"
                             Placement="Bottom"
