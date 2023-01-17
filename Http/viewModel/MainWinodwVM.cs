@@ -17,6 +17,8 @@ using Http.viewModel;
 using System.Threading;
 using System.IO;
 using System.Drawing;
+using Http.Code.DataBase;
+using System.ComponentModel;
 
 namespace LostArkAction.viewModel
 {
@@ -27,7 +29,7 @@ namespace LostArkAction.viewModel
         private ICommand _searchCommand;
         private ICommand _setupCommand;
         private ICommand _keyDownCommand;
-
+        private ICommand _apiSetupOpenCommand;
         private float _progressValue;
         private float _searchProgressValue;
         private float _accProgressValue;
@@ -38,6 +40,10 @@ namespace LostArkAction.viewModel
         private string _setupAblityText="";
         #endregion
         #region Property
+        private APISetup APISetup = new APISetup();
+        public DataBase DataBase = new DataBase("database.sdf");
+        private APISetupVM APISetupVM;
+
         public List<FindAccVM> FindAccVMs  = new List<FindAccVM>();
 
         public TargetAblityVM TargetAblityVM { get; set; } = new TargetAblityVM();
@@ -177,36 +183,44 @@ namespace LostArkAction.viewModel
                 return _setupCommand;
             }
         }
+        public ICommand APISetupOpenCommand
+        {
+            get
+            {
+                if (_apiSetupOpenCommand == null)
+                {
+                    _apiSetupOpenCommand = new RelayCommand(OpenAPISetup);
+                }
+                return _apiSetupOpenCommand;
+            }
+        }
         #endregion
 
         #region Constroctor
         public MainWinodwVM()
         {
-            if (!File.Exists("API.txt"))
+            APISetupVM = new APISetupVM(DataBase);
+            APISetup.DataContext = APISetupVM;
+            APISetupVM.RequestClose += (o, e) => { APISetup.Close(); };
+            APISetup.Closing += (o, e) =>
             {
-                MessageBox.Show("API 파일이 존재하지 않습니다.");
-                App.Current.Shutdown();
-            }
-            else
-            {
-                StreamReader SR = new StreamReader("API.txt");
-                string line;
-                while ((line = SR.ReadLine()) != null)
-                {
-                    HttpClient2.APIkeys.Add(line);
-                }
-                SR.Close();
-                if (HttpClient2.APIkeys.Count == 0)
-                {
-                    MessageBox.Show("API 키가 존재하지 않습니다.");
-                    App.Current.Shutdown();
-                }
-            }
-            HttpClient2.testAPIKey();
+                (e as CancelEventArgs).Cancel = true;
+                APISetup.Hide();
+            };
+            APISetup.Hide();
+            HttpClient2.APIkeys = APISetupVM.GetAPIKey();
+            
         }
         #endregion
 
         #region Method
+        public void OpenAPISetup(object obj)
+        {
+            if (APISetup.Visibility == Visibility.Hidden)
+            {
+                APISetup.Show();
+            }
+        }
         public void KeyDownMethod(object obj, object args)
         {
             KeyEventArgs e = args as KeyEventArgs;
@@ -281,6 +295,11 @@ namespace LostArkAction.viewModel
         }
         public void SearchMethod(object sender)
         {
+            if (HttpClient2.APIkeys == null || HttpClient2.APIkeys.Count == 0)
+            {
+                MessageBox.Show("API Key를 입력하세요!");
+                return;
+            }
             IsEnableSearchBtn = false;
             Ablity = new Ablity(this);
             FindAccVMs = new List<FindAccVM>();
@@ -456,7 +475,8 @@ namespace LostArkAction.viewModel
                         }
                     }
                 }
-                
+                APISetup.Owner = App.Current.MainWindow;
+
             }
         }
         #endregion

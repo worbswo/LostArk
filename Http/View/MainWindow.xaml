@@ -288,7 +288,14 @@
                 Foreground="GhostWhite"
                 IsChecked="{Binding IsAll}"
                 Content="전체"></RadioButton>
-          
+            <Button
+                Content="API관리"
+                FontWeight="Bold"
+                FontSize="20"
+                Command="{Binding APISetupOpenCommand}"
+                HorizontalAlignment="Center"
+                IsEnabled="{Binding IsEnableSearchBtn}"
+                Grid.Column="4"></Button>
             <Button
                 Content="  검 색  "
                 FontWeight="Bold"
