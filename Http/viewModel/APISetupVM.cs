@@ -22,10 +22,13 @@ namespace Http.viewModel
     {
         #region Field
         private RelayCommand _addApiKeyCommand;
+        private RelayCommand _deleteApiKeyCommand;
+
         private string _apiKeystr;
         #endregion
 
         #region Property
+        public int SelectedIndex { get; set; }
         private DataBase DataBase;
         public string ApiKeyStr
         {
@@ -75,14 +78,29 @@ namespace Http.viewModel
                 return _addApiKeyCommand;
             }
         }
+        public ICommand DeleteApiKeyCommand
+        {
+            get
+            {
+                if (_deleteApiKeyCommand == null)
+                {
+                    _deleteApiKeyCommand = new RelayCommand(DeleteAPIKey);
+                }
+                return _deleteApiKeyCommand;
+            }
+        }
+
         #endregion
 
         #region Method
-        private void AddAPIKey(object sender)
+        public void AddAPIKey(object sender)
         {
             InputApiKey();        
         }
-
+        public void DeleteAPIKey(object sender)
+        {
+            ApiKeys.RemoveAt(SelectedIndex);
+        }
         public async void InputApiKey()
         {
             HttpClient SharedClient = new HttpClient();

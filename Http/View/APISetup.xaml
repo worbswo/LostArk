@@ -14,18 +14,21 @@
         Background="#FF424452">
         <Grid.ColumnDefinitions>
             <ColumnDefinition
-                Width="3*"></ColumnDefinition>
+                ></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition
-                Height="5*"></RowDefinition>
+                Height="6*"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+
         </Grid.RowDefinitions>
         <ListBox
             Grid.Row="1"
             Grid.ColumnSpan="2"
+            SelectedIndex="{Binding SelectedIndex}"
             ItemsSource="{Binding ApiKeyCollectionView}"
             Margin="10">
             
@@ -37,16 +40,24 @@
             Foreground="White"
             VerticalAlignment="Bottom"> API KEY LIST</TextBlock>
         <TextBox
-            Grid.Row="3"
-            Margin="20,0,0,0"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Margin="20,0,20,0"
             Text="{Binding ApiKeyStr}"
             VerticalAlignment="Center"></TextBox>
+        <Button
+            Grid.Row="3"
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            FontWeight="Bold"
+            Command="{Binding AddApiKeyCommand}"
+            HorizontalAlignment="Center">API 추가</Button>
         <Button
             Grid.Row="3"
             Grid.Column="1"
             VerticalAlignment="Center"
             FontWeight="Bold"
-            Command="{Binding AddApiKeyCommand}"
-            HorizontalAlignment="Center">API 추가</Button>
+            Command="{Binding DeleteApiKeyCommand}"
+            HorizontalAlignment="Center">API 삭제</Button>
     </Grid>
 </Window>
