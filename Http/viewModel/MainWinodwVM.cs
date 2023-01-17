@@ -311,6 +311,12 @@ namespace LostArkAction.viewModel
                 {
                     continue;
                 }
+                if (TargetAblityVM.SelectItems[i] == null)
+                {
+                    MessageBox.Show("올바른 각인을 입력하세요");
+                    IsEnableSearchBtn = true;
+                    return;
+                }
                 if (!Ablity.AblityCode.ContainsKey(TargetAblityVM.SelectItems[i]))
                 {
                     MessageBox.Show("해당 각인이 없습니다.");
