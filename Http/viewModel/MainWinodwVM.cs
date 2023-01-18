@@ -675,10 +675,7 @@ namespace LostArkAction.viewModel
             {
                 Name = SetEngraveName[SetEngraveIndex];
             }
-            if (SetEngraveName.Count == 0)
-            {
-                return;
-            }
+
             List<string> Target = SetEngraves[Name].Target.Split('_').ToList();
             for (int i = 0; i < Target.Count; i++)
             {
@@ -735,58 +732,7 @@ namespace LostArkAction.viewModel
             AccessoriesVM.Qulity5 = AccessoriesVM.Qulity[4];
             AccessoriesVM.SelectCharacteriastics = AccessoriesVM.SelectCharacteriastics;
         }
-        public void initEngrave()
-        {
-
-            TargetAblityVM = new TargetAblityVM();
-            EquipAblityVM = new EquipAblityVM();
-            AccessoriesVM = new AccessoriesVM();
-            for (int i = 0; i < TargetAblityVM.SelectItems.Count; i++)
-            {
-
-                TargetAblityVM.SelectItems[i] = "";
-                TargetAblityVM.SelectFigureItems[i] = 0;
-                
-            }
-            TargetAblityVM.SelectItems = TargetAblityVM.SelectItems;
-            TargetAblityVM.SelectFigureItems = TargetAblityVM.SelectFigureItems;
-            TargetAblityVM.SelectItem1 = TargetAblityVM.SelectItems[0];
-            TargetAblityVM.SelectItem2 = TargetAblityVM.SelectItems[1];
-            TargetAblityVM.SelectItem3 = TargetAblityVM.SelectItems[2];
-            TargetAblityVM.SelectItem4 = TargetAblityVM.SelectItems[3];
-            TargetAblityVM.SelectItem5 = TargetAblityVM.SelectItems[4];
-            TargetAblityVM.SelectItem6 = TargetAblityVM.SelectItems[5];
-            TargetAblityVM.SelectItem7 = TargetAblityVM.SelectItems[6];
-           
-            for (int i = 0; i < EquipAblityVM.SelectItems.Count; i++)
-            {
-
-                    EquipAblityVM.SelectItems[i] = null;
-                    EquipAblityVM.FigureItems[i] = 0;
-                
-            }
-            EquipAblityVM.SelectItems = EquipAblityVM.SelectItems;
-            EquipAblityVM.FigureItems = EquipAblityVM.FigureItems;
-            for (int i = 0; i < AccessoriesVM.Qulity.Count; i++)
-            {
-                    AccessoriesVM.Qulity[i] =0;
-                
-     
-            }
-            for (int i = 0; i < AccessoriesVM.SelectCharacteriastics.Count; i++)
-            {
-      
-
-                    AccessoriesVM.SelectCharacteriastics[i] ="";
-                
-            }
-            AccessoriesVM.Qulity1 = AccessoriesVM.Qulity[0];
-            AccessoriesVM.Qulity2 = AccessoriesVM.Qulity[1];
-            AccessoriesVM.Qulity3 = AccessoriesVM.Qulity[2];
-            AccessoriesVM.Qulity4 = AccessoriesVM.Qulity[3];
-            AccessoriesVM.Qulity5 = AccessoriesVM.Qulity[4];
-            AccessoriesVM.SelectCharacteriastics = AccessoriesVM.SelectCharacteriastics;
-        }
+    
         public void ListClickMethod(object sender, object e)
         {
             SetEngraveText();
