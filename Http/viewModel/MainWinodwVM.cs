@@ -50,7 +50,8 @@ namespace LostArkAction.viewModel
         #endregion
         #region Property
         private APISetup APISetup = new APISetup();
-        public DataBase DataBase = new DataBase("EngaveDatabase.sqlite");
+        
+        public DataBase DataBase = new DataBase(System.AppDomain.CurrentDomain.BaseDirectory + "EngaveDatabase.sqlite");
         private APISetupVM APISetupVM;
         public Dictionary<string, SetEngrave> SetEngraves = new Dictionary<string, SetEngrave>();
         public List<FindAccVM> FindAccVMs  = new List<FindAccVM>();
@@ -560,6 +561,11 @@ namespace LostArkAction.viewModel
         }
         public void AddEngraveMethod(object sender)
         {
+            if (SetEngraveNameText == "")
+            {
+                MessageBox.Show("세팅 이름을 입력하세요");
+                return;
+            }
             for(int i = 0; i < SetEngraveName.Count; i++)
             {
                 if (SetEngraveName[i]== SetEngraveNameText)
@@ -569,6 +575,7 @@ namespace LostArkAction.viewModel
                     return;
                 }
             }
+           
             AddEngrave(SetEngraveNameText);
             SetEngraveNameText = "";
         }
