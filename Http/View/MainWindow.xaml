@@ -38,7 +38,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="280"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="280"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border
@@ -259,9 +259,9 @@
             Grid.ColumnSpan="2"
             Margin="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                <ColumnDefinition Width="0.7*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -311,7 +311,9 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="10"
-                Grid.Column="3">후원 아브렐슈드 : 란후라이</TextBlock>
+                TextWrapping="Wrap"
+                Grid.Column="3"
+                Text="후원 서버 : 아브렐슈드         캐릭터명 : 란후라이"></TextBlock>
         </Grid>
         <Expander
             Grid.Row="1"
