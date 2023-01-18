@@ -22,7 +22,6 @@ namespace LostArkAction.View
     {
         public TargetAblity()
         {
-
             InitializeComponent();
             init(Combo1);
             init(Combo2);
@@ -31,7 +30,6 @@ namespace LostArkAction.View
             init(Combo5);
             init(Combo6);
             init(Combo7);
-
         }
 
         private void Combo1_KeyUp(object sender, KeyEventArgs e)
@@ -65,8 +63,6 @@ namespace LostArkAction.View
                 else return false;
             });
             comboBox.IsDropDownOpen = false;
-            comboBox.Items.Filter = null;
-            comboBox.SelectedIndex = -1;
         }
     }
 }

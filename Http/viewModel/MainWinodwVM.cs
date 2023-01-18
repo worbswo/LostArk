@@ -19,6 +19,9 @@ using System.IO;
 using System.Drawing;
 using Http.Code.DataBase;
 using System.ComponentModel;
+using Http.Model;
+using System.Collections.ObjectModel;
+using System.Xml.Linq;
 
 namespace LostArkAction.viewModel
 {
@@ -30,6 +33,10 @@ namespace LostArkAction.viewModel
         private ICommand _setupCommand;
         private ICommand _keyDownCommand;
         private ICommand _apiSetupOpenCommand;
+        private ICommand _AddEngraveCommand;
+        private ICommand _RemoveEngraveCommand;
+        private ICommand _listClickCommand;
+        private ICommand _updateEngraveCommand;
         private float _progressValue;
         private float _searchProgressValue;
         private float _accProgressValue;
@@ -38,12 +45,14 @@ namespace LostArkAction.viewModel
         private bool isAncient;
         private bool isAll;
         private string _setupAblityText="";
+        private string _setEngraveNameText = "";
+        private int _setEngraveIndex = -1;
         #endregion
         #region Property
         private APISetup APISetup = new APISetup();
-        public DataBase DataBase = new DataBase("database.sdf");
+        public DataBase DataBase = new DataBase("EngaveDatabase.sdf");
         private APISetupVM APISetupVM;
-
+        public Dictionary<string, SetEngrave> SetEngraves = new Dictionary<string, SetEngrave>();
         public List<FindAccVM> FindAccVMs  = new List<FindAccVM>();
 
         public TargetAblityVM TargetAblityVM { get; set; } = new TargetAblityVM();
@@ -51,6 +60,30 @@ namespace LostArkAction.viewModel
         public AccessoriesVM AccessoriesVM { get; set; } = new AccessoriesVM();
         public Ablity Ablity { get; set; }
         public Thread ThreadSearch { get; set; }
+        public string SetEngraveNameText
+        {
+            get
+            {
+                return _setEngraveNameText;
+            }
+            set
+            {
+                _setEngraveNameText = value;
+                OnPropertyChanged("SetEngraveNameText");
+            }
+        }
+        public int SetEngraveIndex
+        {
+            get
+            {
+                return _setEngraveIndex;
+            }
+            set
+            {
+                _setEngraveIndex = value;
+                OnPropertyChanged("SetEngraveIndex");
+            }
+        }
         public string SetupAblityText
         {
             get { return _setupAblityText; }
@@ -146,7 +179,16 @@ namespace LostArkAction.viewModel
             }
         }
 
-
+        private ObservableCollection<string> SetEngraveName { get; set; }
+        private CollectionViewSource SetEngraveNameViewSource { get; set; }
+        public ICollectionView SetEngraveNameCollectionView
+        {
+            get { return SetEngraveNameViewSource.View; }
+            set
+            {
+                OnPropertyChanged("SetEngraveNameCollectionView");
+            }
+        }
         #endregion
 
         #region Command
@@ -194,11 +236,58 @@ namespace LostArkAction.viewModel
                 return _apiSetupOpenCommand;
             }
         }
+        public ICommand RemoveEngraveCommand
+        {
+            get
+            {
+                if (_RemoveEngraveCommand == null)
+                {
+                    _RemoveEngraveCommand = new RelayCommand(RemoveEngraveMethod);
+                }
+                return _RemoveEngraveCommand;
+            }
+        }
+        public ICommand AddEngraveCommand
+        {
+            get
+            {
+                if (_AddEngraveCommand == null)
+                {
+                    _AddEngraveCommand = new RelayCommand(AddEngraveMethod);
+                }
+                return _AddEngraveCommand;
+            }
+        }
+        public ICommand ListClickCommand
+        {
+            get
+            {
+                if (_listClickCommand == null)
+                {
+                    _listClickCommand = new RelayCommand(ListClickMethod,null);
+                }
+                return _listClickCommand;
+            }
+        }
+        public ICommand UpdateEngraveCommand
+        {
+            get
+            {
+                if (_updateEngraveCommand == null)
+                {
+                    _updateEngraveCommand = new RelayCommand(UpdateEngraveMethod);
+                }
+                return _updateEngraveCommand;
+            }
+        }
         #endregion
 
         #region Constroctor
         public MainWinodwVM()
         {
+            TargetAblityVM = new TargetAblityVM();
+            EquipAblityVM = new EquipAblityVM();
+            AccessoriesVM = new AccessoriesVM();
             APISetupVM = new APISetupVM(DataBase);
             APISetup.DataContext = APISetupVM;
             APISetupVM.RequestClose += (o, e) => { APISetup.Close(); };
@@ -209,7 +298,21 @@ namespace LostArkAction.viewModel
             };
             APISetup.Hide();
             HttpClient2.APIkeys = APISetupVM.GetAPIKey();
-            
+            List<SetEngrave> setEngraves = DataBase.GetEngrave();
+            SetEngraveName = new ObservableCollection<string>();
+            for (int i = 0; i < setEngraves.Count; i++)
+            {
+                if (setEngraves[i].Name == DataBase.FinalStateStr)
+                {
+                    SetEngraves.Add(setEngraves[i].Name, setEngraves[i]);
+                    continue;
+                }
+                SetEngraves.Add(setEngraves[i].Name, setEngraves[i]);
+                SetEngraveName.Add(setEngraves[i].Name);
+            }
+
+            SetEngraveNameViewSource = new CollectionViewSource();
+            SetEngraveNameViewSource.Source = this.SetEngraveName;
         }
         #endregion
 
@@ -237,7 +340,7 @@ namespace LostArkAction.viewModel
         {
             string tmp = SetupAblityText;
             string[] strList = new string[7]{"","","","","","","" };
-            int[] ablityVal = new int[7];
+            int[] ablityVal = new int[7] {4,4,4,4,4,4,4 };
             int idx = 0;
 
             for (int i = 0; i < tmp.Length; i++)
@@ -281,6 +384,11 @@ namespace LostArkAction.viewModel
                 {
                     TargetAblityVM.SelectItems[i] = Ablity.AblityShort[strList[i]];
                     TargetAblityVM.SelectFigureItems[i] =(4- ablityVal[i]);
+                }
+                else
+                {
+                    TargetAblityVM.SelectItems[i] = null;
+                    TargetAblityVM.SelectFigureItems[i] = (4 - ablityVal[i]);
                 }
             }
             TargetAblityVM.SelectItems = TargetAblityVM.SelectItems;
@@ -449,7 +557,239 @@ namespace LostArkAction.viewModel
                     }
                 }
             }
+        }
+        public void AddEngraveMethod(object sender)
+        {
+            for(int i = 0; i < SetEngraveName.Count; i++)
+            {
+                if (SetEngraveName[i]== SetEngraveNameText)
+                {
+                    SetEngraveNameText = "";
+                    MessageBox.Show("같은 이름의 세팅이 있습니다.");
+                    return;
+                }
+            }
+            AddEngrave(SetEngraveNameText);
+            SetEngraveNameText = "";
+        }
+        public void UpdateEngraveMethod(object sender)
+        {
+            if(SetEngraveIndex<0||SetEngraveName.Count==0) return;  
 
+            AddEngrave(SetEngraveName[SetEngraveIndex],true);
+
+        }
+        public void RemoveEngraveMethod(object sender)
+        {
+            if (SetEngraveIndex == -1)
+            {
+                return;
+            }
+            DataBase.DeleteEngrave(SetEngraveName[SetEngraveIndex].GetHashCode());
+            int idx = SetEngraveIndex;
+            SetEngraveIndex = SetEngraveIndex - 1 < 0 ? 0 : SetEngraveIndex - 1;
+
+            SetEngraveName.RemoveAt(idx);
+        }
+        public void AddEngrave(string Name,bool isUpdate=false)
+        {
+            
+            SetEngrave setEngrave = new SetEngrave();
+            string Target="";
+            for (int i = 0; i < TargetAblityVM.SelectItems.Count; i++)
+            {
+                if (TargetAblityVM.SelectItems[i] == null|| TargetAblityVM.SelectItems[i] == "")
+                {
+                    Target+=("미사용-" + TargetAblityVM.SelectFigureItems[i].ToString());
+                }
+                else
+                {
+                    Target += (TargetAblityVM.SelectItems[i] + "-" + TargetAblityVM.SelectFigureItems[i].ToString());
+                }
+                if(i< TargetAblityVM.SelectItems.Count-1)
+                {
+                    Target += "_";
+                }
+            }
+            string Equip = "";
+            for (int i = 0; i < EquipAblityVM.SelectItems.Count; i++)
+            {
+
+                if (EquipAblityVM.SelectItems[i] == null || EquipAblityVM.SelectItems[i] == "")
+                {
+                    Equip += ("미사용-" + EquipAblityVM.FigureItems[i].ToString());
+                }
+                else 
+                {
+                    Equip += (EquipAblityVM.SelectItems[i] + "-" + EquipAblityVM.FigureItems[i].ToString());
+                }
+                if (i < EquipAblityVM.SelectItems.Count-1)
+                {
+                    Equip += "_";
+                }
+            }
+            string Acc = "";
+            for(int i=0;i< AccessoriesVM.Qulity.Count; i++)
+            {
+                Acc += AccessoriesVM.Qulity[i];
+                Acc += "_";
+                
+            }
+            for (int i = 0; i < AccessoriesVM.SelectCharacteriastics.Count; i++)
+            {
+                if (AccessoriesVM.SelectCharacteriastics[i] == "")
+                {
+                    Acc += "없음";
+                }
+                else
+                {
+                    Acc += AccessoriesVM.SelectCharacteriastics[i];
+                }
+                if (i < AccessoriesVM.SelectCharacteriastics.Count - 1)
+                {
+                    Acc += "_";
+                }
+            }
+            setEngrave.Name = Name; 
+            setEngrave.Target = Target;
+            setEngrave.Equip= Equip;
+            setEngrave.Acc= Acc;
+            setEngrave.Key = Name.GetHashCode();
+            if (isUpdate)
+            {
+                SetEngraves[Name] = setEngrave;
+                DataBase.UpdateEngrave(setEngrave);
+            }
+            else
+            {
+                SetEngraveName.Add(Name);
+                SetEngraves.Add(Name, setEngrave);
+                DataBase.AddEngrave(setEngrave);
+            }
+        }
+        public void SetEngraveText(bool isInit=false)
+        {
+
+            string Name = DataBase.FinalStateStr;
+            if (!isInit)
+            {
+                Name = SetEngraveName[SetEngraveIndex];
+            }
+            if (SetEngraveName.Count == 0)
+            {
+                return;
+            }
+            List<string> Target = SetEngraves[Name].Target.Split('_').ToList();
+            for (int i = 0; i < Target.Count; i++)
+            {
+                string[] sub = Target[i].Split('-');
+                if (sub[0] != "미사용")
+                {
+                    TargetAblityVM.SelectItems[i] = sub[0];
+                    TargetAblityVM.SelectFigureItems[i] = Convert.ToInt32(sub[1]);
+                }
+                else
+                {
+                    TargetAblityVM.SelectItems[i] = null;
+                    TargetAblityVM.SelectFigureItems[i] = 0;
+                }
+            }
+            TargetAblityVM.SelectItems = TargetAblityVM.SelectItems;
+            TargetAblityVM.SelectFigureItems = TargetAblityVM.SelectFigureItems;
+            TargetAblityVM.SelectItem1 = TargetAblityVM.SelectItems[0];
+            TargetAblityVM.SelectItem2 = TargetAblityVM.SelectItems[1];
+            TargetAblityVM.SelectItem3 = TargetAblityVM.SelectItems[2];
+            TargetAblityVM.SelectItem4 = TargetAblityVM.SelectItems[3];
+            TargetAblityVM.SelectItem5 = TargetAblityVM.SelectItems[4];
+            TargetAblityVM.SelectItem6 = TargetAblityVM.SelectItems[5];
+            TargetAblityVM.SelectItem7 = TargetAblityVM.SelectItems[6];
+            List<string> Equip = SetEngraves[Name].Equip.Split('_').ToList();
+            for (int i = 0; i < Equip.Count; i++)
+            {
+                string[] sub = Equip[i].Split('-');
+                if (sub[0] != "미사용")
+                {
+                    EquipAblityVM.SelectItems[i] = sub[0];
+                    EquipAblityVM.FigureItems[i] = Convert.ToInt32(sub[1]);
+                }
+            }
+            EquipAblityVM.SelectItems = EquipAblityVM.SelectItems;
+            EquipAblityVM.FigureItems = EquipAblityVM.FigureItems;
+            List<string> Acc = SetEngraves[Name].Acc.Split('_').ToList();
+
+            for (int i = 0; i < Acc.Count; i++)
+            {
+                if (i < 5)
+                {
+                    AccessoriesVM.Qulity[i] = Convert.ToInt32(Acc[i]);
+                }
+                else
+                {
+                    AccessoriesVM.SelectCharacteriastics[i - 5] = Acc[i];
+                }
+            }
+            AccessoriesVM.Qulity1 = AccessoriesVM.Qulity[0];
+            AccessoriesVM.Qulity2 = AccessoriesVM.Qulity[1];
+            AccessoriesVM.Qulity3 = AccessoriesVM.Qulity[2];
+            AccessoriesVM.Qulity4 = AccessoriesVM.Qulity[3];
+            AccessoriesVM.Qulity5 = AccessoriesVM.Qulity[4];
+            AccessoriesVM.SelectCharacteriastics = AccessoriesVM.SelectCharacteriastics;
+        }
+        public void initEngrave()
+        {
+
+            TargetAblityVM = new TargetAblityVM();
+            EquipAblityVM = new EquipAblityVM();
+            AccessoriesVM = new AccessoriesVM();
+            for (int i = 0; i < TargetAblityVM.SelectItems.Count; i++)
+            {
+
+                TargetAblityVM.SelectItems[i] = "";
+                TargetAblityVM.SelectFigureItems[i] = 0;
+                
+            }
+            TargetAblityVM.SelectItems = TargetAblityVM.SelectItems;
+            TargetAblityVM.SelectFigureItems = TargetAblityVM.SelectFigureItems;
+            TargetAblityVM.SelectItem1 = TargetAblityVM.SelectItems[0];
+            TargetAblityVM.SelectItem2 = TargetAblityVM.SelectItems[1];
+            TargetAblityVM.SelectItem3 = TargetAblityVM.SelectItems[2];
+            TargetAblityVM.SelectItem4 = TargetAblityVM.SelectItems[3];
+            TargetAblityVM.SelectItem5 = TargetAblityVM.SelectItems[4];
+            TargetAblityVM.SelectItem6 = TargetAblityVM.SelectItems[5];
+            TargetAblityVM.SelectItem7 = TargetAblityVM.SelectItems[6];
+           
+            for (int i = 0; i < EquipAblityVM.SelectItems.Count; i++)
+            {
+
+                    EquipAblityVM.SelectItems[i] = null;
+                    EquipAblityVM.FigureItems[i] = 0;
+                
+            }
+            EquipAblityVM.SelectItems = EquipAblityVM.SelectItems;
+            EquipAblityVM.FigureItems = EquipAblityVM.FigureItems;
+            for (int i = 0; i < AccessoriesVM.Qulity.Count; i++)
+            {
+                    AccessoriesVM.Qulity[i] =0;
+                
+     
+            }
+            for (int i = 0; i < AccessoriesVM.SelectCharacteriastics.Count; i++)
+            {
+      
+
+                    AccessoriesVM.SelectCharacteriastics[i] ="";
+                
+            }
+            AccessoriesVM.Qulity1 = AccessoriesVM.Qulity[0];
+            AccessoriesVM.Qulity2 = AccessoriesVM.Qulity[1];
+            AccessoriesVM.Qulity3 = AccessoriesVM.Qulity[2];
+            AccessoriesVM.Qulity4 = AccessoriesVM.Qulity[3];
+            AccessoriesVM.Qulity5 = AccessoriesVM.Qulity[4];
+            AccessoriesVM.SelectCharacteriastics = AccessoriesVM.SelectCharacteriastics;
+        }
+        public void ListClickMethod(object sender, object e)
+        {
+            SetEngraveText();
         }
         public void OpenFindACC()
         {
@@ -476,7 +816,7 @@ namespace LostArkAction.viewModel
                     }
                 }
                 APISetup.Owner = App.Current.MainWindow;
-
+                AddEngrave(DataBase.FinalStateStr, true);
             }
         }
         #endregion

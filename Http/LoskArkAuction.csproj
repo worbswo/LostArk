@@ -112,6 +112,7 @@
     <Compile Include="Model\Accesories.cs" />
     <Compile Include="Model\Accesory.cs" />
     <Compile Include="Model\SearchAblity.cs" />
+    <Compile Include="Model\SetEngrave.cs" />
     <Compile Include="viewModel\AccVM.cs" />
     <Compile Include="viewModel\AccessoriesVM.cs" />
     <Compile Include="viewModel\APISetupVM.cs" />

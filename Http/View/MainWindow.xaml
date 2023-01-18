@@ -10,11 +10,12 @@
     mc:Ignorable="d"
     Title="LostArkAblity"
     Height="800"
-    Width="550"
+    SizeToContent="WidthAndHeight"
     WindowStyle="None"
     ResizeMode="CanMinimize">
     
     <Grid
+        Width="Auto"
         Background="#FF424452">
 
         <Grid.RowDefinitions>
@@ -22,14 +23,12 @@
                 Height="30"></RowDefinition>
             <RowDefinition
                 Height="30"></RowDefinition>
-
             <RowDefinition
                 Height="0.8*"></RowDefinition>
             <RowDefinition
                 Height="*"></RowDefinition>
             <RowDefinition
                 Height="*"></RowDefinition>
-
             <RowDefinition
                 Height="25"></RowDefinition>
             <RowDefinition
@@ -38,13 +37,13 @@
                 Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border
             Name="main"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             BorderThickness="1"
             BorderBrush="Gray"
             Margin="0">
@@ -186,6 +185,8 @@
             <TextBox
                 Margin="2"
                 FontSize="17"
+                InputMethod.PreferredImeState="On"
+                InputMethod.PreferredImeConversionMode="Native"
                 command:CommandBehavior.Event="KeyDown"
                 command:CommandBehavior.Command="{Binding KeyDownCommand}"
                 Text="{Binding SetupAblityText,UpdateSourceTrigger=PropertyChanged}"
@@ -304,6 +305,96 @@
                 HorizontalAlignment="Center"
                 IsEnabled="{Binding IsEnableSearchBtn}"
                 Grid.Column="5"></Button>
+            <TextBlock
+                FontWeight="Bold"
+                Foreground="White"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="10"
+                Grid.Column="3">후원 아브렐슈드 : 란후라이</TextBlock>
         </Grid>
+        <Expander
+            Grid.Row="1"
+            Grid.RowSpan="7"
+            ExpandDirection="Right"
+            Grid.Column="3">
+            <Grid
+                Width="300"
+                Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition
+                        Height="0.05*"></RowDefinition>
+                    <RowDefinition
+                        Height="0.1*"></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <Border
+                    Grid.RowSpan="5"
+                    Grid.ColumnSpan="3"
+                    Background="#FF636366"
+                    CornerRadius="10"></Border>
+                <TextBlock
+                    Grid.ColumnSpan="3"
+                    Foreground="White"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontWeight="Bold">각인 세팅</TextBlock>
+                <Rectangle Margin="4" Grid.ColumnSpan="3" VerticalAlignment="Bottom" Fill="Gray" Height="2"></Rectangle>
+                <ListBox
+                    ItemsSource="{Binding SetEngraveNameCollectionView}"
+                    SelectedIndex="{Binding SetEngraveIndex}"
+                    command:CommandBehavior.Command="{Binding ListClickCommand}"
+                    command:CommandBehavior.Event="SelectionChanged"
+                    Foreground="White"
+                    FontWeight="SemiBold"
+                    Background="#FF636366"
+                    BorderThickness="0"
+                    Margin="10"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="3">
+                </ListBox>
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="10,0,0,0"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="3"
+                    Foreground="White">각인 세팅 이름 입력</TextBlock>
+                <TextBox
+                    InputMethod.PreferredImeState="On"
+                    InputMethod.PreferredImeConversionMode="Native"
+                    Margin="10,0,10,0"
+                    VerticalAlignment="Center"
+                    Grid.Row="3"
+                    Text="{Binding SetEngraveNameText}"
+                    Grid.ColumnSpan="3"></TextBox>
+                <Button
+                    FontWeight="Bold"
+                    Margin="10"
+                    Command="{Binding AddEngraveCommand}"
+                    Grid.Row="4" > 저장 </Button>
+                <Button
+                    FontWeight="Bold"
+                    Margin="10"
+                    Grid.Column="2"
+                    Command="{Binding RemoveEngraveCommand}"
+                    Grid.Row="4">삭제</Button>
+                <Button
+                    FontWeight="Bold"
+                    Margin="10"
+                    Grid.Column="1"
+                    Command="{Binding UpdateEngraveCommand}"
+                    Grid.Row="4">수정</Button>
+            </Grid>
+        </Expander>
     </Grid>
 </Window>

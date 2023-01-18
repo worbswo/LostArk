@@ -36,6 +36,8 @@ namespace LostArkAction
                 (main.DataContext as MainWinodwVM).Close();
             };
             main.Show();
+            (main.DataContext as MainWinodwVM).SetEngraveText(true);
+
         }
         static Assembly ResolveAssembly(object sender, ResolveEventArgs args)
         {

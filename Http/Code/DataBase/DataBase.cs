@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 using System.Data.SqlServerCe;
 using System.Data;
 using System.IO;
+using Http.Model;
+using Newtonsoft.Json.Bson;
 
 namespace Http.Code.DataBase
 {
     public class DataBase
     {
         internal string DataSourcePath { get; set; }
-
+        public static string FinalStateStr = "finalStateSaveName";
         public DataBase(string productDataFile)
         {
             FileInfo fileInfo = new FileInfo(productDataFile);
@@ -37,18 +39,25 @@ namespace Http.Code.DataBase
             string sql = "CREATE TABLE API (APIKey nText);";
             cmd.CommandText = sql;
             cmd.ExecuteNonQuery();
-            sql = "CREATE TABLE target (Ablity1 nText,Ablity2 nText,Ablity3 nText,Ablity4 nText,Ablity5 nText,Ablity6 nText,Ablity7 nText," +
-                                        "AblityValue1 int,AblityValue2 int,AblityValue3 int,AblityValue4 int,AblityValue5 int,AblityValue6 int,AblityValue7 int );";
+            sql = "CREATE TABLE Engrave (id int, Name nText,Target nText, Equip nText, Acc nText, PRIMARY KEY(id) );";
             cmd.CommandText = sql;
             cmd.ExecuteNonQuery();
-            sql = "CREATE TABLE equip (Ablity1 nText,Ablity2 nText,Ablity3 nText,Ablity4 nText,Ablity5 nText," +
-                                        "AblityValue1 int,AblityValue2 int,AblityValue3 int,AblityValue4 int,AblityValue5 int);";
-            cmd.CommandText = sql;
+            cmd.CommandText = "INSERT INTO Engrave (id , Name,Target, Equip, Acc) " +
+                                    "VALUES (@id, @Name,@Target, @Equip, @Acc);";
+            SqlCeParameter Key = cmd.Parameters.Add("id", SqlDbType.Int);
+
+            SqlCeParameter Name = cmd.Parameters.Add("Name", SqlDbType.NText);
+            SqlCeParameter Target = cmd.Parameters.Add("Target", SqlDbType.NText);
+            SqlCeParameter Equip = cmd.Parameters.Add("Equip", SqlDbType.NText);
+            SqlCeParameter Acc = cmd.Parameters.Add("Acc", SqlDbType.NText);
+            Key.Value = FinalStateStr.GetHashCode();
+
+            Name.Value = FinalStateStr;
+            Target.Value = "미사용-0_미사용-0_미사용-0_미사용-0_미사용-0_미사용-0_미사용-0";
+            Equip.Value = "미사용-0_미사용-0_미사용-0_미사용-0_미사용-0";
+            Acc.Value = "0_0_0_0_0_없음_없음_없음_없음_없음_없음";
             cmd.ExecuteNonQuery();
-            sql = "CREATE TABLE accesory (qualty1 int,qualty2 int,qualty3 int,qualty4 int,qualty5 int," +
-                                         "char1 nText, char2 nText, char3 nText, char4 nText, char5 nText, char6 nText);";
-            cmd.CommandText = sql;
-            cmd.ExecuteNonQuery();
+
         }
         public List<string> getAPIKey()
         {
@@ -79,6 +88,79 @@ namespace Http.Code.DataBase
                                     "VALUES (@APIKey);";
             SqlCeParameter ApiKeyParam = cmd.Parameters.Add("APIKey", SqlDbType.NText);
             ApiKeyParam.Value = apikey;
+            cmd.ExecuteNonQuery();
+            conn.Dispose();
+            conn.Close();
+        }
+        public void AddEngrave(SetEngrave setEngrave)
+        {
+            SqlCeConnection conn = new SqlCeConnection(DataSourcePath);
+            conn.Open();
+            SqlCeCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "INSERT INTO Engrave (id , Name,Target, Equip, Acc) " +
+                                    "VALUES (@id, @Name,@Target, @Equip, @Acc);";
+            SqlCeParameter Key = cmd.Parameters.Add("id", SqlDbType.Int);
+
+            SqlCeParameter Name = cmd.Parameters.Add("Name",SqlDbType.NText);
+            SqlCeParameter Target = cmd.Parameters.Add("Target", SqlDbType.NText);
+            SqlCeParameter Equip = cmd.Parameters.Add("Equip", SqlDbType.NText);
+            SqlCeParameter Acc = cmd.Parameters.Add("Acc", SqlDbType.NText);
+            Key.Value = setEngrave.Name.GetHashCode() ;
+
+            Name.Value = setEngrave.Name;
+            Target.Value = setEngrave.Target;
+            Equip.Value = setEngrave.Equip;
+            Acc.Value = setEngrave.Acc;
+            cmd.ExecuteNonQuery();
+            conn.Dispose();
+            conn.Close();
+        }
+        public void UpdateEngrave(SetEngrave setEngrave)
+        {
+            SqlCeConnection conn = new SqlCeConnection(DataSourcePath);
+            conn.Open();
+            SqlCeCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "update Engrave set Name='" + setEngrave.Name +
+                                               "',Target='" + setEngrave.Target +
+                                               "',Equip='" + setEngrave.Equip +
+                                               "',Acc='" + setEngrave.Acc + "' where id =" + setEngrave.Key;
+
+            cmd.ExecuteNonQuery();
+            conn.Dispose();
+            conn.Close();
+        }
+        public List<SetEngrave> GetEngrave()
+        {
+            List<SetEngrave> engraves= new List<SetEngrave>();
+            SqlCeConnection conn = new SqlCeConnection(DataSourcePath);
+            conn.Open();
+            SqlCeCommand cmd = conn.CreateCommand();
+
+
+            string sql = "select * from Engrave";
+            cmd.CommandText = sql;
+            SqlCeDataReader rdr = cmd.ExecuteReader();
+            if (rdr != null)
+            {
+                while (rdr.Read())
+                {
+                    SetEngrave engrave= new SetEngrave();
+                    engrave.Name = (string)rdr["Name"];
+                    engrave.Target = (string)rdr["Target"];
+                    engrave.Equip = (string)rdr["Equip"];
+                    engrave.Acc = (string)rdr["Acc"];
+                    engraves.Add(engrave);
+                }
+            }
+            return engraves;
+        }
+        public void DeleteEngrave(int Key)
+        {
+            SqlCeConnection conn = new SqlCeConnection(DataSourcePath);
+            conn.Open();
+            SqlCeCommand cmd = conn.CreateCommand();
+            string sql = "delete from Engrave where id = " + Key;
+            cmd.CommandText = sql;
             cmd.ExecuteNonQuery();
             conn.Dispose();
             conn.Close();

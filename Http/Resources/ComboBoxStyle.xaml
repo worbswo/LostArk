@@ -151,6 +151,8 @@
                             Margin="3" />
                         <TextBox
                             x:Name="PART_EditableTextBox"
+                            InputMethod.PreferredImeState="On"
+                            InputMethod.PreferredImeConversionMode="Native"
                             Style="{x:Null}"
                             Template="{StaticResource ComboBoxTextBox}"
                             VerticalAlignment="Bottom"
