@@ -50,7 +50,7 @@ namespace LostArkAction.viewModel
         #endregion
         #region Property
         private APISetup APISetup = new APISetup();
-        public DataBase DataBase = new DataBase("EngaveDatabase.sdf");
+        public DataBase DataBase = new DataBase("EngaveDatabase.sqlite");
         private APISetupVM APISetupVM;
         public Dictionary<string, SetEngrave> SetEngraves = new Dictionary<string, SetEngrave>();
         public List<FindAccVM> FindAccVMs  = new List<FindAccVM>();
