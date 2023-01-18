@@ -23,13 +23,13 @@ namespace LostArkAction.View
         public TargetAblity()
         {
             InitializeComponent();
-            init(Combo1);
+            /*init(Combo1);
             init(Combo2);
             init(Combo3);
             init(Combo4);
             init(Combo5);
             init(Combo6);
-            init(Combo7);
+            init(Combo7);*/
         }
 
         private void Combo1_KeyUp(object sender, KeyEventArgs e)
@@ -39,7 +39,7 @@ namespace LostArkAction.View
         private void init(ComboBox comboBox)
         {
             comboBox.IsDropDownOpen = true;
-
+            comboBox.Text = "원";
             comboBox.Items.Filter = ((o) =>
             {
                 string sValue = string.Empty;
@@ -63,6 +63,8 @@ namespace LostArkAction.View
                 else return false;
             });
             comboBox.IsDropDownOpen = false;
+            comboBox.Items.Filter = null;
+            comboBox.Text = "";
         }
     }
 }

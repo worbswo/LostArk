@@ -594,9 +594,22 @@ namespace LostArkAction.viewModel
             }
             DataBase.DeleteEngrave(SetEngraveName[SetEngraveIndex].GetHashCode());
             int idx = SetEngraveIndex;
-            SetEngraveIndex = SetEngraveIndex - 1 < 0 ? 0 : SetEngraveIndex - 1;
+            if (SetEngraveIndex == 0)
+            {
+                SetEngraveIndex = 0;
 
-            SetEngraveName.RemoveAt(idx);
+            }
+            else
+            {
+                SetEngraveIndex = SetEngraveIndex - 1 < 0 ? 0 : SetEngraveIndex - 1;
+
+
+            }
+            try
+            {
+                SetEngraveName.RemoveAt(idx);
+            }
+            catch { }
         }
         public void AddEngrave(string Name,bool isUpdate=false)
         {

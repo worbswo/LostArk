@@ -28,7 +28,11 @@
                 BasedOn="{StaticResource baseStyle}"></Style>
             <Style
                 TargetType="{x:Type TextBox}"
-                BasedOn="{StaticResource baseStyle}"></Style>
+                BasedOn="{StaticResource baseStyle}">
+                <Setter
+                    Property="InputLanguageManager.InputLanguage"
+                    Value="ko-KR" />
+            </Style>
 
             <Style
                 TargetType="{x:Type RadioButton}"
@@ -36,6 +40,7 @@
             <Style
                 TargetType="{x:Type Button}"
                 BasedOn="{StaticResource baseStyle}"></Style>
+            
  
         </ResourceDictionary>
 
