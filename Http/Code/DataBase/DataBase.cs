@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.IO;
-using Http.Model;
+using LostArkAction.Model;
 using Newtonsoft.Json.Bson;
 using System.Data.SQLite;
+using LostArkAction.Model;
 
-namespace Http.Code.DataBase
+namespace LostArkAction.Code.DataBase
 {
     public class DataBase
     {

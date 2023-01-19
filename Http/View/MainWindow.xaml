@@ -13,7 +13,7 @@
     SizeToContent="WidthAndHeight"
     WindowStyle="None"
     ResizeMode="CanMinimize">
-    
+
     <Grid
         Width="Auto"
         Background="#FF424452">
@@ -37,9 +37,12 @@
                 Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280"></ColumnDefinition>
-            <ColumnDefinition Width="280"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition
+                Width="280"></ColumnDefinition>
+            <ColumnDefinition
+                Width="280"></ColumnDefinition>
+            <ColumnDefinition
+                Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border
             Name="main"
@@ -51,7 +54,6 @@
                 <!-- Title Bar Area -->
                 <Border
                     Name="border"
-                    
                     DockPanel.Dock="Top"
                     Height="25">
 
@@ -167,9 +169,9 @@
                             </Button>
                         </StackPanel>
                     </Grid>
-                    
+
                 </Border>
-                
+
             </DockPanel>
         </Border>
         <Grid
@@ -208,12 +210,18 @@
             Grid.Column="1"
             Grid.Row="2"
             Grid.RowSpan="2"></view:EquipAblity>
-
+        
         <view:Accessories
+            Margin="10"
             DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"
-            Grid.ColumnSpan="2"
             Grid.Row="4"></view:Accessories>
+        <view:CharacteristicRange
+            DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"
+            Margin="10"
+            Grid.Row="4"
+            Grid.Column="1">
 
+        </view:CharacteristicRange>
         <ProgressBar
             Name="searchProgress"
             Grid.Row="5"
@@ -259,9 +267,12 @@
             Grid.ColumnSpan="2"
             Margin="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.7*"></ColumnDefinition>
-                <ColumnDefinition Width="0.7*"></ColumnDefinition>
-                <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                <ColumnDefinition
+                    Width="0.7*"></ColumnDefinition>
+                <ColumnDefinition
+                    Width="0.7*"></ColumnDefinition>
+                <ColumnDefinition
+                    Width="0.7*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -292,17 +303,17 @@
             <Button
                 Content="API관리"
                 FontWeight="Bold"
-                FontSize="20"
+                Margin="3"
                 Command="{Binding APISetupOpenCommand}"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Stretch"
                 IsEnabled="{Binding IsEnableSearchBtn}"
                 Grid.Column="4"></Button>
             <Button
                 Content="  검 색  "
                 FontWeight="Bold"
-                FontSize="20"
+                Margin="3"
                 Command="{Binding SearchCommand}"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Stretch"
                 IsEnabled="{Binding IsEnableSearchBtn}"
                 Grid.Column="5"></Button>
             <TextBlock
@@ -330,9 +341,11 @@
 
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition
+                        Height="0.1*"></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition
+                        Height="0.05*"></RowDefinition>
                     <RowDefinition
                         Height="0.05*"></RowDefinition>
                     <RowDefinition
@@ -350,7 +363,12 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     FontWeight="Bold">각인 세팅</TextBlock>
-                <Rectangle Margin="4" Grid.ColumnSpan="3" VerticalAlignment="Bottom" Fill="Gray" Height="2"></Rectangle>
+                <Rectangle
+                    Margin="4"
+                    Grid.ColumnSpan="3"
+                    VerticalAlignment="Bottom"
+                    Fill="Gray"
+                    Height="2"></Rectangle>
                 <ListBox
                     ItemsSource="{Binding SetEngraveNameCollectionView}"
                     SelectedIndex="{Binding SetEngraveIndex}"
@@ -383,7 +401,7 @@
                     FontWeight="Bold"
                     Margin="10"
                     Command="{Binding AddEngraveCommand}"
-                    Grid.Row="4" > 저장 </Button>
+                    Grid.Row="4">저장</Button>
                 <Button
                     FontWeight="Bold"
                     Margin="10"

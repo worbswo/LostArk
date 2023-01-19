@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Http.viewModel
+namespace LostArkAction.viewModel
 {
     public class FIndAccWindowVM:ViewModelBase
     {

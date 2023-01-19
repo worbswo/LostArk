@@ -8,7 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AB300229-9A6D-4002-A4CD-A9F94FA07E41}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Http</RootNamespace>
+    <RootNamespace>LostArkAction</RootNamespace>
     <AssemblyName>각인 최적화 V1.1.0</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -120,6 +120,7 @@
     <Compile Include="viewModel\AccVM.cs" />
     <Compile Include="viewModel\AccessoriesVM.cs" />
     <Compile Include="viewModel\APISetupVM.cs" />
+    <Compile Include="viewModel\CharacteristicRangeVM.cs" />
     <Compile Include="viewModel\EquipAblityVM.cs" />
     <Compile Include="viewModel\FindAccVM.cs" />
     <Compile Include="viewModel\FIndAccWindowVM.cs" />
@@ -131,6 +132,9 @@
     </Compile>
     <Compile Include="View\APISetup.xaml.cs">
       <DependentUpon>APISetup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CharacteristicRange.xaml.cs">
+      <DependentUpon>CharacteristicRange.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EquipAblity.xaml.cs">
       <DependentUpon>EquipAblity.xaml</DependentUpon>
@@ -198,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\APISetup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CharacteristicRange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

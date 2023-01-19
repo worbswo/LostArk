@@ -1,4 +1,4 @@
-﻿using Http.Code.DataBase;
+﻿using LostArkAction.Code.DataBase;
 using LostArkAction.Code;
 using LostArkAction.viewModel;
 using System;
@@ -16,7 +16,7 @@ using System.Windows;
 using System.Security.Cryptography;
 using LostArkAction;
 
-namespace Http.viewModel
+namespace LostArkAction.viewModel
 {
     public class APISetupVM :ViewModelBase
     {

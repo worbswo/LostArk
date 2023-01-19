@@ -38,7 +38,7 @@
                 <TextBlock
                     FontFamily="MaruBuri"
                     Text="장착 각인"
-                    FontSize="25"
+                    FontSize="20"
                     FontWeight="Bold"
                     Foreground="White"></TextBlock>
                 <TextBlock
@@ -150,7 +150,7 @@
                 <TextBlock
                     FontFamily="MaruBuri"
                     Text="어빌리티 스톤 각인"
-                    FontSize="25"
+                    FontSize="20"
                     Grid.ColumnSpan="3"
                     Foreground="White"
                     FontWeight="Bold"></TextBlock>

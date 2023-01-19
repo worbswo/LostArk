@@ -12,14 +12,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using Http.View;
-using Http.viewModel;
+using LostArkAction.View;
+using LostArkAction.viewModel;
 using System.Threading;
 using System.IO;
 using System.Drawing;
-using Http.Code.DataBase;
+using LostArkAction.Code.DataBase;
 using System.ComponentModel;
-using Http.Model;
+using LostArkAction.Model;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
 
@@ -55,7 +55,7 @@ namespace LostArkAction.viewModel
         private APISetupVM APISetupVM;
         public Dictionary<string, SetEngrave> SetEngraves = new Dictionary<string, SetEngrave>();
         public List<FindAccVM> FindAccVMs  = new List<FindAccVM>();
-
+        public CharacteristicRangeVM CharacteristicRangeVM { get; set; } = new CharacteristicRangeVM();
         public TargetAblityVM TargetAblityVM { get; set; } = new TargetAblityVM();
         public EquipAblityVM EquipAblityVM { get; set; } = new EquipAblityVM();
         public AccessoriesVM AccessoriesVM { get; set; } = new AccessoriesVM();
@@ -554,6 +554,18 @@ namespace LostArkAction.viewModel
                         Ablity.Accesories["귀걸이2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[3]);
                         Ablity.Accesories["반지1"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[4]);
                         Ablity.Accesories["반지2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[5]);
+                        Ablity.MinimumValue.Add("치명", CharacteristicRangeVM.MinimumValue[0]);
+                        Ablity.MinimumValue.Add("신속", CharacteristicRangeVM.MinimumValue[1]);
+                        Ablity.MinimumValue.Add("특화", CharacteristicRangeVM.MinimumValue[2]);
+                        Ablity.MinimumValue.Add("제압", CharacteristicRangeVM.MinimumValue[3]);
+                        Ablity.MinimumValue.Add("인내", CharacteristicRangeVM.MinimumValue[4]);
+                        Ablity.MinimumValue.Add("숙련", CharacteristicRangeVM.MinimumValue[5]);
+                        Ablity.MaximumValue.Add("치명", CharacteristicRangeVM.MaximumValue[0]);
+                        Ablity.MaximumValue.Add("신속", CharacteristicRangeVM.MaximumValue[1]);
+                        Ablity.MaximumValue.Add("특화", CharacteristicRangeVM.MaximumValue[2]);
+                        Ablity.MaximumValue.Add("제압", CharacteristicRangeVM.MaximumValue[3]);
+                        Ablity.MaximumValue.Add("인내", CharacteristicRangeVM.MaximumValue[4]);
+                        Ablity.MaximumValue.Add("숙련", CharacteristicRangeVM.MaximumValue[5]);
                         Ablity.SelectedAblity();
                     }
                 }

@@ -19,8 +19,8 @@
             Margin="15">
             <TextBlock
                 Text="목표 각인"
-                FontSize="25"
                 FontWeight="Bold"
+                FontSize ="20"
                 FontFamily="MaruBuri"
                 Foreground="White"
                 HorizontalAlignment="Left"></TextBlock>

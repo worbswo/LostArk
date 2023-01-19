@@ -8,20 +8,26 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Border
 
-        Margin="10"
         Background="#FF636366"
         BorderBrush="#FF0A3C6D"
         BorderThickness="0"
         CornerRadius="10">
         <Grid
-            Margin="15">
+            Margin="10">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition
+                    Height="1*"></RowDefinition>
+                <RowDefinition
+                    Height="1*"></RowDefinition>
+                <RowDefinition
+                    Height="1*"></RowDefinition>
+                <RowDefinition
+                    Height="1*"></RowDefinition>
+                <RowDefinition
+                    Height="1*"></RowDefinition>
+                <RowDefinition
+                    Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
@@ -33,12 +39,7 @@
                 <ColumnDefinition
                     Width="0.35*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Rectangle
-                Grid.Row="0"
-                Grid.ColumnSpan="5"
-                Height="1"
-                Fill="White"
-                VerticalAlignment="Bottom"></Rectangle>
+            <TextBlock Margin="5" Grid.ColumnSpan="4" FontWeight="Bold" Foreground="White" FontSize="20" VerticalAlignment="Center">장신구</TextBlock>
             <Rectangle
                 Grid.Row="1"
                 Grid.ColumnSpan="5"
@@ -63,49 +64,53 @@
                 Height="1"
                 Fill="Gray"
                 VerticalAlignment="Bottom"></Rectangle>
+            <Rectangle
+                Grid.Row="5"
+                Grid.ColumnSpan="5"
+                Height="1"
+                Fill="Gray"
+                VerticalAlignment="Bottom"></Rectangle>
             <TextBlock
-                Text="부위"
+                Grid.Row="1"
                 Foreground="White"
                 FontWeight="Bold"
-                HorizontalAlignment="Center"
-                FontSize="20"></TextBlock>
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">부위</TextBlock>
             <TextBlock
                 Grid.Column="1"
+                Grid.Row="1"
                 Text="품질"
                 Foreground="White"
                 FontWeight="Bold"
+                VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                FontSize="20"></TextBlock>
+                ></TextBlock>
             <TextBlock
                 Grid.Column="2"
+                Grid.Row="1"
                 Text="전투 특성1"
                 Foreground="White"
                 FontWeight="Bold"
+                VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                FontSize="20"></TextBlock>
+                ></TextBlock>
             <TextBlock
                 Grid.Column="3"
+                Grid.Row="1"
                 Text="전투 특성2"
                 Foreground="White"
                 FontWeight="Bold"
+                VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                FontSize="20"></TextBlock>
+                ></TextBlock>
             <TextBlock
-                Grid.Row="1"
+                Grid.Row="2"
                 Text="목걸이"
                 Foreground="White"
                 FontWeight="Bold"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontSize="20"></TextBlock>
-            <TextBlock
-                Grid.Row="2"
-                Text="귀걸이"
-                Foreground="White"
-                FontWeight="Bold"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="20"></TextBlock>
+                ></TextBlock>
             <TextBlock
                 Grid.Row="3"
                 Text="귀걸이"
@@ -113,15 +118,15 @@
                 FontWeight="Bold"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontSize="20"></TextBlock>
+                ></TextBlock>
             <TextBlock
                 Grid.Row="4"
-                Text="반지"
+                Text="귀걸이"
                 Foreground="White"
                 FontWeight="Bold"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontSize="20"></TextBlock>
+                ></TextBlock>
             <TextBlock
                 Grid.Row="5"
                 Text="반지"
@@ -129,9 +134,17 @@
                 FontWeight="Bold"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontSize="20"></TextBlock>
+                ></TextBlock>
+            <TextBlock
+                Grid.Row="6"
+                Text="반지"
+                Foreground="White"
+                FontWeight="Bold"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                ></TextBlock>
             <TextBox
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="1"
 
                 Text="{Binding DataContext.AccessoriesVM.Qulity1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -142,7 +155,7 @@
                 BorderThickness="0"></TextBox>
   
             <TextBox
-                Grid.Row="2"
+                Grid.Row="3"
                 Grid.Column="1"
                 Text="{Binding DataContext.AccessoriesVM.Qulity2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
@@ -151,7 +164,7 @@
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
             <TextBox
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="1"
                 Text="{Binding DataContext.AccessoriesVM.Qulity3,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
@@ -160,7 +173,7 @@
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
             <TextBox
-                Grid.Row="4"
+                Grid.Row="5"
                 Grid.Column="1"
                 Text="{Binding DataContext.AccessoriesVM.Qulity4,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
@@ -169,7 +182,7 @@
                 Background="#FF636366"
                 BorderThickness="0"></TextBox>
             <TextBox
-                Grid.Row="5"
+                Grid.Row="6"
                 Grid.Column="1"
                 Text="{Binding DataContext.AccessoriesVM.Qulity5,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
@@ -179,24 +192,13 @@
                 BorderThickness="0"></TextBox>
             <ComboBox
                 Grid.Column="2"
-                Grid.Row="1"
-                
-                Foreground="White"
-                Style="{StaticResource ComboBoxTest3}"
-                Margin="5"
-                Width="70"
-                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[0],Mode=TwoWay}"
-                ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
-                VerticalAlignment="Center"></ComboBox>
-            <ComboBox
-                Grid.Column="2"
                 Grid.Row="2"
                 
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
-                Width="70"
-                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[2],Mode=TwoWay}"
+                HorizontalAlignment="Center"
+                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[0],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
                 VerticalAlignment="Center"></ComboBox>
             <ComboBox
@@ -206,9 +208,9 @@
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
-                Width="70"
-                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[3],Mode=TwoWay}"
+                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[2],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center"></ComboBox>
             <ComboBox
                 Grid.Column="2"
@@ -217,9 +219,9 @@
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
-                Width="70"
-                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[4],Mode=TwoWay}"
+                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[3],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center"></ComboBox>
             <ComboBox
                 Grid.Column="2"
@@ -228,20 +230,31 @@
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
-                Width="70"
-                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[5],Mode=TwoWay}"
+                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[4],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center"></ComboBox>
             <ComboBox
-                Grid.Column="3"
-                Grid.Row="1"
+                Grid.Column="2"
+                Grid.Row="6"
                 
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
-                Width="70"
+                Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[5],Mode=TwoWay}"
+                ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"></ComboBox>
+            <ComboBox
+                Grid.Column="3"
+                Grid.Row="2"
+                
+                Foreground="White"
+                Style="{StaticResource ComboBoxTest3}"
+                Margin="5"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
                 Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[1],Mode=TwoWay}"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 ></ComboBox>
         </Grid>

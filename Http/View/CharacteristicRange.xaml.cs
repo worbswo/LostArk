@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace LostArkAction.View
 {
     /// <summary>
-    /// APISetup.xaml에 대한 상호 작용 논리
+    /// CharacteristicRange.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class APISetup : Window
+    public partial class CharacteristicRange : UserControl
     {
-        public APISetup()
+        public CharacteristicRange()
         {
             InitializeComponent();
         }

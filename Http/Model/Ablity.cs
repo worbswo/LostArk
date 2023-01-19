@@ -1,4 +1,4 @@
-﻿using Http.Code;
+﻿using LostArkAction.Code;
 using LostArkAction.Code;
 using LostArkAction.viewModel;
 using System;
@@ -54,7 +54,8 @@ namespace LostArkAction.Model
         public Dictionary<string, List<int>> EquipItems = new Dictionary<string, List<int>>();
         public Dictionary<string, int> PanaltyItems = new Dictionary<string, int>();
         Dictionary<string, List<SearchAblity>> AblityCombinationCases = new Dictionary<string, List<SearchAblity>>();
-
+        public Dictionary<string,int> MinimumValue= new Dictionary<string, int>();
+        public Dictionary<string ,int> MaximumValue= new Dictionary<string ,int>();
         #region Accesory
         public Accesories Accesories = new Accesories();
         public List<AccVM> NeckAcc = new List<AccVM>();
@@ -791,22 +792,31 @@ namespace LostArkAction.Model
                                         }
                                         string result = "";
                                         var sortChar = from entry in totalChar orderby entry.Value ascending select entry;
+                                        bool charCheck = true;
                                         foreach (var tmp in sortChar)
                                         {
+                                            if (tmp.Value < MinimumValue[tmp.Key] || tmp.Value > MaximumValue[tmp.Key])
+                                            {
+                                                charCheck = false;
+                                                break;
+                                            }
                                             result += tmp.Key + " : " + tmp.Value.ToString() + '\n';
                                         }
-                                        FindAccVM findAcc = new FindAccVM
+                                        if (charCheck)
                                         {
-                                            NeckAblity = tmpAccs[0][idx[0]],
-                                            FirstRingAblity = tmpAccs[3][idx[3]],
-                                            SecondRingAblity = tmpAccs[4][idx[4]],
-                                            FirstEarAblity = tmpAccs[1][idx[1]],
-                                            SecondEarAblity = tmpAccs[2][idx[2]],
-                                            TotalChar = result,
-                                            TotalPrice = tmpAccs[0][idx[0]].Price + tmpAccs[1][idx[1]].Price + tmpAccs[2][idx[2]].Price + tmpAccs[3][idx[3]].Price + tmpAccs[4][idx[4]].Price
-                                        };
+                                            FindAccVM findAcc = new FindAccVM
+                                            {
+                                                NeckAblity = tmpAccs[0][idx[0]],
+                                                FirstRingAblity = tmpAccs[3][idx[3]],
+                                                SecondRingAblity = tmpAccs[4][idx[4]],
+                                                FirstEarAblity = tmpAccs[1][idx[1]],
+                                                SecondEarAblity = tmpAccs[2][idx[2]],
+                                                TotalChar = result,
+                                                TotalPrice = tmpAccs[0][idx[0]].Price + tmpAccs[1][idx[1]].Price + tmpAccs[2][idx[2]].Price + tmpAccs[3][idx[3]].Price + tmpAccs[4][idx[4]].Price
+                                            };
 
-                                        MainWinodwVM.FindAccVMs.Add(findAcc);
+                                            MainWinodwVM.FindAccVMs.Add(findAcc);
+                                        }
                                         
                                         panaltyCheck[tmpAccs[4][idx[4]].PenaltyName] -= tmpAccs[4][idx[4]].PenaltyValue;
                                     }

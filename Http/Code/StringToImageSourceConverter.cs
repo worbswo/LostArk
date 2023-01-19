@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace Http.Code
+namespace LostArkAction.Code
 {
     internal class StringToImageSourceConverter : IValueConverter
     {

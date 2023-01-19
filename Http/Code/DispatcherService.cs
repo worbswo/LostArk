@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace Http.Code
+namespace LostArkAction.Code
 {
     public static class DispatcherService
     {
