@@ -198,6 +198,9 @@ namespace LostArkAction.Code
                                 }
                                 SharedClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", APIkeys[apiKeyidx]);
                                 continue;
+                            }else if(response.StatusCode == HttpStatusCode.BadRequest)
+                            {
+                                continue;
                             }
                         }
                         if (tmp != null)

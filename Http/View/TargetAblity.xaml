@@ -35,7 +35,7 @@
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem1,Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Options1}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
-                command:CommandBehavior.Event="KeyUp"
+                command:CommandBehavior.Event="PreviewKeyUp"
                 IsTextSearchEnabled="False"
                 
                 VerticalAlignment="Center">
@@ -57,7 +57,7 @@
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem2,Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Options2,Mode=OneTime}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
-                command:CommandBehavior.Event="KeyUp"
+                command:CommandBehavior.Event="PreviewKeyUp"
                 IsTextSearchEnabled="False"
                 VerticalAlignment="Center">
             </ComboBox>
@@ -77,7 +77,7 @@
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem3,Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Options3,Mode=OneTime}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
-                command:CommandBehavior.Event="KeyUp"
+                command:CommandBehavior.Event="PreviewKeyUp"
                 IsTextSearchEnabled="False"
                 VerticalAlignment="Center">
             </ComboBox>
@@ -97,7 +97,7 @@
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem4,Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Options4}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
-                command:CommandBehavior.Event="KeyUp"
+                command:CommandBehavior.Event="PreviewKeyUp"
                 IsTextSearchEnabled="False"
                 VerticalAlignment="Center">
             </ComboBox>
@@ -117,7 +117,7 @@
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem5,Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Options5}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
-                command:CommandBehavior.Event="KeyUp"
+                command:CommandBehavior.Event="PreviewKeyUp"
                 IsTextSearchEnabled="False"
                 VerticalAlignment="Center">
             </ComboBox>
@@ -137,7 +137,7 @@
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem6,Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Options6}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
-                command:CommandBehavior.Event="KeyUp"
+                command:CommandBehavior.Event="PreviewKeyUp"
                 IsTextSearchEnabled="False"
                 VerticalAlignment="Center">
             </ComboBox>
@@ -157,7 +157,7 @@
                 SelectedItem="{Binding  DataContext.TargetAblityVM.SelectItem7,Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.TargetAblityVM.Options7}"
                 command:CommandBehavior.Command="{Binding DataContext.TargetAblityVM.KeyBoardDownCommand}"
-                command:CommandBehavior.Event="KeyUp"
+                command:CommandBehavior.Event="PreviewKeyUp"
                 IsTextSearchEnabled="False"
                 VerticalAlignment="Center">
             </ComboBox>
