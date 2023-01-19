@@ -739,7 +739,13 @@ namespace LostArkAction.Model
                             }
                             for (idx[2] = 0; idx[2] < tmpAccs[2].Count; idx[2]++)
                             {
-                                
+                                if (earSameChar)
+                                {
+                                    if (tmpAccs[2][idx[2]].Contain(tmpAccs[1][idx[1]]))
+                                    {
+                                        continue;
+                                    }
+                                }
                                 panaltyCheck[tmpAccs[2][idx[2]].PenaltyName] += tmpAccs[2][idx[2]].PenaltyValue;
                                 if (panaltyCheck[tmpAccs[2][idx[2]].PenaltyName] >= 5)
                                 {
@@ -756,7 +762,13 @@ namespace LostArkAction.Model
                                     }
                                     for (idx[4] = 0; idx[4] < tmpAccs[4].Count; idx[4]++)
                                     {
-                                       
+                                        if (ringSameChar)
+                                        {
+                                            if (tmpAccs[4][idx[4]].Contain(tmpAccs[3][idx[3]]))
+                                            {
+                                                continue;
+                                            }
+                                        }
                                         panaltyCheck[tmpAccs[4][idx[4]].PenaltyName] += tmpAccs[4][idx[4]].PenaltyValue;
                                         if (panaltyCheck[tmpAccs[4][idx[4]].PenaltyName] >= 5)
                                         {
