@@ -61,6 +61,7 @@ namespace LostArkAction.viewModel
         public AccessoriesVM AccessoriesVM { get; set; } = new AccessoriesVM();
         public Ablity Ablity { get; set; }
         public Thread ThreadSearch { get; set; }
+        public bool LimitedCheck { get; set; } = false;
         public string SetEngraveNameText
         {
             get

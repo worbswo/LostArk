@@ -210,7 +210,7 @@
             Grid.Column="1"
             Grid.Row="2"
             Grid.RowSpan="2"></view:EquipAblity>
-        
+
         <view:Accessories
             Margin="10"
             DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"
@@ -266,6 +266,10 @@
             Grid.Row="7"
             Grid.ColumnSpan="2"
             Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
                     Width="0.7*"></ColumnDefinition>
@@ -277,30 +281,45 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <RadioButton
+            <GroupItem
+                BorderThickness="0"
+                Grid.ColumnSpan="3">
+                <StackPanel
+                    Orientation="Horizontal">
+                    <RadioButton
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Stretch"
+                        VerticalContentAlignment="Center"
+                        IsChecked="{Binding IsRelic}"
+                        Foreground="GhostWhite"
+                        Content="유물"></RadioButton>
+                    <RadioButton
+                        Margin="10,0,0,0"              
+                        VerticalAlignment="Stretch"
+                        VerticalContentAlignment="Center"
+                        Foreground="GhostWhite"
+                        IsChecked="{Binding IsAncient}"
+                        Content="고대"></RadioButton>
+                    <RadioButton
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Stretch"
+                        VerticalContentAlignment="Center"
+                        Foreground="GhostWhite"
+                        IsChecked="{Binding IsAll}"
+                        Content="전체"></RadioButton>
+                </StackPanel>
+            </GroupItem>
+            <CheckBox
+                Margin="10,0,0,0"
+                Grid.Row="1"
+                Grid.ColumnSpan="3"
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Center"
-                FontSize="20"
-                IsChecked="{Binding IsRelic}"
+                IsChecked="{Binding LimitedCheck}"
                 Foreground="GhostWhite"
-                Content="유물"></RadioButton>
-            <RadioButton
-                Grid.Column="1"
-                VerticalAlignment="Stretch"
-                VerticalContentAlignment="Center"
-                FontSize="20"
-                Foreground="GhostWhite"
-                IsChecked="{Binding IsAncient}"
-                Content="고대"></RadioButton>
-            <RadioButton
-                Grid.Column="2"
-                VerticalAlignment="Stretch"
-                VerticalContentAlignment="Center"
-                FontSize="20"
-                Foreground="GhostWhite"
-                IsChecked="{Binding IsAll}"
-                Content="전체"></RadioButton>
+                Content="거래 가능 횟수 2회 이상"></CheckBox>
             <Button
+                Grid.RowSpan="2"
                 Content="API관리"
                 FontWeight="Bold"
                 Margin="3"
@@ -309,6 +328,7 @@
                 IsEnabled="{Binding IsEnableSearchBtn}"
                 Grid.Column="4"></Button>
             <Button
+                Grid.RowSpan="2"
                 Content="  검 색  "
                 FontWeight="Bold"
                 Margin="3"
@@ -317,6 +337,7 @@
                 IsEnabled="{Binding IsEnableSearchBtn}"
                 Grid.Column="5"></Button>
             <TextBlock
+                Grid.RowSpan="2"
                 FontWeight="Bold"
                 Foreground="White"
                 HorizontalAlignment="Center"

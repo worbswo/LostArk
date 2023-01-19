@@ -856,6 +856,7 @@ namespace LostArkAction.Model
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
+                searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
 
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
@@ -917,6 +918,7 @@ namespace LostArkAction.Model
             else if (accName == "반지1" || accName == "반지2")
             {
                 searchAblity.ImagePath = auctionItem.Icon;
+                searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
 
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
@@ -971,6 +973,7 @@ namespace LostArkAction.Model
             else if (accName == "귀걸이1" || accName == "귀걸이2")
             {
                 searchAblity.ImagePath = auctionItem.Icon;
+                searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
 
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
@@ -1042,6 +1045,7 @@ namespace LostArkAction.Model
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
                 searchAblity.ImagePath = auctionItem.Icon;
+                searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
                     if (auctionItem.Options[i].Type == "STAT")
@@ -1107,6 +1111,7 @@ namespace LostArkAction.Model
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
                 searchAblity.ImagePath = auctionItem.Icon;
+                searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
 
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
@@ -1162,6 +1167,7 @@ namespace LostArkAction.Model
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
                 searchAblity.ImagePath = auctionItem.Icon;
+                searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
 
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
@@ -1217,6 +1223,7 @@ namespace LostArkAction.Model
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
                 searchAblity.ImagePath = auctionItem.Icon;
+                searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
 
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
@@ -1273,6 +1280,7 @@ namespace LostArkAction.Model
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
                 searchAblity.ImagePath = auctionItem.Icon;
+                searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
 
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {

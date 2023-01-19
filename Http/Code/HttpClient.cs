@@ -213,6 +213,13 @@ namespace LostArkAction.Code
                             {
                                 for (int j = 0; j < tmp.Items.Count; j++)
                                 {
+                                    if ((App.Current.MainWindow.DataContext as MainWinodwVM).LimitedCheck)
+                                    {
+                                        if (tmp.Items[j].AuctionInfo.TradeAllowCount < 2)
+                                        {
+                                            continue;
+                                        }
+                                    }
                                     if (tmp.Items[j].AuctionInfo.BuyPrice != 0 && tmp.Items[j].AuctionInfo.BuyPrice != null)
                                     {
                                         bool isSame = false;

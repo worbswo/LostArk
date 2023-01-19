@@ -24,10 +24,12 @@ namespace LostArkAction.viewModel
         private string _secondcharaterics;
         private int _secondCharValue;
         private string _imagePath;
+        private int _tradeAllow;
+
         #endregion
 
         #region Property
-       
+
         public string ImagePath
         {
             get { return _imagePath; }
@@ -38,6 +40,17 @@ namespace LostArkAction.viewModel
                     _imagePath = value;
                 }
                 OnPropertyChanged("ImagePath");
+            }
+        }
+        public int TradeAllow
+        {
+            get { return _tradeAllow; }
+            set
+            {
+              
+                    _tradeAllow = value;
+                
+                OnPropertyChanged("TradeAllow");
             }
         }
         public string Name
@@ -219,6 +232,7 @@ namespace LostArkAction.viewModel
             Secondcharaterics = accvm.Secondcharaterics;
             SecondCharValue = accvm.SecondCharValue;
             ImagePath = accvm.ImagePath;
+            TradeAllow=accvm.TradeAllow;
 
     }
         #endregion

@@ -200,6 +200,7 @@
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition></ColumnDefinition>
@@ -292,6 +293,11 @@
                                                 Margin="20,0,0,0"
                                                 Source="{Binding Path=NeckAblity.ImagePath,Converter={StaticResource MyImageConverter}}"
                                                 Stretch="Uniform"></Image>
+                                            <TextBlock
+                                                Grid.Row="7"
+                                                Grid.ColumnSpan="3"
+                                                Margin="2"
+                                                Text="{Binding NeckAblity.TradeAllow,StringFormat='구매시 거래 \{0:N0\}회 가능'}"></TextBlock>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -315,6 +321,7 @@
                                         <Grid
                                             Margin="10">
                                             <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
@@ -396,6 +403,11 @@
                                                 Margin="20,0,0,0"
                                                 Source="{Binding Path=FirstEarAblity.ImagePath,Converter={StaticResource MyImageConverter}}"
                                                 Stretch="Uniform"></Image>
+                                            <TextBlock
+                                                Grid.Row="8"
+                                                Grid.ColumnSpan="3"
+                                                Margin="2"
+                                                Text="{Binding FirstEarAblity.TradeAllow,StringFormat='구매시 거래 \{0:N0\}회 가능'}"></TextBlock>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -419,6 +431,7 @@
                                         <Grid
                                             Margin="10">
                                             <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
@@ -500,6 +513,11 @@
                                                 Margin="20,0,0,0"
                                                 Source="{Binding Path=SecondEarAblity.ImagePath,Converter={StaticResource MyImageConverter}}"
                                                 Stretch="Uniform"></Image>
+                                            <TextBlock
+                                                Grid.Row="8"
+                                                Grid.ColumnSpan="3"
+                                                Margin="2"
+                                                Text="{Binding SecondEarAblity.TradeAllow,StringFormat='구매시 거래 \{0:N0\}회 가능'}"></TextBlock>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -523,6 +541,7 @@
                                         <Grid
                                             Margin="10">
                                             <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
@@ -604,6 +623,11 @@
                                                 Margin="20,0,0,0"
                                                 Source="{Binding Path=FirstRingAblity.ImagePath,Converter={StaticResource MyImageConverter}}"
                                                 Stretch="Uniform"></Image>
+                                            <TextBlock
+                                                Grid.Row="8"
+                                                Grid.ColumnSpan="3"
+                                                Margin="2"
+                                                Text="{Binding FirstRingAblity.TradeAllow,StringFormat='구매시 거래 \{0:N0\}회 가능'}"></TextBlock>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -627,6 +651,7 @@
                                         <Grid
                                             Margin="10">
                                             <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
@@ -708,6 +733,11 @@
                                                 Margin="20,0,0,0"
                                                 Source="{Binding Path=SecondRingAblity.ImagePath,Converter={StaticResource MyImageConverter}}"
                                                 Stretch="Uniform"></Image>
+                                            <TextBlock
+                                                Grid.Row="8"
+                                                Grid.ColumnSpan="3"
+                                                Margin="2"
+                                                Text="{Binding SecondRingAblity.TradeAllow,StringFormat='구매시 거래 \{0:N0\}회 가능'}"></TextBlock>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
