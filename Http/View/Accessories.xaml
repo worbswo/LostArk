@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LostArkAction.View"
-             mc:Ignorable="d" 
+    xmlns:command="clr-namespace:LostArkAction.Code"
+    mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border
 
@@ -193,18 +194,23 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="2"
-                
+                command:CommandBehavior.Command="{Binding DataContext.AccessoriesVM.SlecteChangeCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="0"
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
                 HorizontalAlignment="Center"
+                
                 Text="{Binding DataContext.AccessoriesVM.SelectCharacteriastics[0],Mode=TwoWay}"
                 ItemsSource="{Binding DataContext.AccessoriesVM.Characteristics}"
                 VerticalAlignment="Center"></ComboBox>
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="3"
-                
+                command:CommandBehavior.Command="{Binding DataContext.AccessoriesVM.SlecteChangeCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="1"
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
@@ -215,7 +221,9 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="4"
-                
+                command:CommandBehavior.Command="{Binding DataContext.AccessoriesVM.SlecteChangeCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="2"
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
@@ -226,7 +234,9 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="5"
-                
+                command:CommandBehavior.Command="{Binding DataContext.AccessoriesVM.SlecteChangeCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="3"
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
@@ -237,7 +247,9 @@
             <ComboBox
                 Grid.Column="2"
                 Grid.Row="6"
-                
+                command:CommandBehavior.Command="{Binding DataContext.AccessoriesVM.SlecteChangeCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="4"
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest3}"
                 Margin="5"
@@ -248,7 +260,9 @@
             <ComboBox
                 Grid.Column="3"
                 Grid.Row="2"
-                
+                command:CommandBehavior.Command="{Binding DataContext.AccessoriesVM.SlecteChangeCommand}"
+                command:CommandBehavior.Event="SelectionChanged"
+                command:CommandBehavior.CommandParameter="5"
                 Foreground="White"
                 Style="{StaticResource ComboBoxTest3}"
                 Margin="5"

@@ -73,37 +73,37 @@
                 Grid.Row="1"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Foreground="White"
+                Foreground="{Binding DataContext.CharacteristicRangeVM.ColorTxt[0]}"
                 FontWeight="Bold">치명</TextBlock>
             <TextBlock
                 Grid.Row="2"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Foreground="White"
+                Foreground="{Binding DataContext.CharacteristicRangeVM.ColorTxt[1]}"
                 FontWeight="Bold">신속</TextBlock>
             <TextBlock
                 Grid.Row="3"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Foreground="White"
+                Foreground="{Binding DataContext.CharacteristicRangeVM.ColorTxt[2]}"
                 FontWeight="Bold">특화</TextBlock>
             <TextBlock
                 Grid.Row="4"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Foreground="White"
+                Foreground="{Binding DataContext.CharacteristicRangeVM.ColorTxt[3]}"
                 FontWeight="Bold">제압</TextBlock>
             <TextBlock
                 Grid.Row="5"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Foreground="White"
+                Foreground="{Binding DataContext.CharacteristicRangeVM.ColorTxt[4]}"
                 FontWeight="Bold">인내</TextBlock>
             <TextBlock
                 Grid.Row="6"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Foreground="White"
+                Foreground="{Binding DataContext.CharacteristicRangeVM.ColorTxt[5]}"
                 FontWeight="Bold">숙련</TextBlock>
             <TextBlock
                 Grid.Row="0"
@@ -125,6 +125,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Foreground="White"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[0]}"
                 FontWeight="Bold">~</TextBlock>
             <TextBlock
                 Grid.Row="2"
@@ -132,6 +133,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Foreground="White"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[1]}"
                 FontWeight="Bold">~</TextBlock>
             <TextBlock
                 Grid.Row="3"
@@ -139,6 +141,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Foreground="White"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[2]}"
                 FontWeight="Bold">~</TextBlock>
             <TextBlock
                 Grid.Row="4"
@@ -146,6 +149,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Foreground="White"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[3]}"
                 FontWeight="Bold">~</TextBlock>
             <TextBlock
                 Grid.Row="5"
@@ -153,6 +157,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Foreground="White"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[4]}"
                 FontWeight="Bold">~</TextBlock>
             <TextBlock
                 Grid.Row="6"
@@ -160,12 +165,14 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Foreground="White"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[5]}"
                 FontWeight="Bold">~</TextBlock>
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
                 Foreground="White"
                 Background="#FF636366"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[0]}"
                 Text="{Binding DataContext.CharacteristicRangeVM.MinimumValue[0]}"
                 BorderThickness="0"
                 HorizontalAlignment="Center"
@@ -177,6 +184,7 @@
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[1]}"
                 Text="{Binding DataContext.CharacteristicRangeVM.MinimumValue[1]}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
@@ -187,6 +195,7 @@
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[2]}"
                 Text="{Binding DataContext.CharacteristicRangeVM.MinimumValue[2]}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
@@ -197,6 +206,7 @@
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[3]}"
                 Text="{Binding DataContext.CharacteristicRangeVM.MinimumValue[3]}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
@@ -207,6 +217,7 @@
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[4]}"
                 Text="{Binding DataContext.CharacteristicRangeVM.MinimumValue[4]}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
@@ -217,6 +228,7 @@
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[5]}"
                 Text="{Binding DataContext.CharacteristicRangeVM.MinimumValue[5]}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
@@ -227,6 +239,7 @@
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[0]}"
                 Text="{Binding DataContext.CharacteristicRangeVM.MaximumValue[0]}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
@@ -236,6 +249,7 @@
                 Grid.Column="3"
                 Foreground="White"
                 Background="#FF636366"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[1]}"
                 Text="{Binding DataContext.CharacteristicRangeVM.MaximumValue[1]}"
                 BorderThickness="0"
                 HorizontalAlignment="Center"
@@ -247,6 +261,7 @@
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[2]}"
                 Text="{Binding DataContext.CharacteristicRangeVM.MaximumValue[2]}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
@@ -257,6 +272,7 @@
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[3]}"
                 Text="{Binding DataContext.CharacteristicRangeVM.MaximumValue[3]}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
@@ -267,6 +283,7 @@
                 Foreground="White"
                 Background="#FF636366"
                 BorderThickness="0"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[4]}"
                 Text="{Binding DataContext.CharacteristicRangeVM.MaximumValue[4]}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
@@ -276,6 +293,7 @@
                 Grid.Column="3"
                 Foreground="White"
                 Background="#FF636366"
+                IsEnabled="{Binding DataContext.CharacteristicRangeVM.isChecked[5]}"
                 Text="{Binding DataContext.CharacteristicRangeVM.MaximumValue[5]}"
                 BorderThickness="0"
                 HorizontalAlignment="Center"

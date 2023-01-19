@@ -6,12 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace LostArkAction.viewModel
 {
     public class AccessoriesVM : ViewModelBase
     {
         #region Field
+        private ICommand _selecteChangeCommand;
         private List<string> _characteristics;
         private List<int> _qulity = new List<int> { 0, 0, 0, 0, 0 };
         private int _qulity1;
@@ -20,6 +23,7 @@ namespace LostArkAction.viewModel
         private int _qulity4;
         private int _qulity5;
         private List<string> _selectCharacteriastics =new List<string>{"","","","","",""};
+        private List<int> previusSelected = new List<int> { -1, -1, -1, -1  , -1, -1 };
         #endregion
         #region Property
         public int Qulity1
@@ -122,7 +126,7 @@ namespace LostArkAction.viewModel
                 {
                     _characteristics = new List<string>
                     {
-                        "치명","특화","제압","신속","인내","숙련"
+                        "치명","신속","특화","제압","인내","숙련"
                     };
 
                 }
@@ -133,7 +137,19 @@ namespace LostArkAction.viewModel
 
 
         #endregion
-
+        #region Command
+        public ICommand SlecteChangeCommand
+        {
+            get
+            {
+                if (_selecteChangeCommand == null)
+                {
+                    _selecteChangeCommand = new RelayCommand(SelectedChangeMethod, null);
+                }
+                return _selecteChangeCommand;
+            }
+        }
+        #endregion
         #region Constroctor
         public AccessoriesVM()
         {
@@ -143,7 +159,23 @@ namespace LostArkAction.viewModel
         #endregion
 
         #region Method
+        public void SelectedChangeMethod(object sender, object e,object param)
+        {
+            int index = Convert.ToInt32(param as string);
+            ComboBox comboBox = sender as ComboBox;
+            if (previusSelected[index] != -1)
+            {
+                (App.Current.MainWindow.DataContext as MainWinodwVM).CharacteristicRangeVM.isChecked[previusSelected[index]]--;
+                if((App.Current.MainWindow.DataContext as MainWinodwVM).CharacteristicRangeVM.isChecked[previusSelected[index]] == 0)
+                {
+                    (App.Current.MainWindow.DataContext as MainWinodwVM).CharacteristicRangeVM.ColorTxt[previusSelected[index]] = "Gray";
 
+                }
+            }
+            (App.Current.MainWindow.DataContext as MainWinodwVM).CharacteristicRangeVM.isChecked[comboBox.SelectedIndex] ++;
+            (App.Current.MainWindow.DataContext as MainWinodwVM).CharacteristicRangeVM.ColorTxt[comboBox.SelectedIndex] = "White";
+            previusSelected[index] = comboBox.SelectedIndex;
+        }
         internal void Close(bool isClosing = false)
         {
             if (!isClosing)
