@@ -2,11 +2,16 @@
 using LostArkAction.viewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices.ComTypes;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -18,6 +23,8 @@ namespace LostArkAction
     /// </summary>
     public partial class App : Application
     {
+        private static DownloadProgress DownloadProgress;
+
         public App()
         {
             // 리소스 포함
@@ -28,15 +35,101 @@ namespace LostArkAction
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-            MainWindow main = new MainWindow();
-            main.DataContext = new MainWinodwVM();
-            main.Closing += (o, c) =>
+            WebClient Update = new WebClient();
+            Update.DownloadProgressChanged += webClient_DownloadProgressChanged;
+            Update.DownloadFileCompleted += webClient_DownloadFileCompleted;
+
+            Uri UpgradeUri = new Uri("https://onedrive.live.com/download?cid=E0C2B3D1108565EA&resid=E0C2B3D1108565EA%2111321&authkey=AH35XOVsmpGVi-M");
+            List<string> list = new List<string>();
+            try
             {
-                (main.DataContext as MainWinodwVM).Close();
-            };
-            main.Show();
-            (main.DataContext as MainWinodwVM).SetEngraveText(true);
+                Stream aa = Update.OpenRead(UpgradeUri);
+                StreamReader reader = new StreamReader(aa);
+                string text = reader.ReadToEnd();
+                list = text.Split('\n').ToList();
+                list[0] = list[0].Split('\r').ToList()[0];
+                list[1] = list[1].Split('\r').ToList()[0];
+
+            }
+            catch (WebException ex)
+
+            {
+
+                MessageBox.Show("BMTUpdate" + "Download WebException" + ex.Message);
+
+            }
+
+            catch (UriFormatException ex)
+
+            {
+                MessageBox.Show("BMTUpdate" + "Download UriFormatException" + ex.Message);
+
+
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("BMTUpdate" + "Download Exception" + ex.Message);
+            }
+
+
+
+            if (list.Count > 0)
+            {
+                if (list[0] != "version 2.0.0")
+                {
+
+                    if (MessageBox.Show("새 버전 " + list[0] + " 이 발견되었습니다. 설치하겠습니까?", "Yes-No", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        DownloadProgress = new DownloadProgress();
+                        DownloadProgress.DataContext = new DownloadProgressVM();
+                        DownloadProgress.Show();
+                        Uri UpgradeUri2 = new Uri(list[2]);
+                        Update.DownloadFileAsync(UpgradeUri2, list[1]);
+                    }
+                    else
+                    {
+                        base.OnStartup(e);
+
+                        MainWindow main = new MainWindow();
+                        main.DataContext = new MainWinodwVM();
+                        main.Closing += (o, c) =>
+                        {
+                            (main.DataContext as MainWinodwVM).Close();
+                        };
+                        main.Show();
+                        (main.DataContext as MainWinodwVM).SetEngraveText(true);
+
+                    }
+                }
+                else
+                {
+                    base.OnStartup(e);
+
+                    MainWindow main = new MainWindow();
+                    main.DataContext = new MainWinodwVM();
+                    main.Closing += (o, c) =>
+                    {
+                        (main.DataContext as MainWinodwVM).Close();
+                    };
+                    main.Show();
+                    (main.DataContext as MainWinodwVM).SetEngraveText(true);
+                }
+            }
+            else
+            {
+                base.OnStartup(e);
+
+                MainWindow main = new MainWindow();
+                main.DataContext = new MainWinodwVM();
+                main.Closing += (o, c) =>
+                {
+                    (main.DataContext as MainWinodwVM).Close();
+                };
+                main.Show();
+                (main.DataContext as MainWinodwVM).SetEngraveText(true);
+            }
+           
 
         }
         static Assembly ResolveAssembly(object sender, ResolveEventArgs args)
@@ -87,6 +180,31 @@ namespace LostArkAction
             {
                 Application.Current.MainWindow.Close();
             }
+        }
+        private static void webClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            string message = string.Format
+            (
+                "다운로드 : {0}/{1} Byte",
+                e.BytesReceived,
+                e.TotalBytesToReceive
+            );
+            (DownloadProgress.DataContext as DownloadProgressVM).ProgressBar = e.ProgressPercentage;
+            (DownloadProgress.DataContext as DownloadProgressVM).Data = message;
+            Console.WriteLine(message);
+        }
+
+
+        /// <summary>
+        /// 웹 클라이언트 파일 다운로드 완료시 처리하기
+        /// </summary>
+        /// <param name="sender">이벤트 발생자</param>
+        /// <param name="e">이벤트 인자</param>
+        private static void webClient_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            Console.WriteLine("다운로드 완료");
+            Environment.Exit(0);
+
         }
     }
 }

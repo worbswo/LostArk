@@ -52,7 +52,6 @@ namespace LostArkAction.viewModel
         #endregion
         #region Property
         private APISetup APISetup = new APISetup();
-        
         public DataBase DataBase = new DataBase(System.AppDomain.CurrentDomain.BaseDirectory + "EngaveDatabase.sqlite");
         private APISetupVM APISetupVM;
         public Dictionary<string, SetEngrave> SetEngraves = new Dictionary<string, SetEngrave>();
@@ -318,80 +317,11 @@ namespace LostArkAction.viewModel
             SetEngraveNameViewSource = new CollectionViewSource();
             SetEngraveNameViewSource.Source = this.SetEngraveName;
 
-            WebClient Update = new WebClient();
-            Uri uri = new Uri("https://1drv.ms/f/s!AuplhRDRs8Lg1kvpBOMLo9Ekz_iA/ver.txt");
-            Uri UpgradeUri = new Uri("https://public.bn.files.1drv.com/y4m6ex3orH7Pgoog0DHIjFZ4mdSA23MFJ-g-gjbdIlDelogGkuppG5trK0XyZVorF-t1Z1NOtk4LnHwPrcIl0aYYTvsN3LSV8XRvXJBNpUGxIdrTUzFMuxLyHwFSr6oEGVNjLA95C3zZn3hg1aTUVM91jy-9oraobrKL8YSB9CT9Dip1Dz3SYv0PZ6TmvlF120jM5SVQAs51PouYeIZRlS0onIq-q110mxhCzRPZeABExE");
-            try
-            {
-                Update.DownloadFile(UpgradeUri, "./ver.txt");
-            }
-              catch(WebException ex)
-
-            {
-
-                MessageBox.Show("BMTUpdate"+ "Download WebException"+ex.Message);
-
-            }
-
-            catch(UriFormatException ex)
-
-            {
-                MessageBox.Show("BMTUpdate" + "Download UriFormatException" + ex.Message);
-
-
-            }
-
-            catch(Exception ex)
-
-            {
-                MessageBox.Show("BMTUpdate" + "Download Exception" + ex.Message);
-
             
 
-            }
-            string[] lines = File.ReadAllLines("ver.txt");
-            List<string> list = new List<string>();
-            // 3. StreamReader 이용하여 한 줄씩 읽기
-            try
-            {
-                using (StreamReader sr = new StreamReader("ver.txt"))
-                {
-                    string line;
-
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        list.Add(line);
-                    }
-                }
-            }
-            catch
-            {
-
-            }
-            
-            Uri UpgradeUri2 = new Uri(list[2]);
-            Update.DownloadFile(UpgradeUri2,list[1]);
-            Process.Start("powershell.exe", @"DEL "+System.AppDomain.CurrentDomain.BaseDirectory+"/LostCalcv1.6.3.exe");
-            Process.Start("powershell.exe", @"DEL " + System.AppDomain.CurrentDomain.BaseDirectory + "/ver.txt");
-
-            Environment.Exit(0);
-
         }
-        public void ExecutePowerShellScript(string script)
-        {
-            byte[] byteArray = Encoding.Unicode.GetBytes(script);
 
-            string scriptBase64Encoded = Convert.ToBase64String(byteArray);
-
-            ProcessStartInfo processStartInfo = new ProcessStartInfo()
-            {
-                FileName = "powershell.exe",
-                Arguments = $"-NoProfile -ExecutionPolicy unrestricted -EncodedCommand {scriptBase64Encoded}",
-                UseShellExecute = false
-            };
-
-            Process.Start(processStartInfo);
-        }
+  
         #endregion
 
         #region Method
