@@ -76,11 +76,17 @@ namespace LostArkAction
 
             if (list.Count > 0)
             {
-                if (list[0] != "version 2.0.0")
+                if (list[0] != "version 2.0.2")
                 {
 
                     if (MessageBox.Show("새 버전 " + list[0] + " 이 발견되었습니다. 설치하겠습니까?", "Yes-No", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
+                        string updatestr = "업데이트 내역 - \n";
+                        for (int i = 3; i < list.Count; i++)
+                        {
+                            updatestr += list[i] + "\n";
+                        }
+                        MessageBox.Show(updatestr);
                         DownloadProgress = new DownloadProgress();
                         DownloadProgress.DataContext = new DownloadProgressVM();
                         DownloadProgress.Show();
