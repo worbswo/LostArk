@@ -9,6 +9,7 @@ using LostArkAction.Model;
 using Newtonsoft.Json.Bson;
 using System.Data.SQLite;
 using LostArkAction.Model;
+using System.Windows.Forms;
 
 namespace LostArkAction.Code.DataBase
 {
@@ -61,15 +62,26 @@ namespace LostArkAction.Code.DataBase
 
 
             string sql = "select * from API";
-            SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            SQLiteDataReader rdr = cmd.ExecuteReader();
-            if (rdr!=null){
-                while (rdr.Read())
+            try
+            {
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                SQLiteDataReader rdr = cmd.ExecuteReader();
+                if (rdr != null)
                 {
-                    string key = (string)rdr["APIKey"];
-                    apiKey.Add(key);
+                    while (rdr.Read())
+                    {
+                        string key = (string)rdr["APIKey"];
+                        apiKey.Add(key);
+                    }
                 }
+            }
+            catch
+            {
+                sql = "CREATE TABLE API (APIKey nText);";
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("API Table이 존재 하지 않습니다. 재 생성하겠습니다.");
             }
             return apiKey;
         }
@@ -114,20 +126,51 @@ namespace LostArkAction.Code.DataBase
 
 
             string sql = "select * from Engrave";
-            cmd.CommandText = sql;
-            SQLiteDataReader rdr = cmd.ExecuteReader();
-            if (rdr != null)
+            try
             {
-                while (rdr.Read())
+                cmd.CommandText = sql;
+                SQLiteDataReader rdr = cmd.ExecuteReader();
+                if (rdr != null)
                 {
-                    SetEngrave engrave= new SetEngrave();
-                    engrave.Name = (string)rdr["Name"];
-                    engrave.Target = (string)rdr["Target"];
-                    engrave.Equip = (string)rdr["Equip"];
-                    engrave.Acc = (string)rdr["Acc"];
-                    engraves.Add(engrave);
+                    while (rdr.Read())
+                    {
+                        SetEngrave engrave = new SetEngrave();
+                        engrave.Name = (string)rdr["Name"];
+                        engrave.Target = (string)rdr["Target"];
+                        engrave.Equip = (string)rdr["Equip"];
+                        engrave.Acc = (string)rdr["Acc"];
+                        engraves.Add(engrave);
+                    }
                 }
             }
+            catch
+            {
+                sql = "CREATE TABLE Engrave (id int, Name nText,Target nText, Equip nText, Acc nText, PRIMARY KEY(id) );";
+                cmd = new SQLiteCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                sql = "INSERT INTO Engrave (id , Name,Target, Equip, Acc) " +
+                                    "VALUES ('" + FinalStateStr.GetHashCode() + "','" + FinalStateStr + "','미사용-0_미사용-0_미사용-0_미사용-0_미사용-0_미사용-0_미사용-0','미사용-0_미사용-0_미사용-0_미사용-0_미사용-0','0_0_0_0_0_없음_없음_없음_없음_없음_없음');";
+                cmd = new SQLiteCommand(sql, conn);
+
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Engrave Table이 존재 하지 않습니다. 재 생성하겠습니다.");
+                sql = "select * from Engrave";
+    
+                    cmd.CommandText = sql;
+                    SQLiteDataReader rdr = cmd.ExecuteReader();
+                    if (rdr != null)
+                    {
+                        while (rdr.Read())
+                        {
+                            SetEngrave engrave = new SetEngrave();
+                            engrave.Name = (string)rdr["Name"];
+                            engrave.Target = (string)rdr["Target"];
+                            engrave.Equip = (string)rdr["Equip"];
+                            engrave.Acc = (string)rdr["Acc"];
+                            engraves.Add(engrave);
+                        }
+                    }
+                }
             return engraves;
         }
         public void DeleteEngrave(int Key)
