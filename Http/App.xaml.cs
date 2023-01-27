@@ -76,7 +76,7 @@ namespace LostArkAction
 
             if (list.Count > 0)
             {
-                if (list[0] != "version 2.0.4")
+                if (list[0] != "version 2.1.0")
                 {
 
                     if (MessageBox.Show("새 버전 " + list[0] + " 이 발견되었습니다. 설치하겠습니까?", "Yes-No", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
