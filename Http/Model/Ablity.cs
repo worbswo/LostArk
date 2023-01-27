@@ -114,7 +114,9 @@ namespace LostArkAction.Model
             AccRelicCases.Add(1, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 3 } };
             AccRelicCases.Add(3, new List<List<int>>(tmp));
-            AccRelicCases.Add(0, new List<List<int>>());
+            tmp = new List<List<int>>() { new List<int> { 0 } };
+
+            AccRelicCases.Add(0, new List<List<int>>(tmp));
 
             tmp = new List<List<int>>() { new List<int> { 5, 5, 5 }, new List<int> { 5, 5, 4, 3 }, new List<int> { 5, 4, 4, 3 }, new List<int> { 5, 4, 3, 3 }, new List<int> { 4, 4, 4, 3 } };
             AccAncientCases.Add(15, new List<List<int>>(tmp));
@@ -146,7 +148,8 @@ namespace LostArkAction.Model
             AccAncientCases.Add(1, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 3 } };
             AccAncientCases.Add(3, new List<List<int>>(tmp));
-            AccAncientCases.Add(0, new List<List<int>>());
+            tmp = new List<List<int>>() { new List<int> { 0 } };
+            AccAncientCases.Add(0, new List<List<int>>(tmp));
 
             AccAncientCases[15].Add(new List<int> { 6, 6, 3 });
             AccAncientCases[15].Add(new List<int> { 6, 5, 4 });
@@ -406,8 +409,10 @@ namespace LostArkAction.Model
             for (int i = 0; i < index.Count; i++)
             {
                 List<int> tmp = accCases[targetItems[abliName[i]]][index[i]];
+                
                 for (int j = 0; j < tmp.Count; j++)
                 {
+                    if (tmp[j] == 0) continue;
                     if (tmp[j] > 3) {
                         firstCnt++;
                         if (firstAblityCandidate.ContainsKey(abliName[i])) {
