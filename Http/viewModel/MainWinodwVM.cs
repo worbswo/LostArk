@@ -42,6 +42,7 @@ namespace LostArkAction.viewModel
         private float _progressValue;
         private float _searchProgressValue;
         private float _accProgressValue;
+        private string _searchProgressText;
         private bool _isEnableSearchBtn = true;
         private bool isRelic  = true;
         private bool isAncient;
@@ -63,6 +64,19 @@ namespace LostArkAction.viewModel
         public Ablity Ablity { get; set; }
         public Thread ThreadSearch { get; set; }
         public bool LimitedCheck { get; set; } = false;
+
+        public string SearchProgressText
+        {
+            get
+            {
+                return _searchProgressText;
+            }
+            set
+            {
+                _searchProgressText = value;
+                OnPropertyChanged("SearchProgressText");
+            }
+        }
         public string SetEngraveNameText
         {
             get

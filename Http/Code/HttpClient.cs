@@ -269,6 +269,7 @@ namespace LostArkAction.Code
                     }
                     searchCnt++;
                     (App.Current.MainWindow.DataContext as MainWinodwVM).SearchProgressValue = (float)searchCnt / searchTotal * 100;
+                    (App.Current.MainWindow.DataContext as MainWinodwVM).SearchProgressText = String.Format("{0} / {1}", searchCnt, searchTotal);
                 }
             }
             Console.WriteLine("검색완료");

@@ -76,7 +76,7 @@ namespace LostArkAction
 
             if (list.Count > 0)
             {
-                if (list[0] != "version 2.1.0")
+                if (list[0] != "version 2.1.1")
                 {
 
                     if (MessageBox.Show("새 버전 " + list[0] + " 이 발견되었습니다. 설치하겠습니까?", "Yes-No", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -105,7 +105,6 @@ namespace LostArkAction
                         };
                         main.Show();
                         (main.DataContext as MainWinodwVM).SetEngraveText(true);
-
                     }
                 }
                 else
@@ -134,9 +133,7 @@ namespace LostArkAction
                 };
                 main.Show();
                 (main.DataContext as MainWinodwVM).SetEngraveText(true);
-            }
-           
-
+            }   
         }
         static Assembly ResolveAssembly(object sender, ResolveEventArgs args)
         {

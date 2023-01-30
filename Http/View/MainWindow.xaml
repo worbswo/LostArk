@@ -241,7 +241,9 @@
             Foreground="White"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Text="{Binding ElementName=searchProgress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>
+            Text="{Binding SearchProgressText}"
+            ></TextBlock>
+            <!--Text="{Binding ElementName=searchProgress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>-->
         <ProgressBar
             Name="progress"
             Grid.Row="6"
