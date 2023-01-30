@@ -32,6 +32,8 @@
             <RowDefinition
                 Height="25"></RowDefinition>
             <RowDefinition
+                Height="15"></RowDefinition>
+            <RowDefinition
                 Height="25"></RowDefinition>
             <RowDefinition
                 Height="50"></RowDefinition>
@@ -243,9 +245,9 @@
             HorizontalAlignment="Center"
             Text="{Binding SearchProgressText}"
             ></TextBlock>
-            <!--Text="{Binding ElementName=searchProgress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>-->
+        <!--Text="{Binding ElementName=searchProgress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>-->
         <ProgressBar
-            Name="progress"
+            Name="waitAPIprogress"
             Grid.Row="6"
             Minimum="0"
             Maximum="100"
@@ -253,8 +255,8 @@
             BorderThickness="0"
             Grid.ColumnSpan="2"
             Margin="10,2,10,2"
-            Value="{Binding ProgressValue}"
-            Foreground="#FF036515">
+            Value="{Binding WaitAPIprogressValue}"
+            Foreground="#FF674D12">
         </ProgressBar>
         <TextBlock
             Grid.Row="6"
@@ -263,9 +265,29 @@
             HorizontalAlignment="Center"
             FontWeight="UltraBold"
             Foreground="White"
+            Text="{Binding ElementName=waitAPIprogress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>
+        <ProgressBar
+            Name="progress"
+            Grid.Row="7"
+            Minimum="0"
+            Maximum="100"
+            Background="#FF424452"
+            BorderThickness="0"
+            Grid.ColumnSpan="2"
+            Margin="10,2,10,0"
+            Value="{Binding ProgressValue}"
+            Foreground="#FF036515" Height="21" VerticalAlignment="Top">
+        </ProgressBar>
+        <TextBlock
+            Grid.Row="7"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            FontWeight="UltraBold"
+            Foreground="White"
             Text="{Binding ElementName=progress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>
         <Grid
-            Grid.Row="7"
+            Grid.Row="8"
             Grid.ColumnSpan="2"
             Margin="10">
             <Grid.RowDefinitions>

@@ -8,7 +8,6 @@ using System.IO;
 using LostArkAction.Model;
 using Newtonsoft.Json.Bson;
 using System.Data.SQLite;
-using LostArkAction.Model;
 using System.Windows.Forms;
 
 namespace LostArkAction.Code.DataBase

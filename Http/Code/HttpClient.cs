@@ -24,7 +24,10 @@ namespace LostArkAction.Code
     public class HttpClient2
     {
         public static List<string> APIkeys { get; set; } = new List<string>();
+        public static List<bool> CheckAPILimit = new List<bool>();
+        public static List<int> APILimitTime = new List<int>();
         public static int Cnt = 0;
+        public static int minTime = int.MaxValue;
 
         public static HttpClient SharedClient { get; set; } = new HttpClient();
         public HttpClient2()
@@ -50,7 +53,7 @@ namespace LostArkAction.Code
                 }
             }
         }
-        public static async void GetAsync(List<SearchAblity> searchAblitie, Accesories accesory)
+        public static async Task GetAsync(List<SearchAblity> searchAblitie, Accesories accesory)
         {
             int apiKeyidx = 0;
             int searchTotal = 0;
@@ -172,17 +175,65 @@ namespace LostArkAction.Code
                             MaxValue = 500
                         });
                     }
-
                     while (true)
                     {
                         item.PageNo = pageNo;
-                        ResultItem tmp = new ResultItem() ;
+                        ResultItem tmp = new ResultItem();
+                        bool apiKeyLimitCheck = false;
+                        for(int keyIndex =0;keyIndex < APIkeys.Count; keyIndex++)
+                        {
+                            if (CheckAPILimit[keyIndex])
+                            {
+                                apiKeyLimitCheck = true;
+                                break;
+                            }
+                        }
+                        if (!apiKeyLimitCheck)
+                        {
+                            using (HttpResponseMessage response = await SharedClient.PostAsync("https://developer-lostark.game.onstove.com/auctions/items", new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json")))
+                            {
+
+                                int currentTime = (int)GetTime();
+                                (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIprogressValue = (float)(60.0f - (minTime - currentTime)) / 60.0f * 100;
+                                if (minTime <= currentTime)
+                                {
+                                    (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIprogressValue = 0.0f;
+
+                                    for (int keyIndex = 0; keyIndex < APIkeys.Count; keyIndex++)
+                                    {
+                                        CheckAPILimit[keyIndex] = true;
+                                    }
+                                    minTime = int.MaxValue;
+                                    apiKeyLimitCheck = true;
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+                            }
+                        }
                         using (HttpResponseMessage response = await SharedClient.PostAsync("https://developer-lostark.game.onstove.com/auctions/items", new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json")))
                         {
                             if(response.StatusCode== HttpStatusCode.OK)
                             {
                                 string jsonString = await response.Content.ReadAsStringAsync();
                                 tmp = JsonConvert.DeserializeObject<ResultItem>(jsonString);
+                                CheckAPILimit[apiKeyidx] = true;
+                                try
+                                {
+                                    foreach (var reset in response.Headers.ToList()[2].Value)
+                                    {
+                                        if (reset != null || reset != "")
+                                            APILimitTime[apiKeyidx] = Convert.ToInt32(reset);
+                                    }
+                                }
+                                catch
+                                {
+                                }
+                                if (minTime > APILimitTime[apiKeyidx])
+                                {
+                                    minTime = APILimitTime[apiKeyidx];
+                                }
                             }
                             else if (response.StatusCode == HttpStatusCode.Unauthorized)
                             {
@@ -191,6 +242,22 @@ namespace LostArkAction.Code
                             }
                             else if(response.StatusCode.ToString() =="429")
                             {
+                                CheckAPILimit[apiKeyidx] = false;
+                                try
+                                {
+                                    foreach (var reset in response.Headers.ToList()[2].Value)
+                                    {
+                                        if (reset != null || reset != "")
+                                            APILimitTime[apiKeyidx] = Convert.ToInt32(reset);
+                                    }
+                                }
+                                catch
+                                {
+                                }
+                                if (minTime > APILimitTime[apiKeyidx])
+                                {
+                                    minTime = APILimitTime[apiKeyidx];
+                                }
                                 apiKeyidx++;
                                 if (apiKeyidx > APIkeys.Count - 1)
                                 {
@@ -306,6 +373,20 @@ namespace LostArkAction.Code
             }
             return isSame;
         }
+        public static long GetTime()
+        {
+            DateTime dtCurTime = DateTime.Now.ToUniversalTime();
+
+            DateTime dtEpochStartTime = Convert.ToDateTime("1/1/1970 0:00:00 AM");
+
+            TimeSpan ts = dtCurTime.Subtract(dtEpochStartTime);
+
+            double epochtime;
+
+            epochtime = ((((((ts.Days * 24) + ts.Hours) * 60) + ts.Minutes) * 60) + ts.Seconds);
+
+            return Convert.ToInt64(epochtime);
+        }
     }
-    
+   
 }

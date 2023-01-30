@@ -60,6 +60,11 @@ namespace LostArkAction.viewModel
         {
             DataBase=dataBase;
             ApiKeys = new ObservableCollection<string>(DataBase.getAPIKey());
+            for(int i = 0; i < ApiKeys.Count; i++)
+            {
+                HttpClient2.CheckAPILimit.Add(true);
+                HttpClient2.APILimitTime.Add(0);
+            }
             ApiKeyViewSource = new CollectionViewSource();
             ApiKeyViewSource.Source = this.ApiKeys;
 
@@ -128,6 +133,9 @@ namespace LostArkAction.viewModel
             DataBase.AddAPIKey(ApiKeyStr);  
             ApiKeys.Add(ApiKeyStr);
             HttpClient2.APIkeys.Add(ApiKeyStr);
+            HttpClient2.CheckAPILimit.Add(true);
+            HttpClient2.APILimitTime.Add(0);
+
             ApiKeyStr = "";
         }
         public List<string> GetAPIKey()

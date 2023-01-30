@@ -12,14 +12,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using LostArkAction.View;
-using LostArkAction.viewModel;
+
 using System.Threading;
 using System.IO;
 using System.Drawing;
 using LostArkAction.Code.DataBase;
 using System.ComponentModel;
-using LostArkAction.Model;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using System.Net;
@@ -29,7 +27,6 @@ namespace LostArkAction.viewModel
 {
     public class MainWinodwVM : ViewModelBase
     {
-        static string ver = "version 1.6.3";
         #region Field
         private ICommand _searchCommand;
         private ICommand _setupCommand;
@@ -42,6 +39,7 @@ namespace LostArkAction.viewModel
         private float _progressValue;
         private float _searchProgressValue;
         private float _accProgressValue;
+        private float _waitAPIprogressValue;
         private string _searchProgressText;
         private bool _isEnableSearchBtn = true;
         private bool isRelic  = true;
@@ -50,6 +48,7 @@ namespace LostArkAction.viewModel
         private string _setupAblityText="";
         private string _setEngraveNameText = "";
         private int _setEngraveIndex = -1;
+        
         #endregion
         #region Property
         private APISetup APISetup = new APISetup();
@@ -139,6 +138,15 @@ namespace LostArkAction.viewModel
             {
                 _accProgressValue = value;
                 OnPropertyChanged("AccProgressValue");
+            }
+        }
+        public float WaitAPIprogressValue
+        {
+            get { return _waitAPIprogressValue; }
+            set
+            {
+                _waitAPIprogressValue = value;
+                OnPropertyChanged("WaitAPIprogressValue");
             }
         }
         public float SearchProgressValue

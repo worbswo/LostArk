@@ -396,7 +396,7 @@ namespace LostArkAction.Model
             }
             Console.WriteLine("검색 개수 {0}", SearchAblities.Count);
 #endif
-           HttpClient2.GetAsync(SearchAblities, Accesories);
+           _=HttpClient2.GetAsync(SearchAblities, Accesories);
         }
         public void ComputeAblity(List<int> index, List<string> abliName, Dictionary<int, List<List<int>>> accCases, Dictionary<string, int> targetItems, List<List<SearchAblity>> searchAblities)
         {
