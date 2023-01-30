@@ -265,7 +265,7 @@
             HorizontalAlignment="Center"
             FontWeight="UltraBold"
             Foreground="White"
-            Text="{Binding ElementName=waitAPIprogress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>
+            Text="{Binding WaitAPIProgressText}"></TextBlock>
         <ProgressBar
             Name="progress"
             Grid.Row="7"

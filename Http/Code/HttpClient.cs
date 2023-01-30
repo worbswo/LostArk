@@ -194,11 +194,12 @@ namespace LostArkAction.Code
                             {
 
                                 int currentTime = (int)GetTime();
-                                (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIprogressValue = (float)(60.0f - (minTime - currentTime)) / 60.0f * 100;
+                                (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIprogressValue = (float)((minTime - currentTime)) / 60.0f * 100;
+                                (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIProgressText = String.Format("API Key reset Time : {0}s...", (minTime - currentTime));
                                 if (minTime <= currentTime)
                                 {
                                     (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIprogressValue = 0.0f;
-
+                                    (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIProgressText = "";
                                     for (int keyIndex = 0; keyIndex < APIkeys.Count; keyIndex++)
                                     {
                                         CheckAPILimit[keyIndex] = true;
