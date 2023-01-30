@@ -360,6 +360,10 @@ namespace LostArkAction.viewModel
         }
         public void SetupMethod(object sender)
         {
+            if (SetupAblityText == "" || string.IsNullOrEmpty(SetupAblityText))
+            {
+                return;
+            }
             string tmp = SetupAblityText;
             string[] strList = new string[7]{"","","","","","","" };
             int[] ablityVal = new int[7] {4,4,4,4,4,4,4 };
