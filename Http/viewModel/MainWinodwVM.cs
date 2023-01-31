@@ -353,9 +353,6 @@ namespace LostArkAction.viewModel
 
             SetEngraveNameViewSource = new CollectionViewSource();
             SetEngraveNameViewSource.Source = this.SetEngraveName;
-
-            
-
         }
 
   
@@ -708,6 +705,23 @@ namespace LostArkAction.viewModel
                     Equip += "_";
                 }
             }
+            string Possesion = "";
+            for (int i = 0; i < EquipAblityVM.SelectPossessionItems.Count; i++)
+            {
+
+                if (EquipAblityVM.SelectPossessionItems[i] == null || EquipAblityVM.SelectPossessionItems[i] == "")
+                {
+                    Possesion += ("미사용-" + EquipAblityVM.FigurePossessionItems[i].ToString());
+                }
+                else
+                {
+                    Possesion += (EquipAblityVM.SelectPossessionItems[i] + "-" + EquipAblityVM.FigurePossessionItems[i].ToString());
+                }
+                if (i < EquipAblityVM.SelectPossessionItems.Count - 1)
+                {
+                    Possesion += "_";
+                }
+            }
             string Acc = "";
             for(int i=0;i< AccessoriesVM.Qulity.Count; i++)
             {
@@ -734,6 +748,8 @@ namespace LostArkAction.viewModel
             setEngrave.Target = Target;
             setEngrave.Equip= Equip;
             setEngrave.Acc= Acc;
+            setEngrave.Possession = Possesion;
+
             setEngrave.Key = Name.GetHashCode();
             if (isUpdate)
             {
@@ -789,9 +805,32 @@ namespace LostArkAction.viewModel
                     EquipAblityVM.SelectItems[i] = sub[0];
                     EquipAblityVM.FigureItems[i] = Convert.ToInt32(sub[1]);
                 }
+                else
+                {
+                    EquipAblityVM.SelectItems[i] = null;
+                    EquipAblityVM.FigureItems[i] = 0;
+                }
             }
             EquipAblityVM.SelectItems = EquipAblityVM.SelectItems;
             EquipAblityVM.FigureItems = EquipAblityVM.FigureItems;
+            List<string> Possesion = SetEngraves[Name].Possession.Split('_').ToList();
+            for (int i = 0; i < Possesion.Count; i++)
+            {
+                string[] sub = Possesion[i].Split('-');
+                if (sub[0] != "미사용")
+                {
+                    EquipAblityVM.SelectPossessionItems[i] = sub[0];
+                    EquipAblityVM.FigurePossessionItems[i] = Convert.ToInt32(sub[1]);
+                }
+                else
+                {
+                    EquipAblityVM.SelectPossessionItems[i] = null;
+                    EquipAblityVM.FigurePossessionItems[i] = 0;
+                }
+            }
+            EquipAblityVM.SelectPossessionItems = EquipAblityVM.SelectPossessionItems;
+            EquipAblityVM.FigurePossessionItems = EquipAblityVM.FigurePossessionItems;
+
             List<string> Acc = SetEngraves[Name].Acc.Split('_').ToList();
 
             for (int i = 0; i < Acc.Count; i++)

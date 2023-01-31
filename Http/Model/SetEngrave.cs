@@ -13,5 +13,7 @@ namespace LostArkAction.Model
         public string Target { get; set; } = "";
         public string Equip { get; set; } = "";
         public string Acc { get; set; } = "";
+        public string Possession { get; set; } = "";
+
     }
 }

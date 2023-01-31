@@ -45,15 +45,15 @@ namespace LostArkAction.Code.DataBase
             cmd.ExecuteNonQuery();
 
 
-            sql = "CREATE TABLE Engrave (id int, Name nText,Target nText, Equip nText, Acc nText, PRIMARY KEY(id) );";
+            sql = "CREATE TABLE Engrave (id int, Name nText,Target nText, Equip nText, Acc nText, Possession nText, PRIMARY KEY(id) );";
             cmd = new SQLiteCommand(sql, conn);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO Engrave (id , Name,Target, Equip, Acc) " +
-                                    "VALUES ('"+ FinalStateStr.GetHashCode() +"','"+ FinalStateStr+ "','미사용-0_미사용-0_미사용-0_미사용-0_미사용-0_미사용-0_미사용-0','미사용-0_미사용-0_미사용-0_미사용-0_미사용-0','0_0_0_0_0_없음_없음_없음_없음_없음_없음');";
+            sql = "INSERT INTO Engrave (id , Name,Target, Equip, Acc, possession) " +
+                                    "VALUES ('"+ FinalStateStr.GetHashCode() +"','"+ FinalStateStr+ "','미사용-0_미사용-0_미사용-0_미사용-0_미사용-0_미사용-0_미사용-0','미사용-0_미사용-0_미사용-0_미사용-0_미사용-0','0_0_0_0_0_없음_없음_없음_없음_없음_없음','미사용-0_미사용-0_미사용-0_미사용-0');";
             cmd = new SQLiteCommand(sql, conn);
 
             cmd.ExecuteNonQuery();
-
+           
         }
         public List<string> getAPIKey()
         {
@@ -95,9 +95,9 @@ namespace LostArkAction.Code.DataBase
         public void AddEngrave(SetEngrave setEngrave)
         {
             SQLiteCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "INSERT INTO Engrave (id , Name,Target, Equip, Acc) " +
+            cmd.CommandText = "INSERT INTO Engrave (id , Name,Target, Equip, Acc,Possesion) " +
                                     "VALUES ("+ setEngrave.Name.GetHashCode() +",'"+
-                                    setEngrave.Name +"','"+ setEngrave.Target + "','" + setEngrave.Equip + "','" + setEngrave.Acc + "');";
+                                    setEngrave.Name +"','"+ setEngrave.Target + "','" + setEngrave.Equip + "','" + setEngrave.Acc + "','" + setEngrave.Possession + "');";
 
 
             cmd.ExecuteNonQuery();
@@ -111,7 +111,8 @@ namespace LostArkAction.Code.DataBase
             cmd.CommandText = "update Engrave set Name='" + setEngrave.Name +
                                                "',Target='" + setEngrave.Target +
                                                "',Equip='" + setEngrave.Equip +
-                                               "',Acc='" + setEngrave.Acc + "' where id =" + setEngrave.Key;
+                                               "',Acc='" + setEngrave.Acc +
+                                               "',Possesion='" + setEngrave.Possession + "' where id =" + setEngrave.Key;
 
             cmd.ExecuteNonQuery();
         
@@ -122,9 +123,35 @@ namespace LostArkAction.Code.DataBase
             SQLiteConnection conn = new SQLiteConnection(DataSourcePath);
             conn.Open();
             SQLiteCommand cmd = conn.CreateCommand();
+            string sql;
+            if (!CheckIfColumnExists("Engrave", "Possesion"))
+            {
+                sql = "ALTER TABLE Engrave ADD Possesion nText";
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+                List<int> ids = new List<int>();
+                sql = "select * from Engrave";
+                cmd.CommandText = sql;
+                SQLiteDataReader rdr = cmd.ExecuteReader();
+                if (rdr != null)
+                {
+                    while (rdr.Read())
+                    {
+                        int id;
+                        id = (int)rdr["id"];
+                        ids.Add(id);
+                    }
+                }
+                cmd = conn.CreateCommand();
+                for (int i = 0; i < ids.Count; i++)
+                {
+                    cmd.CommandText = "update Engrave set Possesion='미사용-0_미사용-0_미사용-0_미사용-0' where id =" + ids[i];
 
+                    cmd.ExecuteNonQuery();
+                }
+            }
 
-            string sql = "select * from Engrave";
+            sql = "select * from Engrave";
             try
             {
                 cmd.CommandText = sql;
@@ -138,21 +165,23 @@ namespace LostArkAction.Code.DataBase
                         engrave.Target = (string)rdr["Target"];
                         engrave.Equip = (string)rdr["Equip"];
                         engrave.Acc = (string)rdr["Acc"];
+                        engrave.Possession = (string)rdr["Possesion"];
                         engraves.Add(engrave);
                     }
                 }
             }
             catch
             {
-                sql = "CREATE TABLE Engrave (id int, Name nText,Target nText, Equip nText, Acc nText, PRIMARY KEY(id) );";
+                MessageBox.Show("Engrave Table이 존재 하지 않습니다. 재 생성하겠습니다.");
+
+                sql = "CREATE TABLE Engrave (id int, Name nText,Target nText, Equip nText, Acc nText, Possession nText, PRIMARY KEY(id) );";
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
-                sql = "INSERT INTO Engrave (id , Name,Target, Equip, Acc) " +
-                                    "VALUES ('" + FinalStateStr.GetHashCode() + "','" + FinalStateStr + "','미사용-0_미사용-0_미사용-0_미사용-0_미사용-0_미사용-0_미사용-0','미사용-0_미사용-0_미사용-0_미사용-0_미사용-0','0_0_0_0_0_없음_없음_없음_없음_없음_없음');";
+                sql = "INSERT INTO Engrave (id , Name,Target, Equip, Acc, possession) " +
+                                        "VALUES ('" + FinalStateStr.GetHashCode() + "','" + FinalStateStr + "','미사용-0_미사용-0_미사용-0_미사용-0_미사용-0_미사용-0_미사용-0','미사용-0_미사용-0_미사용-0_미사용-0_미사용-0','0_0_0_0_0_없음_없음_없음_없음_없음_없음','미사용-0_미사용-0_미사용-0_미사용-0');";
                 cmd = new SQLiteCommand(sql, conn);
 
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("Engrave Table이 존재 하지 않습니다. 재 생성하겠습니다.");
                 sql = "select * from Engrave";
     
                     cmd.CommandText = sql;
@@ -166,6 +195,7 @@ namespace LostArkAction.Code.DataBase
                             engrave.Target = (string)rdr["Target"];
                             engrave.Equip = (string)rdr["Equip"];
                             engrave.Acc = (string)rdr["Acc"];
+                            engrave.Possession = (string)rdr["Possesion"];
                             engraves.Add(engrave);
                         }
                     }
@@ -181,6 +211,28 @@ namespace LostArkAction.Code.DataBase
             cmd.CommandText = sql;
             cmd.ExecuteNonQuery();
        
+        }
+        private bool CheckIfColumnExists(string tableName, string columnName)
+        {
+            using (var conn = new SQLiteConnection(DataSourcePath))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = string.Format("PRAGMA table_info({0})", tableName);
+
+                var reader = cmd.ExecuteReader();
+                int nameIndex = reader.GetOrdinal("Name");
+                while (reader.Read())
+                {
+                    if (reader.GetString(nameIndex).Equals(columnName))
+                    {
+                        conn.Close();
+                        return true;
+                    }
+                }
+                conn.Close();
+            }
+            return false;
         }
     }
 }
