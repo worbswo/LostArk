@@ -806,6 +806,7 @@ namespace LostArkAction.Model
                                             }
                                             result += tmp.Key + " : " + tmp.Value.ToString() + '\n';
                                         }
+                                     
                                         if (charCheck)
                                         {
                                             FindAccVM findAcc = new FindAccVM
@@ -816,6 +817,9 @@ namespace LostArkAction.Model
                                                 FirstEarAblity = tmpAccs[1][idx[1]],
                                                 SecondEarAblity = tmpAccs[2][idx[2]],
                                                 TotalChar = result,
+                                                EquipChar = MainWinodwVM.EquipStr,
+                                                EquipChar2 = MainWinodwVM.EquipStr2,
+
                                                 TotalPrice = tmpAccs[0][idx[0]].Price + tmpAccs[1][idx[1]].Price + tmpAccs[2][idx[2]].Price + tmpAccs[3][idx[3]].Price + tmpAccs[4][idx[4]].Price
                                             };
 

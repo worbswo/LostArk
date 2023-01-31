@@ -50,9 +50,12 @@ namespace LostArkAction.viewModel
         private string _setupAblityText="";
         private string _setEngraveNameText = "";
         private int _setEngraveIndex = -1;
-        
+
         #endregion
         #region Property
+        public string EquipStr = "";
+        public string EquipStr2 = "";
+
         private APISetup APISetup = new APISetup();
         public DataBase DataBase = new DataBase(System.AppDomain.CurrentDomain.BaseDirectory + "EngaveDatabase.sqlite");
         private APISetupVM APISetupVM;
@@ -562,7 +565,17 @@ namespace LostArkAction.viewModel
                     }
                     else
                     {
-
+                        if (EquipAblityVM.SelectItems[0]== EquipAblityVM.SelectItems[1])
+                        {
+                            EquipStr = EquipAblityVM.SelectItems[0] + " : " + (EquipAblityVM.FigureItems[0] + EquipAblityVM.FigureItems[1]) + "\n";
+                        }
+                        else
+                        {
+                            EquipStr =  EquipAblityVM.SelectItems[0] + " : " + (EquipAblityVM.FigureItems[0]) + "\n";
+                            EquipStr += EquipAblityVM.SelectItems[1] + " : " + (EquipAblityVM.FigureItems[1]) + "\n";
+                        }
+                        EquipStr2 =  EquipAblityVM.SelectItems[2] + " : " + (EquipAblityVM.FigureItems[2]) + "\n";
+                        EquipStr2 +=  EquipAblityVM.SelectItems[3] + " : " + (EquipAblityVM.FigureItems[3]) + "\n";
                         for (int i = 0; i < EquipAblityVM.SelectItems.Count - 1; i++)
                         {
 
@@ -621,6 +634,10 @@ namespace LostArkAction.viewModel
             if (EquipAblityVM.SelectedTabIdx == 0)
             {
                 SearchAcc();
+            }
+            else
+            {
+
             }
         }
         public void AddEngraveMethod(object sender)

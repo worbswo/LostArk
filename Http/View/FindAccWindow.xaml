@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Title="검색 결과"
     Height="800"
-    Width="1180"
+    Width="1350"
 
     ResizeMode="NoResize">
     <Window.Resources>
@@ -20,7 +20,7 @@
         <ListView
             Margin="0"
             ItemsSource="{Binding AccCollectionView}"
-            Width="1180"
+            Width="1330"
             Name="lstView"
             
             AlternationCount="2">
@@ -124,20 +124,20 @@
                     <GridView.Columns>
                         <GridViewColumn
                             Width="30">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader
                                 Tag="ReceivingDate"
                                 Content="NO"></GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
                                     <TextBlock
                                         Text="{Binding Index}"
                                         TextWrapping="Wrap"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"/>
                                 </DataTemplate>
-                        </GridViewColumn.CellTemplate>
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn
                             Width="120">
@@ -167,9 +167,67 @@
                                             <TextBlock
                                                 Grid.Row="1"
                                                 Text="{Binding TotalChar}"></TextBlock>
-  
+
                                         </Grid>
                                     </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn
+                            Width="150">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader
+                                    Tag="ReceivingDate"
+                                    Content="장착 각인"></GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Border
+                                        BorderBrush="DodgerBlue"
+                                        BorderThickness="2"
+                                          Margin="0,2,0,2"
+                                        CornerRadius="2">
+                                            <Grid
+                                            Margin="15">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+
+                                                </Grid.RowDefinitions>
+                                                <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Text="장착 각인서"></TextBlock>
+                                                <TextBlock
+                                                Grid.Row="1"
+                                                Text="{Binding EquipChar}"></TextBlock>
+                                            </Grid>
+                                        </Border>
+                                        <Border
+                                            Grid.Row="1"
+                                        BorderBrush="DodgerBlue"
+                                        BorderThickness="2"
+                                        Margin="0,2,0,2"
+
+                                        CornerRadius="2">
+                                            <Grid
+                                            Margin="15">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+
+                                                </Grid.RowDefinitions>
+                                                <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Text="장착 어빌리티 스톤"></TextBlock>
+
+                                                <TextBlock
+                                                Grid.Row="1"
+                                                Text="{Binding EquipChar2}"></TextBlock>
+
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
