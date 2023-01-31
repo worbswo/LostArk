@@ -114,7 +114,7 @@ namespace LostArkAction.viewModel
             get { return _selectCharacteriastics; }
             set
             {
-                _selectCharacteriastics = value; ;
+                _selectCharacteriastics = value;
                 NotifyPropertyChanged("SelectCharacteriastics");
             }
         }
@@ -163,6 +163,8 @@ namespace LostArkAction.viewModel
         {
             int index = Convert.ToInt32(param as string);
             ComboBox comboBox = sender as ComboBox;
+           
+
             if (previusSelected[index] != -1)
             {
                 (App.Current.MainWindow.DataContext as MainWinodwVM).CharacteristicRangeVM.isChecked[previusSelected[index]]--;
@@ -172,8 +174,12 @@ namespace LostArkAction.viewModel
 
                 }
             }
-            (App.Current.MainWindow.DataContext as MainWinodwVM).CharacteristicRangeVM.isChecked[comboBox.SelectedIndex] ++;
-            (App.Current.MainWindow.DataContext as MainWinodwVM).CharacteristicRangeVM.ColorTxt[comboBox.SelectedIndex] = "White";
+            if (comboBox.SelectedIndex != -1)
+            {
+                (App.Current.MainWindow.DataContext as MainWinodwVM).CharacteristicRangeVM.isChecked[comboBox.SelectedIndex]++;
+                (App.Current.MainWindow.DataContext as MainWinodwVM).CharacteristicRangeVM.ColorTxt[comboBox.SelectedIndex] = "White";
+            }
+            
             previusSelected[index] = comboBox.SelectedIndex;
         }
         internal void Close(bool isClosing = false)

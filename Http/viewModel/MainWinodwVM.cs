@@ -848,7 +848,7 @@ namespace LostArkAction.viewModel
                 }
                 else
                 {
-                    AccessoriesVM.SelectCharacteriastics[i - 5] = Acc[i];
+                   AccessoriesVM.SelectCharacteriastics[i - 5] = Acc[i];  
                 }
             }
             AccessoriesVM.Qulity1 = AccessoriesVM.Qulity[0];
