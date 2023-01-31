@@ -447,7 +447,7 @@ namespace LostArkAction.viewModel
             TargetAblityVM.SelectItem6 = TargetAblityVM.SelectItems[5];
             TargetAblityVM.SelectItem7 = TargetAblityVM.SelectItems[6];
         }
-        public void SearchMethod(object sender)
+        public void SearchAcc()
         {
             if (HttpClient2.APIkeys == null || HttpClient2.APIkeys.Count == 0)
             {
@@ -503,14 +503,14 @@ namespace LostArkAction.viewModel
                     ischeck = false;
                     return;
                 }
-                Ablity.TargetItems.Add(TargetAblityVM.SelectItems[i], value );
+                Ablity.TargetItems.Add(TargetAblityVM.SelectItems[i], value);
             }
             if (ischeck)
             {
                 ischeck = true;
                 for (int i = 0; i < TargetAblityVM.SelectItems.Count; i++)
                 {
-                    if (TargetAblityVM.SelectItems[i] != ""&& TargetAblityVM.SelectItems[i]!=null)
+                    if (TargetAblityVM.SelectItems[i] != "" && TargetAblityVM.SelectItems[i] != null)
                     {
                         if (TargetAblityVM.SelectFigureItems[i] == 0)
                         {
@@ -523,38 +523,38 @@ namespace LostArkAction.viewModel
                 }
                 if (ischeck)
                 {
-                    if (AccessoriesVM.SelectCharacteriastics[0] == "")
+                    if (AccessoriesVM.SelectCharacteriastics[0] == ""|| AccessoriesVM.SelectCharacteriastics[0]==null)
                     {
                         MessageBox.Show("목걸이의 첫번째 특성을 선택하세요.");
                         IsEnableSearchBtn = true;
                         return;
                     }
-                    else if (AccessoriesVM.SelectCharacteriastics[1] == "")
+                    else if (AccessoriesVM.SelectCharacteriastics[1] == "" || AccessoriesVM.SelectCharacteriastics[1] == null)
                     {
                         MessageBox.Show("목걸이의 두번째 특성을 선택하세요.");
                         IsEnableSearchBtn = true;
                         return;
 
                     }
-                    else if (AccessoriesVM.SelectCharacteriastics[2] == "")
+                    else if (AccessoriesVM.SelectCharacteriastics[2] == "" || AccessoriesVM.SelectCharacteriastics[2] == null)
                     {
                         MessageBox.Show("첫번째 귀걸이의 특성을 선택하세요.");
                         IsEnableSearchBtn = true;
                         return;
                     }
-                    else if (AccessoriesVM.SelectCharacteriastics[3] == "")
+                    else if (AccessoriesVM.SelectCharacteriastics[3] == "" || AccessoriesVM.SelectCharacteriastics[3] == null)
                     {
                         MessageBox.Show("두번재 귀걸이의 특성을 선택하세요.");
                         IsEnableSearchBtn = true;
                         return;
                     }
-                    else if (AccessoriesVM.SelectCharacteriastics[4] == "")
+                    else if (AccessoriesVM.SelectCharacteriastics[4] == "" || AccessoriesVM.SelectCharacteriastics[4] == null)
                     {
                         MessageBox.Show("첫번째 반지의 특성을 선택하세요.");
                         IsEnableSearchBtn = true;
                         return;
                     }
-                    else if (AccessoriesVM.SelectCharacteriastics[5] == "")
+                    else if (AccessoriesVM.SelectCharacteriastics[5] == "" || AccessoriesVM.SelectCharacteriastics[5] == null)
                     {
                         MessageBox.Show("두번째 반지의 특성을 선택하세요.");
                         IsEnableSearchBtn = true;
@@ -579,7 +579,7 @@ namespace LostArkAction.viewModel
                                 Ablity.EquipItems.Add(EquipAblityVM.SelectItems[i], new List<int> { EquipAblityVM.FigureItems[i] });
                             }
                         }
-                        if(EquipAblityVM.SelectItems[4]==null|| EquipAblityVM.SelectItems[4] == "")
+                        if (EquipAblityVM.SelectItems[4] == null || EquipAblityVM.SelectItems[4] == "")
                         {
                             MessageBox.Show("페널티 감소 각인을 입력 하세요.");
                             IsEnableSearchBtn = true;
@@ -614,6 +614,13 @@ namespace LostArkAction.viewModel
                         Ablity.SelectedAblity();
                     }
                 }
+            }
+        }
+        public void SearchMethod(object sender)
+        {
+            if (EquipAblityVM.SelectedTabIdx == 0)
+            {
+                SearchAcc();
             }
         }
         public void AddEngraveMethod(object sender)
