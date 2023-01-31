@@ -30,6 +30,8 @@
             <RowDefinition
                 Height="*"></RowDefinition>
             <RowDefinition
+                Height="15"></RowDefinition>
+            <RowDefinition
                 Height="25"></RowDefinition>
             <RowDefinition
                 Height="15"></RowDefinition>
@@ -225,8 +227,28 @@
 
         </view:CharacteristicRange>
         <ProgressBar
-            Name="searchProgress"
             Grid.Row="5"
+            Minimum="0"
+            Maximum="100"
+            Background="#FF424452"
+            BorderThickness="0"
+            Grid.ColumnSpan="2"
+            Margin="10,2,10,2"
+            Value="{Binding PossProgressValue}"
+            Foreground="#FFA2A925">
+        </ProgressBar>
+        <TextBlock
+            Grid.Row="5"
+            Grid.ColumnSpan="2"
+            FontWeight="UltraBold"
+            Foreground="White"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Text="{Binding PossProgressText}"
+            ></TextBlock>
+        <ProgressBar
+            Name="searchProgress"
+            Grid.Row="6"
             Minimum="0"
             Maximum="100"
             Background="#FF424452"
@@ -237,7 +259,7 @@
             Foreground="#FF284E80">
         </ProgressBar>
         <TextBlock
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.ColumnSpan="2"
             FontWeight="UltraBold"
             Foreground="White"
@@ -248,7 +270,7 @@
         <!--Text="{Binding ElementName=searchProgress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>-->
         <ProgressBar
             Name="waitAPIprogress"
-            Grid.Row="6"
+            Grid.Row="7"
             Minimum="0"
             Maximum="100"
             Background="#FF424452"
@@ -259,7 +281,7 @@
             Foreground="#FF674D12">
         </ProgressBar>
         <TextBlock
-            Grid.Row="6"
+            Grid.Row="7"
             Grid.ColumnSpan="2"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
@@ -268,7 +290,7 @@
             Text="{Binding WaitAPIProgressText}"></TextBlock>
         <ProgressBar
             Name="progress"
-            Grid.Row="7"
+            Grid.Row="8"
             Minimum="0"
             Maximum="100"
             Background="#FF424452"
@@ -279,7 +301,7 @@
             Foreground="#FF036515" Height="21" VerticalAlignment="Top">
         </ProgressBar>
         <TextBlock
-            Grid.Row="7"
+            Grid.Row="8"
             Grid.ColumnSpan="2"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
@@ -287,7 +309,7 @@
             Foreground="White"
             Text="{Binding ElementName=progress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>
         <Grid
-            Grid.Row="8"
+            Grid.Row="9"
             Grid.ColumnSpan="2"
             Margin="10">
             <Grid.RowDefinitions>

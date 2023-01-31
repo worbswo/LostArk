@@ -40,6 +40,8 @@ namespace LostArkAction.viewModel
         private float _searchProgressValue;
         private float _accProgressValue;
         private float _waitAPIprogressValue;
+        private float _possProgressValue;
+        private string _possProgressText;
         private string _searchProgressText;
         private string _waitAPIProgressText;
 
@@ -82,6 +84,18 @@ namespace LostArkAction.viewModel
             {
                 _searchProgressText = value;
                 OnPropertyChanged("SearchProgressText");
+            }
+        }
+        public string PossProgressText
+        {
+            get
+            {
+                return _possProgressText;
+            }
+            set
+            {
+                _possProgressText = value;
+                OnPropertyChanged("PossProgressText");
             }
         }
         public string WaitAPIProgressText
@@ -150,6 +164,15 @@ namespace LostArkAction.viewModel
             {
                 _progressValue = value;
                 OnPropertyChanged("ProgressValue");
+            }
+        }
+        public float PossProgressValue
+        {
+            get { return _possProgressValue; }
+            set
+            {
+                _possProgressValue = value;
+                OnPropertyChanged("PossProgressValue");
             }
         }
         public float AccProgressValue
@@ -675,6 +698,8 @@ namespace LostArkAction.viewModel
                 EquipAblityVM.SelectItems = EquipAblityVM.SelectItems;
                 EquipAblityVM.FigureItems = EquipAblityVM.FigureItems;
                 isRunnigSearch = true;
+                PossProgressText = "1/" + PossessionAblities.Count;
+                PossProgressValue = ((float)(PossessionCnt + 1) / (float)PossessionAblities.Count)*100.0f;
                 SearchAcc();
             }
         }
@@ -682,7 +707,8 @@ namespace LostArkAction.viewModel
         {
             PossessionCnt++;
             SearchProgressText = "";
-            if(PossessionCnt >= PossessionAblities.Count)
+            
+            if (PossessionCnt >= PossessionAblities.Count)
             {
                 if (!isResultExist)
                 {
@@ -690,6 +716,8 @@ namespace LostArkAction.viewModel
                 }
                 return;
             }
+            PossProgressText = (PossessionCnt+1) + "/" + PossessionAblities.Count;
+            PossProgressValue = (float)((float)(PossessionCnt + 1) / (float)PossessionAblities.Count) * 100.0f;
             EquipAblityVM.SelectItems[0] = PossessionAblities[PossessionCnt].FirstAblity;
             EquipAblityVM.SelectItems[1] = PossessionAblities[PossessionCnt].SecondAblity;
             EquipAblityVM.FigureItems[0] = PossessionAblities[PossessionCnt].FirstValue;
