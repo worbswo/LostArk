@@ -681,6 +681,7 @@ namespace LostArkAction.viewModel
         public void NextPossessionSetting()
         {
             PossessionCnt++;
+            SearchProgressText = "";
             if(PossessionCnt >= PossessionAblities.Count)
             {
                 if (!isResultExist)

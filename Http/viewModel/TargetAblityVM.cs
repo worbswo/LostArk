@@ -32,6 +32,8 @@ namespace LostArkAction.viewModel
         private RelayCommand _mouseDownCommand;
         private RelayCommand _keyBoardDownCommand;
         private ObservableCollection<string> _optionsList = new ObservableCollection<string>();
+        private ObservableCollection<string> _optionsPosList = new ObservableCollection<string>();
+
         private List<string> _selectItems = new List<string>() { "", "", "", "", "", "", "", };
         public Dictionary<int, string> optionIndex { get; set; } = new Dictionary<int, string>();
 
@@ -81,13 +83,17 @@ namespace LostArkAction.viewModel
                     }
                 }
                 _optionsList = new ObservableCollection<string>();
-                foreach(var item in optionIndex)
+                _optionsPosList = new ObservableCollection<string>();
+
+                _optionsPosList.Add("");
+                foreach (var item in optionIndex)
                 {
 
                         _optionsList.Add(item.Value);
-                    
+                    _optionsPosList.Add(item.Value);
                 }
                  (App.Current.MainWindow.DataContext as MainWinodwVM).EquipAblityVM.SelectOptions = _optionsList;
+                (App.Current.MainWindow.DataContext as MainWinodwVM).EquipAblityVM.SelectPosOptions = _optionsPosList;
 
                 NotifyPropertyChanged("SelectItems");
             }

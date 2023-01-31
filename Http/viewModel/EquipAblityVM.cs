@@ -13,6 +13,7 @@ namespace LostArkAction.viewModel
     {
         #region Field
         private ObservableCollection<string> _selectOption;
+        private ObservableCollection<string> _selectPosOption;
 
         private List<string> _selectOption2;
         
@@ -103,6 +104,23 @@ namespace LostArkAction.viewModel
             {
                 _selectOption = value;
                 NotifyPropertyChanged("SelectOptions");
+            }
+        }
+        public ObservableCollection<string> SelectPosOptions
+        {
+            get
+            {
+                if (_selectPosOption == null)
+                {
+                    _selectPosOption = new ObservableCollection<string>();
+
+                }
+                return _selectPosOption;
+            }
+            set
+            {
+                _selectPosOption = value;
+                NotifyPropertyChanged("SelectPosOptions");
             }
         }
         public List<string> SelectOptions2

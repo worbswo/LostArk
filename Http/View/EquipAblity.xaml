@@ -215,7 +215,7 @@
                         Margin="0,0,0,2"
                         Style="{StaticResource ComboBoxTest3}"
                         SelectedItem="{Binding DataContext.EquipAblityVM.SelectPossessionItems[0]}"
-                        ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions,Mode=TwoWay}"
+                        ItemsSource="{Binding DataContext.EquipAblityVM.SelectPosOptions,Mode=TwoWay}"
                         VerticalAlignment="Center">
                         </ComboBox>
                         <TextBox
@@ -266,7 +266,7 @@
                         Margin="0,0,0,2"
                         Style="{StaticResource ComboBoxTest3}"
                         SelectedItem="{Binding DataContext.EquipAblityVM.SelectPossessionItems[1]}"
-                        ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions}"
+                        ItemsSource="{Binding DataContext.EquipAblityVM.SelectPosOptions}"
                         VerticalAlignment="Center">
                         </ComboBox>
                         <TextBox
@@ -291,7 +291,7 @@
                         Margin="0,0,0,2"
                         Style="{StaticResource ComboBoxTest3}"
                         SelectedItem="{Binding DataContext.EquipAblityVM.SelectPossessionItems[2]}"
-                        ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions}"
+                        ItemsSource="{Binding DataContext.EquipAblityVM.SelectPosOptions}"
                         VerticalAlignment="Center">
                         </ComboBox>
                         <TextBox
@@ -329,7 +329,7 @@
                         Margin="0,0,0,2"
                         Style="{StaticResource ComboBoxTest3}"
                         SelectedItem="{Binding DataContext.EquipAblityVM.SelectPossessionItems[3]}"
-                        ItemsSource="{Binding DataContext.EquipAblityVM.SelectOptions}"
+                        ItemsSource="{Binding DataContext.EquipAblityVM.SelectPosOptions}"
                         VerticalAlignment="Center">
                         </ComboBox>
                         <TextBox
