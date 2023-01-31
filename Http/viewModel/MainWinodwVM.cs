@@ -55,7 +55,10 @@ namespace LostArkAction.viewModel
         #region Property
         public string EquipStr = "";
         public string EquipStr2 = "";
-
+        List<PossessionAblity> PossessionAblities = new List<PossessionAblity>();
+        int PossessionCnt = 0;
+        bool isResultExist = false;
+        public bool isRunnigSearch = false;
         private APISetup APISetup = new APISetup();
         public DataBase DataBase = new DataBase(System.AppDomain.CurrentDomain.BaseDirectory + "EngaveDatabase.sqlite");
         private APISetupVM APISetupVM;
@@ -631,14 +634,68 @@ namespace LostArkAction.viewModel
         }
         public void SearchMethod(object sender)
         {
+            isRunnigSearch = false;
+            PossessionCnt = 0;
+            isResultExist = false;
+            PossessionAblities = new List<PossessionAblity>();
             if (EquipAblityVM.SelectedTabIdx == 0)
             {
                 SearchAcc();
             }
             else
             {
-
+                List<string> posAblitys = new List<string>();
+                List<int> posAblitiesValue = new List<int>();
+                for (int i = 0; i < EquipAblityVM.SelectPossessionItems.Count; i++)
+                {
+                    if (EquipAblityVM.SelectPossessionItems[i] != null && EquipAblityVM.SelectPossessionItems[i] != "")
+                    {
+                        posAblitys.Add(EquipAblityVM.SelectPossessionItems[i]);
+                        posAblitiesValue.Add(EquipAblityVM.FigurePossessionItems[i]);
+                    }
+                }
+                EquipAblityVM.SelectedTabIdx = 0;
+                for(int i = 0; i < posAblitys.Count; i++)
+                {
+                    for(int j = i; j < posAblitys.Count; j++)
+                    {
+                        PossessionAblity possessionAblity = new PossessionAblity();
+                        possessionAblity.FirstAblity = posAblitys[i];
+                        possessionAblity.SecondAblity = posAblitys[j];
+                        possessionAblity.FirstValue = posAblitiesValue[i];
+                        possessionAblity.SecondValue = posAblitiesValue[j];
+                        PossessionAblities.Add(possessionAblity);
+                        
+                    }
+                }
+                EquipAblityVM.SelectItems[0] = PossessionAblities[PossessionCnt].FirstAblity;
+                EquipAblityVM.SelectItems[1] = PossessionAblities[PossessionCnt].SecondAblity;
+                EquipAblityVM.FigureItems[0] = PossessionAblities[PossessionCnt].FirstValue;
+                EquipAblityVM.FigureItems[1] = PossessionAblities[PossessionCnt].SecondValue;
+                EquipAblityVM.SelectItems = EquipAblityVM.SelectItems;
+                EquipAblityVM.FigureItems = EquipAblityVM.FigureItems;
+                isRunnigSearch = true;
+                SearchAcc();
             }
+        }
+        public void NextPossessionSetting()
+        {
+            PossessionCnt++;
+            if(PossessionCnt >= PossessionAblities.Count)
+            {
+                if (!isResultExist)
+                {
+                    MessageBox.Show("각인을 구성할 수 있는 매물이 없습니다.");
+                }
+                return;
+            }
+            EquipAblityVM.SelectItems[0] = PossessionAblities[PossessionCnt].FirstAblity;
+            EquipAblityVM.SelectItems[1] = PossessionAblities[PossessionCnt].SecondAblity;
+            EquipAblityVM.FigureItems[0] = PossessionAblities[PossessionCnt].FirstValue;
+            EquipAblityVM.FigureItems[1] = PossessionAblities[PossessionCnt].SecondValue;
+            EquipAblityVM.SelectItems = EquipAblityVM.SelectItems;
+            EquipAblityVM.FigureItems = EquipAblityVM.FigureItems;
+            SearchAcc();
         }
         public void AddEngraveMethod(object sender)
         {
@@ -882,6 +939,7 @@ namespace LostArkAction.viewModel
         }
         public void OpenFindACC()
         {
+            isResultExist = true;
             FindAccWindow findAccWindow= new FindAccWindow();
             
             findAccWindow.DataContext = new FIndAccWindowVM(FindAccVMs);

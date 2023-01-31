@@ -53,7 +53,7 @@ namespace LostArkAction.Code
                 }
             }
         }
-        public static async Task GetAsync(List<SearchAblity> searchAblitie, Accesories accesory)
+        public static async void GetAsync(List<SearchAblity> searchAblitie, Accesories accesory)
         {
             int apiKeyidx = 0;
             int searchTotal = 0;

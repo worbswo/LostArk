@@ -146,6 +146,7 @@
     <Compile Include="Model\Ablity.cs" />
     <Compile Include="Model\Accesories.cs" />
     <Compile Include="Model\Accesory.cs" />
+    <Compile Include="Model\PossessionAblity.cs" />
     <Compile Include="Model\SearchAblity.cs" />
     <Compile Include="Model\SetEngrave.cs" />
     <Compile Include="viewModel\AccVM.cs" />

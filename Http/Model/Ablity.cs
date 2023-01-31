@@ -282,7 +282,15 @@ namespace LostArkAction.Model
             }
             if (Minus > auctionIItemSum)
             {
-                MessageBox.Show("구성할 수 없는 각인 입니다.");
+
+                if (!MainWinodwVM.isRunnigSearch)
+                {
+                    MessageBox.Show("구성할 수 없는 각인 입니다.");
+                }
+                else
+                {
+                    MainWinodwVM.NextPossessionSetting();
+                }
                 DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
 
 
@@ -338,7 +346,14 @@ namespace LostArkAction.Model
             
             if (AblitiesCombi.Count == 0)
             {
-                MessageBox.Show("구성할 수 없는 각인 입니다.");
+                if (!MainWinodwVM.isRunnigSearch)
+                {
+                    MessageBox.Show("구성할 수 없는 각인 입니다.");
+                }
+                else
+                {
+                    MainWinodwVM.NextPossessionSetting();
+                }
                 DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
 
                 return;
@@ -396,7 +411,7 @@ namespace LostArkAction.Model
             }
             Console.WriteLine("검색 개수 {0}", SearchAblities.Count);
 #endif
-           _=HttpClient2.GetAsync(SearchAblities, Accesories);
+           HttpClient2.GetAsync(SearchAblities, Accesories);
         }
         public void ComputeAblity(List<int> index, List<string> abliName, Dictionary<int, List<List<int>>> accCases, Dictionary<string, int> targetItems, List<List<SearchAblity>> searchAblities)
         {
@@ -841,14 +856,18 @@ namespace LostArkAction.Model
                 
 
             }
+            MainWinodwVM.ProgressValue = 100;
             if (MainWinodwVM.FindAccVMs.Count == 0)
             {
-                MessageBox.Show("각인을 구성할 수 있는 매물이 없습니다.");
+                if (!MainWinodwVM.isRunnigSearch)  MessageBox.Show("각인을 구성할 수 있는 매물이 없습니다.");
                 DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
+                DispatcherService.Invoke(() => { MainWinodwVM.NextPossessionSetting(); });
                 return;
             }
             DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
             DispatcherService.Invoke(() => { MainWinodwVM.OpenFindACC(); });
+            DispatcherService.Invoke(() => { MainWinodwVM.NextPossessionSetting(); });
+
         }
         public AccVM ConvertAuctionItemToAcc(AuctionItem auctionItem, string accName)
         {
