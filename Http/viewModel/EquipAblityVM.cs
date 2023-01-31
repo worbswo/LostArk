@@ -13,13 +13,40 @@ namespace LostArkAction.viewModel
     {
         #region Field
         private ObservableCollection<string> _selectOption;
+
         private List<string> _selectOption2;
 
         private List<string> _selectItems=new List<string> { "", "", "", "", ""};
         private List<int> _figureItems  = new List<int> {0,0,0,0,0 };
+        private List<string> _selectPossessionItems = new List<string> { "", "", "", "" };
+        private List<int> _figurePossessionItems = new List<int> { 0, 0, 0, 0 };
         #endregion
         #region Property
-
+        public int SelectedTabIdx { get; set; } = 0;
+        public List<string> SelectPossessionItems
+        {
+            get
+            {
+                return _selectPossessionItems;
+            }
+            set
+            {
+                _selectPossessionItems = value;
+                NotifyPropertyChanged("SelectPossessionItems");
+            }
+        }
+        public List<int> FigurePossessionItems
+        {
+            get
+            {
+                return _figurePossessionItems;
+            }
+            set
+            {
+                _figurePossessionItems = value;
+                NotifyPropertyChanged("FigurePossessionItems");
+            }
+        }
         public List<string> SelectItems
         {
             get
