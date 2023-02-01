@@ -60,7 +60,14 @@ namespace LostArkAction.Code
             int searchCnt = 0;
 
             searchTotal = 3 * searchAblitie.Count;
-
+            if (accesory["반지1"].Characteristic[0] != accesory["반지2"].Characteristic[0])
+            {
+                searchTotal += searchAblitie.Count;
+            }
+            if (accesory["귀걸이1"].Characteristic[0] != accesory["귀걸이2"].Characteristic[0])
+            {
+                searchTotal += searchAblitie.Count;
+            }
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc = new List<AccVM>();
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1 = new List<AccVM>();
             (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1 = new List<AccVM>();
