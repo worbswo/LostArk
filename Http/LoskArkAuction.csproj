@@ -284,6 +284,15 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dependency\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Engrave\Engrave.csproj">
+      <Project>{3114cab0-b6f8-43de-ae98-faf5dfcba3fa}</Project>
+      <Name>Engrave</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
