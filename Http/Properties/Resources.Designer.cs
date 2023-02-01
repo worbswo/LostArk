@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LostArkAction.Properties {
+namespace Engrave.Properties {
     using System;
     
     

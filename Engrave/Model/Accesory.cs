@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LostArkAction.Model
+namespace Engrave.Model
 {
     public class Accesory
     {

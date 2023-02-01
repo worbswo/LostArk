@@ -1,5 +1,4 @@
-﻿using LostArkAction.Code;
-using LostArkAction.viewModel;
+﻿using Engrave.Code;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +8,25 @@ using System.Threading.Tasks;
 using System.Windows;
 
 
-namespace LostArkAction.Model
+namespace Engrave.Model
 {
+    public enum ProgressBarType
+    {
+        Calc,
+        Search,
+        Acc,
+        WaitAPI,
+        Possession
+    }
     public class Ablity
     {
         #region Field
+        public delegate void ProgressbarInitEventHandler();
+        public delegate void AblityFailEventHandler();
+        public delegate void FindAccAddEventHandler(List<List<AccInfo>> accInfo,string equipStr,int[] idx);
+        public delegate void SetProgressbarEventHandler(ProgressBarType type,float value);
+        public delegate void ResultEventHandler();
+
         #endregion
 
         #region Property
@@ -77,6 +90,15 @@ namespace LostArkAction.Model
         int[] _arr = { 0, 1, 2, 3, 4 };
         bool[] _check = { false, false, false, false, false };
         List<int> _v = new List<int>();
+        #endregion
+
+        #region Event
+        public event ProgressbarInitEventHandler ProgressbarInit;
+        public event AblityFailEventHandler AblityFail;
+        public event FindAccAddEventHandler FindAccAdd;
+        public event SetProgressbarEventHandler SetProgressbar;
+        public event ResultEventHandler Result;
+
         #endregion
         public Ablity()
         {
@@ -233,9 +255,7 @@ namespace LostArkAction.Model
             int TargetSum = 0;
             int EquipSum = 0;
             int auctionIItemSum = 0;
-            MainWinodwVM.ProgressValue = 0;
-            MainWinodwVM.AccProgressValue = 0;
-            MainWinodwVM.SearchProgressValue = 0;
+            ProgressbarInit();
 
             Dictionary<string, int> targetItems = new Dictionary<string, int>();
             Dictionary<string, List<int>> equipItems = new Dictionary<string, List<int>>();
@@ -280,17 +300,9 @@ namespace LostArkAction.Model
             }
             if (Minus > auctionIItemSum)
             {
+                AblityFail();
 
-                if (!MainWinodwVM.isRunnigSearch)
-                {
-                    MessageBox.Show("구성할 수 없는 각인 입니다.");
-                }
-                else
-                {
-                    MainWinodwVM.NextPossessionSetting();
-                }
-                DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
-
+               
 
                 return;
             }
@@ -344,15 +356,7 @@ namespace LostArkAction.Model
             
             if (AblitiesCombi.Count == 0)
             {
-                if (!MainWinodwVM.isRunnigSearch)
-                {
-                    MessageBox.Show("구성할 수 없는 각인 입니다.");
-                }
-                else
-                {
-                    MainWinodwVM.NextPossessionSetting();
-                }
-                DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
+                AblityFail();
 
                 return;
             }
@@ -409,7 +413,7 @@ namespace LostArkAction.Model
             }
             Console.WriteLine("검색 개수 {0}", SearchAblities.Count);
 #endif
-           HttpClient2.GetAsync(SearchAblities, Accesories);
+           HttpClient2.GetAsync(SearchAblities, Accesories,this);
         }
         public void ComputeAblity(List<int> index, List<string> abliName, Dictionary<int, List<List<int>>> accCases, Dictionary<string, int> targetItems, List<List<SearchAblity>> searchAblities)
         {
@@ -678,7 +682,6 @@ namespace LostArkAction.Model
             {
                 earSameChar = true;
             }
-            List<FindAccVM> findAccVMsTmp = new List<FindAccVM>();
             List<List<AccInfo>> tmpAccs = new List<List<AccInfo>>();
             Dictionary<string, int> sameIndex = new Dictionary<string, int>();
             for (int i = 0; i < perAccs.Count; i++)
@@ -822,21 +825,7 @@ namespace LostArkAction.Model
                                      
                                         if (charCheck)
                                         {
-                                            FindAccVM findAcc = new FindAccVM
-                                            {
-                                                NeckAblity = tmpAccs[0][idx[0]],
-                                                FirstRingAblity = tmpAccs[3][idx[3]],
-                                                SecondRingAblity = tmpAccs[4][idx[4]],
-                                                FirstEarAblity = tmpAccs[1][idx[1]],
-                                                SecondEarAblity = tmpAccs[2][idx[2]],
-                                                TotalChar = result,
-                                                EquipChar = MainWinodwVM.EquipStr,
-                                                EquipChar2 = MainWinodwVM.EquipStr2,
-
-                                                TotalPrice = tmpAccs[0][idx[0]].Price + tmpAccs[1][idx[1]].Price + tmpAccs[2][idx[2]].Price + tmpAccs[3][idx[3]].Price + tmpAccs[4][idx[4]].Price
-                                            };
-
-                                            MainWinodwVM.FindAccVMs.Add(findAcc);
+                                            FindAccAdd(tmpAccs, result, idx);
                                         }
                                         
                                         panaltyCheck[tmpAccs[4][idx[4]].PenaltyName] -= tmpAccs[4][idx[4]].PenaltyValue;
@@ -849,22 +838,11 @@ namespace LostArkAction.Model
                         }
                     }
                     Cnt++;
-                    MainWinodwVM.ProgressValue = (float)(((double)Cnt / TotalValue) * 100.0);
+                    SetProgressbar(ProgressBarType.Calc, (float)(((double)Cnt / TotalValue) * 100.0));
                 }
-                
-
             }
-            MainWinodwVM.ProgressValue = 100;
-            if (MainWinodwVM.FindAccVMs.Count == 0)
-            {
-                if (!MainWinodwVM.isRunnigSearch)  MessageBox.Show("각인을 구성할 수 있는 매물이 없습니다.");
-                DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
-                DispatcherService.Invoke(() => { MainWinodwVM.NextPossessionSetting(); });
-                return;
-            }
-            DispatcherService.Invoke(() => { (App.Current.MainWindow.DataContext as MainWinodwVM).IsEnableSearchBtn = true; });
-            DispatcherService.Invoke(() => { MainWinodwVM.OpenFindACC(); });
-            DispatcherService.Invoke(() => { MainWinodwVM.NextPossessionSetting(); });
+            SetProgressbar(ProgressBarType.Calc,100);
+            Result();
 
         }
         public AccInfo ConvertAuctionItemToAcc(AuctionItem auctionItem, string accName)

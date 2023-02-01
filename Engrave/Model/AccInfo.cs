@@ -1,0 +1,278 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Engrave.Model
+{
+    public class AccInfo
+    {
+        #region Field
+        private string _name;
+        private int _quality;
+        private string _name1;
+        private int _value1;
+        private string _name2;
+        private int _value2;
+        private string _penaltyName;
+        private int _penaltyValue;
+        private int _price;
+        private string _firstcharaterics;
+        private int _firstCharValue;
+        private string _secondcharaterics;
+        private int _secondCharValue;
+        private string _imagePath;
+        private int _tradeAllow;
+
+        #endregion
+
+        #region Property
+
+        public string ImagePath
+        {
+            get { return _imagePath; }
+            set
+            {
+                if (_imagePath != value)
+                {
+                    _imagePath = value;
+                }
+            }
+        }
+        public int TradeAllow
+        {
+            get { return _tradeAllow; }
+            set
+            {
+              
+                    _tradeAllow = value;
+                
+            }
+        }
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                }
+            }
+        }
+        public int Quality
+        {
+            get { return _quality; }
+            set
+            {
+                if (_quality != value)
+                {
+                    _quality = value;
+                }
+            }
+        }
+        public string Name1
+        {
+            get { return _name1; }
+            set
+            {
+                if (_name1 != value)
+                {
+                    _name1 = value;
+                }
+            }
+        }
+        public int Value1
+        {
+            get { return _value1; }
+            set
+            {
+                if (_value1 != value)
+                {
+                    _value1 = value;
+                }
+            }
+        }
+        public string Name2
+        {
+            get { return _name2; }
+            set
+            {
+                if (_name2 != value)
+                {
+                    _name2 = value;
+                }
+            }
+        }
+        public int Value2
+        {
+            get { return _value2; }
+            set
+            {
+                if (_value2 != value)
+                {
+                    _value2 = value;
+                }
+            }
+        }
+        public string PenaltyName
+        {
+            get { return _penaltyName; }
+            set
+            {
+                if (_penaltyName != value)
+                {
+                    _penaltyName = value;
+                }
+            }
+        }
+        public int PenaltyValue
+        {
+            get { return _penaltyValue; }
+            set
+            {
+                if (_penaltyValue != value)
+                {
+                    _penaltyValue = value;
+                }
+            }
+        }
+        public int Price
+        {
+            get { return _price; }
+            set
+            {
+                if (_price != value)
+                {
+                    _price = value;
+                }
+            }
+        }
+        public string FirstCharaterics
+        {
+            get
+            {
+                return _firstcharaterics;
+            }
+            set
+            {
+                _firstcharaterics = value;
+            }
+        }
+        public string Secondcharaterics
+        {
+            get
+            {
+                return _secondcharaterics;
+            }
+            set
+            {
+                _secondcharaterics = value;
+            }
+        }
+        public int FirstCharValue
+        {
+            get
+            {
+                return _firstCharValue;
+            }
+            set
+            {
+                _firstCharValue = value;
+            }
+        }
+        public int SecondCharValue
+        {
+            get
+            {
+                return _secondCharValue;
+            }
+            set
+            {
+                _secondCharValue = value;
+            }
+        }
+        #endregion
+        #region Constructor
+        public AccInfo()
+        {
+
+        }
+
+        public AccInfo(AccInfo accvm)
+        {
+            Name = accvm.Name;
+            Name1 = accvm.Name1;
+            Name2 = accvm.Name2;
+            Value1 = accvm.Value1;
+            Value2 = accvm.Value2;
+            Quality = accvm.Quality;
+            PenaltyName = accvm.PenaltyName;
+            PenaltyValue = accvm.PenaltyValue;
+            Price = accvm.Price;
+            FirstCharaterics = accvm.FirstCharaterics;
+            FirstCharValue = accvm.FirstCharValue;
+            Secondcharaterics = accvm.Secondcharaterics;
+            SecondCharValue = accvm.SecondCharValue;
+            ImagePath = accvm.ImagePath;
+            TradeAllow=accvm.TradeAllow;
+
+    }
+        #endregion
+        #region Method
+        public bool Contain(AccInfo accVM, bool ran = false)
+        {
+            bool result = false;
+            if (!ran)
+            {
+                if (accVM.Name1 == Name1 && accVM.Name2 == Name2)
+                {
+                    if (accVM.Value1 == Value1 && accVM.Value2 == Value2)
+                    {
+                        if (accVM.PenaltyName == PenaltyName)
+                        {
+                            if (accVM.PenaltyValue == PenaltyValue)
+                            {
+                                result = true;
+                            }
+
+                        }
+                    }
+                }
+                if (accVM.Name1 == Name2 && accVM.Name2 == Name1)
+                {
+                    if (accVM.Value1 == Value2 && accVM.Value2 == Value1)
+                    {
+                        if (accVM.PenaltyName == PenaltyName)
+                        {
+
+                            if (accVM.PenaltyValue == PenaltyValue)
+                            {
+                                result = true;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (accVM.Name1 == Name1)
+                {
+                    if (accVM.Value1 == Value1)
+                    {
+                        if (accVM.PenaltyName == PenaltyName)
+                        {
+                            if (accVM.PenaltyValue == PenaltyValue)
+                            {
+                                result = true;
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+        #endregion
+    }
+}

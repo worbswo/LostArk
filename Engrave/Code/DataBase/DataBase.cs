@@ -5,19 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.IO;
-using LostArkAction.Model;
+using Engrave.Model;
 using Newtonsoft.Json.Bson;
 using System.Data.SQLite;
-using System.Windows.Forms;
-using Microsoft.Data.Sqlite;
 
-namespace LostArkAction.Code.DataBase
+namespace Engrave.Code.DataBase
 {
     public class DataBase
     {
         internal string DataSourcePath { get; set; }
         public static string FinalStateStr = "finalStateSaveName";
-        SqliteConnection conn;
+        SQLiteConnection conn;
         public DataBase(string productDataFile)
         {
             FileInfo fileInfo = new FileInfo(productDataFile);
@@ -81,7 +79,6 @@ namespace LostArkAction.Code.DataBase
                 sql = "CREATE TABLE API (APIKey nText);";
                 SQLiteCommand cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("API Table이 존재 하지 않습니다. 재 생성하겠습니다.");
             }
             return apiKey;
         }
@@ -173,7 +170,6 @@ namespace LostArkAction.Code.DataBase
             }
             catch
             {
-                MessageBox.Show("Engrave Table이 존재 하지 않습니다. 재 생성하겠습니다.");
 
                 sql = "CREATE TABLE Engrave (id int, Name nText,Target nText, Equip nText, Acc nText, Possession nText, PRIMARY KEY(id) );";
                 cmd = new SQLiteCommand(sql, conn);

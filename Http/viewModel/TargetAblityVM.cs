@@ -1,5 +1,4 @@
-﻿using LostArkAction.Model;
-using LostArkAction;
+﻿using LostArkAction;
 using LostArkAction.Code;
 using LostArkAction.viewModel;
 using System;

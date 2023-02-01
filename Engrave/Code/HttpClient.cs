@@ -1,7 +1,5 @@
-﻿using LostArkAction.Code;
-using LostArkAction.Model;
-using LostArkAction.View;
-using LostArkAction.viewModel;
+﻿using Engrave.Code;
+using Engrave.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,12 +15,25 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LostArkAction.Code
+namespace Engrave.Code
 {
 
 
     public class HttpClient2
     {
+
+        #region Field
+        public delegate void SetProgressbarEventHandler(ProgressBarType type, float value);
+        public delegate void SetProgressBarTextEventHandler(ProgressBarType type, string value);
+        public delegate bool GetLimitedEventHandler();
+
+        #endregion
+        public static event SetProgressbarEventHandler SetProgressbar;
+        public static event SetProgressBarTextEventHandler SetProgressBarText;
+        public static event GetLimitedEventHandler GetLimitedEvent;
+
+        #region Event
+        #endregion
         public static List<string> APIkeys { get; set; } = new List<string>();
         public static List<bool> CheckAPILimit = new List<bool>();
         public static List<int> APILimitTime = new List<int>();
@@ -53,7 +64,7 @@ namespace LostArkAction.Code
                 }
             }
         }
-        public static async void GetAsync(List<SearchAblity> searchAblitie, Accesories accesory)
+        public static async void GetAsync(List<SearchAblity> searchAblitie, Accesories accesory, Ablity ablity)
         {
             int apiKeyidx = 0;
             int searchTotal = 0;
@@ -68,11 +79,11 @@ namespace LostArkAction.Code
             {
                 searchTotal += searchAblitie.Count;
             }
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc = new List<AccInfo>();
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1 = new List<AccInfo>();
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1 = new List<AccInfo>();
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2 = new List<AccInfo>();
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2 = new List<AccInfo>();
+            ablity.NeckAcc = new List<AccInfo>();
+            ablity.RingAcc1 = new List<AccInfo>();
+            ablity.EarAcc1 = new List<AccInfo>();
+            ablity.RingAcc2 = new List<AccInfo>();
+            ablity.EarAcc2 = new List<AccInfo>();
             for (int k = 0; k < 5; k++)
             {
                 string AcceccesoryType = Ablity.AccessoryCode.Keys.ToList()[k];
@@ -104,10 +115,10 @@ namespace LostArkAction.Code
                 {
                     if (accesory[AcceccesoryType].Characteristic[0] == accesory["반지1"].Characteristic[0])
                     {
-                        for (int i = 0;i< (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1.Count; i++) {
-                            if (accesory[AcceccesoryType].Qulity <= (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[i].Quality)
+                        for (int i = 0;i< ablity.RingAcc1.Count; i++) {
+                            if (accesory[AcceccesoryType].Qulity <= ablity.RingAcc1[i].Quality)
                             {
-                                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2.Add(new AccVM((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1[i]));
+                                ablity.RingAcc2.Add(new AccInfo(ablity.RingAcc1[i]));
                             }
                         }
                         continue;
@@ -117,11 +128,11 @@ namespace LostArkAction.Code
                 {
                     if (accesory[AcceccesoryType].Characteristic[0] == accesory["귀걸이1"].Characteristic[0])
                     {
-                        for (int i = 0; i < (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1.Count; i++)
+                        for (int i = 0; i < ablity.EarAcc1.Count; i++)
                         {
-                            if (accesory[AcceccesoryType].Qulity <= (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[i].Quality)
+                            if (accesory[AcceccesoryType].Qulity <= ablity.EarAcc1[i].Quality)
                             {
-                                (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2.Add(new AccVM((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1[i]));
+                                ablity.EarAcc2.Add(new AccInfo(ablity.EarAcc1[i]));
                             }
                         }
 
@@ -200,24 +211,24 @@ namespace LostArkAction.Code
 
                             await Task.Delay(1000);
                             int currentTime = (int)GetTime();
-                                (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIprogressValue = (float)((minTime - currentTime)) / 60.0f * 100;
-                                (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIProgressText = String.Format("API Key reset Time : {0}s...", (minTime - currentTime));
-                                if (minTime <= currentTime)
+                            SetProgressbar(ProgressBarType.WaitAPI, (float)((minTime - currentTime)) / 60.0f * 100);
+                            SetProgressBarText(ProgressBarType.WaitAPI, String.Format("API Key reset Time : {0}s...", (minTime - currentTime)));
+                            if (minTime <= currentTime)
+                            {
+                            SetProgressbar(ProgressBarType.WaitAPI, (float)((minTime - currentTime)) / 60.0f * 100);
+                            SetProgressBarText(ProgressBarType.WaitAPI, String.Format("API Key reset Time : {0}s...", (minTime - currentTime)));
+                            for (int keyIndex = 0; keyIndex < APIkeys.Count; keyIndex++)
                                 {
-                                    (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIprogressValue = 0.0f;
-                                    (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIProgressText = "";
-                                    for (int keyIndex = 0; keyIndex < APIkeys.Count; keyIndex++)
-                                    {
-                                        CheckAPILimit[keyIndex] = true;
-                                    }
-                                    minTime = int.MaxValue;
-                                    apiKeyLimitCheck = true;
-                                    apiKeyidx = minmumAPiKey;
+                                    CheckAPILimit[keyIndex] = true;
                                 }
-                                else
-                                {
-                                    continue;
-                                }
+                                minTime = int.MaxValue;
+                                apiKeyLimitCheck = true;
+                                apiKeyidx = minmumAPiKey;
+                            }
+                            else
+                            {
+                                continue;
+                            }
                             
                         }
                         using (HttpResponseMessage response = await SharedClient.PostAsync("https://developer-lostark.game.onstove.com/auctions/items", new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json")))
@@ -291,7 +302,7 @@ namespace LostArkAction.Code
                             {
                                 for (int j = 0; j < tmp.Items.Count; j++)
                                 {
-                                    if ((App.Current.MainWindow.DataContext as MainWinodwVM).LimitedCheck)
+                                    if (GetLimitedEvent())
                                     {
                                         if (tmp.Items[j].AuctionInfo.TradeAllowCount < 2)
                                         {
@@ -302,31 +313,31 @@ namespace LostArkAction.Code
                                     {
                                         bool isSame = false;
                                         bool isRandom = searchAblitie[i].SecondAblity.Keys.ToList()[0] == "random";
-                                        AccInfo tmp2 = (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.ConvertAuctionItemToAcc(tmp.Items[j], AcceccesoryType);
+                                        AccInfo tmp2 = ablity.ConvertAuctionItemToAcc(tmp.Items[j], AcceccesoryType);
 
                                         if (AcceccesoryType == "목걸이")
                                         {
-                                            isSame=MatchingAcc((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc, tmp2, isRandom);
+                                            isSame=MatchingAcc(ablity.NeckAcc, tmp2, isRandom);
                                         }
                                         else if (AcceccesoryType == "반지1")
                                         {
-                                            isSame = MatchingAcc((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1, tmp2, isRandom);
+                                            isSame = MatchingAcc(ablity.RingAcc1, tmp2, isRandom);
                                         }
                                         else if (AcceccesoryType == "반지2")
                                         {
-                                            isSame = MatchingAcc((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2, tmp2, isRandom);
+                                            isSame = MatchingAcc(ablity.RingAcc2, tmp2, isRandom);
                                         }
                                         else if (AcceccesoryType == "귀걸이1")
                                         {
-                                            isSame = MatchingAcc((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1, tmp2, isRandom);
+                                            isSame = MatchingAcc(ablity.EarAcc1, tmp2, isRandom);
                                         }
                                         else if (AcceccesoryType == "귀걸이2")
                                         {
-                                            isSame = MatchingAcc((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2, tmp2, isRandom);
+                                            isSame = MatchingAcc(ablity.EarAcc2, tmp2, isRandom);
                                         }
                                         if (!isSame)
                                         {
-                                            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.SetAcc(tmp.Items[j], AcceccesoryType);
+                                            ablity.SetAcc(tmp.Items[j], AcceccesoryType);
                                         }
                                     }
                                 }                               
@@ -346,12 +357,12 @@ namespace LostArkAction.Code
                         }
                     }
                     searchCnt++;
-                    (App.Current.MainWindow.DataContext as MainWinodwVM).SearchProgressValue = (float)searchCnt / searchTotal * 100;
-                    (App.Current.MainWindow.DataContext as MainWinodwVM).SearchProgressText = String.Format("{0} / {1}", searchCnt, searchTotal);
+                    SetProgressbar(ProgressBarType.Search, (float)searchCnt / searchTotal * 100);
+                    SetProgressBarText(ProgressBarType.Search, String.Format("{0} / {1}", searchCnt, searchTotal));
                 }
             }
             Console.WriteLine("검색완료");
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.Start();
+            ablity.Start();
         }
         public static bool MatchingAcc(List<AccInfo> Accs, AccInfo inputAccVM, bool isRandom)
         {

@@ -1,5 +1,4 @@
-﻿using LostArkAction.Model;
-using LostArkAction.View;
+﻿using LostArkAction.View;
 using LostArkAction.viewModel;
 using LostArkAction.Code;
 using Newtonsoft.Json.Linq;
@@ -12,11 +11,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-
+using Engrave.Model;
+using Engrave.Code;
+using Engrave.Code.DataBase;
 using System.Threading;
 using System.IO;
 using System.Drawing;
-using LostArkAction.Code.DataBase;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
@@ -382,6 +382,48 @@ namespace LostArkAction.viewModel
 
             SetEngraveNameViewSource = new CollectionViewSource();
             SetEngraveNameViewSource.Source = this.SetEngraveName;
+            HttpClient2.SetProgressbar += (type, value) =>
+            {
+                switch (type)
+                {
+                    case ProgressBarType.Calc:
+                        ProgressValue = value;
+                        break;
+                    case ProgressBarType.Acc:
+                        AccProgressValue = value;
+                        break;
+                    case ProgressBarType.WaitAPI:
+                        WaitAPIprogressValue = value;
+                        break;
+                    case ProgressBarType.Search:
+                        SearchProgressValue = value;
+                        break;
+                    case ProgressBarType.Possession:
+                        PossProgressValue = value;
+                        break;
+                }
+            };
+            HttpClient2.SetProgressBarText += (type, value) =>
+            {
+                switch (type)
+                {
+
+                    case ProgressBarType.WaitAPI:
+                        WaitAPIProgressText = value;
+                        break;
+                    case ProgressBarType.Search:
+                        SearchProgressText = value;
+                        break;
+                    case ProgressBarType.Possession:
+                        PossProgressText = value;
+                        break;
+                }
+            };
+            HttpClient2.GetLimitedEvent += () =>
+            {
+                return LimitedCheck;
+            };
+
         }
 
   
@@ -484,7 +526,82 @@ namespace LostArkAction.viewModel
                 return;
             }
             IsEnableSearchBtn = false;
-            Ablity = new Ablity(this);
+            Ablity = new Ablity();
+            Ablity.ProgressbarInit += () =>
+            {
+                ProgressValue=0;
+                SearchProgressValue = 0;
+                AccProgressValue = 0;
+                WaitAPIprogressValue = 0;
+                PossProgressValue = 0;
+            };
+            Ablity.AblityFail += () =>
+            {
+                if (!isRunnigSearch)
+                {
+                    MessageBox.Show("구성할 수 없는 각인 입니다.");
+                }
+                else
+                {
+                    NextPossessionSetting();
+                }
+                DispatcherService.Invoke(() => { IsEnableSearchBtn = true; });
+
+            };
+            Ablity.FindAccAdd += (accInfo, equipStr,idx) =>
+            {
+                FindAccVM findAcc = new FindAccVM
+                {
+                    NeckAblity = new AccVM(accInfo[0][idx[0]]),
+                    FirstRingAblity = new AccVM(accInfo[3][idx[3]]),
+                    SecondRingAblity = new AccVM(accInfo[4][idx[4]]),
+                    FirstEarAblity = new AccVM(accInfo[1][idx[1]]),
+                    SecondEarAblity = new AccVM(accInfo[2][idx[2]]),
+                    TotalChar = equipStr,
+                    EquipChar = EquipStr,
+                    EquipChar2 = EquipStr2,
+
+                    TotalPrice = accInfo[0][idx[0]].Price + accInfo[1][idx[1]].Price + accInfo[2][idx[2]].Price + accInfo[3][idx[3]].Price + accInfo[4][idx[4]].Price
+                };
+
+                FindAccVMs.Add(findAcc);
+            };
+            Ablity.SetProgressbar += (type, value) =>
+            {
+                switch (type)
+                {
+                    case ProgressBarType.Calc:
+                        ProgressValue = value;
+                        break;
+                    case ProgressBarType.Acc:
+                        AccProgressValue = value;
+                        break;
+                    case ProgressBarType.WaitAPI:
+                        WaitAPIprogressValue = value;
+                        break;
+                    case ProgressBarType.Search:
+                        SearchProgressValue = value;
+                        break;
+                    case ProgressBarType.Possession:
+                        PossProgressValue = value;
+                        break;
+                }
+            };
+           
+            Ablity.Result += () =>
+            {
+                if (FindAccVMs.Count == 0)
+                {
+                    if (!isRunnigSearch) MessageBox.Show("각인을 구성할 수 있는 매물이 없습니다.");
+                    DispatcherService.Invoke(() => { IsEnableSearchBtn = true; });
+                    DispatcherService.Invoke(() => { NextPossessionSetting(); });
+                    return;
+                }
+                DispatcherService.Invoke(() => { IsEnableSearchBtn = true; });
+                DispatcherService.Invoke(() => { OpenFindACC(); });
+                DispatcherService.Invoke(() => { NextPossessionSetting(); });
+            };
+            
             FindAccVMs = new List<FindAccVM>();
             Ablity.TargetItems = new Dictionary<string, int>();
             Ablity.EquipItems = new Dictionary<string, List<int>>();
@@ -985,10 +1102,7 @@ namespace LostArkAction.viewModel
                     if (Ablity.Thread != null)
                     {
                         Ablity.Thread.Abort();
-                        if (Ablity.Thread2 != null)
-                        {
-                            Ablity.Thread2.Abort();
-                        }
+
                     }
                 }
                 if (APISetup != null)

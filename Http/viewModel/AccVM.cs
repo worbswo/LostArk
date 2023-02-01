@@ -1,4 +1,6 @@
-﻿using LostArkAction.viewModel;
+﻿using Engrave.Model;
+
+using LostArkAction.viewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -233,8 +235,25 @@ namespace LostArkAction.viewModel
             SecondCharValue = accvm.SecondCharValue;
             ImagePath = accvm.ImagePath;
             TradeAllow=accvm.TradeAllow;
-
-    }
+        }
+        public AccVM(AccInfo accvm)
+        {
+            Name = accvm.Name;
+            Name1 = accvm.Name1;
+            Name2 = accvm.Name2;
+            Value1 = accvm.Value1;
+            Value2 = accvm.Value2;
+            Quality = accvm.Quality;
+            PenaltyName = accvm.PenaltyName;
+            PenaltyValue = accvm.PenaltyValue;
+            Price = accvm.Price;
+            FirstCharaterics = accvm.FirstCharaterics;
+            FirstCharValue = accvm.FirstCharValue;
+            Secondcharaterics = accvm.Secondcharaterics;
+            SecondCharValue = accvm.SecondCharValue;
+            ImagePath = accvm.ImagePath;
+            TradeAllow = accvm.TradeAllow;
+        }
         #endregion
         #region Method
         public bool Contain(AccVM accVM, bool ran = false)

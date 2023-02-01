@@ -95,7 +95,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -134,21 +134,9 @@
     </Compile>
     <Compile Include="Code\Combination.cs" />
     <Compile Include="Code\CommandBehavior.cs" />
-    <Compile Include="Code\DataBase\DataBase.cs" />
     <Compile Include="Code\DispatcherService.cs" />
-    <Compile Include="Code\EtcOption.cs" />
-    <Compile Include="Code\HttpClient.cs" />
-    <Compile Include="Code\ResultItem.cs" />
-    <Compile Include="Code\SearchItem.cs" />
     <Compile Include="Code\RelayCommand.cs" />
-    <Compile Include="Code\SkillOption.cs" />
     <Compile Include="Code\StringToImageSourceConverter.cs" />
-    <Compile Include="Model\Ablity.cs" />
-    <Compile Include="Model\Accesories.cs" />
-    <Compile Include="Model\Accesory.cs" />
-    <Compile Include="Model\PossessionAblity.cs" />
-    <Compile Include="Model\SearchAblity.cs" />
-    <Compile Include="Model\SetEngrave.cs" />
     <Compile Include="viewModel\AccVM.cs" />
     <Compile Include="viewModel\AccessoriesVM.cs" />
     <Compile Include="viewModel\APISetupVM.cs" />
