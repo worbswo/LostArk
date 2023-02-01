@@ -216,7 +216,7 @@ namespace Engrave.Code
                             if (minTime <= currentTime)
                             {
                             SetProgressbar(ProgressBarType.WaitAPI, (float)((minTime - currentTime)) / 60.0f * 100);
-                            SetProgressBarText(ProgressBarType.WaitAPI, String.Format("API Key reset Time : {0}s...", (minTime - currentTime)));
+                            SetProgressBarText(ProgressBarType.WaitAPI,"");
                             for (int keyIndex = 0; keyIndex < APIkeys.Count; keyIndex++)
                                 {
                                     CheckAPILimit[keyIndex] = true;

@@ -533,7 +533,6 @@ namespace LostArkAction.viewModel
                 SearchProgressValue = 0;
                 AccProgressValue = 0;
                 WaitAPIprogressValue = 0;
-                PossProgressValue = 0;
             };
             Ablity.AblityFail += () =>
             {
@@ -827,6 +826,7 @@ namespace LostArkAction.viewModel
             
             if (PossessionCnt >= PossessionAblities.Count)
             {
+                PossProgressText = "";
                 if (!isResultExist)
                 {
                     MessageBox.Show("각인을 구성할 수 있는 매물이 없습니다.");
