@@ -28,7 +28,7 @@ namespace LostArkAction.Code
         public static List<int> APILimitTime = new List<int>();
         public static int Cnt = 0;
         public static int minTime = int.MaxValue;
-
+        private static int minmumAPiKey = 0;
         public static HttpClient SharedClient { get; set; } = new HttpClient();
         public HttpClient2()
         {
@@ -197,10 +197,9 @@ namespace LostArkAction.Code
                         }
                         if (!apiKeyLimitCheck)
                         {
-                            using (HttpResponseMessage response = await SharedClient.PostAsync("https://developer-lostark.game.onstove.com/auctions/items", new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json")))
-                            {
 
-                                int currentTime = (int)GetTime();
+                            await Task.Delay(1000);
+                            int currentTime = (int)GetTime();
                                 (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIprogressValue = (float)((minTime - currentTime)) / 60.0f * 100;
                                 (App.Current.MainWindow.DataContext as MainWinodwVM).WaitAPIProgressText = String.Format("API Key reset Time : {0}s...", (minTime - currentTime));
                                 if (minTime <= currentTime)
@@ -213,12 +212,13 @@ namespace LostArkAction.Code
                                     }
                                     minTime = int.MaxValue;
                                     apiKeyLimitCheck = true;
+                                    apiKeyidx = minmumAPiKey;
                                 }
                                 else
                                 {
                                     continue;
                                 }
-                            }
+                            
                         }
                         using (HttpResponseMessage response = await SharedClient.PostAsync("https://developer-lostark.game.onstove.com/auctions/items", new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json")))
                         {
@@ -241,6 +241,7 @@ namespace LostArkAction.Code
                                 if (minTime > APILimitTime[apiKeyidx])
                                 {
                                     minTime = APILimitTime[apiKeyidx];
+                                    minmumAPiKey = apiKeyidx;
                                 }
                             }
                             else if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -265,6 +266,8 @@ namespace LostArkAction.Code
                                 if (minTime > APILimitTime[apiKeyidx])
                                 {
                                     minTime = APILimitTime[apiKeyidx];
+                                    minmumAPiKey = apiKeyidx;
+
                                 }
                                 apiKeyidx++;
                                 if (apiKeyidx > APIkeys.Count - 1)
