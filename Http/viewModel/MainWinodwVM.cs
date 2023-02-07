@@ -54,6 +54,7 @@ namespace LostArkAction.viewModel
         private int _setEngraveIndex = -1;
 
         #endregion
+
         #region Property
         public string EquipStr = "";
         public string EquipStr2 = "";
@@ -525,8 +526,16 @@ namespace LostArkAction.viewModel
                 MessageBox.Show("API Key를 입력하세요!");
                 return;
             }
+            bool ischeck = true;
             IsEnableSearchBtn = false;
+            FindAccVMs = new List<FindAccVM>();
+
             Ablity = new Ablity();
+            Ablity.TargetItems = new Dictionary<string, int>();
+            Ablity.EquipItems = new Dictionary<string, List<int>>();
+            Ablity.PanaltyItems = new Dictionary<string, int>();
+
+            #region Ablity class event Setup
             Ablity.ProgressbarInit += () =>
             {
                 ProgressValue=0;
@@ -600,12 +609,9 @@ namespace LostArkAction.viewModel
                 DispatcherService.Invoke(() => { OpenFindACC(); });
                 DispatcherService.Invoke(() => { NextPossessionSetting(); });
             };
-            
-            FindAccVMs = new List<FindAccVM>();
-            Ablity.TargetItems = new Dictionary<string, int>();
-            Ablity.EquipItems = new Dictionary<string, List<int>>();
-            Ablity.PanaltyItems = new Dictionary<string, int>();
-            bool ischeck = true;
+            #endregion
+
+            #region TargetItems Setup
             for (int i = 0; i < TargetAblityVM.SelectItems.Count; i++)
             {
                 int value = 0;
@@ -650,6 +656,8 @@ namespace LostArkAction.viewModel
                 }
                 Ablity.TargetItems.Add(TargetAblityVM.SelectItems[i], value);
             }
+            #endregion
+
             if (ischeck)
             {
                 ischeck = true;
@@ -705,69 +713,73 @@ namespace LostArkAction.viewModel
                         IsEnableSearchBtn = true;
                         return;
                     }
+
+                    #region EquipItems Setup
+                    if (EquipAblityVM.SelectItems[0]== EquipAblityVM.SelectItems[1])
+                    {
+                        EquipStr = EquipAblityVM.SelectItems[0] + " : " + (EquipAblityVM.FigureItems[0] + EquipAblityVM.FigureItems[1]) + "\n";
+                    }
                     else
                     {
-                        if (EquipAblityVM.SelectItems[0]== EquipAblityVM.SelectItems[1])
+                        EquipStr =  EquipAblityVM.SelectItems[0] + " : " + (EquipAblityVM.FigureItems[0]) + "\n";
+                        EquipStr += EquipAblityVM.SelectItems[1] + " : " + (EquipAblityVM.FigureItems[1]) + "\n";
+                    }
+                    EquipStr2 =  EquipAblityVM.SelectItems[2] + " : " + (EquipAblityVM.FigureItems[2]) + "\n";
+                    EquipStr2 +=  EquipAblityVM.SelectItems[3] + " : " + (EquipAblityVM.FigureItems[3]) + "\n";
+                    for (int i = 0; i < EquipAblityVM.SelectItems.Count - 1; i++)
+                    {
+
+                        if (EquipAblityVM.SelectItems[i] == null || EquipAblityVM.SelectItems[i] == "")
                         {
-                            EquipStr = EquipAblityVM.SelectItems[0] + " : " + (EquipAblityVM.FigureItems[0] + EquipAblityVM.FigureItems[1]) + "\n";
+                            break;
+                        }
+                        if (Ablity.EquipItems.ContainsKey(EquipAblityVM.SelectItems[i]))
+                        {
+                            Ablity.EquipItems[EquipAblityVM.SelectItems[i]].Add(EquipAblityVM.FigureItems[i]);
                         }
                         else
                         {
-                            EquipStr =  EquipAblityVM.SelectItems[0] + " : " + (EquipAblityVM.FigureItems[0]) + "\n";
-                            EquipStr += EquipAblityVM.SelectItems[1] + " : " + (EquipAblityVM.FigureItems[1]) + "\n";
+                            Ablity.EquipItems.Add(EquipAblityVM.SelectItems[i], new List<int> { EquipAblityVM.FigureItems[i] });
                         }
-                        EquipStr2 =  EquipAblityVM.SelectItems[2] + " : " + (EquipAblityVM.FigureItems[2]) + "\n";
-                        EquipStr2 +=  EquipAblityVM.SelectItems[3] + " : " + (EquipAblityVM.FigureItems[3]) + "\n";
-                        for (int i = 0; i < EquipAblityVM.SelectItems.Count - 1; i++)
-                        {
-
-                            if (EquipAblityVM.SelectItems[i] == null || EquipAblityVM.SelectItems[i] == "")
-                            {
-                                break;
-                            }
-                            if (Ablity.EquipItems.ContainsKey(EquipAblityVM.SelectItems[i]))
-                            {
-                                Ablity.EquipItems[EquipAblityVM.SelectItems[i]].Add(EquipAblityVM.FigureItems[i]);
-                            }
-                            else
-                            {
-                                Ablity.EquipItems.Add(EquipAblityVM.SelectItems[i], new List<int> { EquipAblityVM.FigureItems[i] });
-                            }
-                        }
-                        if (EquipAblityVM.SelectItems[4] == null || EquipAblityVM.SelectItems[4] == "")
-                        {
-                            MessageBox.Show("페널티 감소 각인을 입력 하세요.");
-                            IsEnableSearchBtn = true;
-                            return;
-                        }
-                        Ablity.PanaltyItems.Add(EquipAblityVM.SelectItems[4], EquipAblityVM.FigureItems[4]);
-
-                        Ablity.Accesories = new Accesories();
-                        Ablity.Accesories["목걸이"].Qulity = AccessoriesVM.Qulity[0];
-                        Ablity.Accesories["귀걸이1"].Qulity = AccessoriesVM.Qulity[1];
-                        Ablity.Accesories["귀걸이2"].Qulity = AccessoriesVM.Qulity[2];
-                        Ablity.Accesories["반지1"].Qulity = AccessoriesVM.Qulity[3];
-                        Ablity.Accesories["반지2"].Qulity = AccessoriesVM.Qulity[4];
-                        Ablity.Accesories["목걸이"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[0]);
-                        Ablity.Accesories["목걸이"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[1]);
-                        Ablity.Accesories["귀걸이1"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[2]);
-                        Ablity.Accesories["귀걸이2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[3]);
-                        Ablity.Accesories["반지1"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[4]);
-                        Ablity.Accesories["반지2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[5]);
-                        Ablity.MinimumValue.Add("치명", CharacteristicRangeVM.MinimumValue[0]);
-                        Ablity.MinimumValue.Add("신속", CharacteristicRangeVM.MinimumValue[1]);
-                        Ablity.MinimumValue.Add("특화", CharacteristicRangeVM.MinimumValue[2]);
-                        Ablity.MinimumValue.Add("제압", CharacteristicRangeVM.MinimumValue[3]);
-                        Ablity.MinimumValue.Add("인내", CharacteristicRangeVM.MinimumValue[4]);
-                        Ablity.MinimumValue.Add("숙련", CharacteristicRangeVM.MinimumValue[5]);
-                        Ablity.MaximumValue.Add("치명", CharacteristicRangeVM.MaximumValue[0]);
-                        Ablity.MaximumValue.Add("신속", CharacteristicRangeVM.MaximumValue[1]);
-                        Ablity.MaximumValue.Add("특화", CharacteristicRangeVM.MaximumValue[2]);
-                        Ablity.MaximumValue.Add("제압", CharacteristicRangeVM.MaximumValue[3]);
-                        Ablity.MaximumValue.Add("인내", CharacteristicRangeVM.MaximumValue[4]);
-                        Ablity.MaximumValue.Add("숙련", CharacteristicRangeVM.MaximumValue[5]);
-                        Ablity.SelectedAblity();
                     }
+                    if (EquipAblityVM.SelectItems[4] == null || EquipAblityVM.SelectItems[4] == "")
+                    {
+                        MessageBox.Show("페널티 감소 각인을 입력 하세요.");
+                        IsEnableSearchBtn = true;
+                        return;
+                    }
+                    Ablity.PanaltyItems.Add(EquipAblityVM.SelectItems[4], EquipAblityVM.FigureItems[4]);
+                    #endregion
+
+                    #region ACcesorie Setup
+                    Ablity.Accesories = new Accesories();
+                    Ablity.Accesories["목걸이"].Qulity = AccessoriesVM.Qulity[0];
+                    Ablity.Accesories["귀걸이1"].Qulity = AccessoriesVM.Qulity[1];
+                    Ablity.Accesories["귀걸이2"].Qulity = AccessoriesVM.Qulity[2];
+                    Ablity.Accesories["반지1"].Qulity = AccessoriesVM.Qulity[3];
+                    Ablity.Accesories["반지2"].Qulity = AccessoriesVM.Qulity[4];
+                    Ablity.Accesories["목걸이"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[0]);
+                    Ablity.Accesories["목걸이"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[1]);
+                    Ablity.Accesories["귀걸이1"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[2]);
+                    Ablity.Accesories["귀걸이2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[3]);
+                    Ablity.Accesories["반지1"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[4]);
+                    Ablity.Accesories["반지2"].Characteristic.Add(AccessoriesVM.SelectCharacteriastics[5]);
+                    Ablity.MinimumValue.Add("치명", CharacteristicRangeVM.MinimumValue[0]);
+                    Ablity.MinimumValue.Add("신속", CharacteristicRangeVM.MinimumValue[1]);
+                    Ablity.MinimumValue.Add("특화", CharacteristicRangeVM.MinimumValue[2]);
+                    Ablity.MinimumValue.Add("제압", CharacteristicRangeVM.MinimumValue[3]);
+                    Ablity.MinimumValue.Add("인내", CharacteristicRangeVM.MinimumValue[4]);
+                    Ablity.MinimumValue.Add("숙련", CharacteristicRangeVM.MinimumValue[5]);
+                    Ablity.MaximumValue.Add("치명", CharacteristicRangeVM.MaximumValue[0]);
+                    Ablity.MaximumValue.Add("신속", CharacteristicRangeVM.MaximumValue[1]);
+                    Ablity.MaximumValue.Add("특화", CharacteristicRangeVM.MaximumValue[2]);
+                    Ablity.MaximumValue.Add("제압", CharacteristicRangeVM.MaximumValue[3]);
+                    Ablity.MaximumValue.Add("인내", CharacteristicRangeVM.MaximumValue[4]);
+                    Ablity.MaximumValue.Add("숙련", CharacteristicRangeVM.MaximumValue[5]);
+                    #endregion
+
+                    Ablity.SelectedAblity();
+                    
                 }
             }
         }

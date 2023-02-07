@@ -58,8 +58,6 @@ namespace Engrave.Model
 
         List<List<SearchAblity>> AblitiesCombi = new List<List<SearchAblity>>();
         List<SearchAblity> SearchAblities = new List<SearchAblity>();
-        List<Dictionary<string, List<int>>> SearchAblityCandidate = new List<Dictionary<string, List<int>>>();
-        List<Dictionary<string, List<int>>> SearchSecondAblityCandidate = new List<Dictionary<string, List<int>>>();
         public Dictionary<int, List<List<int>>> AccRelicCases = new Dictionary<int, List<List<int>>>();
         public Dictionary<int, List<List<int>>> AccAncientCases = new Dictionary<int, List<List<int>>>();
         public Dictionary<string, int> TargetItems = new Dictionary<string, int>();
@@ -577,7 +575,6 @@ namespace Engrave.Model
             Console.WriteLine("----------------------------");
             Console.WriteLine("----------------------------");
             #endregion
-            SearchAblityCandidate.Add(candidate);
             Dictionary<string,List<SearchAblity>> tmep2 = new Dictionary<string,List<SearchAblity>>();
 
             for (int i = 0; i < tmpSearchAblities.Count; i++)

@@ -66,5 +66,7 @@ namespace LostArkAction.View
             comboBox.Items.Filter = null;
             comboBox.Text = "";
         }
+
+   
     }
 }
