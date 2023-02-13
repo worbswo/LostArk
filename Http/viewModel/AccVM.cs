@@ -10,7 +10,7 @@ namespace LostArkAction.viewModel
     public class AccVM : ViewModelBase
     {
         #region Field
-        private string _name;
+        private string _name="보유 악세";
         private int _quality;
         private string _name1;
         private int _value1;
@@ -18,13 +18,13 @@ namespace LostArkAction.viewModel
         private int _value2;
         private string _penaltyName;
         private int _penaltyValue;
-        private int _price;
-        private string _firstcharaterics;
-        private int _firstCharValue;
-        private string _secondcharaterics;
-        private int _secondCharValue;
-        private string _imagePath;
-        private int _tradeAllow;
+        private int _price=0;
+        private string _firstcharaterics="";
+        private int _firstCharValue=0;
+        private string _secondcharaterics = "";
+        private int _secondCharValue=0;
+        private string _imagePath = "";
+        private int _tradeAllow = 2;
 
         #endregion
 

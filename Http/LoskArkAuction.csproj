@@ -9,7 +9,7 @@
     <ProjectGuid>{AB300229-9A6D-4002-A4CD-A9F94FA07E41}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>LostArkAction</RootNamespace>
-    <AssemblyName>LostCalcv2.3.3</AssemblyName>
+    <AssemblyName>LostCalcv2.3.5</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -155,6 +155,7 @@
     <Compile Include="viewModel\CharacteristicRangeVM.cs" />
     <Compile Include="viewModel\DownloadProgressVM.cs" />
     <Compile Include="viewModel\EquipAblityVM.cs" />
+    <Compile Include="viewModel\EquipAccVM.cs" />
     <Compile Include="viewModel\FindAccVM.cs" />
     <Compile Include="viewModel\FIndAccWindowVM.cs" />
     <Compile Include="viewModel\MainWinodwVM.cs" />
@@ -174,6 +175,9 @@
     </Compile>
     <Compile Include="View\EquipAblity.xaml.cs">
       <DependentUpon>EquipAblity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EquipAcc.xaml.cs">
+      <DependentUpon>EquipAcc.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FindAccWindow.xaml.cs">
       <DependentUpon>FindAccWindow.xaml</DependentUpon>
@@ -250,6 +254,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EquipAblity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EquipAcc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

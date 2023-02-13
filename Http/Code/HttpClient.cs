@@ -59,22 +59,62 @@ namespace LostArkAction.Code
             int searchTotal = 0;
             int searchCnt = 0;
 
-            searchTotal = 3 * searchAblitie.Count;
-            if (accesory["반지1"].Characteristic[0] != accesory["반지2"].Characteristic[0])
+            searchTotal = 5 * searchAblitie.Count;
+            if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.isAccExist[0])
             {
-                searchTotal += searchAblitie.Count;
+                searchTotal -= searchAblitie.Count;
+
             }
-            if (accesory["귀걸이1"].Characteristic[0] != accesory["귀걸이2"].Characteristic[0])
+            if (accesory["반지1"].Characteristic[0] == accesory["반지2"].Characteristic[0])
             {
-                searchTotal += searchAblitie.Count;
+                searchTotal -= searchAblitie.Count;
+                if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.isAccExist[1] && (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.isAccExist[2])
+                {
+                    searchTotal -= searchAblitie.Count;
+                }
             }
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.NeckAcc = new List<AccVM>();
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc1 = new List<AccVM>();
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc1 = new List<AccVM>();
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.RingAcc2 = new List<AccVM>();
-            (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.EarAcc2 = new List<AccVM>();
+            else
+            {
+                if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.isAccExist[1])
+                {
+                    searchTotal -= searchAblitie.Count;
+
+                }
+                if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.isAccExist[2])
+                {
+                    searchTotal -= searchAblitie.Count;
+
+                }
+            }
+            if (accesory["귀걸이1"].Characteristic[0] == accesory["귀걸이2"].Characteristic[0])
+            {
+                searchTotal -= searchAblitie.Count;
+
+                if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.isAccExist[3] && (App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.isAccExist[4])
+                {
+                    searchTotal -= searchAblitie.Count;
+                }
+            }
+            else
+            {
+                if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.isAccExist[3])
+                {
+                    searchTotal -= searchAblitie.Count;
+
+                }
+                if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.isAccExist[4])
+                {
+                    searchTotal -= searchAblitie.Count;
+
+                }
+            }
+
             for (int k = 0; k < 5; k++)
             {
+                if ((App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.isAccExist[k])
+                {
+                    continue;
+                }
                 string AcceccesoryType = Ablity.AccessoryCode.Keys.ToList()[k];
                 int qulity = (int)(accesory[AcceccesoryType].Qulity);
                 if (AcceccesoryType.Contains("반지1"))
@@ -100,7 +140,7 @@ namespace LostArkAction.Code
                         }
                     }
                 }
-                if (AcceccesoryType.Contains("반지2"))
+                if (AcceccesoryType.Contains("반지2")&& !(App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.isAccExist[1])
                 {
                     if (accesory[AcceccesoryType].Characteristic[0] == accesory["반지1"].Characteristic[0])
                     {
@@ -113,7 +153,7 @@ namespace LostArkAction.Code
                         continue;
                     }
                 }
-                else if (AcceccesoryType.Contains("귀걸이2"))
+                else if (AcceccesoryType.Contains("귀걸이2")&& !(App.Current.MainWindow.DataContext as MainWinodwVM).Ablity.isAccExist[3])
                 {
                     if (accesory[AcceccesoryType].Characteristic[0] == accesory["귀걸이1"].Characteristic[0])
                     {

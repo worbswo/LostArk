@@ -64,7 +64,8 @@ namespace LostArkAction.Model
         public List<AccVM> RingAcc2 = new List<AccVM>();
         public List<AccVM> EarAcc2 = new List<AccVM>();
         public List<List<AccVM>> Accs = new List<List<AccVM>>();
-        public List<List<int>> perAccs = new List<List<int>>(); 
+        public List<List<int>> perAccs = new List<List<int>>();
+        public List<bool> isAccExist = new List<bool>() { false, false, false, false,false };
         public Thread Thread;
         public Thread Thread2;
         MainWinodwVM MainWinodwVM;
@@ -796,10 +797,17 @@ namespace LostArkAction.Model
                                             continue;
                                         }
                                         Dictionary<string, int> totalChar = new Dictionary<string, int>();
-                                        totalChar.Add(tmpAccs[0][idx[0]].Secondcharaterics ,tmpAccs[0][idx[0]].SecondCharValue);
-                                        totalChar.Add(tmpAccs[0][idx[0]].FirstCharaterics ,tmpAccs[0][idx[0]].FirstCharValue);
+                                        if (!isAccExist[0])
+                                        {
+                                            totalChar.Add(tmpAccs[0][idx[0]].Secondcharaterics, tmpAccs[0][idx[0]].SecondCharValue);
+                                            totalChar.Add(tmpAccs[0][idx[0]].FirstCharaterics, tmpAccs[0][idx[0]].FirstCharValue);
+                                        }
                                         for (int c = 1; c < 5; c++)
                                         {
+                                            int idxEx = 0;
+                                            if (c < 3) idxEx = c + 2;
+                                            if (c >= 3) idxEx = c - 2;
+                                            if (isAccExist[idxEx]) continue;
                                             if (totalChar.ContainsKey(tmpAccs[c][idx[c]].FirstCharaterics))
                                             {
                                                 totalChar[tmpAccs[c][idx[c]].FirstCharaterics] += tmpAccs[c][idx[c]].FirstCharValue;

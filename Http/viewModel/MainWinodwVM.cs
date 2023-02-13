@@ -70,6 +70,7 @@ namespace LostArkAction.viewModel
         public TargetAblityVM TargetAblityVM { get; set; } = new TargetAblityVM();
         public EquipAblityVM EquipAblityVM { get; set; } = new EquipAblityVM();
         public AccessoriesVM AccessoriesVM { get; set; } = new AccessoriesVM();
+        public EquipAccVM EquipAccVM { get; set; } =new EquipAccVM();
         public Ablity Ablity { get; set; }
         public Thread ThreadSearch { get; set; }
         public bool LimitedCheck { get; set; } = false;
@@ -483,12 +484,44 @@ namespace LostArkAction.viewModel
                 MessageBox.Show("API Key를 입력하세요!");
                 return;
             }
+
             IsEnableSearchBtn = false;
             Ablity = new Ablity(this);
             FindAccVMs = new List<FindAccVM>();
             Ablity.TargetItems = new Dictionary<string, int>();
             Ablity.EquipItems = new Dictionary<string, List<int>>();
             Ablity.PanaltyItems = new Dictionary<string, int>();
+            for (int i = 0; i < 5; i++)
+            {
+                if ((EquipAccVM.AccVM[i].Name1 != "" && EquipAccVM.AccVM[i].Name1 != null) &&
+                    (EquipAccVM.AccVM[i].Name2 != "" && EquipAccVM.AccVM[i].Name2 != null) &&
+                    (EquipAccVM.AccVM[i].PenaltyName != "" && EquipAccVM.AccVM[i].PenaltyName != null) &&
+                    (EquipAccVM.AccVM[i].Value1 != 0) &&
+                    (EquipAccVM.AccVM[i].Value2 != 0) &&
+                    (EquipAccVM.AccVM[i].PenaltyValue != 0))
+                {
+                    Ablity.isAccExist[i] = true;
+                    if (i == 0)
+                    {
+                        Ablity.NeckAcc.Add(EquipAccVM.AccVM[i]);
+                    }else if(i == 1)
+                    {
+                        Ablity.RingAcc1.Add(EquipAccVM.AccVM[i]);
+                    }
+                    else if (i == 2)
+                    {
+                        Ablity.RingAcc2.Add(EquipAccVM.AccVM[i]);
+                    }
+                    else if (i == 3)
+                    {
+                        Ablity.EarAcc1.Add(EquipAccVM.AccVM[i]);
+                    }
+                    else if (i == 4)
+                    {
+                        Ablity.EarAcc2.Add(EquipAccVM.AccVM[i]);
+                    }
+                }
+            }
             bool ischeck = true;
             for (int i = 0; i < TargetAblityVM.SelectItems.Count; i++)
             {

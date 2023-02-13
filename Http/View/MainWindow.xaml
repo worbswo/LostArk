@@ -395,93 +395,87 @@
         </Grid>
         <Expander
             Grid.Row="1"
-            Grid.RowSpan="7"
+            Grid.RowSpan="10"
             ExpandDirection="Right"
             Grid.Column="3">
-            <Grid
-                Width="300"
-                Margin="10">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition
-                        Height="0.05*"></RowDefinition>
-                    <RowDefinition
-                        Height="0.05*"></RowDefinition>
-                    <RowDefinition
-                        Height="0.1*"></RowDefinition>
-
-                </Grid.RowDefinitions>
-                <Border
-                    Grid.RowSpan="5"
-                    Grid.ColumnSpan="3"
-                    Background="#FF636366"
-                    CornerRadius="10"></Border>
-                <TextBlock
-                    Grid.ColumnSpan="3"
-                    Foreground="White"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    FontWeight="Bold">각인 세팅</TextBlock>
-                <Rectangle
-                    Margin="4"
-                    Grid.ColumnSpan="3"
-                    VerticalAlignment="Bottom"
-                    Fill="Gray"
-                    Height="2"></Rectangle>
-                <ListBox
-                    ItemsSource="{Binding SetEngraveNameCollectionView}"
-                    SelectedIndex="{Binding SetEngraveIndex}"
-                    command:CommandBehavior.Command="{Binding ListClickCommand}"
-                    command:CommandBehavior.Event="SelectionChanged"
-                    Foreground="White"
-                    FontWeight="SemiBold"
-                    Background="#FF636366"
-                    BorderThickness="0"
-                    Margin="10"
-                    Grid.Row="1"
-                    Grid.ColumnSpan="3">
-                </ListBox>
-                <TextBlock
-                    VerticalAlignment="Center"
-                    FontWeight="Bold"
-                    Margin="10,0,0,0"
-                    Grid.Row="2"
-                    Grid.ColumnSpan="3"
-                    Foreground="White">각인 세팅 이름 입력</TextBlock>
-                <TextBox
-                    InputMethod.PreferredImeState="On"
-                    InputMethod.PreferredImeConversionMode="Native"
-                    Margin="10,0,10,0"
-                    VerticalAlignment="Center"
-                    Grid.Row="3"
-                    Text="{Binding SetEngraveNameText}"
-                    Grid.ColumnSpan="3"></TextBox>
-                <Button
-                    FontWeight="Bold"
-                    Margin="10"
-                    Command="{Binding AddEngraveCommand}"
-                    Grid.Row="4">저장</Button>
-                <Button
-                    FontWeight="Bold"
-                    Margin="10"
-                    Grid.Column="2"
-                    Command="{Binding RemoveEngraveCommand}"
-                    Grid.Row="4">삭제</Button>
-                <Button
-                    FontWeight="Bold"
-                    Margin="10"
-                    Grid.Column="1"
-                    Command="{Binding UpdateEngraveCommand}"
-                    Grid.Row="4">수정</Button>
+                <Grid Width="300"
+                      Grid.Column="1"
+                      Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="0.05*"></RowDefinition>
+                        <RowDefinition Height="0.05*"></RowDefinition>
+                        <RowDefinition Height="0.1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border Grid.RowSpan="5"
+                            Grid.ColumnSpan="3"
+                            Background="#FF636366"
+                            CornerRadius="10"></Border>
+                    <TextBlock Grid.ColumnSpan="3"
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontWeight="Bold">각인 세팅</TextBlock>
+                    <Rectangle Margin="4"
+                               Grid.ColumnSpan="3"
+                               VerticalAlignment="Bottom"
+                               Fill="Gray"
+                               Height="2"></Rectangle>
+                    <ListBox ItemsSource="{Binding SetEngraveNameCollectionView}"
+                             SelectedIndex="{Binding SetEngraveIndex}"
+                             command:CommandBehavior.Command="{Binding ListClickCommand}"
+                             command:CommandBehavior.Event="SelectionChanged"
+                             Foreground="White"
+                             FontWeight="SemiBold"
+                             Background="#FF636366"
+                             BorderThickness="0"
+                             Margin="10"
+                             Grid.Row="1"
+                             Grid.ColumnSpan="3"></ListBox>
+                    <TextBlock VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               Margin="10,0,0,0"
+                               Grid.Row="2"
+                               Grid.ColumnSpan="3"
+                               Foreground="White">각인 세팅 이름 입력</TextBlock>
+                    <TextBox InputMethod.PreferredImeState="On"
+                             InputMethod.PreferredImeConversionMode="Native"
+                             Margin="10,0,10,0"
+                             VerticalAlignment="Center"
+                             Grid.Row="3"
+                             Text="{Binding SetEngraveNameText}"
+                             Grid.ColumnSpan="3"></TextBox>
+                    <Button FontWeight="Bold"
+                            Margin="10"
+                            Command="{Binding AddEngraveCommand}"
+                            Grid.Row="4">저장</Button>
+                    <Button FontWeight="Bold"
+                            Margin="10"
+                            Grid.Column="2"
+                            Command="{Binding RemoveEngraveCommand}"
+                            Grid.Row="4">삭제</Button>
+                    <Button FontWeight="Bold"
+                            Margin="10"
+                            Grid.Column="1"
+                            Command="{Binding UpdateEngraveCommand}"
+                            Grid.Row="4">수정</Button>
+                </Grid>
+                <view:EquipAcc Width="350" DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"
+                               ></view:EquipAcc>
             </Grid>
+            
         </Expander>
+
     </Grid>
 </Window>
