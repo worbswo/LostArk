@@ -52,6 +52,9 @@ namespace LostArkAction.viewModel
         private string _setupAblityText="";
         private string _setEngraveNameText = "";
         private int _setEngraveIndex = -1;
+        private bool _isCheckedAll = false;
+        private int _minimumAncient = 0;
+        private int _maximumOfAncient = 5;
 
         #endregion
         #region Property
@@ -74,7 +77,50 @@ namespace LostArkAction.viewModel
         public Ablity Ablity { get; set; }
         public Thread ThreadSearch { get; set; }
         public bool LimitedCheck { get; set; } = false;
-
+        public bool IsCheckedAll
+        {
+            get
+            {
+                return _isCheckedAll;
+            }
+            set
+            {
+                _isCheckedAll = value;
+                OnPropertyChanged("IsCheckedAll");
+            }
+        }
+        public int MinimumAncient
+        {
+            get
+            {
+                return _minimumAncient;
+            }
+            set
+            {
+                _minimumAncient = value;
+                if (_minimumAncient > 5)
+                {
+                    _minimumAncient = 5;
+                }
+                OnPropertyChanged("MinimumAncient");
+            }
+        }
+        public int MaximumOfAncient
+        {
+            get
+            {
+                return _maximumOfAncient;
+            }
+            set
+            {
+                _maximumOfAncient = value;
+                if (_maximumOfAncient > 5)
+                {
+                    _maximumOfAncient = 5;
+                }
+                OnPropertyChanged("MaximumOfAncient");
+            }
+        }
         public string SearchProgressText
         {
             get
@@ -215,6 +261,8 @@ namespace LostArkAction.viewModel
                 if (isRelic)
                 {
                     Ablity.selectClass = 0;
+                    IsCheckedAll = false;
+
                 }
             }
         }
@@ -230,6 +278,8 @@ namespace LostArkAction.viewModel
                 if (isAncient)
                 {
                     Ablity.selectClass = 1;
+                    IsCheckedAll = false;
+
                 }
             }
         }
@@ -245,6 +295,7 @@ namespace LostArkAction.viewModel
                 if (isAll)
                 {
                     Ablity.selectClass = 2;
+                    IsCheckedAll = true;
                 }
             }
         }

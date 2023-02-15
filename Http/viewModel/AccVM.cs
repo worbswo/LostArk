@@ -29,7 +29,7 @@ namespace LostArkAction.viewModel
         #endregion
 
         #region Property
-
+        public bool isRelic = false;
         public string ImagePath
         {
             get { return _imagePath; }
@@ -233,6 +233,7 @@ namespace LostArkAction.viewModel
             SecondCharValue = accvm.SecondCharValue;
             ImagePath = accvm.ImagePath;
             TradeAllow=accvm.TradeAllow;
+            isRelic = accvm.isRelic;
 
     }
         #endregion
@@ -250,7 +251,10 @@ namespace LostArkAction.viewModel
                         {
                             if (accVM.PenaltyValue == PenaltyValue)
                             {
-                                result = true;
+                                if (accVM.isRelic == isRelic)
+                                {
+                                    result = true;
+                                }
                             }
 
                         }
@@ -265,7 +269,10 @@ namespace LostArkAction.viewModel
 
                             if (accVM.PenaltyValue == PenaltyValue)
                             {
-                                result = true;
+                                if (accVM.isRelic == isRelic)
+                                {
+                                    result = true;
+                                }
                             }
                         }
                     }
@@ -281,7 +288,10 @@ namespace LostArkAction.viewModel
                         {
                             if (accVM.PenaltyValue == PenaltyValue)
                             {
-                                result = true;
+                                if (accVM.isRelic == isRelic)
+                                {
+                                    result = true;
+                                }
                             }
                         }
                     }

@@ -740,9 +740,9 @@ namespace LostArkAction.Model
                         tmpAccs[perAccs[index][k]] = tmpAccs[perAccs[index][k]].OrderBy(x=>x.Price).ToList();
                     }
                     int[] idx = { 0, 0, 0, 0, 0 };
-
                     for (idx[0]=0;idx[0] < tmpAccs[0].Count;idx[0]++)
                     {
+                        int numOfAncient = 0;
                         Dictionary<string, int> panaltyCheck = new Dictionary<string, int> { { "공격력 감소", 0 }, { "공격속도 감소", 0 }, { "방어력 감소", 0 }, { "이동속도 감소", 0 } };
                         panaltyCheck[PanaltyItems.Keys.ToList()[0]] += PanaltyItems[PanaltyItems.Keys.ToList()[0]];
                         panaltyCheck[tmpAccs[0][idx[0]].PenaltyName] += tmpAccs[0][idx[0]].PenaltyValue;
@@ -750,6 +750,7 @@ namespace LostArkAction.Model
                         {
                             continue;
                         }
+                        if (!tmpAccs[0][idx[0]].isRelic) numOfAncient++;
                         for (idx[1] = 0; idx[1] < tmpAccs[1].Count; idx[1]++)
                         {
                             panaltyCheck[tmpAccs[1][idx[1]].PenaltyName] += tmpAccs[1][idx[1]].PenaltyValue;
@@ -758,6 +759,8 @@ namespace LostArkAction.Model
                                 panaltyCheck[tmpAccs[1][idx[1]].PenaltyName] -= tmpAccs[1][idx[1]].PenaltyValue;
                                 continue;
                             }
+                            if (!tmpAccs[1][idx[1]].isRelic) numOfAncient++;
+                           
                             for (idx[2] = 0; idx[2] < tmpAccs[2].Count; idx[2]++)
                             {
                                 if (earSameChar)
@@ -773,6 +776,8 @@ namespace LostArkAction.Model
                                     panaltyCheck[tmpAccs[2][idx[2]].PenaltyName] -= tmpAccs[2][idx[2]].PenaltyValue;
                                     continue;
                                 }
+                                if (!tmpAccs[2][idx[2]].isRelic) numOfAncient++;
+
                                 for (idx[3] = 0; idx[3] < tmpAccs[3].Count; idx[3]++)
                                 {
                                     panaltyCheck[tmpAccs[3][idx[3]].PenaltyName] += tmpAccs[3][idx[3]].PenaltyValue;
@@ -781,6 +786,8 @@ namespace LostArkAction.Model
                                         panaltyCheck[tmpAccs[3][idx[3]].PenaltyName] -= tmpAccs[3][idx[3]].PenaltyValue;
                                         continue;
                                     }
+                                    if (!tmpAccs[3][idx[3]].isRelic) numOfAncient++;
+
                                     for (idx[4] = 0; idx[4] < tmpAccs[4].Count; idx[4]++)
                                     {
                                         if (ringSameChar)
@@ -794,6 +801,13 @@ namespace LostArkAction.Model
                                         if (panaltyCheck[tmpAccs[4][idx[4]].PenaltyName] >= 5)
                                         {
                                             panaltyCheck[tmpAccs[4][idx[4]].PenaltyName] -= tmpAccs[4][idx[4]].PenaltyValue;
+                                            continue;
+                                        }
+                                        if (!tmpAccs[4][idx[4]].isRelic) numOfAncient++;
+                                        if(MainWinodwVM.IsCheckedAll && (MainWinodwVM.MinimumAncient> numOfAncient||MainWinodwVM.MaximumOfAncient< numOfAncient))
+                                        {
+                                            panaltyCheck[tmpAccs[4][idx[4]].PenaltyName] -= tmpAccs[4][idx[4]].PenaltyValue;
+                                            if (!tmpAccs[4][idx[4]].isRelic) numOfAncient--;
                                             continue;
                                         }
                                         Dictionary<string, int> totalChar = new Dictionary<string, int>();
@@ -850,12 +864,20 @@ namespace LostArkAction.Model
                                         }
                                         
                                         panaltyCheck[tmpAccs[4][idx[4]].PenaltyName] -= tmpAccs[4][idx[4]].PenaltyValue;
+                                        if (!tmpAccs[4][idx[4]].isRelic) numOfAncient--;
+
                                     }
                                     panaltyCheck[tmpAccs[3][idx[3]].PenaltyName] -= tmpAccs[3][idx[3]].PenaltyValue;
+                                    if (!tmpAccs[3][idx[3]].isRelic) numOfAncient--;
+
                                 }
                                 panaltyCheck[tmpAccs[2][idx[2]].PenaltyName] -= tmpAccs[2][idx[2]].PenaltyValue;
+                                if (!tmpAccs[2][idx[2]].isRelic) numOfAncient--;
+
                             }
                             panaltyCheck[tmpAccs[1][idx[1]].PenaltyName] -= tmpAccs[1][idx[1]].PenaltyValue;
+                            if (!tmpAccs[1][idx[1]].isRelic) numOfAncient--;
+
                         }
                     }
                     Cnt++;
@@ -892,6 +914,7 @@ namespace LostArkAction.Model
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
                 searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
+                searchAblity.isRelic = auctionItem.Grade == "유물";
 
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
@@ -958,6 +981,8 @@ namespace LostArkAction.Model
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
+                searchAblity.isRelic = auctionItem.Grade == "유물";
+
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
                     if (auctionItem.Options[i].Type == "STAT")
@@ -1013,6 +1038,8 @@ namespace LostArkAction.Model
                 searchAblity.Name = auctionItem.Name;
                 searchAblity.Price = (int)auctionItem.AuctionInfo.BuyPrice;
                 searchAblity.Quality = auctionItem.GradeQuality;
+                searchAblity.isRelic = auctionItem.Grade == "유물";
+
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
                     if (auctionItem.Options[i].Type == "STAT")
@@ -1081,6 +1108,7 @@ namespace LostArkAction.Model
                 searchAblity.Quality = auctionItem.GradeQuality;
                 searchAblity.ImagePath = auctionItem.Icon;
                 searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
+                searchAblity.isRelic = auctionItem.Grade == "유물";
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
                     if (auctionItem.Options[i].Type == "STAT")
@@ -1147,6 +1175,7 @@ namespace LostArkAction.Model
                 searchAblity.Quality = auctionItem.GradeQuality;
                 searchAblity.ImagePath = auctionItem.Icon;
                 searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
+                searchAblity.isRelic = auctionItem.Grade == "유물";
 
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
@@ -1203,6 +1232,7 @@ namespace LostArkAction.Model
                 searchAblity.Quality = auctionItem.GradeQuality;
                 searchAblity.ImagePath = auctionItem.Icon;
                 searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
+                searchAblity.isRelic = auctionItem.Grade == "유물";
 
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
@@ -1259,6 +1289,7 @@ namespace LostArkAction.Model
                 searchAblity.Quality = auctionItem.GradeQuality;
                 searchAblity.ImagePath = auctionItem.Icon;
                 searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
+                searchAblity.isRelic = auctionItem.Grade == "유물";
 
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
@@ -1316,6 +1347,7 @@ namespace LostArkAction.Model
                 searchAblity.Quality = auctionItem.GradeQuality;
                 searchAblity.ImagePath = auctionItem.Icon;
                 searchAblity.TradeAllow = auctionItem.AuctionInfo.TradeAllowCount;
+                searchAblity.isRelic = auctionItem.Grade == "유물";
 
                 for (int i = 0; i < auctionItem.Options.Count; i++)
                 {
