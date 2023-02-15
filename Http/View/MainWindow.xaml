@@ -410,15 +410,15 @@
                 IsEnabled="{Binding IsEnableSearchBtn}"
                 Grid.Column="5"></Button>
             <TextBlock
-                Grid.RowSpan="2"
+                Grid.RowSpan="3"
                 FontWeight="Bold"
                 Foreground="White"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontSize="10"
+                FontSize="15"
                 TextWrapping="Wrap"
                 Grid.Column="3"
-                Text="모바일 버전 : 로악툴 (구글플레이)"></TextBlock>
+                Text="모바일 버전 : 로악툴        (구글플레이)"></TextBlock>
         </Grid>
         <Expander
             Grid.Row="1"
