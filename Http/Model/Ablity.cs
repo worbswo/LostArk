@@ -673,11 +673,11 @@ namespace LostArkAction.Model
             Cnt = 0;
             bool ringSameChar = false;
             bool earSameChar = false;
-            if (Accesories["반지2"].Characteristic[0] == Accesories["반지1"].Characteristic[0])
+            if (Accesories["반지2"].Characteristic[0] == Accesories["반지1"].Characteristic[0] && (!isAccExist[1]&&!isAccExist[2]))
             {
                 ringSameChar = true;
             }
-            if (Accesories["귀걸이1"].Characteristic[0] == Accesories["귀걸이2"].Characteristic[0])
+            if (Accesories["귀걸이1"].Characteristic[0] == Accesories["귀걸이2"].Characteristic[0] && (!isAccExist[3] && !isAccExist[4]))
             {
                 earSameChar = true;
             }
