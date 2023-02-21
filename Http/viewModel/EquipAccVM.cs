@@ -25,6 +25,7 @@ namespace LostArkAction.viewModel
         private ObservableCollection<string> _options10;
 
         private ObservableCollection<string> _selectOption;
+        public List<bool> isUsed = new List<bool>() { false, false, false, false, false, };
 
         private List<string> _selectOption2;
 
@@ -37,6 +38,18 @@ namespace LostArkAction.viewModel
         public Dictionary<int, string> optionIndex { get; set; } = new Dictionary<int, string>();
 
 
+        public List<bool> IsUsed
+        {
+            get
+            {
+                return isUsed;
+            }
+            set
+            {
+                isUsed = value;
+                OnPropertyChanged("IsUsed");
+            }
+        }
         public ObservableCollection<string> SelectOptions
         {
             get
@@ -284,6 +297,7 @@ namespace LostArkAction.viewModel
                 {
                     _selectOption2 = new List<string>()
                     {
+                        "",
                         "공격력 감소",
                         "방어력 감소",
                         "이동속도 감소",
@@ -317,6 +331,7 @@ namespace LostArkAction.viewModel
             CollectionView itemsViewOriginal = (CollectionView)CollectionViewSource.GetDefaultView(comboBox.ItemsSource);
             TextBox txt = comboBox.Template.FindName("PART_EditableTextBox", comboBox) as TextBox;
             string tmp = txt.Text;
+            comboBox.SelectedItem = txt.Text;
             if ((arg.Key == Key.Enter) || (arg.Key == Key.Tab) || (arg.Key == Key.Return) || (arg.Key == Key.Up) || (arg.Key == Key.Down) || (arg.Key == Key.Left) || (arg.Key == Key.Right))
 
             {

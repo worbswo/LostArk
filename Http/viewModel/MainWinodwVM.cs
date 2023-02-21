@@ -544,6 +544,7 @@ namespace LostArkAction.viewModel
             Ablity.PanaltyItems = new Dictionary<string, int>();
             for (int i = 0; i < 5; i++)
             {
+                if (!EquipAccVM.isUsed[i]) { continue; }
                 if ((EquipAccVM.AccVM[i].Name1 != "" && EquipAccVM.AccVM[i].Name1 != null) &&
                     (EquipAccVM.AccVM[i].Name2 != "" && EquipAccVM.AccVM[i].Name2 != null) &&
                     (EquipAccVM.AccVM[i].PenaltyName != "" && EquipAccVM.AccVM[i].PenaltyName != null) &&
