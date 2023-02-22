@@ -22,6 +22,8 @@ using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using System.Net;
 using System.Diagnostics;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace LostArkAction.viewModel
 {
@@ -75,6 +77,7 @@ namespace LostArkAction.viewModel
         public AccessoriesVM AccessoriesVM { get; set; } = new AccessoriesVM();
         public EquipAccVM EquipAccVM { get; set; } =new EquipAccVM();
         public Ablity Ablity { get; set; }
+        public EventViewModel EventViewModel { get;set; } = new EventViewModel();
         public Thread ThreadSearch { get; set; }
         public bool LimitedCheck { get; set; } = false;
         public bool IsCheckedAll
@@ -434,12 +437,46 @@ namespace LostArkAction.viewModel
 
             SetEngraveNameViewSource = new CollectionViewSource();
             SetEngraveNameViewSource.Source = this.SetEngraveName;
+            OpenEvnetList();
         }
 
   
         #endregion
 
         #region Method
+
+        public async void OpenEvnetList()
+        {
+            if (HttpClient2.APIkeys.Count == 0) return;
+            HttpClient SharedClient = new HttpClient();
+            List<EventItem> eventItems= new List<EventItem>();
+            SharedClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpClient2.APIkeys[0]);
+            SharedClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            try
+            {
+                using (HttpResponseMessage response = await SharedClient.GetAsync("https://developer-lostark.game.onstove.com/news/events"))
+                {
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        MessageBox.Show("API KEY가 올바르지 않습니다.");
+                        return;
+                    }
+                    string jsonString = await response.Content.ReadAsStringAsync();
+                    eventItems = JsonConvert.DeserializeObject<List<EventItem>>(jsonString);
+                    //eventItems =
+                }
+            }
+            catch { }
+            for(int i = 0; i < eventItems.Count; i++)
+            {
+                EventInfoVM eventInfoVM = new EventInfoVM();
+                eventInfoVM.EventUrl = eventItems[i].Thumbnail;
+                eventInfoVM.EventLink = eventItems[i].Link;
+                eventInfoVM.StartTime = eventItems[i].StartDate;
+                eventInfoVM.EndTime= eventItems[i].EndDate;
+                EventViewModel.EventsList.Add(eventInfoVM);
+            }
+        }
         public void OpenAPISetup(object obj)
         {
             if (APISetup.Visibility == Visibility.Hidden)

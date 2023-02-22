@@ -41,6 +41,7 @@
                 Height="80"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition
                 Width="280"></ColumnDefinition>
             <ColumnDefinition
@@ -50,7 +51,7 @@
         </Grid.ColumnDefinitions>
         <Border
             Name="main"
-            Grid.ColumnSpan="3"
+            Grid.ColumnSpan="4"
             BorderThickness="1"
             BorderBrush="Gray"
             Margin="0">
@@ -178,8 +179,13 @@
 
             </DockPanel>
         </Border>
-        <Grid
-            Margin="50,0,50,0"
+        <Expander ExpandDirection="Left"
+                  Grid.Row="1"
+                  Grid.RowSpan="10">
+            <local:EventView DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"></local:EventView>
+        </Expander>
+        <Grid Grid.Column="1"
+              Margin="50,0,50,0"
             Grid.Row="1"
             Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -191,7 +197,7 @@
             <TextBox
                 Margin="2"
                 FontSize="17"
-                InputMethod.PreferredImeState="On"
+                     InputMethod.PreferredImeState="On"
                 InputMethod.PreferredImeConversionMode="Native"
                 command:CommandBehavior.Event="KeyDown"
                 command:CommandBehavior.Command="{Binding KeyDownCommand}"
@@ -208,29 +214,32 @@
         <view:TargetAblity
             DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"
             Grid.RowSpan="2"
-            Grid.Row="2"></view:TargetAblity>
+                           Grid.Column="1"
+                           Grid.Row="2"></view:TargetAblity>
         <view:EquipAblity
             DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"
-            Grid.Column="1"
+            Grid.Column="2"
             Grid.Row="2"
             Grid.RowSpan="2"></view:EquipAblity>
 
         <view:Accessories
             Margin="10"
-            DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"
+                          Grid.Column="1"
+                          DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"
             Grid.Row="4"></view:Accessories>
         <view:CharacteristicRange
             DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"
             Margin="10"
             Grid.Row="4"
-            Grid.Column="1">
+            Grid.Column="2">
 
         </view:CharacteristicRange>
         <ProgressBar
             Grid.Row="5"
             Minimum="0"
             Maximum="100"
-            Background="#FF424452"
+                     Grid.Column="1"
+                     Background="#FF424452"
             BorderThickness="0"
             Grid.ColumnSpan="2"
             Margin="10,2,10,2"
@@ -242,7 +251,8 @@
             Grid.ColumnSpan="2"
             FontWeight="UltraBold"
             Foreground="White"
-            VerticalAlignment="Center"
+                   Grid.Column="1"
+                   VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Text="{Binding PossProgressText}"
             ></TextBlock>
@@ -251,7 +261,8 @@
             Grid.Row="6"
             Minimum="0"
             Maximum="100"
-            Background="#FF424452"
+                     Grid.Column="1"
+                     Background="#FF424452"
             BorderThickness="0"
             Grid.ColumnSpan="2"
             Margin="10,2,10,2"
@@ -261,7 +272,8 @@
         <TextBlock
             Grid.Row="6"
             Grid.ColumnSpan="2"
-            FontWeight="UltraBold"
+                   Grid.Column="1"
+                   FontWeight="UltraBold"
             Foreground="White"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
@@ -275,7 +287,8 @@
             Maximum="100"
             Background="#FF424452"
             BorderThickness="0"
-            Grid.ColumnSpan="2"
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2"
             Margin="10,2,10,2"
             Value="{Binding WaitAPIprogressValue}"
             Foreground="#FF674D12">
@@ -286,7 +299,8 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             FontWeight="UltraBold"
-            Foreground="White"
+                   Grid.Column="1"
+                   Foreground="White"
             Text="{Binding WaitAPIProgressText}"></TextBlock>
         <ProgressBar
             Name="progress"
@@ -296,7 +310,8 @@
             Background="#FF424452"
             BorderThickness="0"
             Grid.ColumnSpan="2"
-            Margin="10,2,10,0"
+                     Grid.Column="1"
+                     Margin="10,2,10,0"
             Value="{Binding ProgressValue}"
             Foreground="#FF036515" Height="21" VerticalAlignment="Top">
         </ProgressBar>
@@ -306,11 +321,13 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             FontWeight="UltraBold"
-            Foreground="White"
+                   Grid.Column="1"
+                   Foreground="White"
             Text="{Binding ElementName=progress,Path=Value, StringFormat={}{0:0}%}"></TextBlock>
         <Grid
             Grid.Row="9"
-            Grid.ColumnSpan="2"
+              Grid.Column="1"
+              Grid.ColumnSpan="2"
             Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>

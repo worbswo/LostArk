@@ -63,6 +63,5 @@ namespace LostArkAction.View
                 DragMove();
             }
         }
-
     }
 }

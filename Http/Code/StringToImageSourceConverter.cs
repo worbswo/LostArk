@@ -24,8 +24,16 @@ namespace LostArkAction.Code
 
             image.BeginInit();
             image.UriSource = new Uri(imagePath, UriKind.RelativeOrAbsolute);
-            image.DecodePixelWidth = 50;
-            image.DecodePixelHeight = 50;
+            if (parameter == null) 
+            {
+                image.DecodePixelWidth = 50;
+                image.DecodePixelHeight = 50;
+            }
+            else
+            {
+                image.DecodePixelWidth = 300;
+                image.DecodePixelHeight = 100;
+            }
             image.EndInit();
             if (image == null) return null;
 
