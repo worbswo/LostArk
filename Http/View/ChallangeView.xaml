@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="LostArkAction.View.ChallangeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:LostArkAction.View"
+             mc:Ignorable="d"
+             xmlns:code="clr-namespace:LostArkAction.Code"
+             xmlns:command="clr-namespace:LostArkAction.Code"
+             d:DesignHeight="680"
+             d:DesignWidth="800">
+    <UserControl.Resources>
+        <code:StringToImageSourceConverter x:Key="MyImageConverter"></code:StringToImageSourceConverter>
+    </UserControl.Resources>
+    <Grid Width="350"
+          Height="680"
+          VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Background="#FF636366"
+                Margin="0,2,0,2"
+                BorderBrush="#FF0A3C6D"
+                BorderThickness="0"
+                CornerRadius="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Abyss Dungeon"
+                           Grid.Row="0"
+                           FontWeight="Bold"
+                           FontSize="20"
+                           FontFamily="MaruBuri"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Foreground="White"></TextBlock>
+                <ListView Name="abyss"
+                          Grid.Row="1"
+                          ScrollViewer.CanContentScroll="False"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          Background="#00000000"
+                          BorderThickness="0"
+                          ItemsSource="{Binding DataContext.ChallangeVM.AbyssDungeonsCollectionView}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto">
+                                    </RowDefinition>
+                                    <RowDefinition Height="100"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock Foreground="DarkOrange"
+                                           FontSize="15"
+                                           Text="{Binding Name}"></TextBlock>
+                                <Image Grid.Row="1"
+                                       Source="{Binding Path=Image, ConverterParameter=Event, Converter={StaticResource MyImageConverter}}"
+                                       Stretch="Fill">
+                                    <Image.ToolTip>
+                                        <TextBlock Text="{Binding Description}"></TextBlock>
+                                    </Image.ToolTip>
+                                </Image>
+                                <StackPanel Grid.Row="2"
+                                            Orientation="Horizontal">
+                                        <Image Source="{Binding Path=Rewards[0].Icon, ConverterParameter=Icon,Converter={StaticResource MyImageConverter}}">
+                                        <Image.ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Rewards[0].Name}"></TextBlock>
+                                                <TextBlock Text="{Binding Rewards[0].Grade}"></TextBlock>
+                                            </StackPanel>
+                                        </Image.ToolTip>
+                                    </Image>
+                                    <Image Source="{Binding Path=Rewards[1].Icon,  ConverterParameter=Icon,Converter={StaticResource MyImageConverter}}">
+                                        <Image.ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Rewards[1].Name}"></TextBlock>
+                                                <TextBlock Text="{Binding Rewards[1].Grade}"></TextBlock>
+                                            </StackPanel>
+                                        </Image.ToolTip>
+                                    </Image>
+                                    <Image Source="{Binding Path=Rewards[2].Icon,  ConverterParameter=Icon,Converter={StaticResource MyImageConverter}}">
+                                        <Image.ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Rewards[2].Name}"></TextBlock>
+                                                <TextBlock Text="{Binding Rewards[2].Grade}"></TextBlock>
+                                            </StackPanel>
+                                        </Image.ToolTip>
+                                    </Image>
+                                    <Image Source="{Binding Path=Rewards[3].Icon, ConverterParameter=Icon, Converter={StaticResource MyImageConverter}}">
+                                        <Image.ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Rewards[3].Name}"></TextBlock>
+                                                <TextBlock Text="{Binding Rewards[3].Grade}"></TextBlock>
+                                            </StackPanel>
+                                        </Image.ToolTip>
+                                    </Image>
+                                </StackPanel>
+                                <StackPanel Grid.Row="3"
+                                            Orientation="Horizontal">
+                                    <TextBlock Foreground="White"
+                                               Text="{Binding StartTime}"></TextBlock>
+                                    <TextBlock Foreground="White"
+                                               Text="~"></TextBlock>
+                                    <TextBlock Foreground="White"
+                                               Text="{Binding EndTime}"></TextBlock>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

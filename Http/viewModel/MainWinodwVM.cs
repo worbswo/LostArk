@@ -24,6 +24,9 @@ using System.Net;
 using System.Diagnostics;
 using System.Net.Http;
 using Newtonsoft.Json;
+using LostArkAction.Code.Items;
+using LostArkAction.ViewModel;
+using LostArkAction.viewModel.Callange;
 
 namespace LostArkAction.viewModel
 {
@@ -78,6 +81,7 @@ namespace LostArkAction.viewModel
         public EquipAccVM EquipAccVM { get; set; } =new EquipAccVM();
         public Ablity Ablity { get; set; }
         public EventViewModel EventViewModel { get;set; } = new EventViewModel();
+        public ChallangeVM ChallangeVM { get; set; } = new ChallangeVM();
         public Thread ThreadSearch { get; set; }
         public bool LimitedCheck { get; set; } = false;
         public bool IsCheckedAll
@@ -437,8 +441,9 @@ namespace LostArkAction.viewModel
 
             SetEngraveNameViewSource = new CollectionViewSource();
             SetEngraveNameViewSource.Source = this.SetEngraveName;
-            OpenEvnetList();
-            OpenNoticeList();
+            _ = OpenEvnetList();
+            _ = OpenNoticeList();
+            _ = OpenAbyss();
         }
 
   
@@ -446,14 +451,14 @@ namespace LostArkAction.viewModel
 
         #region Method
 
-        public async void OpenEvnetList()
+        public async Task OpenEvnetList()
         {
             if (HttpClient2.APIkeys.Count == 0) return;
             HttpClient SharedClient = new HttpClient();
             List<EventItem> eventItems= new List<EventItem>();
             SharedClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpClient2.APIkeys[0]);
             SharedClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            try
+            while (true)
             {
                 using (HttpResponseMessage response = await SharedClient.GetAsync("https://developer-lostark.game.onstove.com/news/events"))
                 {
@@ -462,30 +467,105 @@ namespace LostArkAction.viewModel
                         MessageBox.Show("API KEY가 올바르지 않습니다.");
                         return;
                     }
-                    string jsonString = await response.Content.ReadAsStringAsync();
-                    eventItems = JsonConvert.DeserializeObject<List<EventItem>>(jsonString);
-                    //eventItems =
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        string jsonString = await response.Content.ReadAsStringAsync();
+                        eventItems = JsonConvert.DeserializeObject<List<EventItem>>(jsonString);
+                        for (int i = 0; i < eventItems.Count; i++)
+                        {
+                            EventInfoVM eventInfoVM = new EventInfoVM();
+                            eventInfoVM.EventUrl = eventItems[i].Thumbnail;
+                            eventInfoVM.EventLink = eventItems[i].Link;
+                            eventInfoVM.StartTime = eventItems[i].StartDate.Split('T')[0];
+                            eventInfoVM.EndTime = eventItems[i].EndDate.Split('T')[0];
+                            eventInfoVM.StartTime = eventInfoVM.StartTime.Split('-')[0] + "년" + eventInfoVM.StartTime.Split('-')[1] + "월" + eventInfoVM.StartTime.Split('-')[2] + "일";
+                            eventInfoVM.EndTime = eventInfoVM.EndTime.Split('-')[0] + "년" + eventInfoVM.EndTime.Split('-')[1] + "월" + eventInfoVM.EndTime.Split('-')[2] + "일";
+                            EventViewModel.EventsList.Add(eventInfoVM);
+                        }
+                        break;
+
+                    }
+                    else
+                    {
+                        Thread.Sleep(1000);
+
+                        continue;
+
+                    }
                 }
             }
-            catch { }
-            for(int i = 0; i < eventItems.Count; i++)
-            {
-                EventInfoVM eventInfoVM = new EventInfoVM();
-                eventInfoVM.EventUrl = eventItems[i].Thumbnail;
-                eventInfoVM.EventLink = eventItems[i].Link;
-                eventInfoVM.StartTime = eventItems[i].StartDate;
-                eventInfoVM.EndTime= eventItems[i].EndDate;
-                EventViewModel.EventsList.Add(eventInfoVM);
-            }
+          
+            
         }
-        public async void OpenNoticeList()
+        public async Task OpenAbyss()
+        {
+            if (HttpClient2.APIkeys.Count == 0) return;
+            HttpClient SharedClient = new HttpClient();
+            List<ChallengeAbyssDungeonItem> eventItems = new List<ChallengeAbyssDungeonItem>();
+            SharedClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpClient2.APIkeys[0]);
+            SharedClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            while (true)
+            {
+                using (HttpResponseMessage response = await SharedClient.GetAsync("https://developer-lostark.game.onstove.com/gamecontents/challenge-abyss-dungeons"))
+                {
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        MessageBox.Show("API KEY가 올바르지 않습니다.");
+                        return;
+                    }
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        string jsonString = await response.Content.ReadAsStringAsync();
+                        eventItems = JsonConvert.DeserializeObject<List<ChallengeAbyssDungeonItem>>(jsonString);
+                        for (int i = 0; i < eventItems.Count; i++)
+                        {
+                            AbyssDungeonVM eventInfoVM = new AbyssDungeonVM();
+                            for (int j = 0; j < 4; j++)
+                            {
+                                RewardVM rewardVM = new RewardVM();
+                                if (eventItems[i].RewardItems.Count > j)
+                                {
+                                    rewardVM.Name = eventItems[i].RewardItems[j].Name;
+                                    rewardVM.Grade = eventItems[i].RewardItems[j].Grade;
+                                    rewardVM.Icon = eventItems[i].RewardItems[j].Icon;
+                                    rewardVM.StartTimes = eventItems[i].RewardItems[j].StartTimes;
+
+                                    eventInfoVM.Rewards.Add(rewardVM);
+
+                                }
+                            }
+                            eventInfoVM.Name = eventItems[i].Name;
+                            eventInfoVM.MinItemLevel= eventItems[i].MinItemLevel;
+                            eventInfoVM.StartTime= eventItems[i].StartTime;
+                            eventInfoVM.EndTime= eventItems[i].EndTime; 
+                            eventInfoVM.AreaName = eventItems[i].AreaName; 
+                            eventInfoVM.Description = eventItems[i].Description;
+                            eventInfoVM._image= eventItems[i].Image;
+                            ChallangeVM.AbyssDungeons.Add(eventInfoVM);
+                        }
+                        break;
+
+                    }
+                    else
+                    {
+                        Thread.Sleep(1000);
+
+                        continue;
+
+                    }
+                }
+            }
+
+
+        }
+        public async Task OpenNoticeList()
         {
             if (HttpClient2.APIkeys.Count == 0) return;
             HttpClient SharedClient = new HttpClient();
             List<NoticeItem> noticItems = new List<NoticeItem>();
             SharedClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpClient2.APIkeys[0]);
             SharedClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            try
+            while (true)
             {
                 using (HttpResponseMessage response = await SharedClient.GetAsync("https://developer-lostark.game.onstove.com/news/notices?type=%EA%B3%B5%EC%A7%80"))
                 {
@@ -494,21 +574,30 @@ namespace LostArkAction.viewModel
                         MessageBox.Show("API KEY가 올바르지 않습니다.");
                         return;
                     }
-                    string jsonString = await response.Content.ReadAsStringAsync();
-                    noticItems = JsonConvert.DeserializeObject<List<NoticeItem>>(jsonString);
-                    //eventItems =
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        string jsonString = await response.Content.ReadAsStringAsync();
+                        noticItems = JsonConvert.DeserializeObject<List<NoticeItem>>(jsonString);
+                        for (int i = 0; i < noticItems.Count; i++)
+                        {
+                            NoticeInfoVM eventInfoVM = new NoticeInfoVM();
+                            eventInfoVM.Title = noticItems[i].Title;
+                            eventInfoVM.Link = noticItems[i].Link;
+                            eventInfoVM.Date = noticItems[i].Date;
+                            eventInfoVM.Type = noticItems[i].Type;
+                            EventViewModel.NoticesList.Add(eventInfoVM);
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        Thread.Sleep(1000);
+                        continue;
+                    }
                 }
             }
-            catch { }
-            for (int i = 0; i < noticItems.Count; i++)
-            {
-                NoticeInfoVM eventInfoVM = new NoticeInfoVM();
-                eventInfoVM.Title = noticItems[i].Title;
-                eventInfoVM.Link = noticItems[i].Link;
-                eventInfoVM.Date = noticItems[i].Date;
-                eventInfoVM.Type = noticItems[i].Type;
-                EventViewModel.NoticesList.Add(eventInfoVM);
-            }
+            
+           
         }
         public void OpenAPISetup(object obj)
         {

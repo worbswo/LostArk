@@ -120,7 +120,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.View>
-                <GridView>
+                <GridView ScrollViewer.CanContentScroll="False">
                     <GridView.Columns>
                         <GridViewColumn
                             Width="30">

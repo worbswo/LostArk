@@ -181,8 +181,60 @@
         </Border>
         <Expander ExpandDirection="Left"
                   Grid.Row="1"
-                  Grid.RowSpan="10">
-            <local:EventView DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"></local:EventView>
+                  Padding="0"
+                  Grid.RowSpan="9">
+            <TabControl SelectedIndex="{Binding DataContext.EquipAblityVM.SelectedTabIdx}"
+                        Margin="10"
+                        BorderThickness="0"
+                        Background="#00000000">
+                <TabControl.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <Border Name="Border"
+                                            CornerRadius="4,4,0,0"
+                                            Margin="0,0,0,0">
+                                        <ContentPresenter x:Name="ContentSite"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          ContentSource="Header"
+                                                          Margin="10" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected"
+                                                 Value="True">
+                                            <Setter TargetName="Border"
+                                                    Property="Background"
+                                                    Value="#FF0A3C6D" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected"
+                                                 Value="False">
+                                            <Setter TargetName="Border"
+                                                    Property="Background"
+                                                    Value="#FF636366" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Resources>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock Foreground="White"
+                                   Text="News"></TextBlock>
+                    </TabItem.Header>
+                    <local:EventView DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"></local:EventView>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock Foreground="White"
+                                   Text="Challang"></TextBlock>
+                    </TabItem.Header>
+                    <local:ChallangeView DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}"></local:ChallangeView>
+                </TabItem>
+            </TabControl>
         </Expander>
         <Grid Grid.Column="1"
               Margin="50,0,50,0"
