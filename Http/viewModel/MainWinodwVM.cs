@@ -438,6 +438,7 @@ namespace LostArkAction.viewModel
             SetEngraveNameViewSource = new CollectionViewSource();
             SetEngraveNameViewSource.Source = this.SetEngraveName;
             OpenEvnetList();
+            OpenNoticeList();
         }
 
   
@@ -475,6 +476,38 @@ namespace LostArkAction.viewModel
                 eventInfoVM.StartTime = eventItems[i].StartDate;
                 eventInfoVM.EndTime= eventItems[i].EndDate;
                 EventViewModel.EventsList.Add(eventInfoVM);
+            }
+        }
+        public async void OpenNoticeList()
+        {
+            if (HttpClient2.APIkeys.Count == 0) return;
+            HttpClient SharedClient = new HttpClient();
+            List<NoticeItem> noticItems = new List<NoticeItem>();
+            SharedClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpClient2.APIkeys[0]);
+            SharedClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            try
+            {
+                using (HttpResponseMessage response = await SharedClient.GetAsync("https://developer-lostark.game.onstove.com/news/notices?type=%EA%B3%B5%EC%A7%80"))
+                {
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        MessageBox.Show("API KEY가 올바르지 않습니다.");
+                        return;
+                    }
+                    string jsonString = await response.Content.ReadAsStringAsync();
+                    noticItems = JsonConvert.DeserializeObject<List<NoticeItem>>(jsonString);
+                    //eventItems =
+                }
+            }
+            catch { }
+            for (int i = 0; i < noticItems.Count; i++)
+            {
+                NoticeInfoVM eventInfoVM = new NoticeInfoVM();
+                eventInfoVM.Title = noticItems[i].Title;
+                eventInfoVM.Link = noticItems[i].Link;
+                eventInfoVM.Date = noticItems[i].Date;
+                eventInfoVM.Type = noticItems[i].Type;
+                EventViewModel.NoticesList.Add(eventInfoVM);
             }
         }
         public void OpenAPISetup(object obj)
