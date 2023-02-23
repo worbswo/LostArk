@@ -27,6 +27,7 @@ using Newtonsoft.Json;
 using LostArkAction.Code.Items;
 using LostArkAction.ViewModel;
 using LostArkAction.viewModel.Callange;
+using System.Reflection;
 
 namespace LostArkAction.viewModel
 {
@@ -82,6 +83,7 @@ namespace LostArkAction.viewModel
         public Ablity Ablity { get; set; }
         public EventViewModel EventViewModel { get;set; } = new EventViewModel();
         public ChallangeVM ChallangeVM { get; set; } = new ChallangeVM();
+       
         public Thread ThreadSearch { get; set; }
         public bool LimitedCheck { get; set; } = false;
         public bool IsCheckedAll
@@ -441,16 +443,82 @@ namespace LostArkAction.viewModel
 
             SetEngraveNameViewSource = new CollectionViewSource();
             SetEngraveNameViewSource.Source = this.SetEngraveName;
+            _ = OpenRaid();
             _ = OpenEvnetList();
             _ = OpenNoticeList();
             _ = OpenAbyss();
         }
 
-  
+
         #endregion
 
         #region Method
+        public async Task OpenRaid()
+        {
+            if (HttpClient2.APIkeys.Count == 0) return;
+            HttpClient SharedClient = new HttpClient();
+            ChallangeGuardianRaid eventItems = new ChallangeGuardianRaid();
+            SharedClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpClient2.APIkeys[0]);
+            SharedClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            while (true)
+            {
+                using (HttpResponseMessage response = await SharedClient.GetAsync("https://developer-lostark.game.onstove.com/gamecontents/challenge-guardian-raids"))
+                {
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        MessageBox.Show("API KEY가 올바르지 않습니다.");
+                        return;
+                    }
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        string jsonString = await response.Content.ReadAsStringAsync();
+                        eventItems = JsonConvert.DeserializeObject<ChallangeGuardianRaid>(jsonString);
+                        for (int i = 0; i < eventItems.Raids.Count; i++)
+                        {
+                            RaidVM raidVM = new RaidVM();
 
+                            raidVM.Name = eventItems.Raids[i].Name;
+                            raidVM.MinItemLevel = eventItems.Raids[i].MinItemLevel;
+                            raidVM.StartTime = eventItems.Raids[i].StartTime;
+                            raidVM.EndTime = eventItems.Raids[i].EndTime;
+                            raidVM.RequiredClearRaid = eventItems.Raids[i].RequiredClearRaid;
+                            raidVM.Description = eventItems.Raids[i].Description;
+                            raidVM.Image = eventItems.Raids[i].Image;
+                            ChallangeVM.Raids.Add(raidVM);
+                        }
+                        for (int i = 0; i < eventItems.RewardItems.Count; i++)
+                        {
+                            RewaidRaidVM rewaidRaidVM = new RewaidRaidVM();
+                            rewaidRaidVM.ExpeditionItemLevel = eventItems.RewardItems[i].ExpeditionItemLevel;
+                            for (int j = 0; j < 9; j++)
+                            {
+                                RewardVM rewardVM = new RewardVM();
+                                if (eventItems.RewardItems[i].Itmes.Count > j)
+                                {
+                                    rewardVM.Name = eventItems.RewardItems[i].Itmes[j].Name;
+                                    rewardVM.Grade = eventItems.RewardItems[i].Itmes[j].Grade;
+                                    rewardVM.Icon = eventItems.RewardItems[i].Itmes[j].Icon;
+                                    rewardVM.StartTimes = eventItems.RewardItems[i].Itmes[j].StartTimes;
+
+                                }
+                                rewaidRaidVM.Rewards.Add(rewardVM);
+
+                            }
+                            ChallangeVM.RewaidRaids.Add(rewaidRaidVM);  
+                        }
+                        break;
+
+                    }
+                    else
+                    {
+                        Thread.Sleep(1000);
+
+                        continue;
+
+                    }
+                }
+            }
+        }
         public async Task OpenEvnetList()
         {
             if (HttpClient2.APIkeys.Count == 0) return;
@@ -494,8 +562,6 @@ namespace LostArkAction.viewModel
                     }
                 }
             }
-          
-            
         }
         public async Task OpenAbyss()
         {
@@ -540,7 +606,7 @@ namespace LostArkAction.viewModel
                             eventInfoVM.EndTime= eventItems[i].EndTime; 
                             eventInfoVM.AreaName = eventItems[i].AreaName; 
                             eventInfoVM.Description = eventItems[i].Description;
-                            eventInfoVM._image= eventItems[i].Image;
+                            eventInfoVM.Image= eventItems[i].Image;
                             ChallangeVM.AbyssDungeons.Add(eventInfoVM);
                         }
                         break;

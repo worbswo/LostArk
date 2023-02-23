@@ -137,7 +137,14 @@
     <Compile Include="Code\DataBase\DataBase.cs" />
     <Compile Include="Code\DispatcherService.cs" />
     <Compile Include="Code\EtcOption.cs" />
+    <Compile Include="Code\EventItem.cs" />
     <Compile Include="Code\HttpClient.cs" />
+    <Compile Include="Code\Items\ChallangeGuardianRaid.cs" />
+    <Compile Include="Code\Items\ChallengeAbyssDungeonItem.cs" />
+    <Compile Include="Code\Items\RaidItem.cs" />
+    <Compile Include="Code\Items\RewardItem.cs" />
+    <Compile Include="Code\Items\RewardRaidItem.cs" />
+    <Compile Include="Code\NoticeItem.cs" />
     <Compile Include="Code\ResultItem.cs" />
     <Compile Include="Code\SearchItem.cs" />
     <Compile Include="Code\RelayCommand.cs" />
@@ -152,13 +159,21 @@
     <Compile Include="viewModel\AccVM.cs" />
     <Compile Include="viewModel\AccessoriesVM.cs" />
     <Compile Include="viewModel\APISetupVM.cs" />
+    <Compile Include="viewModel\Callange\AbyssDungeonVM.cs" />
+    <Compile Include="viewModel\Callange\GuarduanRaid.cs" />
+    <Compile Include="viewModel\Callange\RaidVM.cs" />
+    <Compile Include="viewModel\Callange\RewaidRaidVM.cs" />
+    <Compile Include="viewModel\Callange\RewardVM.cs" />
     <Compile Include="viewModel\CharacteristicRangeVM.cs" />
     <Compile Include="viewModel\DownloadProgressVM.cs" />
     <Compile Include="viewModel\EquipAblityVM.cs" />
     <Compile Include="viewModel\EquipAccVM.cs" />
+    <Compile Include="viewModel\EventInfoVM.cs" />
+    <Compile Include="viewModel\EventViewModel.cs" />
     <Compile Include="viewModel\FindAccVM.cs" />
     <Compile Include="viewModel\FIndAccWindowVM.cs" />
     <Compile Include="viewModel\MainWinodwVM.cs" />
+    <Compile Include="viewModel\NoticeInfoVM.cs" />
     <Compile Include="viewModel\TargetAblityVM.cs" />
     <Compile Include="viewModel\ViewModelBase.cs" />
     <Compile Include="View\Accessories.xaml.cs">
@@ -166,6 +181,10 @@
     </Compile>
     <Compile Include="View\APISetup.xaml.cs">
       <DependentUpon>APISetup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="viewModel\ChallangeVM.cs" />
+    <Compile Include="View\ChallangeView.xaml.cs">
+      <DependentUpon>ChallangeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CharacteristicRange.xaml.cs">
       <DependentUpon>CharacteristicRange.xaml</DependentUpon>
@@ -178,6 +197,9 @@
     </Compile>
     <Compile Include="View\EquipAcc.xaml.cs">
       <DependentUpon>EquipAcc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EventView.xaml.cs">
+      <DependentUpon>EventView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FindAccWindow.xaml.cs">
       <DependentUpon>FindAccWindow.xaml</DependentUpon>
@@ -245,6 +267,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ChallangeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CharacteristicRange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -258,6 +284,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EquipAcc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EventView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

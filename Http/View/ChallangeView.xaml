@@ -114,5 +114,67 @@
                 </ListView>
             </Grid>
         </Border>
+        <Border Background="#FF636366"
+                Margin="0,2,0,2"
+                Grid.Row="1"
+                BorderBrush="#FF0A3C6D"
+                BorderThickness="0"
+                CornerRadius="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Guardian Raid"
+                           Grid.Row="0"
+                           FontWeight="Bold"
+                           FontSize="20"
+                           FontFamily="MaruBuri"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Foreground="White"></TextBlock>
+                <ListView 
+                          Grid.Row="1"
+                          ScrollViewer.CanContentScroll="False"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          Background="#00000000"
+                          BorderThickness="0"
+                          ItemsSource="{Binding DataContext.ChallangeVM.RaidsCollectionView}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="100"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock Foreground="DarkOrange"
+                                           FontSize="15"
+                                           Text="{Binding Name}"></TextBlock>
+                                <Image Grid.Row="1"
+                                       Source="{Binding Path=Image, ConverterParameter=Event, Converter={StaticResource MyImageConverter}}"
+                                       Stretch="Fill">
+                                    <Image.ToolTip>
+                                        <TextBlock Text="{Binding Description}"></TextBlock>
+                                    </Image.ToolTip>
+                                </Image>
+                                
+                                <StackPanel Grid.Row="3"
+                                            Orientation="Horizontal">
+                                    <TextBlock Foreground="White"
+                                               Text="{Binding StartTime}"></TextBlock>
+                                    <TextBlock Foreground="White"
+                                               Text="~"></TextBlock>
+                                    <TextBlock Foreground="White"
+                                               Text="{Binding EndTime}"></TextBlock>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>
