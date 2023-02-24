@@ -493,12 +493,12 @@ namespace LostArkAction.viewModel
                             for (int j = 0; j < 9; j++)
                             {
                                 RewardVM rewardVM = new RewardVM();
-                                if (eventItems.RewardItems[i].Itmes.Count > j)
+                                if (eventItems.RewardItems[i].Items.Count > j)
                                 {
-                                    rewardVM.Name = eventItems.RewardItems[i].Itmes[j].Name;
-                                    rewardVM.Grade = eventItems.RewardItems[i].Itmes[j].Grade;
-                                    rewardVM.Icon = eventItems.RewardItems[i].Itmes[j].Icon;
-                                    rewardVM.StartTimes = eventItems.RewardItems[i].Itmes[j].StartTimes;
+                                    rewardVM.Name = eventItems.RewardItems[i].Items[j].Name;
+                                    rewardVM.Grade = eventItems.RewardItems[i].Items[j].Grade;
+                                    rewardVM.Icon = eventItems.RewardItems[i].Items[j].Icon;
+                                    rewardVM.StartTimes = eventItems.RewardItems[i].Items[j].StartTimes;
 
                                 }
                                 rewaidRaidVM.Rewards.Add(rewardVM);

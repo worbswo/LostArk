@@ -40,7 +40,8 @@
                 <ListView Name="events"
                           Grid.Row="1"
                           ScrollViewer.CanContentScroll="False"
-                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           Background="#00000000"
                           BorderThickness="0"
                           SelectedItem="{Binding DataContext.EventViewModel.SelectedItem}"
@@ -51,7 +52,7 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="100"></RowDefinition>
+                                    <RowDefinition Height="120"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 
@@ -103,7 +104,7 @@
                     <ListView 
                               Name="notices"
                               Background="#00000000"
-                              ScrollViewer.VerticalScrollBarVisibility="Visible"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
                               BorderThickness="0"
                               SelectedItem="{Binding DataContext.EventViewModel.SelectedItem2}"
                               command:CommandBehavior.Command="{Binding DataContext.EventViewModel.MouseClickCommand}"

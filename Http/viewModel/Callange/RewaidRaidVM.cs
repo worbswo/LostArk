@@ -9,7 +9,7 @@ namespace LostArkAction.viewModel.Callange
     public class RewaidRaidVM :ViewModelBase
     {
         public int _expeditionItemLevel;
-        public List<RewardVM> Rewards { get; set; }
+        public List<RewardVM> Rewards { get; set; } = new List<RewardVM>();
 
         public int ExpeditionItemLevel
         {

@@ -40,7 +40,8 @@
                 <ListView Name="abyss"
                           Grid.Row="1"
                           ScrollViewer.CanContentScroll="False"
-                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           Background="#00000000"
                           BorderThickness="0"
                           ItemsSource="{Binding DataContext.ChallangeVM.AbyssDungeonsCollectionView}">
@@ -50,14 +51,14 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto">
                                     </RowDefinition>
-                                    <RowDefinition Height="100"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="120"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <TextBlock Foreground="DarkOrange"
                                            FontSize="15"
                                            Text="{Binding Name}"></TextBlock>
                                 <Image Grid.Row="1"
+                                       
                                        Source="{Binding Path=Image, ConverterParameter=Event, Converter={StaticResource MyImageConverter}}"
                                        Stretch="Fill">
                                     <Image.ToolTip>
@@ -65,41 +66,6 @@
                                     </Image.ToolTip>
                                 </Image>
                                 <StackPanel Grid.Row="2"
-                                            Orientation="Horizontal">
-                                        <Image Source="{Binding Path=Rewards[0].Icon, ConverterParameter=Icon,Converter={StaticResource MyImageConverter}}">
-                                        <Image.ToolTip>
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Rewards[0].Name}"></TextBlock>
-                                                <TextBlock Text="{Binding Rewards[0].Grade}"></TextBlock>
-                                            </StackPanel>
-                                        </Image.ToolTip>
-                                    </Image>
-                                    <Image Source="{Binding Path=Rewards[1].Icon,  ConverterParameter=Icon,Converter={StaticResource MyImageConverter}}">
-                                        <Image.ToolTip>
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Rewards[1].Name}"></TextBlock>
-                                                <TextBlock Text="{Binding Rewards[1].Grade}"></TextBlock>
-                                            </StackPanel>
-                                        </Image.ToolTip>
-                                    </Image>
-                                    <Image Source="{Binding Path=Rewards[2].Icon,  ConverterParameter=Icon,Converter={StaticResource MyImageConverter}}">
-                                        <Image.ToolTip>
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Rewards[2].Name}"></TextBlock>
-                                                <TextBlock Text="{Binding Rewards[2].Grade}"></TextBlock>
-                                            </StackPanel>
-                                        </Image.ToolTip>
-                                    </Image>
-                                    <Image Source="{Binding Path=Rewards[3].Icon, ConverterParameter=Icon, Converter={StaticResource MyImageConverter}}">
-                                        <Image.ToolTip>
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Rewards[3].Name}"></TextBlock>
-                                                <TextBlock Text="{Binding Rewards[3].Grade}"></TextBlock>
-                                            </StackPanel>
-                                        </Image.ToolTip>
-                                    </Image>
-                                </StackPanel>
-                                <StackPanel Grid.Row="3"
                                             Orientation="Horizontal">
                                     <TextBlock Foreground="White"
                                                Text="{Binding StartTime}"></TextBlock>
@@ -124,7 +90,6 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Guardian Raid"
                            Grid.Row="0"
@@ -137,7 +102,8 @@
                 <ListView 
                           Grid.Row="1"
                           ScrollViewer.CanContentScroll="False"
-                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           Background="#00000000"
                           BorderThickness="0"
                           ItemsSource="{Binding DataContext.ChallangeVM.RaidsCollectionView}">
@@ -146,7 +112,7 @@
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="100"></RowDefinition>
+                                    <RowDefinition Height="120"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <TextBlock Foreground="DarkOrange"
@@ -173,63 +139,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <ListView Grid.Row="2"
-                          ScrollViewer.CanContentScroll="False"
-                          ScrollViewer.VerticalScrollBarVisibility="Visible"
-                          Background="#00000000"
-                          BorderThickness="0"
-                          ItemsSource="{Binding DataContext.ChallangeVM.RewaidRaidsCollectionView}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBlock Foreground="DarkOrange"
-                                           FontSize="15"
-                                           Text="{Binding ExpeditionItemLevel,StringFormat='\{0:N0\}레벨'}"></TextBlock>
-                                
-                                <StackPanel Grid.Row="1"
-                                            Orientation="Horizontal">
-                                    <Image Source="{Binding Path=Rewards[0].Icon, ConverterParameter=Icon,Converter={StaticResource MyImageConverter}}">
-                                        <Image.ToolTip>
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Rewards[0].Name}"></TextBlock>
-                                                <TextBlock Text="{Binding Rewards[0].Grade}"></TextBlock>
-                                            </StackPanel>
-                                        </Image.ToolTip>
-                                    </Image>
-                                    <Image Source="{Binding Path=Rewards[1].Icon,  ConverterParameter=Icon,Converter={StaticResource MyImageConverter}}">
-                                        <Image.ToolTip>
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Rewards[1].Name}"></TextBlock>
-                                                <TextBlock Text="{Binding Rewards[1].Grade}"></TextBlock>
-                                            </StackPanel>
-                                        </Image.ToolTip>
-                                    </Image>
-                                    <Image Source="{Binding Path=Rewards[2].Icon,  ConverterParameter=Icon,Converter={StaticResource MyImageConverter}}">
-                                        <Image.ToolTip>
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Rewards[2].Name}"></TextBlock>
-                                                <TextBlock Text="{Binding Rewards[2].Grade}"></TextBlock>
-                                            </StackPanel>
-                                        </Image.ToolTip>
-                                    </Image>
-                                    <Image Source="{Binding Path=Rewards[3].Icon, ConverterParameter=Icon, Converter={StaticResource MyImageConverter}}">
-                                        <Image.ToolTip>
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Rewards[3].Name}"></TextBlock>
-                                                <TextBlock Text="{Binding Rewards[3].Grade}"></TextBlock>
-                                            </StackPanel>
-                                        </Image.ToolTip>
-                                    </Image>
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+              
             </Grid>
         </Border>
     </Grid>

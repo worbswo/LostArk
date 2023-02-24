@@ -30,13 +30,13 @@ namespace LostArkAction.Code
                 image.DecodePixelHeight = 50;
             }else if(parameter as string == "Icon")
             {
-                image.DecodePixelWidth = 30;
-                image.DecodePixelHeight = 30;
+                image.DecodePixelWidth = 25;
+                image.DecodePixelHeight = 25;
             }
             else
             {
-                image.DecodePixelWidth = 300;
-                image.DecodePixelHeight = 100;
+                image.DecodePixelWidth = 350;
+                image.DecodePixelHeight = 120;
             }
             image.EndInit();
             if (image == null) return null;

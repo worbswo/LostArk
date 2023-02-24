@@ -9,6 +9,6 @@ namespace LostArkAction.Code.Items
     public class RewardRaidItem
     {
         public int ExpeditionItemLevel;
-        public List<RewardItem> Itmes;
+        public List<RewardItem> Items;
     }
 }
