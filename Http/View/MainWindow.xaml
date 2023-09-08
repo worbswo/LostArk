@@ -7,9 +7,10 @@
     xmlns:local="clr-namespace:LostArkAction.View"
     xmlns:command="clr-namespace:LostArkAction.Code"
     xmlns:view="clr-namespace:LostArkAction.View"
-    mc:Ignorable="d"
+        xmlns:AdsJumboWinForm="clr-namespace:AdsJumboWinForm;assembly=AdsJumboWinForm"
+        mc:Ignorable="d"
     Title="LostArkAblity"
-    Height="800"
+    Height="900"
     SizeToContent="WidthAndHeight"
     WindowStyle="None"
     ResizeMode="CanMinimize">
@@ -39,6 +40,7 @@
                 Height="25"></RowDefinition>
             <RowDefinition
                 Height="80"></RowDefinition>
+            <RowDefinition Height="90"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -484,10 +486,10 @@
                 Foreground="White"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontSize="15"
+                FontSize="11"
                 TextWrapping="Wrap"
                 Grid.Column="3"
-                Text="모바일 버전 : 로악툴        (구글플레이)"></TextBlock>
+                Text="서버 : 아브렐슈드        캐릭터명 : 란후라이"></TextBlock>
         </Grid>
         <Expander
             Grid.Row="1"
@@ -572,6 +574,14 @@
             </Grid>
             
         </Expander>
-
+        <WindowsFormsHost  Grid.Row="10"
+                           Width="560"
+                           Height="80"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           x:Name="adsHost"
+                           VerticalAlignment="Center">
+            <AdsJumboWinForm:BannerAds />
+        </WindowsFormsHost>
     </Grid>
 </Window>

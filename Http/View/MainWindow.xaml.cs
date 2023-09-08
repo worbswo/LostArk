@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdsJumboWinForm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -25,6 +26,8 @@ namespace LostArkAction.View
         public MainWindow()
         {
             InitializeComponent();
+            ShowAdsJumbo();
+
         }
 
         private void Maximize_Click(object sender, RoutedEventArgs e)
@@ -62,6 +65,10 @@ namespace LostArkAction.View
                 }
                 DragMove();
             }
+        }
+        private void ShowAdsJumbo()
+        {
+            ((BannerAds)adsHost.Child).ShowAd(728, 90, "t9d8obafc3ob");
         }
     }
 }
