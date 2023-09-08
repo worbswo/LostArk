@@ -23,7 +23,7 @@
                 Margin="0,2,0,2"
                 BorderBrush="#FFFF1E56"
                 BorderThickness="0"
-                CornerRadius="10">
+                CornerRadius="3">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -81,7 +81,7 @@
                 BorderBrush="#FFFF1E56"
                 BorderThickness="0"
                 Grid.Row="2"
-                CornerRadius="10">
+                CornerRadius="3">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -100,7 +100,7 @@
                         BorderBrush="#FFFF1E56"
                         BorderThickness="0"
                         Grid.Row="1"
-                        CornerRadius="10">
+                        CornerRadius="3">
                     <ListView 
                               Name="notices"
                               Background="#00000000"

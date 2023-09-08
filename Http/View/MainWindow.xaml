@@ -519,7 +519,7 @@
                     <Border Grid.RowSpan="5"
                             Grid.ColumnSpan="3"
                             Background="#FF323232"
-                            CornerRadius="10"></Border>
+                            CornerRadius="3"></Border>
                     <TextBlock Grid.ColumnSpan="3"
                                Foreground="White"
                                VerticalAlignment="Center"

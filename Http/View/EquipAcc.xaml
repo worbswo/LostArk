@@ -21,7 +21,7 @@
                 Margin="10,2,10,2"
                 BorderBrush="#FFFF1E56"
                 BorderThickness="0"
-                CornerRadius="10">
+                CornerRadius="3">
             <TextBlock Text="보유 악세사리"
                        Grid.Row="0"
                        FontWeight="Bold"
@@ -36,7 +36,7 @@
                 Grid.Row="1"
                 BorderBrush="#FFFF1E56"
                 BorderThickness="0"
-                CornerRadius="10">
+                CornerRadius="3">
             <Grid Margin="15">
                 <TextBlock Text="목걸이"
                            Grid.Row="1"
@@ -183,7 +183,7 @@
                 Grid.Row="2"
                 BorderBrush="#FFFF1E56"
                 BorderThickness="0"
-                CornerRadius="10">
+                CornerRadius="3">
             <Grid Margin="15">
                 <TextBlock Text="귀걸이"
                            Grid.Row="1"
@@ -326,7 +326,7 @@
                 Grid.Row="3"
                 BorderBrush="#FFFF1E56"
                 BorderThickness="0"
-                CornerRadius="10">
+                CornerRadius="3">
             <Grid Margin="15">
                 <TextBlock Text="귀걸이"
                            Grid.Row="1"
@@ -472,7 +472,7 @@
                 Grid.Row="4"
                 BorderBrush="#FFFF1E56"
                 BorderThickness="0"
-                CornerRadius="10">
+                CornerRadius="3">
             <Grid Margin="15">
                 <TextBlock Text="반지"
                            Grid.Row="1"
@@ -615,7 +615,7 @@
                 Grid.Row="5"
                 BorderBrush="#FFFF1E56"
                 BorderThickness="0"
-                CornerRadius="10">
+                CornerRadius="3">
             <Grid Margin="15">
                 <TextBlock Text="반지"
                            Grid.Row="1"

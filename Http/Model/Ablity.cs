@@ -118,6 +118,17 @@ namespace LostArkAction.Model
             tmp = new List<List<int>>() { new List<int> { 0 } };
 
             AccRelicCases.Add(0, new List<List<int>>(tmp));
+            AccRelicCases[5].Add(new List<int> { 3, 3 });
+            AccRelicCases[5].Add(new List<int> { 5, 3 });
+            AccRelicCases[5].Add(new List<int> { 4, 3 });
+            AccRelicCases[3].Add(new List<int> { 4 });
+            AccRelicCases[3].Add(new List<int> { 5 });
+            AccRelicCases[2].Add(new List<int> { 5 });
+            AccRelicCases[2].Add(new List<int> { 4 });
+            AccRelicCases[2].Add(new List<int> { 3 });
+            AccRelicCases[1].Add(new List<int> { 3 });
+            AccRelicCases[1].Add(new List<int> { 4 });
+            AccRelicCases[1].Add(new List<int> { 5 });
 
             tmp = new List<List<int>>() { new List<int> { 5, 5, 5 }, new List<int> { 5, 5, 4, 3 }, new List<int> { 5, 4, 4, 3 }, new List<int> { 5, 4, 3, 3 }, new List<int> { 4, 4, 4, 3 } };
             AccAncientCases.Add(15, new List<List<int>>(tmp));
@@ -149,8 +160,13 @@ namespace LostArkAction.Model
             AccAncientCases.Add(1, new List<List<int>>(tmp));
             tmp = new List<List<int>>() { new List<int> { 3 } };
             AccAncientCases.Add(3, new List<List<int>>(tmp));
+
             tmp = new List<List<int>>() { new List<int> { 0 } };
             AccAncientCases.Add(0, new List<List<int>>(tmp));
+            tmp = new List<List<int>>() { new List<int> { 6, 6, 4 } };
+            AccAncientCases.Add(16, new List<List<int>>(tmp));
+            tmp = new List<List<int>>() { new List<int> { 6, 6, 5 } };
+            AccAncientCases.Add(17, new List<List<int>>(tmp));
 
             AccAncientCases[15].Add(new List<int> { 6, 6, 3 });
             AccAncientCases[15].Add(new List<int> { 6, 5, 4 });
@@ -190,8 +206,29 @@ namespace LostArkAction.Model
             AccAncientCases[7].Add(new List<int> { 6, 3 });
             AccAncientCases[6].Add(new List<int> { 6 });
             AccAncientCases[5].Add(new List<int> { 6 });
-            AccAncientCases[4].Add(new List<int> { 6 });
+            AccAncientCases[5].Add(new List<int> { 3,3 });
+            AccAncientCases[5].Add(new List<int> { 5, 3 });
+            AccAncientCases[5].Add(new List<int> { 5, 5 });
+            AccAncientCases[5].Add(new List<int> { 5, 4 });
 
+            AccAncientCases[5].Add(new List<int> { 4, 3 });
+
+            AccAncientCases[4].Add(new List<int> { 6 });
+            AccAncientCases[4].Add(new List<int> { 3,3 });
+            AccAncientCases[4].Add(new List<int> { 4,3 });
+            AccAncientCases[4].Add(new List<int> { 5,3 });
+
+            AccAncientCases[3].Add(new List<int> { 4 });
+            AccAncientCases[3].Add(new List<int> { 5 });
+            AccAncientCases[3].Add(new List<int> { 6 });
+            AccAncientCases[2].Add(new List<int> { 5 });
+            AccAncientCases[2].Add(new List<int> { 4 });
+            AccAncientCases[2].Add(new List<int> { 6 });
+            AccAncientCases[2].Add(new List<int> { 3 });
+            AccAncientCases[1].Add(new List<int> { 3 });
+            AccAncientCases[1].Add(new List<int> { 4 });
+            AccAncientCases[1].Add(new List<int> { 5 });
+            AccAncientCases[1].Add(new List<int> { 6 });
         }
         #region Method
         void Permutation(int n, int r)
@@ -429,7 +466,7 @@ namespace LostArkAction.Model
                 for (int j = 0; j < tmp.Count; j++)
                 {
                     if (tmp[j] == 0) continue;
-                    if (tmp[j] > 3) {
+                    if (tmp[j] >3) {
                         firstCnt++;
                         if (firstAblityCandidate.ContainsKey(abliName[i])) {
                             if (!firstAblityCandidate[abliName[i]].Contains(tmp[j]))

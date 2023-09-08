@@ -11,7 +11,7 @@
         Background="#FF323232"
         BorderBrush="#FFFF1E56"
         BorderThickness="0"
-        CornerRadius="10">
+        CornerRadius="3">
         <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>

@@ -14,7 +14,7 @@
         Margin="10"
         BorderBrush="#FFFF1E56"
         BorderThickness="0"
-        CornerRadius="10">
+        CornerRadius="3">
         <Grid
             Margin="15">
             <TextBlock
