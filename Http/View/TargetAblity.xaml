@@ -10,9 +10,9 @@
     d:DesignHeight="450"
     d:DesignWidth="800">
     <Border
-        Background="#FF636366"
+        Background="#FF323232"
         Margin="10"
-        BorderBrush="#FF0A3C6D"
+        BorderBrush="#FFFF1E56"
         BorderThickness="0"
         CornerRadius="10">
         <Grid

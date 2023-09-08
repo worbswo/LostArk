@@ -17,9 +17,9 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Border Background="#FF636366"
+        <Border Background="#FF323232"
                 Margin="10,2,10,2"
-                BorderBrush="#FF0A3C6D"
+                BorderBrush="#FFFF1E56"
                 BorderThickness="0"
                 CornerRadius="10">
             <TextBlock Text="보유 악세사리"
@@ -31,10 +31,10 @@
                        HorizontalAlignment="Center"
                        Foreground="White"></TextBlock>
         </Border>
-        <Border Background="#FF636366"
+        <Border Background="#FF323232"
                 Margin="10,2,10,2"
                 Grid.Row="1"
-                BorderBrush="#FF0A3C6D"
+                BorderBrush="#FFFF1E56"
                 BorderThickness="0"
                 CornerRadius="10">
             <Grid Margin="15">
@@ -108,21 +108,21 @@
                 <TextBox Grid.Row="1"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[0].Value1}"
                          VerticalAlignment="Center"></TextBox>
                 <TextBox Grid.Row="3"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[0].Value2}"
                          VerticalAlignment="Center"></TextBox>
                 <TextBox Grid.Row="5"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[0].PenaltyValue}"
                          VerticalAlignment="Center"></TextBox>
@@ -178,10 +178,10 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </Border>
-        <Border Background="#FF636366"
+        <Border Background="#FF323232"
                 Margin="10,2,10,2"
                 Grid.Row="2"
-                BorderBrush="#FF0A3C6D"
+                BorderBrush="#FFFF1E56"
                 BorderThickness="0"
                 CornerRadius="10">
             <Grid Margin="15">
@@ -251,21 +251,21 @@
                 <TextBox Grid.Row="1"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[3].Value1}"
                          VerticalAlignment="Center"></TextBox>
                 <TextBox Grid.Row="3"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[3].Value2}"
                          VerticalAlignment="Center"></TextBox>
                 <TextBox Grid.Row="5"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[3].PenaltyValue}"
                          VerticalAlignment="Center"></TextBox>
@@ -321,10 +321,10 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </Border>
-        <Border Background="#FF636366"
+        <Border Background="#FF323232"
                 Margin="10,2,10,2"
                 Grid.Row="3"
-                BorderBrush="#FF0A3C6D"
+                BorderBrush="#FFFF1E56"
                 BorderThickness="0"
                 CornerRadius="10">
             <Grid Margin="15">
@@ -397,21 +397,21 @@
                 <TextBox Grid.Row="1"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[4].Value1}"
                          VerticalAlignment="Center"></TextBox>
                 <TextBox Grid.Row="3"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[4].Value2}"
                          VerticalAlignment="Center"></TextBox>
                 <TextBox Grid.Row="5"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[4].PenaltyValue}"
                          VerticalAlignment="Center"></TextBox>
@@ -467,10 +467,10 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </Border>
-        <Border Background="#FF636366"
+        <Border Background="#FF323232"
                 Margin="10,2,10,2"
                 Grid.Row="4"
-                BorderBrush="#FF0A3C6D"
+                BorderBrush="#FFFF1E56"
                 BorderThickness="0"
                 CornerRadius="10">
             <Grid Margin="15">
@@ -540,21 +540,21 @@
                 <TextBox Grid.Row="1"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[1].Value1}"
                          VerticalAlignment="Center"></TextBox>
                 <TextBox Grid.Row="3"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[1].Value2}"
                          VerticalAlignment="Center"></TextBox>
                 <TextBox Grid.Row="5"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[1].PenaltyValue}"
                          VerticalAlignment="Center"></TextBox>
@@ -610,10 +610,10 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </Border>
-        <Border Background="#FF636366"
+        <Border Background="#FF323232"
                 Margin="10,2,10,2"
                 Grid.Row="5"
-                BorderBrush="#FF0A3C6D"
+                BorderBrush="#FFFF1E56"
                 BorderThickness="0"
                 CornerRadius="10">
             <Grid Margin="15">
@@ -683,21 +683,21 @@
                 <TextBox Grid.Row="1"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[2].Value1}"
                          VerticalAlignment="Center"></TextBox>
                 <TextBox Grid.Row="3"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[2].Value2}"
                          VerticalAlignment="Center"></TextBox>
                 <TextBox Grid.Row="5"
                          Grid.Column="3"
                          Foreground="White"
-                         Background="#FF636366"
+                         Background="#FF323232"
                          BorderThickness="0"
                          Text="{Binding DataContext.EquipAccVM.AccVM[2].PenaltyValue}"
                          VerticalAlignment="Center"></TextBox>

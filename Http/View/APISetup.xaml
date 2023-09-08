@@ -10,8 +10,7 @@
     Title="API관리"
     Height="450"
     Width="400">
-    <Grid
-        Background="#FF424452">
+    <Grid Background="#FF000000">
         <Grid.ColumnDefinitions>
             <ColumnDefinition
                 ></ColumnDefinition>

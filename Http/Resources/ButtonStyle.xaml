@@ -10,17 +10,17 @@
             Width="{Binding Width}"
             Height="{Binding Height}"
             VerticalAlignment="Center"
-            TextBlock.FontSize="20"
-            TextBlock.FontWeight="ExtraBold">
+            HorizontalAlignment="Center"
+            TextBlock.FontSize="17"
+            TextBlock.Foreground="White"
+            TextBlock.FontWeight="Bold">
             <Border.Background>
                 <LinearGradientBrush
                     EndPoint="0.5,1"
                     StartPoint="0.5,0">
-                    <GradientStop
-                        Color="#FFE4E3E3"
+                    <GradientStop Color="#FFFF1E56"
                         Offset="1" />
-                    <GradientStop
-                        Color="#FFF1F0F0"
+                    <GradientStop Color="#FFFF1E56"
                         Offset="0" />
                 </LinearGradientBrush>
             </Border.Background>
@@ -45,11 +45,9 @@
                             <TranslateTransform />
                         </TransformGroup>
                     </LinearGradientBrush.RelativeTransform>
-                    <GradientStop
-                        Color="#FFF9F9F9"
+                    <GradientStop Color="#FFFF1E56"
                         Offset="0.1" />
-                    <GradientStop
-                        Color="#FFDAD8D8"
+                    <GradientStop Color="#FFFF1E56"
                         Offset="0.677" />
                 </LinearGradientBrush>
             </Border.BorderBrush>
@@ -68,11 +66,9 @@
                         <LinearGradientBrush
                             EndPoint="0.5,1"
                             StartPoint="0.5,0">
-                            <GradientStop
-                                Color="#FF9FABE0"
+                            <GradientStop Color="#FFFFAC41"
                                 Offset="1" />
-                            <GradientStop
-                                Color="#FFD6D8FB"
+                            <GradientStop Color="#FFFFAC41"
                                 Offset="0" />
                         </LinearGradientBrush>
                     </Setter.Value>
@@ -101,11 +97,9 @@
                                     <TranslateTransform />
                                 </TransformGroup>
                             </LinearGradientBrush.RelativeTransform>
-                            <GradientStop
-                                Color="#FF93A7F7"
+                            <GradientStop Color="#FFFFAC41"
                                 Offset="0.1" />
-                            <GradientStop
-                                Color="#FF9FABE0"
+                            <GradientStop Color="#FFFFAC41"
                                 Offset="0.677" />
                         </LinearGradientBrush>
                     </Setter.Value>
@@ -113,7 +107,7 @@
                 <Setter
                     TargetName="Border"
                     Property="TextBlock.Foreground"
-                    Value="black"></Setter>
+                    Value="White"></Setter>
             </Trigger>
             <Trigger
                 Property="IsPressed"
@@ -125,12 +119,10 @@
                         <LinearGradientBrush
                             EndPoint="0.5,1"
                             StartPoint="0.5,0">
-                            <GradientStop
-                                Color="#FFB2B9DA"
+                            <GradientStop Color="#FFFFAC41"
                                 Offset="1" />
-                            <GradientStop
-                                Color="#FF525AF3"
-                                Offset="0" />
+                            <GradientStop Color="#FFA25D04"
+                                          Offset="0" />
                         </LinearGradientBrush>
                     </Setter.Value>
                 </Setter>
@@ -158,11 +150,9 @@
                                     <TranslateTransform />
                                 </TransformGroup>
                             </LinearGradientBrush.RelativeTransform>
-                            <GradientStop
-                                Color="#FF2440AF"
+                            <GradientStop Color="#FFA25D04"
                                 Offset="0.093" />
-                            <GradientStop
-                                Color="#FFB2B9DA"
+                            <GradientStop Color="#FFFFAC41"
                                 Offset="0.677" />
                         </LinearGradientBrush>
                     </Setter.Value>
@@ -170,7 +160,7 @@
                 <Setter
                     TargetName="Border"
                     Property="TextBlock.Foreground"
-                    Value="black"></Setter>
+                        Value="White"></Setter>
 
             </Trigger>
 

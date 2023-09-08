@@ -9,8 +9,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Border
 
-        Background="#FF636366"
-        BorderBrush="#FF0A3C6D"
+        Background="#FF323232"
+        BorderBrush="#FFFF1E56"
         BorderThickness="0"
         CornerRadius="10">
         <Grid
@@ -152,7 +152,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Foreground="White"
-                Background="#FF636366"
+                Background="#FF323232"
                 BorderThickness="0"></TextBox>
   
             <TextBox
@@ -162,7 +162,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Foreground="White"
-                Background="#FF636366"
+                Background="#FF323232"
                 BorderThickness="0"></TextBox>
             <TextBox
                 Grid.Row="4"
@@ -171,7 +171,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Foreground="White"
-                Background="#FF636366"
+                Background="#FF323232"
                 BorderThickness="0"></TextBox>
             <TextBox
                 Grid.Row="5"
@@ -180,7 +180,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Foreground="White"
-                Background="#FF636366"
+                Background="#FF323232"
                 BorderThickness="0"></TextBox>
             <TextBox
                 Grid.Row="6"
@@ -189,7 +189,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Foreground="White"
-                Background="#FF636366"
+                Background="#FF323232"
                 BorderThickness="0"></TextBox>
             <ComboBox
                 Grid.Column="2"

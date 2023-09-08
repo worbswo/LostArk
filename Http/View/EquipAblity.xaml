@@ -32,10 +32,10 @@
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="#FF0A3C6D" />
+                                        <Setter TargetName="Border" Property="Background" Value="#FFFF1E56" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="False">
-                                        <Setter TargetName="Border" Property="Background" Value="#FF636366" />
+                                        <Setter TargetName="Border" Property="Background" Value="#FF323232" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -50,8 +50,8 @@
                 </TabItem.Header>
 
                 <Border
-                BorderBrush="#FF0A3C6D"
-                Background="#FF636366"
+                BorderBrush="#FFFF1E56"
+                Background="#FF323232"
                 BorderThickness="0"
                 CornerRadius="10">
                     <Grid
@@ -106,7 +106,7 @@
                     Grid.Column="2"
                     
                     Foreground="White"
-                    Background="#FF636366"
+                    Background="#FF323232"
                     BorderThickness="0"
                     Text="{Binding DataContext.EquipAblityVM.FigureItems[0]}"
                     VerticalAlignment="Center">
@@ -144,7 +144,7 @@
                     Grid.Column="2"
                     
                     Foreground="White"
-                    Background="#FF636366"
+                    Background="#FF323232"
                     BorderThickness="0"
                     Text="{Binding DataContext.EquipAblityVM.FigureItems[1]}"
                     VerticalAlignment="Center">
@@ -165,8 +165,8 @@
                     <TextBlock Foreground="White" Text="보유 각인"></TextBlock>
                 </TabItem.Header>
                 <Border
-                BorderBrush="#FF0A3C6D"
-                Background="#FF636366"
+                BorderBrush="#FFFF1E56"
+                Background="#FF323232"
                 BorderThickness="0"
                 CornerRadius="10">
                     <Grid
@@ -223,7 +223,7 @@
                         Grid.Column="2"
                     
                         Foreground="White"
-                        Background="#FF636366"
+                        Background="#FF323232"
                         BorderThickness="0"
                         Text="{Binding DataContext.EquipAblityVM.FigurePossessionItems[0]}"
                         VerticalAlignment="Center">
@@ -274,7 +274,7 @@
                         Grid.Column="2"
                     
                         Foreground="White"
-                        Background="#FF636366"
+                        Background="#FF323232"
                         BorderThickness="0"
                         Text="{Binding DataContext.EquipAblityVM.FigurePossessionItems[1]}"
                         VerticalAlignment="Center">
@@ -299,7 +299,7 @@
                         Grid.Column="2"
                     
                         Foreground="White"
-                        Background="#FF636366"
+                        Background="#FF323232"
                         BorderThickness="0"
                         Text="{Binding DataContext.EquipAblityVM.FigurePossessionItems[2]}"
                         VerticalAlignment="Center">
@@ -337,7 +337,7 @@
                         Grid.Column="2"
                     
                         Foreground="White"
-                        Background="#FF636366"
+                        Background="#FF323232"
                         BorderThickness="0"
                         Text="{Binding DataContext.EquipAblityVM.FigurePossessionItems[3]}"
                         VerticalAlignment="Center">
@@ -356,8 +356,8 @@
         <Border
             Grid.Row="1"
             Margin="10"
-            Background="#FF636366"
-            BorderBrush="#FF0A3C6D"
+            Background="#FF323232"
+            BorderBrush="#FFFF1E56"
             BorderThickness="0"
             CornerRadius="10">
             <Grid
@@ -413,7 +413,7 @@
                     Grid.Column="2"
                     
                     Foreground="White"
-                    Background="#FF636366"
+                    Background="#FF323232"
                     BorderThickness="0"
                     Text="{Binding DataContext.EquipAblityVM.FigureItems[2]}"
                     VerticalAlignment="Center">
@@ -452,7 +452,7 @@
                     Grid.Column="2"
                     
                     Foreground="White"
-                    Background="#FF636366"
+                    Background="#FF323232"
                     BorderThickness="0"
                     Text="{Binding DataContext.EquipAblityVM.FigureItems[3]}"
                     VerticalAlignment="Center">
@@ -493,7 +493,7 @@
                     Grid.Column="2"
                     
                     Foreground="White"
-                    Background="#FF636366"
+                    Background="#FF323232"
                     BorderThickness="0"
                     Text="{Binding DataContext.EquipAblityVM.FigureItems[4]}"
                     VerticalAlignment="Center">

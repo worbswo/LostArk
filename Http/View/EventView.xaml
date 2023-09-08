@@ -19,9 +19,9 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Border Background="#FF636366"
+        <Border Background="#FF323232"
                 Margin="0,2,0,2"
-                BorderBrush="#FF0A3C6D"
+                BorderBrush="#FFFF1E56"
                 BorderThickness="0"
                 CornerRadius="10">
             <Grid>
@@ -76,9 +76,9 @@
                 </ListView>
             </Grid>
         </Border>
-        <Border Background="#FF636366"
+        <Border Background="#FF323232"
                 Margin="0,2,0,2"
-                BorderBrush="#FF0A3C6D"
+                BorderBrush="#FFFF1E56"
                 BorderThickness="0"
                 Grid.Row="2"
                 CornerRadius="10">
@@ -95,9 +95,9 @@
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            Foreground="White"></TextBlock>
-                <Border Background="#FF636366"
+                <Border Background="#FF323232"
                         Margin="10,2,10,2"
-                        BorderBrush="#FF0A3C6D"
+                        BorderBrush="#FFFF1E56"
                         BorderThickness="0"
                         Grid.Row="1"
                         CornerRadius="10">
